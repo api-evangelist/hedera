@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/TimestampRangeNullable.json",
+  "title": "TimestampRangeNullable",
+  "type": [
+    "object",
+    "null"
+  ],
+  "description": "A timestamp range an entity is valid for",
+  "properties": {
+    "from": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The inclusive from timestamp in seconds"
+        }
+      ]
+    },
+    "to": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TimestampNullable"
+        },
+        {
+          "description": "The exclusive to timestamp in seconds"
+        }
+      ]
+    }
+  }
+}

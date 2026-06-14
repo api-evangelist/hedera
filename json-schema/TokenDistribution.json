@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/TokenDistribution.json",
+  "title": "TokenDistribution",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "account": {
+        "$ref": "#/components/schemas/EntityId"
+      },
+      "balance": {
+        "format": "int64",
+        "type": "integer"
+      },
+      "decimals": {
+        "format": "int64",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "account",
+      "balance",
+      "decimals"
+    ]
+  },
+  "example": [
+    {
+      "account": "0.15.2",
+      "balance": 1000,
+      "decimals": 3
+    }
+  ]
+}

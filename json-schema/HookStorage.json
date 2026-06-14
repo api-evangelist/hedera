@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/HookStorage.json",
+  "title": "HookStorage",
+  "type": "object",
+  "required": [
+    "key",
+    "timestamp",
+    "value"
+  ],
+  "properties": {
+    "key": {
+      "example": "0x00000000000000000000000000000000000000000000000000000000000f9a17",
+      "format": "binary",
+      "type": "string"
+    },
+    "value": {
+      "example": "0x00000000000000000000000000000000000000000000000000000000000f9a17",
+      "format": "binary",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timestamp": {
+      "$ref": "#/components/schemas/Timestamp"
+    }
+  }
+}

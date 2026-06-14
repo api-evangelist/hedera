@@ -1,0 +1,30 @@
+{
+  "operationId": "getNetworkFees",
+  "method": "GET",
+  "path": "/api/v1/network/fees",
+  "summary": "Get the network fees",
+  "description": "Returns the estimated gas in tinybars per each transaction type. Default order is ASC. Currently only `ContractCall`, `ContractCreate` and `EthereumTransaction` transaction types are supported.",
+  "tags": [
+    "network"
+  ],
+  "parameters": [
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "timestamp",
+      "in": "query",
+      "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found",
+    "500": "Service Unavailable"
+  }
+}

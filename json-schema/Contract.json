@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/Contract.json",
+  "title": "Contract",
+  "type": "object",
+  "properties": {
+    "admin_key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "auto_renew_account": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "auto_renew_period": {
+      "example": 7776000,
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "contract_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "created_timestamp": {
+      "$ref": "#/components/schemas/TimestampNullable"
+    },
+    "deleted": {
+      "type": "boolean",
+      "example": false
+    },
+    "evm_address": {
+      "$ref": "#/components/schemas/EvmAddress"
+    },
+    "expiration_timestamp": {
+      "$ref": "#/components/schemas/TimestampNullable"
+    },
+    "file_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "max_automatic_token_associations": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int32"
+    },
+    "memo": {
+      "example": "contract memo",
+      "type": "string"
+    },
+    "nonce": {
+      "description": "The nonce of the contract",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "example": 1
+    },
+    "obtainer_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "permanent_removal": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "proxy_account_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "timestamp": {
+      "$ref": "#/components/schemas/TimestampRange"
+    }
+  }
+}

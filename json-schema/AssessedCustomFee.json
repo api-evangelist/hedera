@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/AssessedCustomFee.json",
+  "title": "AssessedCustomFee",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "collector_account_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "effective_payer_account_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/EntityId"
+      }
+    },
+    "token_id": {
+      "$ref": "#/components/schemas/EntityId"
+    }
+  }
+}

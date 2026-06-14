@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/OpcodesResponse.json",
+  "title": "OpcodesResponse",
+  "type": "object",
+  "required": [
+    "address",
+    "contract_id",
+    "failed",
+    "gas",
+    "opcodes",
+    "return_value"
+  ],
+  "properties": {
+    "address": {
+      "description": "The address of the transaction recipient in hex.\nZero address is set for transactions without a recipient (e.g., contract create)\n",
+      "type": "string",
+      "format": "binary"
+    },
+    "contract_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "failed": {
+      "description": "Whether the transaction failed to be completely processed.",
+      "type": "boolean"
+    },
+    "gas": {
+      "description": "The gas used in tinybars",
+      "type": "integer",
+      "format": "int64"
+    },
+    "opcodes": {
+      "description": "The logs produced by the opcode logger",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Opcode"
+      }
+    },
+    "return_value": {
+      "description": "The returned data from the transaction in hex",
+      "type": "string",
+      "format": "binary"
+    }
+  }
+}

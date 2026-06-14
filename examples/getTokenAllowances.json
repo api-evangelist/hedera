@@ -1,0 +1,47 @@
+{
+  "operationId": "getTokenAllowances",
+  "method": "GET",
+  "path": "/api/v1/accounts/{idOrAliasOrEvmAddress}/allowances/tokens",
+  "summary": "Get fungible token allowances for an account",
+  "description": "Returns information for fungible token allowances for an account.\n\n## Ordering\nThe order is governed by a combination of the spender id and the token id values, with spender id being the parent column.\nThe token id value governs its order within the given spender id.\n\nNote: The default order for this API is currently ASC\n\n## Filtering\nWhen filtering there are some restrictions enforced to ensure correctness and scalability.\n\n**The table below defines the restrictions and support for the endpoint**\n\n| Query Param   | Comparison Operator | Support | Description           | Example |\n| ------------- | ------------------- | ------- | --------------------- | ------- |\n| spender.id    | eq                  | Y       | Single occurrence only. | ?spender.id=X |\n|               | ne                  | N       | | |\n|               | lt(e)               | Y       | Single occurrence only. | ?spender.id=lte:X |\n|               | gt(e)               | Y       | Single occurrence only. | ?spender.id=gte:X |\n| token.id      | eq                  | Y       | Single occurrence only. Requires the presence of a **spender.id** query | ?token.id=lt:Y |\n|               | ne                  | N       | | |\n|               | lt(e)               | Y       | Single occurrence only. Requires the presence of an **lte** or **eq** **spender.id** query | ?spender.id=lte:X&token.id=lt:Y |\n|               | gt(e)               | Y       | Single occurrence only. Requires the presence of an **gte** or **eq** **spender.id** query | ?spender.id=gte:X&token.id=gt:Y |\n\nBoth filters must be a single occurrence of **gt(e)** or **lt(e)** which provide a lower and or upper boundary for search.\n",
+  "tags": [
+    "accounts"
+  ],
+  "parameters": [
+    {
+      "name": "idOrAliasOrEvmAddress",
+      "in": "path",
+      "description": "Account alias or account id or evm address",
+      "required": true
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "spender.id",
+      "in": "query",
+      "description": "The ID of the spender to return information for",
+      "required": false
+    },
+    {
+      "name": "token.id",
+      "in": "query",
+      "description": "The ID of the token to return information for",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

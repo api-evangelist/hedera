@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/FeeEstimateNetwork.json",
+  "title": "FeeEstimateNetwork",
+  "description": "The network fee component which covers the cost of gossip, consensus, signature verifications, fee payment, and storage.",
+  "properties": {
+    "multiplier": {
+      "description": "Multiplied by the node fee to determine the total network fee.",
+      "example": 2,
+      "format": "int32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "subtotal": {
+      "description": "The subtotal in tinycents for the network fee component which is calculated by multiplying the node subtotal by the network multiplier.",
+      "example": 1200,
+      "format": "int64",
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "multiplier",
+    "subtotal"
+  ],
+  "type": "object"
+}

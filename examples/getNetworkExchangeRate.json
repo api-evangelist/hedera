@@ -1,0 +1,24 @@
+{
+  "operationId": "getNetworkExchangeRate",
+  "method": "GET",
+  "path": "/api/v1/network/exchangerate",
+  "summary": "Get the network exchange rate to estimate costs",
+  "description": "Returns the network's exchange rate, current and next.",
+  "tags": [
+    "network"
+  ],
+  "parameters": [
+    {
+      "name": "timestamp",
+      "in": "query",
+      "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found",
+    "500": "Service Unavailable"
+  }
+}

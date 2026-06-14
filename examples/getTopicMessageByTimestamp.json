@@ -1,0 +1,23 @@
+{
+  "operationId": "getTopicMessageByTimestamp",
+  "method": "GET",
+  "path": "/api/v1/topics/messages/{timestamp}",
+  "summary": "Get topic message by consensusTimestamp",
+  "description": "Returns a topic message the given the consensusTimestamp.",
+  "tags": [
+    "topics"
+  ],
+  "parameters": [
+    {
+      "name": "timestamp",
+      "in": "path",
+      "description": "The Unix timestamp in seconds.nanoseconds format, the timestamp at which the associated transaction reached consensus. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": true
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

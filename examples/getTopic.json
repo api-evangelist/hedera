@@ -1,0 +1,23 @@
+{
+  "operationId": "getTopic",
+  "method": "GET",
+  "path": "/api/v1/topics/{topicId}",
+  "summary": "Get topic by ID",
+  "description": "Returns the topic details for the given topic ID.",
+  "tags": [
+    "topics"
+  ],
+  "parameters": [
+    {
+      "name": "topicId",
+      "in": "path",
+      "description": "Topic id",
+      "required": true
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

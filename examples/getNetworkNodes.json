@@ -1,0 +1,40 @@
+{
+  "operationId": "getNetworkNodes",
+  "method": "GET",
+  "path": "/api/v1/network/nodes",
+  "summary": "Get the network address book nodes",
+  "description": "Returns the network's list of nodes used in consensus",
+  "tags": [
+    "network"
+  ],
+  "parameters": [
+    {
+      "name": "file.id",
+      "in": "query",
+      "description": "The ID of the file entity",
+      "required": false
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "node.id",
+      "in": "query",
+      "description": "The ID of the node",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/ContractCallResponse.json",
+  "title": "ContractCallResponse",
+  "type": "object",
+  "properties": {
+    "result": {
+      "description": "Result in hexadecimal from executed contract call.",
+      "example": "0x0000000000006d8d",
+      "format": "binary",
+      "pattern": "^0x[0-9a-fA-F]+$",
+      "type": "string"
+    }
+  }
+}

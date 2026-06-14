@@ -1,0 +1,53 @@
+{
+  "operationId": "getNftAllowances",
+  "method": "GET",
+  "path": "/api/v1/accounts/{idOrAliasOrEvmAddress}/allowances/nfts",
+  "summary": "Get non fungible token allowances for an account",
+  "description": "Returns an account's non-fungible token allowances.\n\n## Ordering\nThe order is governed by a combination of the account ID and the token ID values, with account ID being the parent column.\nThe token ID value governs its order within the given account ID.\n\nNote: The default order for this API is currently ascending. The account ID can be the owner or the spender ID depending upon the owner flag.\n\n## Filtering\nWhen filtering there are some restrictions enforced to ensure correctness and scalability.\n\n**The table below defines the restrictions and support for the endpoint**\n\n| Query Param   | Comparison Operator | Support | Description           | Example |\n| ------------- | ------------------- | ------- | --------------------- | ------- |\n| account.id    | eq                  | Y       | Single occurrence only. | ?account.id=X |\n|               | ne                  | N       | | |\n|               | lt(e)               | Y       | Single occurrence only. | ?account.id=lte:X |\n|               | gt(e)               | Y       | Single occurrence only. | ?account.id=gte:X |\n| token.id      | eq                  | Y       | Single occurrence only. Requires the presence of an **account.id** parameter | ?account.id=X&token.id=eq:Y |\n|               | ne                  | N       | | |\n|               | lt(e)               | Y       | Single occurrence only. Requires the presence of an **lte** or **eq** **account.id** parameter | ?account.id=lte:X&token.id=lt:Y |\n|               | gt(e)               | Y       | Single occurrence only. Requires the presence of an **gte** or **eq** **account.id** parameter | ?account.id=gte:X&token.id=gt:Y |\n\nBoth filters must be a single occurrence of **gt(e)** or **lt(e)** which provide a lower and or upper boundary for search.\n",
+  "tags": [
+    "accounts"
+  ],
+  "parameters": [
+    {
+      "name": "idOrAliasOrEvmAddress",
+      "in": "path",
+      "description": "Account alias or account id or evm address",
+      "required": true
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "account.id",
+      "in": "query",
+      "description": "The ID of the account to return information for",
+      "required": false
+    },
+    {
+      "name": "token.id",
+      "in": "query",
+      "description": "The ID of the token to return information for",
+      "required": false
+    },
+    {
+      "name": "owner",
+      "in": "query",
+      "description": "When the owner value is true or omitted, the accountId path parameter will specify the ID of the owner, and the API will retrieve the allowances that the owner has granted to different spenders. Conversely, when the owner value is false, the accountId path parameter will indicate the ID of the spender who has an allowance, and the API will instead provide the allowances granted to the spender by different owners of those tokens.",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

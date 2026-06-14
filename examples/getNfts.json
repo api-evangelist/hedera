@@ -1,0 +1,46 @@
+{
+  "operationId": "getNfts",
+  "method": "GET",
+  "path": "/api/v1/tokens/{tokenId}/nfts",
+  "summary": "List nfts",
+  "description": "Returns a list of non-fungible tokens",
+  "tags": [
+    "tokens"
+  ],
+  "parameters": [
+    {
+      "name": "tokenId",
+      "in": "path",
+      "description": "Token id",
+      "required": true
+    },
+    {
+      "name": "account.id",
+      "in": "query",
+      "description": "The ID of the account to return information for",
+      "required": false
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "serialnumber",
+      "in": "query",
+      "description": "The nft serial number (64 bit type). Requires a tokenId value also be populated.",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter"
+  }
+}

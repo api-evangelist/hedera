@@ -1,0 +1,2547 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Hedera Mirror Node REST API Vocabulary",
+  "description": "Terms and properties used in the Hedera Mirror Node REST API",
+  "apiTags": [
+    "accounts",
+    "airdrops",
+    "balances",
+    "blocks",
+    "contracts",
+    "network",
+    "schedules",
+    "tokens",
+    "topics",
+    "transactions"
+  ],
+  "terms": [
+    {
+      "term": "accounts",
+      "description": "",
+      "type": "Accounts",
+      "usedIn": [
+        "AccountsResponse"
+      ]
+    },
+    {
+      "term": "links",
+      "description": "",
+      "type": "Links",
+      "usedIn": [
+        "AccountsResponse",
+        "BalancesResponse",
+        "ContractsResponse",
+        "ContractResultsResponse",
+        "ContractStateResponse",
+        "ContractActionsResponse",
+        "ContractLogsResponse",
+        "CryptoAllowancesResponse",
+        "HooksResponse",
+        "HooksStorageResponse",
+        "NetworkNodesResponse",
+        "NftAllowancesResponse",
+        "RegisteredNodesResponse",
+        "SchedulesResponse",
+        "BlocksResponse",
+        "StakingRewardsResponse",
+        "TokenAirdropsResponse",
+        "TokenAllowancesResponse",
+        "TokenBalancesResponse",
+        "TokenRelationshipResponse",
+        "TokensResponse",
+        "TopicMessagesResponse",
+        "TransactionsResponse",
+        "Nfts",
+        "NftTransactionHistory"
+      ]
+    },
+    {
+      "term": "amount",
+      "description": "The amount remaining of the original amount granted.",
+      "type": "integer",
+      "usedIn": [
+        "Allowance",
+        "AssessedCustomFee",
+        "ContractResult",
+        "FixedFee",
+        "CustomFeeLimit",
+        "FractionalFee",
+        "RoyaltyFee",
+        "FixedCustomFee",
+        "StakingReward",
+        "StakingRewardTransfer",
+        "TokenAirdrop"
+      ]
+    },
+    {
+      "term": "amount_granted",
+      "description": "The granted amount of the spender's allowance.",
+      "type": "integer",
+      "usedIn": [
+        "Allowance"
+      ]
+    },
+    {
+      "term": "owner",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "Allowance",
+        "NftAllowance"
+      ]
+    },
+    {
+      "term": "spender",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "Allowance",
+        "Nft",
+        "NftAllowance"
+      ]
+    },
+    {
+      "term": "timestamp",
+      "description": "",
+      "type": "TimestampRange",
+      "usedIn": [
+        "Allowance",
+        "BalancesResponse",
+        "HookStorage",
+        "NetworkExchangeRateSetResponse",
+        "NetworkFeesResponse",
+        "NetworkSupplyResponse",
+        "TokenBalancesResponse",
+        "Balance",
+        "Contract",
+        "ContractAction",
+        "ContractResult",
+        "ContractState",
+        "NetworkNode",
+        "NftAllowance",
+        "Block",
+        "RegisteredNode",
+        "StakingReward",
+        "TokenAirdrop",
+        "Topic"
+      ]
+    },
+    {
+      "term": "collector_account_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "AssessedCustomFee",
+        "FixedFee",
+        "FractionalFee",
+        "RoyaltyFee",
+        "FixedCustomFee"
+      ]
+    },
+    {
+      "term": "effective_payer_account_ids",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "AssessedCustomFee"
+      ]
+    },
+    {
+      "term": "token_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "AssessedCustomFee",
+        "Nft",
+        "NftAllowance",
+        "Token",
+        "TokenAirdrop",
+        "TokenBalance",
+        "TokenInfo",
+        "TokenRelationship"
+      ]
+    },
+    {
+      "term": "balances",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "BalancesResponse",
+        "TokenBalancesResponse"
+      ]
+    },
+    {
+      "term": "contracts",
+      "description": "",
+      "type": "Contracts",
+      "usedIn": [
+        "ContractsResponse"
+      ]
+    },
+    {
+      "term": "results",
+      "description": "",
+      "type": "ContractResults",
+      "usedIn": [
+        "ContractResultsResponse"
+      ]
+    },
+    {
+      "term": "state",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "ContractStateResponse"
+      ]
+    },
+    {
+      "term": "actions",
+      "description": "",
+      "type": "ContractActions",
+      "usedIn": [
+        "ContractActionsResponse"
+      ]
+    },
+    {
+      "term": "logs",
+      "description": "",
+      "type": "ContractLogs",
+      "usedIn": [
+        "ContractLogsResponse"
+      ]
+    },
+    {
+      "term": "allowances",
+      "description": "",
+      "type": "CryptoAllowances",
+      "usedIn": [
+        "CryptoAllowancesResponse",
+        "NftAllowancesResponse",
+        "TokenAllowancesResponse"
+      ]
+    },
+    {
+      "term": "hooks",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "HooksResponse"
+      ]
+    },
+    {
+      "term": "admin_key",
+      "description": "",
+      "type": "Key",
+      "usedIn": [
+        "Hook",
+        "Contract",
+        "NetworkNode",
+        "RegisteredNode",
+        "Schedule",
+        "Token",
+        "TokenInfo",
+        "Topic"
+      ]
+    },
+    {
+      "term": "contract_id",
+      "description": "The contract entity that contains the hook's executing bytecode",
+      "type": "",
+      "usedIn": [
+        "Hook",
+        "OpcodesResponse",
+        "Contract",
+        "ContractResult",
+        "ContractResultLog",
+        "ContractState",
+        "ContractResultStateChange"
+      ]
+    },
+    {
+      "term": "created_timestamp",
+      "description": "The consensus timestamp when the hook was created",
+      "type": "",
+      "usedIn": [
+        "Hook",
+        "AccountInfo",
+        "Contract",
+        "CustomFees",
+        "Nft",
+        "ConsensusCustomFees",
+        "RegisteredNode",
+        "TokenInfo",
+        "TokenRelationship",
+        "Topic"
+      ]
+    },
+    {
+      "term": "deleted",
+      "description": "Whether the hook has been deleted",
+      "type": "boolean",
+      "usedIn": [
+        "Hook",
+        "AccountInfo",
+        "Contract",
+        "Nft",
+        "Schedule",
+        "TokenInfo",
+        "Topic"
+      ]
+    },
+    {
+      "term": "extension_point",
+      "description": "The extension point this hook implements",
+      "type": "string",
+      "usedIn": [
+        "Hook"
+      ]
+    },
+    {
+      "term": "hook_id",
+      "description": "The unique identifier for the hook within the owner's scope",
+      "type": "integer",
+      "usedIn": [
+        "Hook",
+        "HooksStorageResponse"
+      ]
+    },
+    {
+      "term": "owner_id",
+      "description": "The entity that owns the hook",
+      "type": "",
+      "usedIn": [
+        "Hook",
+        "HooksStorageResponse"
+      ]
+    },
+    {
+      "term": "timestamp_range",
+      "description": "",
+      "type": "TimestampRangeNullable",
+      "usedIn": [
+        "Hook"
+      ]
+    },
+    {
+      "term": "type",
+      "description": "The type of the hook implementation",
+      "type": "string",
+      "usedIn": [
+        "Hook",
+        "ContractResult",
+        "NftTransactionTransfer",
+        "RegisteredServiceEndpoint",
+        "ScheduleSignature",
+        "Token",
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "key",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "HookStorage",
+        "AccountInfo",
+        "Key"
+      ]
+    },
+    {
+      "term": "value",
+      "description": "",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "HookStorage",
+        "ContractAction",
+        "ContractState",
+        "ContractCallRequest"
+      ]
+    },
+    {
+      "term": "storage",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "HooksStorageResponse",
+        "Opcode"
+      ]
+    },
+    {
+      "term": "current_rate",
+      "description": "",
+      "type": "ExchangeRate",
+      "usedIn": [
+        "NetworkExchangeRateSetResponse"
+      ]
+    },
+    {
+      "term": "next_rate",
+      "description": "",
+      "type": "ExchangeRate",
+      "usedIn": [
+        "NetworkExchangeRateSetResponse"
+      ]
+    },
+    {
+      "term": "fees",
+      "description": "",
+      "type": "NetworkFees",
+      "usedIn": [
+        "NetworkFeesResponse"
+      ]
+    },
+    {
+      "term": "nodes",
+      "description": "",
+      "type": "NetworkNodes",
+      "usedIn": [
+        "NetworkNodesResponse"
+      ]
+    },
+    {
+      "term": "released_supply",
+      "description": "The network's released supply of hbars in tinybars",
+      "type": "string",
+      "usedIn": [
+        "NetworkSupplyResponse"
+      ]
+    },
+    {
+      "term": "total_supply",
+      "description": "The network's total supply of hbars in tinybars",
+      "type": "string",
+      "usedIn": [
+        "NetworkSupplyResponse",
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "address",
+      "description": "The address of the transaction recipient in hex.\nZero address is set for transactions without a recipient (e.g., contract create)\n",
+      "type": "string",
+      "usedIn": [
+        "OpcodesResponse",
+        "AccessList",
+        "AuthorizationList",
+        "ContractResult",
+        "ContractResultLog",
+        "ContractState",
+        "ContractResultStateChange"
+      ]
+    },
+    {
+      "term": "failed",
+      "description": "Whether the transaction failed to be completely processed.",
+      "type": "boolean",
+      "usedIn": [
+        "OpcodesResponse"
+      ]
+    },
+    {
+      "term": "gas",
+      "description": "The gas used in tinybars",
+      "type": "integer",
+      "usedIn": [
+        "OpcodesResponse",
+        "Opcode",
+        "ContractAction",
+        "ContractCallRequest",
+        "NetworkFee"
+      ]
+    },
+    {
+      "term": "opcodes",
+      "description": "The logs produced by the opcode logger",
+      "type": "array",
+      "usedIn": [
+        "OpcodesResponse"
+      ]
+    },
+    {
+      "term": "return_value",
+      "description": "The returned data from the transaction in hex",
+      "type": "string",
+      "usedIn": [
+        "OpcodesResponse"
+      ]
+    },
+    {
+      "term": "depth",
+      "description": "The current call depth",
+      "type": "integer",
+      "usedIn": [
+        "Opcode"
+      ]
+    },
+    {
+      "term": "gas_cost",
+      "description": "The cost for executing op",
+      "type": "integer",
+      "usedIn": [
+        "Opcode"
+      ]
+    },
+    {
+      "term": "memory",
+      "description": "The EVM memory with items in hex",
+      "type": [
+        "array",
+        "null"
+      ],
+      "usedIn": [
+        "Opcode"
+      ]
+    },
+    {
+      "term": "op",
+      "description": "The opcode to execute",
+      "type": "string",
+      "usedIn": [
+        "Opcode"
+      ]
+    },
+    {
+      "term": "pc",
+      "description": "The program counter",
+      "type": "integer",
+      "usedIn": [
+        "Opcode"
+      ]
+    },
+    {
+      "term": "reason",
+      "description": "The revert reason in hex",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "Opcode"
+      ]
+    },
+    {
+      "term": "stack",
+      "description": "The EVM stack with items in hex",
+      "type": [
+        "array",
+        "null"
+      ],
+      "usedIn": [
+        "Opcode"
+      ]
+    },
+    {
+      "term": "registered_nodes",
+      "description": "",
+      "type": "RegisteredNodes",
+      "usedIn": [
+        "RegisteredNodesResponse"
+      ]
+    },
+    {
+      "term": "schedules",
+      "description": "",
+      "type": "Schedules",
+      "usedIn": [
+        "SchedulesResponse"
+      ]
+    },
+    {
+      "term": "blocks",
+      "description": "",
+      "type": "Blocks",
+      "usedIn": [
+        "BlocksResponse"
+      ]
+    },
+    {
+      "term": "rewards",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "StakingRewardsResponse"
+      ]
+    },
+    {
+      "term": "airdrops",
+      "description": "",
+      "type": "TokenAirdrops",
+      "usedIn": [
+        "TokenAirdropsResponse"
+      ]
+    },
+    {
+      "term": "tokens",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "TokenRelationshipResponse",
+        "TokensResponse",
+        "AccountBalance",
+        "Balance"
+      ]
+    },
+    {
+      "term": "messages",
+      "description": "",
+      "type": "TopicMessages",
+      "usedIn": [
+        "TopicMessagesResponse"
+      ]
+    },
+    {
+      "term": "transactions",
+      "description": "",
+      "type": "TransactionDetails",
+      "usedIn": [
+        "TransactionByIdResponse",
+        "TransactionsResponse",
+        "NftTransactionHistory"
+      ]
+    },
+    {
+      "term": "account",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "AccountInfo",
+        "AccountBalance",
+        "StakingRewardTransfer"
+      ]
+    },
+    {
+      "term": "alias",
+      "description": "",
+      "type": "Alias",
+      "usedIn": [
+        "AccountInfo"
+      ]
+    },
+    {
+      "term": "auto_renew_period",
+      "description": "",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "AccountInfo",
+        "Contract",
+        "TokenInfo",
+        "Topic"
+      ]
+    },
+    {
+      "term": "balance",
+      "description": "",
+      "type": "Balance",
+      "usedIn": [
+        "AccountInfo",
+        "AccountBalance",
+        "Balance",
+        "TokenBalance",
+        "TokenRelationship"
+      ]
+    },
+    {
+      "term": "decline_reward",
+      "description": "Whether the account declines receiving a staking reward",
+      "type": "boolean",
+      "usedIn": [
+        "AccountInfo",
+        "NetworkNode"
+      ]
+    },
+    {
+      "term": "ethereum_nonce",
+      "description": "",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "AccountInfo"
+      ]
+    },
+    {
+      "term": "evm_address",
+      "description": "",
+      "type": "EvmAddressNullable",
+      "usedIn": [
+        "AccountInfo",
+        "Contract"
+      ]
+    },
+    {
+      "term": "expiry_timestamp",
+      "description": "",
+      "type": "TimestampNullable",
+      "usedIn": [
+        "AccountInfo",
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "max_automatic_token_associations",
+      "description": "",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "AccountInfo",
+        "Contract"
+      ]
+    },
+    {
+      "term": "memo",
+      "description": "",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "AccountInfo",
+        "Contract",
+        "NetworkNode",
+        "Schedule",
+        "TokenInfo",
+        "Topic"
+      ]
+    },
+    {
+      "term": "pending_reward",
+      "description": "The pending reward in tinybars the account will receive in the next reward payout. Note the value is updated\nat the end of each staking period and there may be delay to reflect the changes in the past staking period.\n",
+      "type": "integer",
+      "usedIn": [
+        "AccountInfo"
+      ]
+    },
+    {
+      "term": "receiver_sig_required",
+      "description": "",
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "usedIn": [
+        "AccountInfo"
+      ]
+    },
+    {
+      "term": "staked_account_id",
+      "description": "",
+      "type": "",
+      "usedIn": [
+        "AccountInfo"
+      ]
+    },
+    {
+      "term": "staked_node_id",
+      "description": "The id of the node to which this account is staking",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "AccountInfo"
+      ]
+    },
+    {
+      "term": "stake_period_start",
+      "description": "",
+      "type": "",
+      "usedIn": [
+        "AccountInfo"
+      ]
+    },
+    {
+      "term": "storage_keys",
+      "description": "The list of accessed hex encoded storage keys",
+      "type": "array",
+      "usedIn": [
+        "AccessList"
+      ]
+    },
+    {
+      "term": "chain_id",
+      "description": "The hex encoded chain id",
+      "type": "string",
+      "usedIn": [
+        "AuthorizationList",
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "nonce",
+      "description": "The nonce of the authorization",
+      "type": "integer",
+      "usedIn": [
+        "AuthorizationList",
+        "Contract",
+        "ContractResult",
+        "NftTransactionTransfer",
+        "Transaction",
+        "TransactionId"
+      ]
+    },
+    {
+      "term": "r",
+      "description": "The hex encoded signature r value",
+      "type": "string",
+      "usedIn": [
+        "AuthorizationList",
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "s",
+      "description": "The hex encoded signature s value",
+      "type": "string",
+      "usedIn": [
+        "AuthorizationList",
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "y_parity",
+      "description": "The hex encoded parity of the y-coordinate of the signature point",
+      "type": "string",
+      "usedIn": [
+        "AuthorizationList"
+      ]
+    },
+    {
+      "term": "initial_transaction_id",
+      "description": "",
+      "type": "TransactionId",
+      "usedIn": [
+        "ChunkInfo"
+      ]
+    },
+    {
+      "term": "number",
+      "description": "",
+      "type": "integer",
+      "usedIn": [
+        "ChunkInfo",
+        "Block"
+      ]
+    },
+    {
+      "term": "total",
+      "description": "",
+      "type": "integer",
+      "usedIn": [
+        "ChunkInfo",
+        "FeeEstimateResponse"
+      ]
+    },
+    {
+      "term": "auto_renew_account",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "Contract",
+        "TokenInfo",
+        "Topic"
+      ]
+    },
+    {
+      "term": "expiration_timestamp",
+      "description": "",
+      "type": "TimestampNullable",
+      "usedIn": [
+        "Contract"
+      ]
+    },
+    {
+      "term": "file_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "Contract",
+        "NetworkNode"
+      ]
+    },
+    {
+      "term": "obtainer_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "Contract"
+      ]
+    },
+    {
+      "term": "permanent_removal",
+      "description": "",
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "usedIn": [
+        "Contract"
+      ]
+    },
+    {
+      "term": "proxy_account_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "Contract"
+      ]
+    },
+    {
+      "term": "call_depth",
+      "description": "The nesting depth of the call",
+      "type": "integer",
+      "usedIn": [
+        "ContractAction"
+      ]
+    },
+    {
+      "term": "call_operation_type",
+      "description": "The type of the call operation",
+      "type": "string",
+      "usedIn": [
+        "ContractAction"
+      ]
+    },
+    {
+      "term": "call_type",
+      "description": "The type of the call",
+      "type": "string",
+      "usedIn": [
+        "ContractAction"
+      ]
+    },
+    {
+      "term": "caller",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "ContractAction"
+      ]
+    },
+    {
+      "term": "caller_type",
+      "description": "The entity type of the caller",
+      "type": "string",
+      "usedIn": [
+        "ContractAction"
+      ]
+    },
+    {
+      "term": "from",
+      "description": "The EVM address of the caller",
+      "type": "string",
+      "usedIn": [
+        "ContractAction",
+        "ContractResult",
+        "ContractCallRequest",
+        "TimestampRange",
+        "TimestampRangeNullable"
+      ]
+    },
+    {
+      "term": "gas_used",
+      "description": "Gas used in tinybars",
+      "type": "integer",
+      "usedIn": [
+        "ContractAction",
+        "ContractResult",
+        "Block"
+      ]
+    },
+    {
+      "term": "index",
+      "description": "The position of the action within the ordered list of actions",
+      "type": "integer",
+      "usedIn": [
+        "ContractAction",
+        "ContractResultLog"
+      ]
+    },
+    {
+      "term": "input",
+      "description": "The hex encoded input data",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "ContractAction"
+      ]
+    },
+    {
+      "term": "recipient",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "ContractAction"
+      ]
+    },
+    {
+      "term": "recipient_type",
+      "description": "The entity type of the recipient",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "ContractAction"
+      ]
+    },
+    {
+      "term": "result_data",
+      "description": "The hex encoded result data",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "ContractAction"
+      ]
+    },
+    {
+      "term": "result_data_type",
+      "description": "The type of the result data",
+      "type": "string",
+      "usedIn": [
+        "ContractAction"
+      ]
+    },
+    {
+      "term": "to",
+      "description": "",
+      "type": "EvmAddressNullable",
+      "usedIn": [
+        "ContractAction",
+        "ContractResult",
+        "ContractCallRequest",
+        "TimestampRange",
+        "TimestampRangeNullable"
+      ]
+    },
+    {
+      "term": "access_list",
+      "description": "The access list of the wrapped ethereum transaction",
+      "type": "array",
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "authorization_list",
+      "description": "The authorization list of the wrapped EIP-7702 ethereum transaction",
+      "type": "array",
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "block_gas_used",
+      "description": "The total amount of gas used in the block",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "block_hash",
+      "description": "The hex encoded block (record file chain) hash",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "block_number",
+      "description": "The block height calculated as the number of record files starting from zero since network start.",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "bloom",
+      "description": "",
+      "type": "",
+      "usedIn": [
+        "ContractResult",
+        "ContractResultLog"
+      ]
+    },
+    {
+      "term": "call_result",
+      "description": "The hex encoded result returned by the function",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "created_contract_ids",
+      "description": "The list of smart contracts that were created by the function call.",
+      "type": [
+        "array",
+        "null"
+      ],
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "error_message",
+      "description": "The message when an error occurs during smart contract execution",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "failed_initcode",
+      "description": "The hex encoded initcode of a failed contract create transaction",
+      "type": "string",
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "function_parameters",
+      "description": "The hex encoded parameters passed to the function",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "gas_consumed",
+      "description": "The units of consumed gas by the EVM to execute contract",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "gas_limit",
+      "description": "The maximum units of gas allowed for contract execution",
+      "type": "integer",
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "gas_price",
+      "description": "The hex encoded gas_price of the wrapped ethereum transaction. When `hbar=true` (default), the value is converted to tinybars. When `hbar=false`, the value is in weibars.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "hash",
+      "description": "A hex encoded 32 byte hash and it is only populated for Ethereum transaction case",
+      "type": "string",
+      "usedIn": [
+        "ContractResult",
+        "Block"
+      ]
+    },
+    {
+      "term": "max_fee_per_gas",
+      "description": "The hex encoded max_fee_per_gas of the wrapped ethereum transaction. When `hbar=true` (default), the value is converted to tinybars. When `hbar=false`, the value is in weibars.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "max_priority_fee_per_gas",
+      "description": "The hex encoded max_priority_fee_per_gas of the wrapped ethereum transaction. When `hbar=true` (default), the value is converted to tinybars. When `hbar=false`, the value is in weibars.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "result",
+      "description": "The result of the transaction",
+      "type": "string",
+      "usedIn": [
+        "ContractResult",
+        "ContractCallResponse",
+        "Transaction"
+      ]
+    },
+    {
+      "term": "status",
+      "description": "The status of the transaction, 0x1 for a SUCCESS transaction and 0x0 for all else",
+      "type": "string",
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "transaction_index",
+      "description": "The position of the transaction in the block",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "v",
+      "description": "The recovery_id of the wrapped ethereum transaction",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "ContractResult"
+      ]
+    },
+    {
+      "term": "data",
+      "description": "The hex encoded data of the contract log",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "ContractResultLog",
+        "ContractCallRequest"
+      ]
+    },
+    {
+      "term": "topics",
+      "description": "",
+      "type": "ContractLogTopics",
+      "usedIn": [
+        "ContractResultLog"
+      ]
+    },
+    {
+      "term": "slot",
+      "description": "The hex encoded storage slot.",
+      "type": "string",
+      "usedIn": [
+        "ContractState",
+        "ContractResultStateChange"
+      ]
+    },
+    {
+      "term": "value_read",
+      "description": "The hex encoded value read from the storage slot.",
+      "type": "string",
+      "usedIn": [
+        "ContractResultStateChange"
+      ]
+    },
+    {
+      "term": "value_written",
+      "description": "The hex encoded value written to the slot. `null` implies no value written.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "ContractResultStateChange"
+      ]
+    },
+    {
+      "term": "fixed_fees",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "CustomFees",
+        "ConsensusCustomFees"
+      ]
+    },
+    {
+      "term": "fractional_fees",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "CustomFees"
+      ]
+    },
+    {
+      "term": "royalty_fees",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "CustomFees"
+      ]
+    },
+    {
+      "term": "_status",
+      "description": "",
+      "type": "object",
+      "usedIn": [
+        "Error"
+      ]
+    },
+    {
+      "term": "block",
+      "description": "Hexadecimal block number or the string \"latest\", \"pending\", \"earliest\". Defaults to \"latest\".",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "ContractCallRequest"
+      ]
+    },
+    {
+      "term": "estimate",
+      "description": "Whether gas estimation is called. Defaults to false.",
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "usedIn": [
+        "ContractCallRequest"
+      ]
+    },
+    {
+      "term": "gasPrice",
+      "description": "Gas price used for each paid gas.",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "ContractCallRequest"
+      ]
+    },
+    {
+      "term": "cent_equivalent",
+      "description": "",
+      "type": "integer",
+      "usedIn": [
+        "ExchangeRate"
+      ]
+    },
+    {
+      "term": "expiration_time",
+      "description": "",
+      "type": "integer",
+      "usedIn": [
+        "ExchangeRate",
+        "Schedule"
+      ]
+    },
+    {
+      "term": "hbar_equivalent",
+      "description": "",
+      "type": "integer",
+      "usedIn": [
+        "ExchangeRate"
+      ]
+    },
+    {
+      "term": "all_collectors_are_exempt",
+      "description": "",
+      "type": "boolean",
+      "usedIn": [
+        "FixedFee",
+        "FractionalFee",
+        "RoyaltyFee"
+      ]
+    },
+    {
+      "term": "denominating_token_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "FixedFee",
+        "CustomFeeLimit",
+        "FractionalFee",
+        "FixedCustomFee"
+      ]
+    },
+    {
+      "term": "account_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "CustomFeeLimit",
+        "Nft",
+        "StakingReward",
+        "TransactionId"
+      ]
+    },
+    {
+      "term": "maximum",
+      "description": "",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "FractionalFee"
+      ]
+    },
+    {
+      "term": "minimum",
+      "description": "",
+      "type": "integer",
+      "usedIn": [
+        "FractionalFee"
+      ]
+    },
+    {
+      "term": "net_of_transfers",
+      "description": "",
+      "type": "boolean",
+      "usedIn": [
+        "FractionalFee"
+      ]
+    },
+    {
+      "term": "fallback_fee",
+      "description": "",
+      "type": "object",
+      "usedIn": [
+        "RoyaltyFee"
+      ]
+    },
+    {
+      "term": "_type",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "Key"
+      ]
+    },
+    {
+      "term": "next",
+      "description": "",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "Links"
+      ]
+    },
+    {
+      "term": "associated_registered_nodes",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "NetworkNode"
+      ]
+    },
+    {
+      "term": "description",
+      "description": "a memo associated with the address book",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "NetworkNode",
+        "RegisteredGeneralServiceEndpoint",
+        "RegisteredNode"
+      ]
+    },
+    {
+      "term": "grpc_proxy_endpoint",
+      "description": "",
+      "type": "ServiceEndpoint",
+      "usedIn": [
+        "NetworkNode"
+      ]
+    },
+    {
+      "term": "max_stake",
+      "description": "The maximum stake (rewarded or not rewarded) this node can have as consensus weight",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "NetworkNode"
+      ]
+    },
+    {
+      "term": "min_stake",
+      "description": "The minimum stake (rewarded or not rewarded) this node must reach before having non-zero consensus weight\n",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "NetworkNode"
+      ]
+    },
+    {
+      "term": "node_account_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "NetworkNode"
+      ]
+    },
+    {
+      "term": "node_id",
+      "description": "An identifier for the node",
+      "type": "integer",
+      "usedIn": [
+        "NetworkNode"
+      ]
+    },
+    {
+      "term": "node_cert_hash",
+      "description": "hex encoded hash of the node's TLS certificate",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "NetworkNode"
+      ]
+    },
+    {
+      "term": "public_key",
+      "description": "hex encoded X509 RSA public key used to verify stream file signature",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "NetworkNode"
+      ]
+    },
+    {
+      "term": "reward_rate_start",
+      "description": "The total tinybars earned by this node per whole hbar in the last staking period",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "NetworkNode"
+      ]
+    },
+    {
+      "term": "service_endpoints",
+      "description": "",
+      "type": "ServiceEndpoints",
+      "usedIn": [
+        "NetworkNode",
+        "RegisteredNode"
+      ]
+    },
+    {
+      "term": "stake",
+      "description": "The node consensus weight at the beginning of the staking period",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "NetworkNode"
+      ]
+    },
+    {
+      "term": "stake_not_rewarded",
+      "description": "The sum (balance + stakedToMe) for all accounts staked to this node with declineReward=true at the\nbeginning of the staking period\n",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "NetworkNode"
+      ]
+    },
+    {
+      "term": "stake_rewarded",
+      "description": "The sum (balance + staked) for all accounts staked to the node that are not declining rewards at the\nbeginning of the staking period\n",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "NetworkNode"
+      ]
+    },
+    {
+      "term": "staking_period",
+      "description": "",
+      "type": "",
+      "usedIn": [
+        "NetworkNode",
+        "NetworkStakeResponse"
+      ]
+    },
+    {
+      "term": "transaction_type",
+      "description": "type of the transaction",
+      "type": "string",
+      "usedIn": [
+        "NetworkFee"
+      ]
+    },
+    {
+      "term": "max_stake_rewarded",
+      "description": "The maximum amount of tinybar that can be staked for reward while still achieving\nthe maximum per-hbar reward rate\n",
+      "type": "integer",
+      "usedIn": [
+        "NetworkStakeResponse"
+      ]
+    },
+    {
+      "term": "max_staking_reward_rate_per_hbar",
+      "description": "The maximum reward rate, in tinybars per whole hbar, that any account can receive in a day",
+      "type": "integer",
+      "usedIn": [
+        "NetworkStakeResponse"
+      ]
+    },
+    {
+      "term": "max_total_reward",
+      "description": "The total tinybars to be paid as staking rewards in the ending period,\nafter applying the settings for the 0.0.800 balance threshold and the maximum stake rewarded\n",
+      "type": "integer",
+      "usedIn": [
+        "NetworkStakeResponse"
+      ]
+    },
+    {
+      "term": "node_reward_fee_fraction",
+      "description": "The fraction between zero and one of the network and service fees paid to the node reward account 0.0.801",
+      "type": "number",
+      "usedIn": [
+        "NetworkStakeResponse"
+      ]
+    },
+    {
+      "term": "reserved_staking_rewards",
+      "description": "The amount of the staking reward funds of account 0.0.800 reserved to pay pending\nrewards that have been earned but not collected\n",
+      "type": "integer",
+      "usedIn": [
+        "NetworkStakeResponse"
+      ]
+    },
+    {
+      "term": "reward_balance_threshold",
+      "description": "The unreserved tinybar balance of account 0.0.800 required to achieve the\nmaximum per-hbar reward rate\n",
+      "type": "integer",
+      "usedIn": [
+        "NetworkStakeResponse"
+      ]
+    },
+    {
+      "term": "stake_total",
+      "description": "The total amount staked to the network in tinybars the start of the current staking period",
+      "type": "integer",
+      "usedIn": [
+        "NetworkStakeResponse"
+      ]
+    },
+    {
+      "term": "staking_period_duration",
+      "description": "The number of minutes in a staking period",
+      "type": "integer",
+      "usedIn": [
+        "NetworkStakeResponse"
+      ]
+    },
+    {
+      "term": "staking_periods_stored",
+      "description": "The number of staking periods for which the reward is stored for each node",
+      "type": "integer",
+      "usedIn": [
+        "NetworkStakeResponse"
+      ]
+    },
+    {
+      "term": "staking_reward_fee_fraction",
+      "description": "The fraction between zero and one of the network and service fees paid to the staking reward account 0.0.800",
+      "type": "number",
+      "usedIn": [
+        "NetworkStakeResponse"
+      ]
+    },
+    {
+      "term": "staking_reward_rate",
+      "description": "The total number of tinybars to be distributed as staking rewards each period",
+      "type": "integer",
+      "usedIn": [
+        "NetworkStakeResponse"
+      ]
+    },
+    {
+      "term": "staking_start_threshold",
+      "description": "The minimum balance of staking reward account 0.0.800 required to active rewards",
+      "type": "integer",
+      "usedIn": [
+        "NetworkStakeResponse"
+      ]
+    },
+    {
+      "term": "unreserved_staking_reward_balance",
+      "description": "The unreserved balance of account 0.0.800 at the close of the just-ending period;\nthis value is used to compute the HIP-782 balance ratio\n",
+      "type": "integer",
+      "usedIn": [
+        "NetworkStakeResponse"
+      ]
+    },
+    {
+      "term": "delegating_spender",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "Nft"
+      ]
+    },
+    {
+      "term": "metadata",
+      "description": "Arbitrary binary data associated with this NFT encoded in base64.",
+      "type": "string",
+      "usedIn": [
+        "Nft",
+        "Token",
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "modified_timestamp",
+      "description": "",
+      "type": "TimestampNullable",
+      "usedIn": [
+        "Nft",
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "serial_number",
+      "description": "",
+      "type": "integer",
+      "usedIn": [
+        "Nft",
+        "TokenAirdrop"
+      ]
+    },
+    {
+      "term": "nfts",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "Nfts"
+      ]
+    },
+    {
+      "term": "approved_for_all",
+      "description": "A boolean value indicating if the spender has the allowance to spend all NFTs owned by the given owner",
+      "type": "boolean",
+      "usedIn": [
+        "NftAllowance"
+      ]
+    },
+    {
+      "term": "consensus_timestamp",
+      "description": "",
+      "type": "Timestamp",
+      "usedIn": [
+        "NftTransactionTransfer",
+        "Schedule",
+        "ScheduleSignature",
+        "TopicMessage",
+        "Transaction"
+      ]
+    },
+    {
+      "term": "is_approval",
+      "description": "",
+      "type": "boolean",
+      "usedIn": [
+        "NftTransactionTransfer"
+      ]
+    },
+    {
+      "term": "receiver_account_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "NftTransactionTransfer"
+      ]
+    },
+    {
+      "term": "sender_account_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "NftTransactionTransfer"
+      ]
+    },
+    {
+      "term": "transaction_id",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "NftTransactionTransfer",
+        "Transaction"
+      ]
+    },
+    {
+      "term": "count",
+      "description": "",
+      "type": "integer",
+      "usedIn": [
+        "Block",
+        "FeeExtra"
+      ]
+    },
+    {
+      "term": "hapi_version",
+      "description": "",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "Block"
+      ]
+    },
+    {
+      "term": "logs_bloom",
+      "description": "A hex encoded 256-byte array with 0x prefix",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "Block"
+      ]
+    },
+    {
+      "term": "name",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "Block",
+        "FeeExtra",
+        "Token",
+        "TokenInfo",
+        "Transaction"
+      ]
+    },
+    {
+      "term": "previous_hash",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "Block"
+      ]
+    },
+    {
+      "term": "size",
+      "description": "",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "Block"
+      ]
+    },
+    {
+      "term": "base",
+      "description": "The base fee price, in tinycents.",
+      "type": "integer",
+      "usedIn": [
+        "FeeEstimate"
+      ]
+    },
+    {
+      "term": "extras",
+      "description": "The extra fees that apply for this fee component.",
+      "type": "array",
+      "usedIn": [
+        "FeeEstimate"
+      ]
+    },
+    {
+      "term": "multiplier",
+      "description": "Multiplied by the node fee to determine the total network fee.",
+      "type": "integer",
+      "usedIn": [
+        "FeeEstimateNetwork"
+      ]
+    },
+    {
+      "term": "subtotal",
+      "description": "The subtotal in tinycents for the network fee component which is calculated by multiplying the node subtotal by the network multiplier.",
+      "type": "integer",
+      "usedIn": [
+        "FeeEstimateNetwork",
+        "FeeExtra"
+      ]
+    },
+    {
+      "term": "high_volume_multiplier",
+      "description": "The high-volume pricing multiplier per HIP-1313. A value of 1 indicates no high-volume pricing. A value greater than 1 applies when the transaction's highVolume flag is true and throttle utilization is non-zero.",
+      "type": "integer",
+      "usedIn": [
+        "FeeEstimateResponse"
+      ]
+    },
+    {
+      "term": "network",
+      "description": "",
+      "type": "FeeEstimateNetwork",
+      "usedIn": [
+        "FeeEstimateResponse"
+      ]
+    },
+    {
+      "term": "node",
+      "description": "",
+      "type": "",
+      "usedIn": [
+        "FeeEstimateResponse",
+        "Transaction"
+      ]
+    },
+    {
+      "term": "service",
+      "description": "",
+      "type": "",
+      "usedIn": [
+        "FeeEstimateResponse"
+      ]
+    },
+    {
+      "term": "charged",
+      "description": "The charged count of items as calculated by `max(0, count - included)`.",
+      "type": "integer",
+      "usedIn": [
+        "FeeExtra"
+      ]
+    },
+    {
+      "term": "fee_per_unit",
+      "description": "The fee price per unit in tinycents.",
+      "type": "integer",
+      "usedIn": [
+        "FeeExtra"
+      ]
+    },
+    {
+      "term": "included",
+      "description": "The count of this \"extra\" that is included for free.",
+      "type": "integer",
+      "usedIn": [
+        "FeeExtra"
+      ]
+    },
+    {
+      "term": "endpoint_apis",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "RegisteredBlockNodeEndpoint"
+      ]
+    },
+    {
+      "term": "registered_node_id",
+      "description": "An identifier for the registered node",
+      "type": "integer",
+      "usedIn": [
+        "RegisteredNode"
+      ]
+    },
+    {
+      "term": "block_node",
+      "description": "",
+      "type": "RegisteredBlockNodeEndpoint",
+      "usedIn": [
+        "RegisteredServiceEndpoint"
+      ]
+    },
+    {
+      "term": "domain_name",
+      "description": "The DNS domain name of the service",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "RegisteredServiceEndpoint",
+        "ServiceEndpoint"
+      ]
+    },
+    {
+      "term": "general_service",
+      "description": "",
+      "type": "RegisteredGeneralServiceEndpoint",
+      "usedIn": [
+        "RegisteredServiceEndpoint"
+      ]
+    },
+    {
+      "term": "ip_address",
+      "description": "The IP address of the service",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "RegisteredServiceEndpoint"
+      ]
+    },
+    {
+      "term": "mirror_node",
+      "description": "",
+      "type": "RegisteredMirrorNodeEndpoint",
+      "usedIn": [
+        "RegisteredServiceEndpoint"
+      ]
+    },
+    {
+      "term": "port",
+      "description": "",
+      "type": "integer",
+      "usedIn": [
+        "RegisteredServiceEndpoint",
+        "ServiceEndpoint"
+      ]
+    },
+    {
+      "term": "requires_tls",
+      "description": "Whether the registered service endpoint requires TLS or not.",
+      "type": "boolean",
+      "usedIn": [
+        "RegisteredServiceEndpoint"
+      ]
+    },
+    {
+      "term": "rpc_relay",
+      "description": "",
+      "type": "RegisteredRpcRelayEndpoint",
+      "usedIn": [
+        "RegisteredServiceEndpoint"
+      ]
+    },
+    {
+      "term": "creator_account_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "Schedule"
+      ]
+    },
+    {
+      "term": "executed_timestamp",
+      "description": "",
+      "type": "TimestampNullable",
+      "usedIn": [
+        "Schedule"
+      ]
+    },
+    {
+      "term": "payer_account_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "Schedule",
+        "TopicMessage"
+      ]
+    },
+    {
+      "term": "schedule_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "Schedule"
+      ]
+    },
+    {
+      "term": "signatures",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "Schedule"
+      ]
+    },
+    {
+      "term": "transaction_body",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "Schedule"
+      ]
+    },
+    {
+      "term": "wait_for_expiry",
+      "description": "",
+      "type": "boolean",
+      "usedIn": [
+        "Schedule"
+      ]
+    },
+    {
+      "term": "public_key_prefix",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "ScheduleSignature"
+      ]
+    },
+    {
+      "term": "signature",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "ScheduleSignature"
+      ]
+    },
+    {
+      "term": "ip_address_v4",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "ServiceEndpoint"
+      ]
+    },
+    {
+      "term": "decimals",
+      "description": "",
+      "type": "integer",
+      "usedIn": [
+        "Token",
+        "TokenInfo",
+        "TokenRelationship"
+      ]
+    },
+    {
+      "term": "symbol",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "Token",
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "receiver_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "TokenAirdrop"
+      ]
+    },
+    {
+      "term": "sender_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "TokenAirdrop"
+      ]
+    },
+    {
+      "term": "fee_schedule_key",
+      "description": "",
+      "type": "Key",
+      "usedIn": [
+        "TokenInfo",
+        "Topic"
+      ]
+    },
+    {
+      "term": "freeze_default",
+      "description": "",
+      "type": "boolean",
+      "usedIn": [
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "freeze_key",
+      "description": "",
+      "type": "Key",
+      "usedIn": [
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "initial_supply",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "kyc_key",
+      "description": "",
+      "type": "Key",
+      "usedIn": [
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "max_supply",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "metadata_key",
+      "description": "",
+      "type": "",
+      "usedIn": [
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "pause_key",
+      "description": "",
+      "type": "Key",
+      "usedIn": [
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "pause_status",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "supply_key",
+      "description": "",
+      "type": "Key",
+      "usedIn": [
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "supply_type",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "treasury_account_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "wipe_key",
+      "description": "",
+      "type": "Key",
+      "usedIn": [
+        "TokenInfo"
+      ]
+    },
+    {
+      "term": "custom_fees",
+      "description": "",
+      "type": "CustomFees",
+      "usedIn": [
+        "TokenInfo",
+        "Topic"
+      ]
+    },
+    {
+      "term": "automatic_association",
+      "description": "Specifies if the relationship is implicitly/explicitly associated.",
+      "type": "boolean",
+      "usedIn": [
+        "TokenRelationship"
+      ]
+    },
+    {
+      "term": "freeze_status",
+      "description": "The Freeze status of the account.",
+      "type": "string",
+      "usedIn": [
+        "TokenRelationship"
+      ]
+    },
+    {
+      "term": "kyc_status",
+      "description": "The KYC status of the account.",
+      "type": "string",
+      "usedIn": [
+        "TokenRelationship"
+      ]
+    },
+    {
+      "term": "fee_exempt_key_list",
+      "description": "Keys permitted to submit messages to the topic without paying custom fees",
+      "type": "array",
+      "usedIn": [
+        "Topic"
+      ]
+    },
+    {
+      "term": "submit_key",
+      "description": "",
+      "type": "Key",
+      "usedIn": [
+        "Topic"
+      ]
+    },
+    {
+      "term": "topic_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "Topic",
+        "TopicMessage"
+      ]
+    },
+    {
+      "term": "chunk_info",
+      "description": "",
+      "type": "ChunkInfo",
+      "usedIn": [
+        "TopicMessage"
+      ]
+    },
+    {
+      "term": "message",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "TopicMessage"
+      ]
+    },
+    {
+      "term": "running_hash",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "TopicMessage"
+      ]
+    },
+    {
+      "term": "running_hash_version",
+      "description": "",
+      "type": "integer",
+      "usedIn": [
+        "TopicMessage"
+      ]
+    },
+    {
+      "term": "sequence_number",
+      "description": "",
+      "type": "integer",
+      "usedIn": [
+        "TopicMessage"
+      ]
+    },
+    {
+      "term": "batch_key",
+      "description": "",
+      "type": "Key",
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "bytes",
+      "description": "",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "charged_tx_fee",
+      "description": "",
+      "type": "integer",
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "entity_id",
+      "description": "",
+      "type": "EntityId",
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "high_volume",
+      "description": "Whether the transaction used high-volume entity creation throttles and pricing per HIP-1313",
+      "type": "boolean",
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "high_volume_pricing_multiplier",
+      "description": "The multiplier applied to the transaction fee when high-volume pricing was in effect per HIP-1313, scaled by 1000 (e.g. 1000 = 1x, 4000 = 4x). A value of 0 means high-volume pricing was not applied. Null for pre-HIP-1313 transactions.",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "max_custom_fees",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "max_fee",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "memo_base64",
+      "description": "",
+      "type": [
+        "string",
+        "null"
+      ],
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "nft_transfers",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "parent_consensus_timestamp",
+      "description": "",
+      "type": "TimestampNullable",
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "scheduled",
+      "description": "",
+      "type": "boolean",
+      "usedIn": [
+        "Transaction",
+        "TransactionId"
+      ]
+    },
+    {
+      "term": "staking_reward_transfers",
+      "description": "",
+      "type": "StakingRewardTransfers",
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "token_transfers",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "transaction_hash",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "transfers",
+      "description": "",
+      "type": "array",
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "valid_duration_seconds",
+      "description": "",
+      "type": "string",
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "valid_start_timestamp",
+      "description": "",
+      "type": "Timestamp",
+      "usedIn": [
+        "Transaction"
+      ]
+    },
+    {
+      "term": "transaction_valid_start",
+      "description": "",
+      "type": "Timestamp",
+      "usedIn": [
+        "TransactionId"
+      ]
+    }
+  ]
+}

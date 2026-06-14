@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/Key.json",
+  "title": "Key",
+  "description": "The public key which controls access to various network entities.",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "_type": {
+      "type": "string",
+      "enum": [
+        "ECDSA_SECP256K1",
+        "ED25519",
+        "ProtobufEncoded"
+      ],
+      "example": "ProtobufEncoded"
+    },
+    "key": {
+      "type": "string",
+      "example": "15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743"
+    }
+  }
+}

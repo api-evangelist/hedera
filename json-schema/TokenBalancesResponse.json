@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/TokenBalancesResponse.json",
+  "title": "TokenBalancesResponse",
+  "type": "object",
+  "properties": {
+    "timestamp": {
+      "$ref": "#/components/schemas/TimestampNullable"
+    },
+    "balances": {
+      "$ref": "#/components/schemas/TokenDistribution"
+    },
+    "links": {
+      "$ref": "#/components/schemas/Links"
+    }
+  }
+}

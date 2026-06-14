@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/NetworkExchangeRateSetResponse.json",
+  "title": "NetworkExchangeRateSetResponse",
+  "type": "object",
+  "properties": {
+    "current_rate": {
+      "$ref": "#/components/schemas/ExchangeRate"
+    },
+    "next_rate": {
+      "$ref": "#/components/schemas/ExchangeRate"
+    },
+    "timestamp": {
+      "$ref": "#/components/schemas/Timestamp"
+    }
+  }
+}

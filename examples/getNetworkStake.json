@@ -1,0 +1,17 @@
+{
+  "operationId": "getNetworkStake",
+  "method": "GET",
+  "path": "/api/v1/network/stake",
+  "summary": "Get network stake information",
+  "description": "Returns the network's current stake information.",
+  "tags": [
+    "network"
+  ],
+  "parameters": [],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "No network stake data found",
+    "500": "Service Unavailable"
+  }
+}

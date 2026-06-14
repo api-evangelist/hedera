@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/StakingRewardsResponse.json",
+  "title": "StakingRewardsResponse",
+  "type": "object",
+  "properties": {
+    "rewards": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/StakingReward"
+      }
+    },
+    "links": {
+      "$ref": "#/components/schemas/Links"
+    }
+  }
+}

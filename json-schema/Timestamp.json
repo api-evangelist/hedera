@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/Timestamp.json",
+  "title": "Timestamp",
+  "description": "A Unix timestamp in seconds.nanoseconds format",
+  "type": "string",
+  "example": "1586567700.453054000",
+  "pattern": "^\\d{1,10}(\\.\\d{1,9})?$"
+}

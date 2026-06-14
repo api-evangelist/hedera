@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/RegisteredServiceEndpoint.json",
+  "title": "RegisteredServiceEndpoint",
+  "type": "object",
+  "required": [
+    "block_node",
+    "general_service",
+    "mirror_node",
+    "port",
+    "rpc_relay",
+    "requires_tls",
+    "type"
+  ],
+  "allOf": [
+    {
+      "anyOf": [
+        {
+          "required": [
+            "domain_name"
+          ]
+        },
+        {
+          "required": [
+            "ip_address"
+          ]
+        }
+      ]
+    }
+  ],
+  "properties": {
+    "block_node": {
+      "$ref": "#/components/schemas/RegisteredBlockNodeEndpoint"
+    },
+    "domain_name": {
+      "description": "The DNS domain name of the service",
+      "example": "block1.alpha.com",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "general_service": {
+      "$ref": "#/components/schemas/RegisteredGeneralServiceEndpoint"
+    },
+    "ip_address": {
+      "description": "The IP address of the service",
+      "example": "191.91.239.79",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "mirror_node": {
+      "$ref": "#/components/schemas/RegisteredMirrorNodeEndpoint"
+    },
+    "port": {
+      "format": "int32",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535
+    },
+    "requires_tls": {
+      "description": "Whether the registered service endpoint requires TLS or not.",
+      "type": "boolean"
+    },
+    "rpc_relay": {
+      "$ref": "#/components/schemas/RegisteredRpcRelayEndpoint"
+    },
+    "type": {
+      "$ref": "#/components/schemas/RegisteredNodeType"
+    }
+  },
+  "example": {
+    "domain_name": "block1.alpha.com",
+    "general_service": null,
+    "ip_address": null,
+    "mirror_node": null,
+    "port": 40840,
+    "requires_tls": false,
+    "rpc_relay": null,
+    "type": "BLOCK_NODE"
+  }
+}

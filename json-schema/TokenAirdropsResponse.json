@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/TokenAirdropsResponse.json",
+  "title": "TokenAirdropsResponse",
+  "type": "object",
+  "properties": {
+    "airdrops": {
+      "$ref": "#/components/schemas/TokenAirdrops"
+    },
+    "links": {
+      "$ref": "#/components/schemas/Links"
+    }
+  }
+}

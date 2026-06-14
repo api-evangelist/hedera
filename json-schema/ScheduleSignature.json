@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/ScheduleSignature.json",
+  "title": "ScheduleSignature",
+  "type": "object",
+  "properties": {
+    "consensus_timestamp": {
+      "$ref": "#/components/schemas/Timestamp"
+    },
+    "public_key_prefix": {
+      "type": "string",
+      "format": "byte",
+      "example": "AAEBAwuqAwzB"
+    },
+    "signature": {
+      "type": "string",
+      "format": "byte",
+      "example": "3q2+7wABAQMLqgMMwQ=="
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "CONTRACT",
+        "ED25519",
+        "RSA_3072",
+        "ECDSA_384",
+        "ECDSA_SECP256K1",
+        "UNKNOWN"
+      ],
+      "example": "ED25519"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "operationId": "getContractLogsByContractId",
+  "method": "GET",
+  "path": "/api/v1/contracts/{contractIdOrAddress}/results/logs",
+  "summary": "List contract logs from a contract on the network",
+  "description": "Search the logs of a specific contract across multiple contract calls. Chained logs are not\nincluded but can be found by calling `/api/v1/contracts/{contractId}/results/{timestamp}`\nor `/api/v1/contracts/results/{transactionId}`. When searching by topic a timestamp parameter must be supplied\nand span a time range of at most seven days.\n\n## Ordering\nThe order is governed by the combination of timestamp and index values. If the index param is omitted, the order is determined by the timestamp only.\n\nNote: The default order for this API is currently DESC\n\n## Filtering\nWhen filtering there are some restrictions enforced to ensure correctness and scalability.\n\n**The table below defines the restrictions and support for the endpoint**\n\n| Query Param   | Comparison Operator | Support | Description           | Example |\n| ------------- | ------------------- | ------- | --------------------- | ------- |\n| index         | eq                  | Y       | Single occurrence only. Requires the presence of timestamp | ?index=X |\n|               | ne                  | N       | | |\n|               | lt(e)               | Y       | Single occurrence only. Requires the presence of timestamp | ?index=lte:X |\n|               | gt(e)               | Y       | Single occurrence only. Requires the presence of timestamp | ?index=gte:X |\n| timestamp     | eq                  | Y       | Single occurrence only. | ?timestamp=Y\n|               | ne                  | N       | | |\n|               | lt(e)               | Y       | Single occurrence only. Optional second timestamp **gt(e)** | ?timestamp=lte:Y\n|               | gt(e)               | Y       | Single occurrence only. Optional second timestamp **lt(e)** | ?timestamp=gte:Y\n\n\nBoth filters must be a single occurrence of **gt(e)** or **lt(e)** which provide a lower and or upper boundary for search.\n",
+  "tags": [
+    "contracts"
+  ],
+  "parameters": [
+    {
+      "name": "contractIdOrAddress",
+      "in": "path",
+      "description": "Contract or account identifier in format shard.realm.num, realm.num, num or a 20-byte EVM address (with or without 0x prefix).",
+      "required": true
+    },
+    {
+      "name": "index",
+      "in": "query",
+      "description": "Contract log index",
+      "required": false
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "timestamp",
+      "in": "query",
+      "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": false
+    },
+    {
+      "name": "topic0",
+      "in": "query",
+      "description": "The first topic associated with a contract log. Requires a timestamp range also be populated.",
+      "required": false
+    },
+    {
+      "name": "topic1",
+      "in": "query",
+      "description": "The second topic associated with a contract log. Requires a timestamp range also be populated.",
+      "required": false
+    },
+    {
+      "name": "topic2",
+      "in": "query",
+      "description": "The third topic associated with a contract log. Requires a timestamp range also be populated.",
+      "required": false
+    },
+    {
+      "name": "topic3",
+      "in": "query",
+      "description": "The fourth topic associated with a contract log. Requires a timestamp range also be populated.",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter"
+  }
+}

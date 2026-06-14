@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/AuthorizationList.json",
+  "title": "AuthorizationList",
+  "type": "object",
+  "properties": {
+    "address": {
+      "description": "The hex encoded address to be delegated to",
+      "example": "0x0000000000000000000000000000000000000001",
+      "format": "binary",
+      "type": "string"
+    },
+    "chain_id": {
+      "description": "The hex encoded chain id",
+      "example": "0x127",
+      "type": "string"
+    },
+    "nonce": {
+      "description": "The nonce of the authorization",
+      "example": 5,
+      "format": "int64",
+      "type": "integer"
+    },
+    "r": {
+      "description": "The hex encoded signature r value",
+      "example": "0x2222222222222222222222222222222222222222222222222222222222222222",
+      "format": "binary",
+      "type": "string"
+    },
+    "s": {
+      "description": "The hex encoded signature s value",
+      "example": "0x3333333333333333333333333333333333333333333333333333333333333333",
+      "format": "binary",
+      "type": "string"
+    },
+    "y_parity": {
+      "description": "The hex encoded parity of the y-coordinate of the signature point",
+      "example": "0x1",
+      "type": "string"
+    }
+  }
+}

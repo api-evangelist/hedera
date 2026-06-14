@@ -1,0 +1,46 @@
+{
+  "operationId": "getContractState",
+  "method": "GET",
+  "path": "/api/v1/contracts/{contractIdOrAddress}/state",
+  "summary": "The contract state from a contract on the network",
+  "description": "Returns a list of all contract's slots. If no timestamp is provided, returns the current state.",
+  "tags": [
+    "contracts"
+  ],
+  "parameters": [
+    {
+      "name": "contractIdOrAddress",
+      "in": "path",
+      "description": "Contract or account identifier in format shard.realm.num, realm.num, num or a 20-byte EVM address (with or without 0x prefix).",
+      "required": true
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "slot",
+      "in": "query",
+      "description": "The slot's number",
+      "required": false
+    },
+    {
+      "name": "timestamp",
+      "in": "query",
+      "description": "The consensus timestamp of the contract state as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter"
+  }
+}

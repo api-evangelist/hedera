@@ -1,0 +1,70 @@
+{
+  "operationId": "getContractResultsByContractId",
+  "method": "GET",
+  "path": "/api/v1/contracts/{contractIdOrAddress}/results",
+  "summary": "List contract results from a contract on the network",
+  "description": "Returns a list of all ContractResults for a contract's function executions.",
+  "tags": [
+    "contracts"
+  ],
+  "parameters": [
+    {
+      "name": "contractIdOrAddress",
+      "in": "path",
+      "description": "Contract or account identifier in format shard.realm.num, realm.num, num or a 20-byte EVM address (with or without 0x prefix).",
+      "required": true
+    },
+    {
+      "name": "block.hash",
+      "in": "query",
+      "description": "The block's hash. If multiple values are provided the last value will be the only value used.",
+      "required": false
+    },
+    {
+      "name": "block.number",
+      "in": "query",
+      "description": "The block's number",
+      "required": false
+    },
+    {
+      "name": "from",
+      "in": "query",
+      "description": "Account ID or EVM address executing the contract",
+      "required": false
+    },
+    {
+      "name": "internal",
+      "in": "query",
+      "description": "Whether to include child transactions or not",
+      "required": false
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "timestamp",
+      "in": "query",
+      "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": false
+    },
+    {
+      "name": "transaction.index",
+      "in": "query",
+      "description": "The transaction index in the block",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter"
+  }
+}

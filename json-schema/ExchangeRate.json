@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/ExchangeRate.json",
+  "title": "ExchangeRate",
+  "type": "object",
+  "properties": {
+    "cent_equivalent": {
+      "format": "int32",
+      "example": 596987,
+      "type": "integer"
+    },
+    "expiration_time": {
+      "format": "int64",
+      "example": 1649689200,
+      "type": "integer"
+    },
+    "hbar_equivalent": {
+      "example": 30000,
+      "format": "int32",
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/RegisteredBlockNodeEndpoint.json",
+  "title": "RegisteredBlockNodeEndpoint",
+  "type": "object",
+  "properties": {
+    "endpoint_apis": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RegisteredBlockNodeApi"
+      }
+    }
+  }
+}

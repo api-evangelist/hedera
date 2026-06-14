@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/EthereumHash.json",
+  "title": "EthereumHash",
+  "type": "string",
+  "description": "A hex encoded ethereum transaction hash.",
+  "minLength": 64,
+  "maxLength": 66,
+  "pattern": "^(0x)?[A-Fa-f0-9]{64}$"
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/FeeExtra.json",
+  "title": "FeeExtra",
+  "description": "The extra fee charged for the transaction.",
+  "properties": {
+    "charged": {
+      "description": "The charged count of items as calculated by `max(0, count - included)`.",
+      "example": 1,
+      "format": "int64",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "count": {
+      "description": "The actual count of items received.",
+      "example": 2,
+      "format": "int64",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "fee_per_unit": {
+      "description": "The fee price per unit in tinycents.",
+      "example": 100,
+      "format": "int64",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "included": {
+      "description": "The count of this \"extra\" that is included for free.",
+      "example": 1,
+      "format": "int64",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "name": {
+      "description": "The unique name of this extra fee as defined in the fee schedule.",
+      "example": "Signatures",
+      "type": "string"
+    },
+    "subtotal": {
+      "description": "The subtotal in tinycents for this extra fee. Calculated by multiplying the charged count by the fee_per_unit.",
+      "example": 100,
+      "format": "int64",
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "charged",
+    "count",
+    "fee_per_unit",
+    "included",
+    "name",
+    "subtotal"
+  ],
+  "type": "object"
+}

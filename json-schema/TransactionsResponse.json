@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/TransactionsResponse.json",
+  "title": "TransactionsResponse",
+  "type": "object",
+  "properties": {
+    "transactions": {
+      "$ref": "#/components/schemas/Transactions"
+    },
+    "links": {
+      "$ref": "#/components/schemas/Links"
+    }
+  }
+}

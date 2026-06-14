@@ -1,0 +1,41 @@
+{
+  "operationId": "getCryptoAllowances",
+  "method": "GET",
+  "path": "/api/v1/accounts/{idOrAliasOrEvmAddress}/allowances/crypto",
+  "summary": "Get crypto allowances for an account info",
+  "description": "Returns information for all crypto allowances for an account.",
+  "tags": [
+    "accounts"
+  ],
+  "parameters": [
+    {
+      "name": "idOrAliasOrEvmAddress",
+      "in": "path",
+      "description": "Account alias or account id or evm address",
+      "required": true
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "spender.id",
+      "in": "query",
+      "description": "The ID of the spender to return information for",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

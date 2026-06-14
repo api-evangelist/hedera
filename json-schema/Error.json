@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/Error.json",
+  "title": "Error",
+  "type": "object",
+  "properties": {
+    "_status": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "description": "Error message in hexadecimal",
+                "example": "0x3000",
+                "format": "binary",
+                "pattern": "^0x[0-9a-fA-F]+$",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "detail": {
+                "description": "Detailed error message",
+                "example": "Generic detailed error message",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "message": {
+                "description": "Error message",
+                "example": "Generic error message",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

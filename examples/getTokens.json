@@ -1,0 +1,58 @@
+{
+  "operationId": "getTokens",
+  "method": "GET",
+  "path": "/api/v1/tokens",
+  "summary": "List tokens",
+  "description": "Returns a list of tokens on the network.",
+  "tags": [
+    "tokens"
+  ],
+  "parameters": [
+    {
+      "name": "account.id",
+      "in": "query",
+      "description": "The ID of the account to return information for",
+      "required": false
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "name",
+      "in": "query",
+      "description": "Partial or full token name. Not allowed to be used with token.id or account.id parameter. Pagination is not supported with the use of this parameter and results are ordered by token.id with respect to the order parameter.",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "publickey",
+      "in": "query",
+      "description": "The public key to compare against",
+      "required": false
+    },
+    {
+      "name": "token.id",
+      "in": "query",
+      "description": "The ID of the token to return information for",
+      "required": false
+    },
+    {
+      "name": "type",
+      "in": "query",
+      "description": "",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/Nft.json",
+  "title": "Nft",
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "created_timestamp": {
+      "$ref": "#/components/schemas/TimestampNullable"
+    },
+    "delegating_spender": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "deleted": {
+      "description": "whether the nft or the token it belongs to has been deleted",
+      "type": "boolean"
+    },
+    "metadata": {
+      "description": "Arbitrary binary data associated with this NFT encoded in base64.",
+      "type": "string",
+      "format": "byte"
+    },
+    "modified_timestamp": {
+      "$ref": "#/components/schemas/TimestampNullable"
+    },
+    "serial_number": {
+      "example": 1,
+      "format": "int64",
+      "type": "integer"
+    },
+    "spender": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "token_id": {
+      "$ref": "#/components/schemas/EntityId"
+    }
+  },
+  "example": {
+    "account_id": "0.1.2",
+    "created_timestamp": "1234567890.000000001",
+    "delegating_spender": "0.0.400",
+    "deleted": false,
+    "metadata": "VGhpcyBpcyBhIHRlc3QgTkZU",
+    "modified_timestamp": "1610682445.003266001",
+    "serial_number": 124,
+    "spender_id": "0.0.500",
+    "token_id": "0.0.222"
+  }
+}

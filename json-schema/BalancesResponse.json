@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/BalancesResponse.json",
+  "title": "BalancesResponse",
+  "type": "object",
+  "properties": {
+    "timestamp": {
+      "$ref": "#/components/schemas/TimestampNullable"
+    },
+    "balances": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AccountBalance"
+      }
+    },
+    "links": {
+      "$ref": "#/components/schemas/Links"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "operationId": "getAccounts",
+  "method": "GET",
+  "path": "/api/v1/accounts",
+  "summary": "List account entities on network",
+  "description": "Returns a list of all account entity items on the network.",
+  "tags": [
+    "accounts"
+  ],
+  "parameters": [
+    {
+      "name": "account.balance",
+      "in": "query",
+      "description": "The optional balance value to compare against",
+      "required": false
+    },
+    {
+      "name": "account.id",
+      "in": "query",
+      "description": "The ID of the account to return information for",
+      "required": false
+    },
+    {
+      "name": "account.publickey",
+      "in": "query",
+      "description": "The account's public key to compare against",
+      "required": false
+    },
+    {
+      "name": "balance",
+      "in": "query",
+      "description": "Whether to include balance information or not. If included, token balances are limited to at most 50 per account as outlined in HIP-367. If multiple values are provided the last value will be the only value used.",
+      "required": false
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter"
+  }
+}

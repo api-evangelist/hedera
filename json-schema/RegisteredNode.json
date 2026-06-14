@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/RegisteredNode.json",
+  "title": "RegisteredNode",
+  "type": "object",
+  "required": [
+    "admin_key",
+    "created_timestamp",
+    "description",
+    "registered_node_id",
+    "service_endpoints",
+    "timestamp"
+  ],
+  "properties": {
+    "admin_key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "created_timestamp": {
+      "$ref": "#/components/schemas/TimestampNullable"
+    },
+    "description": {
+      "description": "A short description of the node",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "registered_node_id": {
+      "description": "An identifier for the registered node",
+      "format": "int64",
+      "type": "integer"
+    },
+    "service_endpoints": {
+      "$ref": "#/components/schemas/RegisteredServiceEndpoints"
+    },
+    "timestamp": {
+      "$ref": "#/components/schemas/TimestampRange"
+    }
+  },
+  "example": {
+    "admin_key": {
+      "_type": "ProtobufEncoded",
+      "key": "421050820e1485acdd59726088e0e4a2130ebbbb70009f640ad95c78dd5a7b38"
+    },
+    "created_timestamp": "1586567700.453054001",
+    "description": "alpha",
+    "registered_node_id": 1,
+    "service_endpoints": [
+      {
+        "ip_address_v4": "128.0.0.6",
+        "port": 50216
+      }
+    ],
+    "timestamp": {
+      "from": "187654.000123457",
+      "to": null
+    }
+  }
+}

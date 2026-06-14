@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/RoyaltyFee.json",
+  "title": "RoyaltyFee",
+  "type": "object",
+  "properties": {
+    "all_collectors_are_exempt": {
+      "type": "boolean",
+      "example": false
+    },
+    "amount": {
+      "type": "object",
+      "properties": {
+        "numerator": {
+          "example": 15,
+          "format": "int64",
+          "type": "integer"
+        },
+        "denominator": {
+          "example": 37,
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "collector_account_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "fallback_fee": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "example": 100,
+          "format": "int64",
+          "type": "integer"
+        },
+        "denominating_token_id": {
+          "$ref": "#/components/schemas/EntityId"
+        }
+      }
+    }
+  }
+}

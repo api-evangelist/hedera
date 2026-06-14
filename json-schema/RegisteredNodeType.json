@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/RegisteredNodeType.json",
+  "title": "RegisteredNodeType",
+  "description": "Registered node type.",
+  "enum": [
+    "BLOCK_NODE",
+    "GENERAL_SERVICE",
+    "MIRROR_NODE",
+    "RPC_RELAY"
+  ],
+  "example": "BLOCK_NODE",
+  "type": "string"
+}

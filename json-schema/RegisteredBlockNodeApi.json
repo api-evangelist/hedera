@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/RegisteredBlockNodeApi.json",
+  "title": "RegisteredBlockNodeApi",
+  "type": "string",
+  "enum": [
+    "OTHER",
+    "STATUS",
+    "PUBLISH",
+    "SUBSCRIBE_STREAM",
+    "STATE_PROOF",
+    "UNRECOGNIZED"
+  ]
+}

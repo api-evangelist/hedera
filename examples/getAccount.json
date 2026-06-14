@@ -1,0 +1,53 @@
+{
+  "operationId": "getAccount",
+  "method": "GET",
+  "path": "/api/v1/accounts/{idOrAliasOrEvmAddress}",
+  "summary": "Get account by alias, id, or evm address",
+  "description": "Return the account transactions and balance information given an account alias, an account id, or an evm address. The information will be limited to at most 1000 token balances for the account as outlined in HIP-367.\nWhen the timestamp parameter is supplied, we will return transactions and account state for the relevant timestamp query. Balance information will be accurate to within 15 minutes of the provided timestamp query.\nHistorical ethereum nonce information is currently not available and may not be the exact value at a provided timestamp.\n",
+  "tags": [
+    "accounts"
+  ],
+  "parameters": [
+    {
+      "name": "idOrAliasOrEvmAddress",
+      "in": "path",
+      "description": "Account alias or account id or evm address",
+      "required": true
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "timestamp",
+      "in": "query",
+      "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": false
+    },
+    {
+      "name": "transactiontype",
+      "in": "query",
+      "description": "",
+      "required": false
+    },
+    {
+      "name": "transactions",
+      "in": "query",
+      "description": "If provided and set to false transactions will not be included in the response",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

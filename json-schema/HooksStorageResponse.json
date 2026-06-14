@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/HooksStorageResponse.json",
+  "title": "HooksStorageResponse",
+  "type": "object",
+  "required": [
+    "hook_id",
+    "links",
+    "owner_id",
+    "storage"
+  ],
+  "properties": {
+    "hook_id": {
+      "description": "The unique identifier of the hook within the owner's scope",
+      "example": 1,
+      "format": "int64",
+      "type": "integer"
+    },
+    "links": {
+      "$ref": "#/components/schemas/Links"
+    },
+    "owner_id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EntityId"
+        },
+        {
+          "description": "The entity that owns the hook"
+        }
+      ]
+    },
+    "storage": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/HookStorage"
+      }
+    }
+  }
+}

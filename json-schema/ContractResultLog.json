@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/ContractResultLog.json",
+  "title": "ContractResultLog",
+  "type": "object",
+  "properties": {
+    "address": {
+      "description": "The hex encoded EVM address of the contract",
+      "example": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+      "pattern": "^0x[0-9A-Fa-f]{40}$",
+      "type": "string"
+    },
+    "bloom": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Bloom"
+        },
+        {
+          "description": "The hex encoded bloom filter of the contract log"
+        }
+      ]
+    },
+    "contract_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "data": {
+      "description": "The hex encoded data of the contract log",
+      "example": "0x00000000000000000000000000000000000000000000000000000000000000fa",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "index": {
+      "description": "The index of the contract log in the chain of logs for an execution",
+      "example": 0,
+      "type": "integer"
+    },
+    "topics": {
+      "$ref": "#/components/schemas/ContractLogTopics"
+    }
+  }
+}

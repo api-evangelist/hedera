@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/NetworkSupplyResponse.json",
+  "title": "NetworkSupplyResponse",
+  "type": "object",
+  "properties": {
+    "released_supply": {
+      "description": "The network's released supply of hbars in tinybars",
+      "example": "3999999999999999949",
+      "type": "string"
+    },
+    "timestamp": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The consensus timestamp at which the released supply was valid"
+        }
+      ]
+    },
+    "total_supply": {
+      "description": "The network's total supply of hbars in tinybars",
+      "example": "5000000000000000000",
+      "type": "string"
+    }
+  }
+}

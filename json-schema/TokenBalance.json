@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/TokenBalance.json",
+  "title": "TokenBalance",
+  "type": "object",
+  "required": [
+    "token_id",
+    "balance"
+  ],
+  "properties": {
+    "token_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "balance": {
+      "format": "int64",
+      "type": "integer"
+    }
+  },
+  "example": {
+    "token_id": "0.0.200001",
+    "balance": 8
+  }
+}

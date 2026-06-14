@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/TokenRelationship.json",
+  "title": "TokenRelationship",
+  "type": "object",
+  "properties": {
+    "automatic_association": {
+      "type": "boolean",
+      "description": "Specifies if the relationship is implicitly/explicitly associated.",
+      "example": true
+    },
+    "balance": {
+      "format": "int64",
+      "type": "integer",
+      "description": "For FUNGIBLE_COMMON, the balance that the account holds in the smallest denomination. For NON_FUNGIBLE_UNIQUE, the number of NFTs held by the account.",
+      "example": 5
+    },
+    "created_timestamp": {
+      "$ref": "#/components/schemas/Timestamp"
+    },
+    "decimals": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "freeze_status": {
+      "type": "string",
+      "description": "The Freeze status of the account.",
+      "example": "UNFROZEN",
+      "enum": [
+        "NOT_APPLICABLE",
+        "FROZEN",
+        "UNFROZEN"
+      ]
+    },
+    "kyc_status": {
+      "type": "string",
+      "description": "The KYC status of the account.",
+      "example": "GRANTED",
+      "enum": [
+        "NOT_APPLICABLE",
+        "GRANTED",
+        "REVOKED"
+      ]
+    },
+    "token_id": {
+      "$ref": "#/components/schemas/EntityId"
+    }
+  },
+  "required": [
+    "automatic_association",
+    "balance",
+    "created_timestamp",
+    "decimals",
+    "freeze_status",
+    "kyc_status",
+    "token_id"
+  ],
+  "example": {
+    "automatic_association": true,
+    "balance": 5,
+    "created_timestamp": "123456789.000000001",
+    "decimals": 3,
+    "freeze_status": "UNFROZEN",
+    "kyc_status": "GRANTED",
+    "token_id": "0.0.27335"
+  }
+}

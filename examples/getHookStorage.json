@@ -1,0 +1,53 @@
+{
+  "operationId": "getHookStorage",
+  "method": "GET",
+  "path": "/api/v1/accounts/{idOrAliasOrEvmAddress}/hooks/{hookId}/storage",
+  "summary": "Get hook storage slots",
+  "description": "Returns a list of hook storage slots associated with a given hook.",
+  "tags": [
+    "accounts"
+  ],
+  "parameters": [
+    {
+      "name": "idOrAliasOrEvmAddress",
+      "in": "path",
+      "description": "Account alias or account id or evm address",
+      "required": true
+    },
+    {
+      "name": "hookId",
+      "in": "path",
+      "description": "The ID of the hook",
+      "required": true
+    },
+    {
+      "name": "key",
+      "in": "query",
+      "description": "A string representing a pair of operator:address of a hook storage entry",
+      "required": false
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "timestamp",
+      "in": "query",
+      "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

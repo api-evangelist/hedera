@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/EntityId.json",
+  "title": "EntityId",
+  "type": [
+    "string",
+    "null"
+  ],
+  "description": "Network entity ID in the format of `shard.realm.num`",
+  "pattern": "^\\d{1,10}\\.\\d{1,10}\\.\\d{1,10}$",
+  "example": "0.0.2"
+}

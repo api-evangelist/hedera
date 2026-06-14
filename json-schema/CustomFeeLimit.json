@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/CustomFeeLimit.json",
+  "title": "CustomFeeLimit",
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "amount": {
+      "example": 100,
+      "format": "int64",
+      "type": "integer"
+    },
+    "denominating_token_id": {
+      "$ref": "#/components/schemas/EntityId"
+    }
+  }
+}

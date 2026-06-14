@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/EvmAddress.json",
+  "title": "EvmAddress",
+  "type": "string",
+  "description": "A network entity encoded as an EVM address in hex.",
+  "format": "binary",
+  "minLength": 40,
+  "maxLength": 42,
+  "pattern": "^(0x)?[A-Fa-f0-9]{40}$",
+  "example": "0000000000000000000000000000000000001f41"
+}

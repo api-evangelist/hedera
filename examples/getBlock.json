@@ -1,0 +1,23 @@
+{
+  "operationId": "getBlock",
+  "method": "GET",
+  "path": "/api/v1/blocks/{hashOrNumber}",
+  "summary": "Get block by hash or number",
+  "description": "Returns the block information by given hash or number.",
+  "tags": [
+    "blocks"
+  ],
+  "parameters": [
+    {
+      "name": "hashOrNumber",
+      "in": "path",
+      "description": "Accepts both eth and hedera hash format or block number",
+      "required": true
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/TransactionId.json",
+  "title": "TransactionId",
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "nonce": {
+      "example": 0,
+      "format": "int32",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "scheduled": {
+      "example": false,
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "transaction_valid_start": {
+      "$ref": "#/components/schemas/Timestamp"
+    }
+  }
+}

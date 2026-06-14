@@ -1,0 +1,70 @@
+{
+  "operationId": "getContractsResults",
+  "method": "GET",
+  "path": "/api/v1/contracts/results",
+  "summary": "List contract results from all contracts on the network",
+  "description": "Returns a list of all ContractResults for all contract's function executions.",
+  "tags": [
+    "contracts"
+  ],
+  "parameters": [
+    {
+      "name": "from",
+      "in": "query",
+      "description": "Account ID or EVM address executing the contract",
+      "required": false
+    },
+    {
+      "name": "block.hash",
+      "in": "query",
+      "description": "The block's hash. If multiple values are provided the last value will be the only value used.",
+      "required": false
+    },
+    {
+      "name": "block.number",
+      "in": "query",
+      "description": "The block's number",
+      "required": false
+    },
+    {
+      "name": "hbar",
+      "in": "query",
+      "description": "Controls the unit used for monetary fields (`amount`, `gas_price`, `max_fee_per_gas`, `max_priority_fee_per_gas`). When `true` (default), values are returned in tinybars. When `false`, values are returned in weibars (the native Ethereum unit, where 1 tinybar = 10,000,000,000 weibars).",
+      "required": false
+    },
+    {
+      "name": "internal",
+      "in": "query",
+      "description": "Whether to include child transactions or not",
+      "required": false
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "timestamp",
+      "in": "query",
+      "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": false
+    },
+    {
+      "name": "transaction.index",
+      "in": "query",
+      "description": "The transaction index in the block",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "operationId": "getContractOpcodes",
+  "method": "GET",
+  "path": "/api/v1/contracts/results/{transactionIdOrHash}/opcodes",
+  "summary": "Get the opcode traces for a historical transaction on the network with the given transaction ID or hash",
+  "description": "Re-executes a transaction and returns a result containing detailed information for the execution,\nincluding all values from the {@code stack}, {@code memory} and {@code storage}\nand the entire trace of opcodes that were executed during the replay.\n\nNote that to provide the output, the transaction needs to be re-executed on the EVM,\nwhich may take a significant amount of time to complete if stack and memory information is requested.\n",
+  "tags": [
+    "contracts"
+  ],
+  "parameters": [
+    {
+      "name": "transactionIdOrHash",
+      "in": "path",
+      "description": "Transaction Id or a 32 byte hash with optional 0x prefix",
+      "required": true
+    },
+    {
+      "name": "stack",
+      "in": "query",
+      "description": "If provided and set to false, stack information will not be included in the response",
+      "required": false
+    },
+    {
+      "name": "memory",
+      "in": "query",
+      "description": "If provided and set to true, memory information will be included in the response",
+      "required": false
+    },
+    {
+      "name": "storage",
+      "in": "query",
+      "description": "If provided and set to true, storage information will be included in the response",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Validation error",
+    "404": "Transaction or record file not found",
+    "429": "Too many requests"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "operationId": "getTopicMessages",
+  "method": "GET",
+  "path": "/api/v1/topics/{topicId}/messages",
+  "summary": "List topic messages by id",
+  "description": "Returns the list of topic messages for the given topic id.",
+  "tags": [
+    "topics"
+  ],
+  "parameters": [
+    {
+      "name": "topicId",
+      "in": "path",
+      "description": "Topic id",
+      "required": true
+    },
+    {
+      "name": "encoding",
+      "in": "query",
+      "description": "",
+      "required": false
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "sequencenumber",
+      "in": "query",
+      "description": "",
+      "required": false
+    },
+    {
+      "name": "timestamp",
+      "in": "query",
+      "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Topic Not Found"
+  }
+}

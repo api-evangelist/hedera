@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/AccountInfo.json",
+  "title": "AccountInfo",
+  "type": "object",
+  "required": [
+    "account",
+    "alias",
+    "auto_renew_period",
+    "balance",
+    "created_timestamp",
+    "decline_reward",
+    "deleted",
+    "ethereum_nonce",
+    "evm_address",
+    "expiry_timestamp",
+    "key",
+    "max_automatic_token_associations",
+    "memo",
+    "receiver_sig_required",
+    "staked_account_id",
+    "staked_node_id",
+    "stake_period_start"
+  ],
+  "properties": {
+    "account": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "alias": {
+      "$ref": "#/components/schemas/Alias"
+    },
+    "auto_renew_period": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "balance": {
+      "$ref": "#/components/schemas/Balance"
+    },
+    "created_timestamp": {
+      "$ref": "#/components/schemas/TimestampNullable"
+    },
+    "decline_reward": {
+      "description": "Whether the account declines receiving a staking reward",
+      "type": "boolean"
+    },
+    "deleted": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "ethereum_nonce": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "evm_address": {
+      "$ref": "#/components/schemas/EvmAddressNullable"
+    },
+    "expiry_timestamp": {
+      "$ref": "#/components/schemas/TimestampNullable"
+    },
+    "key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "max_automatic_token_associations": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int32"
+    },
+    "memo": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pending_reward": {
+      "description": "The pending reward in tinybars the account will receive in the next reward payout. Note the value is updated\nat the end of each staking period and there may be delay to reflect the changes in the past staking period.\n",
+      "type": "integer",
+      "format": "int64"
+    },
+    "receiver_sig_required": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "staked_account_id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EntityId"
+        },
+        {
+          "description": "The account to which this account is staking"
+        }
+      ]
+    },
+    "staked_node_id": {
+      "description": "The id of the node to which this account is staking",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "stake_period_start": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TimestampNullable"
+        },
+        {
+          "description": "The staking period during which either the staking settings for this account changed (such as starting\nstaking or changing stakedNode) or the most recent reward was earned, whichever is later. If this\naccount is not currently staked to a node, then the value is null\n"
+        }
+      ]
+    }
+  },
+  "example": {
+    "account": "0.0.8",
+    "alias": "HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA",
+    "auto_renew_period": null,
+    "balance": {
+      "timestamp": "0.000002345",
+      "balance": 80,
+      "tokens": [
+        {
+          "token_id": "0.0.200001",
+          "balance": 8
+        }
+      ]
+    },
+    "created_timestamp": "1562591528.000123456",
+    "decline_reward": false,
+    "deleted": false,
+    "ethereum_nonce": 10,
+    "evm_address": "0xac384c53f03855fa1b3616052f8ba32c6c2a2fec",
+    "expiry_timestamp": null,
+    "key": null,
+    "max_automatic_token_associations": 200,
+    "memo": "entity memo",
+    "pending_reward": 100,
+    "receiver_sig_required": false,
+    "staked_account_id": null,
+    "staked_node_id": 3,
+    "stake_period_start": "172800000.000000000"
+  }
+}

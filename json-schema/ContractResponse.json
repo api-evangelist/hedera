@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/ContractResponse.json",
+  "title": "ContractResponse",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Contract"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "bytecode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "binary",
+          "description": "The contract bytecode in hex during deployment",
+          "example": "0x01021a1fdc9b"
+        },
+        "runtime_bytecode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "binary",
+          "description": "The contract bytecode in hex after deployment",
+          "example": "0x0302fa1ad39c"
+        }
+      }
+    }
+  ]
+}

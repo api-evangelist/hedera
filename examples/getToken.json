@@ -1,0 +1,29 @@
+{
+  "operationId": "getToken",
+  "method": "GET",
+  "path": "/api/v1/tokens/{tokenId}",
+  "summary": "Get token by id",
+  "description": "Returns token entity information given the id",
+  "tags": [
+    "tokens"
+  ],
+  "parameters": [
+    {
+      "name": "tokenId",
+      "in": "path",
+      "description": "Token id",
+      "required": true
+    },
+    {
+      "name": "timestamp",
+      "in": "query",
+      "description": "The Unix timestamp in seconds.nanoseconds format. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

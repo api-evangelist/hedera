@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/AccountsResponse.json",
+  "title": "AccountsResponse",
+  "type": "object",
+  "required": [
+    "accounts",
+    "links"
+  ],
+  "properties": {
+    "accounts": {
+      "$ref": "#/components/schemas/Accounts"
+    },
+    "links": {
+      "$ref": "#/components/schemas/Links"
+    }
+  }
+}

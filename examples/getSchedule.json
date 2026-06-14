@@ -1,0 +1,23 @@
+{
+  "operationId": "getSchedule",
+  "method": "GET",
+  "path": "/api/v1/schedules/{scheduleId}",
+  "summary": "Get schedule by id",
+  "description": "Returns schedule information based on the given schedule id",
+  "tags": [
+    "schedules"
+  ],
+  "parameters": [
+    {
+      "name": "scheduleId",
+      "in": "path",
+      "description": "Schedule id",
+      "required": true
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

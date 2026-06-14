@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/AccountBalanceTransactions.json",
+  "title": "AccountBalanceTransactions",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/AccountInfo"
+    },
+    {
+      "type": "object",
+      "required": [
+        "transactions",
+        "links"
+      ],
+      "properties": {
+        "transactions": {
+          "$ref": "#/components/schemas/Transactions"
+        },
+        "links": {
+          "$ref": "#/components/schemas/Links"
+        }
+      }
+    }
+  ]
+}

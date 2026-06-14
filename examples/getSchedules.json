@@ -1,0 +1,40 @@
+{
+  "operationId": "getSchedules",
+  "method": "GET",
+  "path": "/api/v1/schedules",
+  "summary": "List schedules entities",
+  "description": "Lists schedules on the network that govern the execution logic of scheduled transactions. This includes executed and non executed schedules.",
+  "tags": [
+    "schedules"
+  ],
+  "parameters": [
+    {
+      "name": "account.id",
+      "in": "query",
+      "description": "The ID of the account to return information for",
+      "required": false
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "schedule.id",
+      "in": "query",
+      "description": "The ID of the schedule to return information for",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter"
+  }
+}

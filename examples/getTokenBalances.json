@@ -1,0 +1,58 @@
+{
+  "operationId": "getTokenBalances",
+  "method": "GET",
+  "path": "/api/v1/tokens/{tokenId}/balances",
+  "summary": "List token balances",
+  "description": "Returns a list of token balances given the id. This represents the Token supply distribution across the network",
+  "tags": [
+    "tokens"
+  ],
+  "parameters": [
+    {
+      "name": "tokenId",
+      "in": "path",
+      "description": "Token id",
+      "required": true
+    },
+    {
+      "name": "account.balance",
+      "in": "query",
+      "description": "The optional balance value to compare against",
+      "required": false
+    },
+    {
+      "name": "account.id",
+      "in": "query",
+      "description": "The ID of the account to return information for",
+      "required": false
+    },
+    {
+      "name": "account.publickey",
+      "in": "query",
+      "description": "The account's public key to compare against",
+      "required": false
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "timestamp",
+      "in": "query",
+      "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter"
+  }
+}

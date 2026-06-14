@@ -1,0 +1,36 @@
+{
+  "operationId": "getContractResultByIdAndTimestamp",
+  "method": "GET",
+  "path": "/api/v1/contracts/{contractIdOrAddress}/results/{timestamp}",
+  "summary": "Get the contract result from a contract on the network executed at a given timestamp",
+  "description": "Returns a single ContractResult for a contract's function executions at a specific timestamp.",
+  "tags": [
+    "contracts"
+  ],
+  "parameters": [
+    {
+      "name": "contractIdOrAddress",
+      "in": "path",
+      "description": "Contract or account identifier in format shard.realm.num, realm.num, num or a 20-byte EVM address (with or without 0x prefix).",
+      "required": true
+    },
+    {
+      "name": "hbar",
+      "in": "query",
+      "description": "Controls the unit used for monetary fields (`amount`, `gas_price`, `max_fee_per_gas`, `max_priority_fee_per_gas`). When `true` (default), values are returned in tinybars. When `false`, values are returned in weibars (the native Ethereum unit, where 1 tinybar = 10,000,000,000 weibars).",
+      "required": false
+    },
+    {
+      "name": "timestamp",
+      "in": "path",
+      "description": "The Unix timestamp in seconds.nanoseconds format, the timestamp at which the associated transaction reached consensus. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": true
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "206": "Partial Content",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

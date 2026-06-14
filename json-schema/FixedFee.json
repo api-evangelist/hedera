@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/FixedFee.json",
+  "title": "FixedFee",
+  "type": "object",
+  "properties": {
+    "all_collectors_are_exempt": {
+      "type": "boolean",
+      "example": false
+    },
+    "amount": {
+      "example": 100,
+      "format": "int64",
+      "type": "integer"
+    },
+    "collector_account_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "denominating_token_id": {
+      "$ref": "#/components/schemas/EntityId"
+    }
+  }
+}

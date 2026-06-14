@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/EntityIdQuery.json",
+  "title": "EntityIdQuery",
+  "type": "string",
+  "pattern": "^((gte?|lte?|eq|ne)\\:)?(\\d{1,10}\\.\\d{1,10}\\.)?\\d{1,10}$"
+}

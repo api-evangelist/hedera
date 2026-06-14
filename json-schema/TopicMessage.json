@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/TopicMessage.json",
+  "title": "TopicMessage",
+  "type": "object",
+  "properties": {
+    "chunk_info": {
+      "$ref": "#/components/schemas/ChunkInfo"
+    },
+    "consensus_timestamp": {
+      "$ref": "#/components/schemas/Timestamp"
+    },
+    "message": {
+      "type": "string"
+    },
+    "payer_account_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "running_hash": {
+      "type": "string",
+      "format": "byte"
+    },
+    "running_hash_version": {
+      "format": "int32",
+      "type": "integer"
+    },
+    "sequence_number": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "topic_id": {
+      "$ref": "#/components/schemas/EntityId"
+    }
+  },
+  "required": [
+    "consensus_timestamp",
+    "message",
+    "payer_account_id",
+    "running_hash",
+    "running_hash_version",
+    "sequence_number",
+    "topic_id"
+  ],
+  "example": {
+    "chunk_info": {
+      "initial_transaction_id": "0.0.10-1234567890-000000321",
+      "nonce": 3,
+      "number": 1,
+      "total": 2,
+      "scheduled": true
+    },
+    "consensus_timestamp": "1234567890.000000001",
+    "message": "bWVzc2FnZQ==",
+    "payer_account_id": "0.0.10",
+    "running_hash": "cnVubmluZ19oYXNo",
+    "running_hash_version": 2,
+    "sequence_number": 1,
+    "topic_id": "0.0.7"
+  }
+}

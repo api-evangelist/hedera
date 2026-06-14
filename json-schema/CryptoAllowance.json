@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/CryptoAllowance.json",
+  "title": "CryptoAllowance",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Allowance"
+    },
+    {
+      "properties": {
+        "amount": {
+          "description": "The amount remaining of the original amount granted in tinybars.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount_granted": {
+          "description": "The granted amount of the spender's allowance in tinybars.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    }
+  ]
+}

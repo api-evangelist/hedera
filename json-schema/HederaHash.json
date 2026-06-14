@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/HederaHash.json",
+  "title": "HederaHash",
+  "type": "string",
+  "description": "A hex encoded hedera transaction hash.",
+  "minLength": 96,
+  "maxLength": 98,
+  "pattern": "^(0x)?[A-Fa-f0-9]{96}$"
+}

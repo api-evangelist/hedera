@@ -1,0 +1,29 @@
+{
+  "operationId": "getTopicMessageByIdAndSequenceNumber",
+  "method": "GET",
+  "path": "/api/v1/topics/{topicId}/messages/{sequenceNumber}",
+  "summary": "Get topic message by id and sequence number",
+  "description": "Returns a single topic message for the given topic id and sequence number.",
+  "tags": [
+    "topics"
+  ],
+  "parameters": [
+    {
+      "name": "topicId",
+      "in": "path",
+      "description": "Topic id",
+      "required": true
+    },
+    {
+      "name": "sequenceNumber",
+      "in": "path",
+      "description": "Topic message sequence number",
+      "required": true
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/Hook.json",
+  "title": "Hook",
+  "type": "object",
+  "required": [
+    "admin_key",
+    "contract_id",
+    "created_timestamp",
+    "deleted",
+    "extension_point",
+    "hook_id",
+    "owner_id",
+    "timestamp_range",
+    "type"
+  ],
+  "properties": {
+    "admin_key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "contract_id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EntityId"
+        }
+      ],
+      "description": "The contract entity that contains the hook's executing bytecode"
+    },
+    "created_timestamp": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TimestampNullable"
+        }
+      ],
+      "description": "The consensus timestamp when the hook was created"
+    },
+    "deleted": {
+      "description": "Whether the hook has been deleted",
+      "example": false,
+      "type": "boolean"
+    },
+    "extension_point": {
+      "description": "The extension point this hook implements",
+      "enum": [
+        "ACCOUNT_ALLOWANCE_HOOK"
+      ],
+      "example": "ACCOUNT_ALLOWANCE_HOOK",
+      "type": "string"
+    },
+    "hook_id": {
+      "description": "The unique identifier for the hook within the owner's scope",
+      "example": 1,
+      "format": "int64",
+      "type": "integer"
+    },
+    "owner_id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EntityId"
+        }
+      ],
+      "description": "The entity that owns the hook"
+    },
+    "timestamp_range": {
+      "$ref": "#/components/schemas/TimestampRangeNullable"
+    },
+    "type": {
+      "description": "The type of the hook implementation",
+      "enum": [
+        "EVM"
+      ],
+      "example": "EVM",
+      "type": "string"
+    }
+  }
+}

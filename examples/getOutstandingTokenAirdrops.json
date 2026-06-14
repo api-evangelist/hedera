@@ -1,0 +1,53 @@
+{
+  "operationId": "getOutstandingTokenAirdrops",
+  "method": "GET",
+  "path": "/api/v1/accounts/{idOrAliasOrEvmAddress}/airdrops/outstanding",
+  "summary": "Get outstanding token airdrops sent by an account",
+  "description": "Returns outstanding token airdrops that have been sent by an account.\n",
+  "tags": [
+    "airdrops"
+  ],
+  "parameters": [
+    {
+      "name": "idOrAliasOrEvmAddress",
+      "in": "path",
+      "description": "Account alias or account id or evm address",
+      "required": true
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "receiver.id",
+      "in": "query",
+      "description": "The ID of the receiver to return information for",
+      "required": false
+    },
+    {
+      "name": "serialnumber",
+      "in": "query",
+      "description": "The nft serial number (64 bit type). Requires a tokenId value also be populated.",
+      "required": false
+    },
+    {
+      "name": "token.id",
+      "in": "query",
+      "description": "The ID of the token to return information for",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

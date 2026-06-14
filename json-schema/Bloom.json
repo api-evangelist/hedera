@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/Bloom.json",
+  "title": "Bloom",
+  "example": "0x549358c4c2e573e02410ef7b5a5ffa5f36dd7398",
+  "format": "binary",
+  "type": [
+    "string",
+    "null"
+  ]
+}

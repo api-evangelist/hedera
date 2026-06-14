@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/RegisteredNodesResponse.json",
+  "title": "RegisteredNodesResponse",
+  "type": "object",
+  "required": [
+    "links",
+    "registered_nodes"
+  ],
+  "properties": {
+    "registered_nodes": {
+      "$ref": "#/components/schemas/RegisteredNodes"
+    },
+    "links": {
+      "$ref": "#/components/schemas/Links"
+    }
+  }
+}

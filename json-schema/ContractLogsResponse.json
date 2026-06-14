@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/ContractLogsResponse.json",
+  "title": "ContractLogsResponse",
+  "type": "object",
+  "properties": {
+    "logs": {
+      "$ref": "#/components/schemas/ContractLogs"
+    },
+    "links": {
+      "$ref": "#/components/schemas/Links"
+    }
+  }
+}

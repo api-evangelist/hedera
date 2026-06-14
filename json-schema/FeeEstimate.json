@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/FeeEstimate.json",
+  "title": "FeeEstimate",
+  "description": "The fee estimate for the network component. Includes the base fee and any extras associated with it.",
+  "properties": {
+    "base": {
+      "description": "The base fee price, in tinycents.",
+      "example": 1000,
+      "format": "int64",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "extras": {
+      "description": "The extra fees that apply for this fee component.",
+      "items": {
+        "$ref": "#/components/schemas/FeeExtra"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "base",
+    "extras"
+  ],
+  "type": "object"
+}

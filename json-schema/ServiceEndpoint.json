@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/ServiceEndpoint.json",
+  "title": "ServiceEndpoint",
+  "type": "object",
+  "required": [
+    "domain_name",
+    "ip_address_v4",
+    "port"
+  ],
+  "properties": {
+    "domain_name": {
+      "type": "string"
+    },
+    "ip_address_v4": {
+      "type": "string"
+    },
+    "port": {
+      "format": "int32",
+      "type": "integer"
+    }
+  },
+  "example": {
+    "domain_name": "www.example.com",
+    "ip_address_v4": "127.0.0.1",
+    "port": 50211
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/Balance.json",
+  "title": "Balance",
+  "type": [
+    "object",
+    "null"
+  ],
+  "required": [
+    "timestamp",
+    "balance",
+    "tokens"
+  ],
+  "properties": {
+    "timestamp": {
+      "$ref": "#/components/schemas/TimestampNullable"
+    },
+    "balance": {
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "tokens": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "token_id": {
+            "$ref": "#/components/schemas/EntityId"
+          },
+          "balance": {
+            "format": "int64",
+            "type": "integer"
+          }
+        }
+      }
+    }
+  },
+  "example": {
+    "timestamp": "0.000002345",
+    "balance": 80,
+    "tokens": [
+      {
+        "token_id": "0.0.200001",
+        "balance": 8
+      }
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "operationId": "getNftTransactions",
+  "method": "GET",
+  "path": "/api/v1/tokens/{tokenId}/nfts/{serialNumber}/transactions",
+  "summary": "Get an nfts transction history",
+  "description": "Returns a list of transactions for a given non-fungible token",
+  "tags": [
+    "tokens"
+  ],
+  "parameters": [
+    {
+      "name": "tokenId",
+      "in": "path",
+      "description": "Token id",
+      "required": true
+    },
+    {
+      "name": "serialNumber",
+      "in": "path",
+      "description": "The nft serial number",
+      "required": true
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "timestamp",
+      "in": "query",
+      "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "206": "Partial Content",
+    "400": "Invalid parameter"
+  }
+}

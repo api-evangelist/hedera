@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/FractionalFee.json",
+  "title": "FractionalFee",
+  "type": "object",
+  "properties": {
+    "all_collectors_are_exempt": {
+      "type": "boolean",
+      "example": false
+    },
+    "amount": {
+      "type": "object",
+      "properties": {
+        "numerator": {
+          "example": 12,
+          "format": "int64",
+          "type": "integer"
+        },
+        "denominator": {
+          "example": 29,
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "collector_account_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "denominating_token_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "maximum": {
+      "example": 120,
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "minimum": {
+      "example": 30,
+      "format": "int64",
+      "type": "integer"
+    },
+    "net_of_transfers": {
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "operationId": "contractCall",
+  "method": "POST",
+  "path": "/api/v1/contracts/call",
+  "summary": "Invoke a smart contract",
+  "description": "Returns a result from EVM execution such as cost-free execution of read-only smart contract queries, gas estimation, and transient simulation of read-write operations. If the `estimate` field is set to true gas estimation is executed. This API can process calls against the `latest` block or specific historical blocks when a hexadecimal or decimal block number is provided in the `block` field.",
+  "tags": [
+    "contracts"
+  ],
+  "parameters": [],
+  "responses": {
+    "200": "OK",
+    "400": "Validation error",
+    "404": "Not found error",
+    "415": "Unsupported media type error",
+    "429": "Too many requests",
+    "500": "Generic error",
+    "501": "Not implemented error"
+  }
+}

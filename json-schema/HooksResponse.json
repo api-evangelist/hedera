@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/HooksResponse.json",
+  "title": "HooksResponse",
+  "type": "object",
+  "required": [
+    "hooks",
+    "links"
+  ],
+  "properties": {
+    "hooks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Hook"
+      }
+    },
+    "links": {
+      "$ref": "#/components/schemas/Links"
+    }
+  }
+}

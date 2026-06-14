@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/ContractAction.json",
+  "title": "ContractAction",
+  "type": "object",
+  "properties": {
+    "call_depth": {
+      "description": "The nesting depth of the call",
+      "example": 1,
+      "format": "int32",
+      "type": "integer"
+    },
+    "call_operation_type": {
+      "description": "The type of the call operation",
+      "enum": [
+        "CALL",
+        "CALLCODE",
+        "CREATE",
+        "CREATE2",
+        "DELEGATECALL",
+        "STATICCALL",
+        "UNKNOWN"
+      ],
+      "example": "CALL",
+      "type": "string"
+    },
+    "call_type": {
+      "description": "The type of the call",
+      "enum": [
+        "NO_ACTION",
+        "CALL",
+        "CREATE",
+        "PRECOMPILE",
+        "SYSTEM"
+      ],
+      "example": "CALL",
+      "type": "string"
+    },
+    "caller": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "caller_type": {
+      "description": "The entity type of the caller",
+      "type": "string",
+      "enum": [
+        "ACCOUNT",
+        "CONTRACT"
+      ],
+      "example": "ACCOUNT"
+    },
+    "from": {
+      "description": "The EVM address of the caller",
+      "example": "0x0000000000000000000000000000000000000065",
+      "type": "string"
+    },
+    "gas": {
+      "description": "Gas cost in tinybars",
+      "example": 50000,
+      "format": "int64",
+      "type": "integer"
+    },
+    "gas_used": {
+      "description": "Gas used in tinybars",
+      "example": 50000,
+      "format": "int64",
+      "type": "integer"
+    },
+    "index": {
+      "description": "The position of the action within the ordered list of actions",
+      "example": 0,
+      "format": "int32",
+      "type": "integer"
+    },
+    "input": {
+      "description": "The hex encoded input data",
+      "example": "0x123456",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "recipient": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "recipient_type": {
+      "description": "The entity type of the recipient",
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "ACCOUNT",
+        "CONTRACT"
+      ],
+      "example": "ACCOUNT"
+    },
+    "result_data": {
+      "description": "The hex encoded result data",
+      "example": "0x123456",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "result_data_type": {
+      "description": "The type of the result data",
+      "enum": [
+        "OUTPUT",
+        "REVERT_REASON",
+        "ERROR"
+      ],
+      "example": "OUTPUT",
+      "type": "string"
+    },
+    "timestamp": {
+      "$ref": "#/components/schemas/Timestamp"
+    },
+    "to": {
+      "$ref": "#/components/schemas/EvmAddressNullable"
+    },
+    "value": {
+      "description": "The value of the transaction in tinybars",
+      "example": 50000,
+      "format": "int64",
+      "type": "integer"
+    }
+  }
+}

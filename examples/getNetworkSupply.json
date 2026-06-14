@@ -1,0 +1,23 @@
+{
+  "operationId": "getNetworkSupply",
+  "method": "GET",
+  "path": "/api/v1/network/supply",
+  "summary": "Get the network supply",
+  "description": "Returns the network's released supply of hbars",
+  "tags": [
+    "network"
+  ],
+  "parameters": [
+    {
+      "name": "timestamp",
+      "in": "query",
+      "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

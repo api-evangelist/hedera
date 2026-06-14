@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/NetworkNode.json",
+  "title": "NetworkNode",
+  "type": "object",
+  "required": [
+    "admin_key",
+    "associated_registered_nodes",
+    "decline_reward",
+    "description",
+    "file_id",
+    "grpc_proxy_endpoint",
+    "max_stake",
+    "memo",
+    "min_stake",
+    "node_account_id",
+    "node_id",
+    "node_cert_hash",
+    "public_key",
+    "reward_rate_start",
+    "service_endpoints",
+    "stake",
+    "stake_not_rewarded",
+    "stake_rewarded",
+    "staking_period",
+    "timestamp"
+  ],
+  "properties": {
+    "admin_key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "associated_registered_nodes": {
+      "type": "array",
+      "items": {
+        "format": "int64",
+        "minimum": 0,
+        "type": "integer"
+      }
+    },
+    "decline_reward": {
+      "description": "Whether the node wants to receive staking rewards or not.",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "description": {
+      "description": "a memo associated with the address book",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "file_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "grpc_proxy_endpoint": {
+      "$ref": "#/components/schemas/ServiceEndpoint"
+    },
+    "max_stake": {
+      "description": "The maximum stake (rewarded or not rewarded) this node can have as consensus weight",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "memo": {
+      "description": "memo",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "min_stake": {
+      "description": "The minimum stake (rewarded or not rewarded) this node must reach before having non-zero consensus weight\n",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "node_account_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "node_id": {
+      "description": "An identifier for the node",
+      "format": "int64",
+      "type": "integer"
+    },
+    "node_cert_hash": {
+      "description": "hex encoded hash of the node's TLS certificate",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "public_key": {
+      "description": "hex encoded X509 RSA public key used to verify stream file signature",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reward_rate_start": {
+      "description": "The total tinybars earned by this node per whole hbar in the last staking period",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "service_endpoints": {
+      "$ref": "#/components/schemas/ServiceEndpoints"
+    },
+    "stake": {
+      "description": "The node consensus weight at the beginning of the staking period",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "stake_not_rewarded": {
+      "description": "The sum (balance + stakedToMe) for all accounts staked to this node with declineReward=true at the\nbeginning of the staking period\n",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "stake_rewarded": {
+      "description": "The sum (balance + staked) for all accounts staked to the node that are not declining rewards at the\nbeginning of the staking period\n",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "staking_period": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TimestampRangeNullable"
+        },
+        {
+          "description": "The timestamp range of the staking period"
+        }
+      ]
+    },
+    "timestamp": {
+      "$ref": "#/components/schemas/TimestampRange"
+    }
+  },
+  "example": {
+    "admin_key": {
+      "_type": "ED25519",
+      "key": "15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743"
+    },
+    "associated_registered_nodes": [
+      1,
+      10
+    ],
+    "decline_reward": false,
+    "description": "address book 1",
+    "file_id": "0.0.102",
+    "max_stake": 50000,
+    "memo": "0.0.4",
+    "min_stake": 1000,
+    "node_account_id": "0.0.4",
+    "node_cert_hash": "0x01d173753810c0aae794ba72d5443c292e9ff962b01046220dd99f5816422696e0569c977e2f169e1e5688afc8f4aa16",
+    "node_id": 1,
+    "public_key": "0x4a5ad514f0957fa170a676210c9bdbddf3bc9519702cf915fa6767a40463b96f",
+    "reward_rate_start": 1000000,
+    "service_endpoints": [
+      {
+        "ip_address_v4": "128.0.0.6",
+        "port": 50216
+      }
+    ],
+    "stake": 20000,
+    "stake_not_rewarded": 19900,
+    "stake_rewarded": 100,
+    "staking_period": {
+      "from": "1655164800.000000000",
+      "to": "1655251200.000000000"
+    },
+    "timestamp": {
+      "from": "187654.000123457",
+      "to": null
+    }
+  }
+}

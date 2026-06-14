@@ -1,0 +1,29 @@
+{
+  "operationId": "getNft",
+  "method": "GET",
+  "path": "/api/v1/tokens/{tokenId}/nfts/{serialNumber}",
+  "summary": "Get nft info",
+  "description": "Returns information for a non-fungible token",
+  "tags": [
+    "tokens"
+  ],
+  "parameters": [
+    {
+      "name": "tokenId",
+      "in": "path",
+      "description": "Token id",
+      "required": true
+    },
+    {
+      "name": "serialNumber",
+      "in": "path",
+      "description": "The nft serial number",
+      "required": true
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

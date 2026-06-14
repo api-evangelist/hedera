@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/StakingRewardTransfer.json",
+  "title": "StakingRewardTransfer",
+  "type": "object",
+  "description": "A staking reward transfer",
+  "required": [
+    "account",
+    "amount"
+  ],
+  "properties": {
+    "account": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "amount": {
+      "description": "The number of tinybars awarded",
+      "example": 10,
+      "format": "int64",
+      "type": "integer"
+    }
+  },
+  "example": {
+    "account_id": "0.0.1000",
+    "amount": 10
+  }
+}

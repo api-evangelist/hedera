@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/FeeEstimateResponse.json",
+  "title": "FeeEstimateResponse",
+  "description": "The response containing the estimated transaction fees.",
+  "properties": {
+    "high_volume_multiplier": {
+      "description": "The high-volume pricing multiplier per HIP-1313. A value of 1 indicates no high-volume pricing. A value greater than 1 applies when the transaction's highVolume flag is true and throttle utilization is non-zero.",
+      "example": 100,
+      "format": "int64",
+      "minimum": 1,
+      "type": "integer"
+    },
+    "network": {
+      "$ref": "#/components/schemas/FeeEstimateNetwork"
+    },
+    "node": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FeeEstimate"
+        },
+        {
+          "description": "The node fee component which is to be paid to the node that submitted the transaction to the network. This fee exists to compensate the node for the work it performed to pre-check the transaction before submitting it, and incentivizes the node to accept new transactions from users."
+        }
+      ]
+    },
+    "service": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FeeEstimate"
+        },
+        {
+          "description": "The service fee component which covers execution costs, state saved in the Merkle tree, and additional costs to the blockchain storage."
+        }
+      ]
+    },
+    "total": {
+      "description": "The sum of the network, node, and service subtotals in tinycents.",
+      "example": 1000,
+      "format": "int64",
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "high_volume_multiplier",
+    "network",
+    "node",
+    "service",
+    "total"
+  ],
+  "type": "object"
+}

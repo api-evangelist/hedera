@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/BlocksResponse.json",
+  "title": "BlocksResponse",
+  "type": "object",
+  "properties": {
+    "blocks": {
+      "$ref": "#/components/schemas/Blocks"
+    },
+    "links": {
+      "$ref": "#/components/schemas/Links"
+    }
+  }
+}

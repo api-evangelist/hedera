@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/TokenInfo.json",
+  "title": "TokenInfo",
+  "type": "object",
+  "properties": {
+    "admin_key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "auto_renew_account": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "auto_renew_period": {
+      "example": null,
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "created_timestamp": {
+      "$ref": "#/components/schemas/Timestamp"
+    },
+    "decimals": {
+      "type": "string",
+      "example": 1000
+    },
+    "deleted": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "example": true
+    },
+    "expiry_timestamp": {
+      "description": "The token's expiration time in nanoseconds since the Unix epoch. Note that this encoding differs from other entity expiry timestamps (e.g., accounts) which use a seconds.nanoseconds string format. This inconsistency is a known issue retained for backwards compatibility.",
+      "example": 1234567890100000,
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "fee_schedule_key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "freeze_default": {
+      "type": "boolean",
+      "example": false
+    },
+    "freeze_key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "initial_supply": {
+      "type": "string",
+      "example": "1000000"
+    },
+    "kyc_key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "max_supply": {
+      "type": "string",
+      "example": "9223372036854775807"
+    },
+    "metadata": {
+      "description": "Arbitrary binary data associated with this token class encoded in base64.",
+      "type": "string",
+      "format": "byte"
+    },
+    "metadata_key": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Key"
+        },
+        {
+          "description": "The key which can change the metadata of a token and individual NFTs."
+        }
+      ]
+    },
+    "modified_timestamp": {
+      "$ref": "#/components/schemas/Timestamp"
+    },
+    "name": {
+      "type": "string",
+      "example": "Token name"
+    },
+    "memo": {
+      "type": "string",
+      "example": "token memo"
+    },
+    "pause_key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "pause_status": {
+      "type": "string",
+      "enum": [
+        "NOT_APPLICABLE",
+        "PAUSED",
+        "UNPAUSED"
+      ],
+      "example": "UNPAUSED"
+    },
+    "supply_key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "supply_type": {
+      "type": "string",
+      "enum": [
+        "FINITE",
+        "INFINITE"
+      ],
+      "example": "INFINITE"
+    },
+    "symbol": {
+      "type": "string",
+      "example": "ORIGINALRDKSE"
+    },
+    "token_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "total_supply": {
+      "type": "string",
+      "example": "1000000"
+    },
+    "treasury_account_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "FUNGIBLE_COMMON",
+        "NON_FUNGIBLE_UNIQUE"
+      ],
+      "example": "FUNGIBLE_COMMON"
+    },
+    "wipe_key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "custom_fees": {
+      "$ref": "#/components/schemas/CustomFees"
+    }
+  }
+}

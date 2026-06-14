@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/AccountBalance.json",
+  "title": "AccountBalance",
+  "type": "object",
+  "required": [
+    "account",
+    "balance",
+    "tokens"
+  ],
+  "properties": {
+    "account": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "balance": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "tokens": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TokenBalance"
+      }
+    }
+  },
+  "example": {
+    "account": "0.15.10",
+    "balance": 80,
+    "tokens": [
+      {
+        "token_id": "0.0.200001",
+        "balance": 8
+      }
+    ]
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/ContractCallRequest.json",
+  "title": "ContractCallRequest",
+  "type": "object",
+  "properties": {
+    "block": {
+      "description": "Hexadecimal block number or the string \"latest\", \"pending\", \"earliest\". Defaults to \"latest\".",
+      "example": "latest",
+      "pattern": "^((0x)?[0-9a-fA-F]+|(earliest|pending|latest))$",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "data": {
+      "description": "Hexadecimal method signature and encoded parameters. Up to 131072 bytes as at most 262146 hexadecimal digits including optional leading 0x.",
+      "example": "0x47f1aae7",
+      "format": "binary",
+      "maxLength": 262146,
+      "pattern": "^(0x)?[0-9a-fA-F]+$",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "estimate": {
+      "description": "Whether gas estimation is called. Defaults to false.",
+      "example": true,
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "from": {
+      "description": "The 20-byte hexadecimal EVM address the transaction is sent from.",
+      "example": "00000000000000000000000000000000000004e2",
+      "format": "binary",
+      "maxLength": 42,
+      "minLength": 40,
+      "pattern": "^(0x)?[A-Fa-f0-9]{40}$",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "gas": {
+      "description": "Gas provided for the transaction execution. Defaults to 15000000.",
+      "example": 15000000,
+      "format": "int64",
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "gasPrice": {
+      "description": "Gas price used for each paid gas.",
+      "example": 100000000,
+      "format": "int64",
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "to": {
+      "description": "The 20-byte hexadecimal EVM address the transaction is directed to.",
+      "example": "0xd9d0c5c0ff85758bdf05a7636f8036d4d065f5b6",
+      "format": "binary",
+      "maxLength": 42,
+      "minLength": 40,
+      "pattern": "^(0x)?[A-Fa-f0-9]{40}$",
+      "type": "string"
+    },
+    "value": {
+      "description": "Value sent with this transaction. Defaults to 0.",
+      "example": 0,
+      "format": "int64",
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "to"
+  ]
+}

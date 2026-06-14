@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/Schedule.json",
+  "title": "Schedule",
+  "type": "object",
+  "properties": {
+    "admin_key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "consensus_timestamp": {
+      "$ref": "#/components/schemas/Timestamp"
+    },
+    "creator_account_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "deleted": {
+      "type": "boolean",
+      "example": false
+    },
+    "executed_timestamp": {
+      "$ref": "#/components/schemas/TimestampNullable"
+    },
+    "expiration_time": {
+      "$ref": "#/components/schemas/TimestampNullable"
+    },
+    "memo": {
+      "type": "string",
+      "example": "created on 02/10/2021"
+    },
+    "payer_account_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "schedule_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ScheduleSignature"
+      }
+    },
+    "transaction_body": {
+      "type": "string",
+      "format": "byte",
+      "example": "Kd6tvu8="
+    },
+    "wait_for_expiry": {
+      "type": "boolean"
+    }
+  }
+}

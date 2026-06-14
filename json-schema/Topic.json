@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/Topic.json",
+  "title": "Topic",
+  "type": "object",
+  "properties": {
+    "admin_key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "auto_renew_account": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "auto_renew_period": {
+      "description": "The amount of time to attempt to extend the topic's lifetime after expiration.",
+      "example": 7776000,
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "created_timestamp": {
+      "$ref": "#/components/schemas/TimestampNullable"
+    },
+    "custom_fees": {
+      "$ref": "#/components/schemas/ConsensusCustomFees"
+    },
+    "deleted": {
+      "description": "Whether the topic is deleted or not.",
+      "example": false,
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "fee_exempt_key_list": {
+      "description": "Keys permitted to submit messages to the topic without paying custom fees",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Key"
+      }
+    },
+    "fee_schedule_key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "memo": {
+      "description": "The memo associated with the topic.",
+      "example": "topic memo",
+      "type": "string"
+    },
+    "submit_key": {
+      "$ref": "#/components/schemas/Key"
+    },
+    "timestamp": {
+      "$ref": "#/components/schemas/TimestampRange"
+    },
+    "topic_id": {
+      "$ref": "#/components/schemas/EntityId"
+    }
+  },
+  "required": [
+    "admin_key",
+    "auto_renew_account",
+    "auto_renew_period",
+    "created_timestamp",
+    "custom_fees",
+    "deleted",
+    "fee_exempt_key_list",
+    "fee_schedule_key",
+    "memo",
+    "submit_key",
+    "timestamp",
+    "topic_id"
+  ]
+}

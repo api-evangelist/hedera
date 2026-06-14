@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/NetworkNodesResponse.json",
+  "title": "NetworkNodesResponse",
+  "type": "object",
+  "required": [
+    "nodes",
+    "links"
+  ],
+  "properties": {
+    "nodes": {
+      "$ref": "#/components/schemas/NetworkNodes"
+    },
+    "links": {
+      "$ref": "#/components/schemas/Links"
+    }
+  }
+}

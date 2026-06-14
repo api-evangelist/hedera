@@ -1,0 +1,41 @@
+{
+  "operationId": "getContractActions",
+  "method": "GET",
+  "path": "/api/v1/contracts/results/{transactionIdOrHash}/actions",
+  "summary": "Get the contract actions from a contract on the network for a given transactionId or ethereum transaction hash",
+  "description": "Returns a list of ContractActions for a contract's function executions for a given transactionId or ethereum transaction hash.",
+  "tags": [
+    "contracts"
+  ],
+  "parameters": [
+    {
+      "name": "transactionIdOrHash",
+      "in": "path",
+      "description": "Transaction Id or a 32 byte hash with optional 0x prefix",
+      "required": true
+    },
+    {
+      "name": "index",
+      "in": "query",
+      "description": "The index of a contract action",
+      "required": false
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

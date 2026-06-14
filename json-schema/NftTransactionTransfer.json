@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/NftTransactionTransfer.json",
+  "title": "NftTransactionTransfer",
+  "type": "object",
+  "properties": {
+    "consensus_timestamp": {
+      "$ref": "#/components/schemas/Timestamp"
+    },
+    "is_approval": {
+      "type": "boolean"
+    },
+    "nonce": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "receiver_account_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "sender_account_id": {
+      "$ref": "#/components/schemas/EntityId"
+    },
+    "transaction_id": {
+      "type": "string"
+    },
+    "type": {
+      "$ref": "#/components/schemas/TransactionTypes"
+    }
+  },
+  "example": {
+    "consensus_timestamp": "1618591023.997420021",
+    "is_approval": false,
+    "nonce": 0,
+    "receiver_account_id": "0.0.11",
+    "sender_account_id": "0.0.10",
+    "transaction_id": "0.0.19789-1618591023-997420021",
+    "type": "CRYPTOTRANSFER"
+  },
+  "required": [
+    "consensus_timestamp",
+    "is_approval",
+    "nonce",
+    "receiver_account_id",
+    "sender_account_id",
+    "transaction_id",
+    "type"
+  ]
+}

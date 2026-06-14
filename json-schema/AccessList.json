@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/AccessList.json",
+  "title": "AccessList",
+  "type": "object",
+  "properties": {
+    "address": {
+      "description": "The hex encoded address of the accessed contract",
+      "example": "0xa02457e5dfd32bda5fc7e1f1b008aa5979568150",
+      "format": "binary",
+      "type": "string"
+    },
+    "storage_keys": {
+      "description": "The list of accessed hex encoded storage keys",
+      "type": "array",
+      "items": {
+        "format": "binary",
+        "type": "string"
+      },
+      "example": [
+        "0x0000000000000000000000000000000000000000000000000000000000000081"
+      ]
+    }
+  }
+}

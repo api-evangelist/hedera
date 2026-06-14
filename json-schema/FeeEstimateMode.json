@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/FeeEstimateMode.json",
+  "title": "FeeEstimateMode",
+  "description": "Estimate solely based on the transaction's inherent properties or use network state.",
+  "default": "INTRINSIC",
+  "enum": [
+    "INTRINSIC",
+    "STATE"
+  ],
+  "type": "string"
+}

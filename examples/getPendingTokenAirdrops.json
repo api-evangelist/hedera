@@ -1,0 +1,53 @@
+{
+  "operationId": "getPendingTokenAirdrops",
+  "method": "GET",
+  "path": "/api/v1/accounts/{idOrAliasOrEvmAddress}/airdrops/pending",
+  "summary": "Get pending token airdrops received by an account",
+  "description": "Returns pending token airdrops that have been received by an account.\n",
+  "tags": [
+    "airdrops"
+  ],
+  "parameters": [
+    {
+      "name": "idOrAliasOrEvmAddress",
+      "in": "path",
+      "description": "Account alias or account id or evm address",
+      "required": true
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "sender.id",
+      "in": "query",
+      "description": "The ID of the sender to return information for",
+      "required": false
+    },
+    {
+      "name": "serialnumber",
+      "in": "query",
+      "description": "The nft serial number (64 bit type). Requires a tokenId value also be populated.",
+      "required": false
+    },
+    {
+      "name": "token.id",
+      "in": "query",
+      "description": "The ID of the token to return information for",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter",
+    "404": "Not Found"
+  }
+}

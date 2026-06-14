@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/json-schema/ChunkInfo.json",
+  "title": "ChunkInfo",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "initial_transaction_id": {
+      "$ref": "#/components/schemas/TransactionId"
+    },
+    "number": {
+      "example": 1,
+      "format": "int32",
+      "type": "integer"
+    },
+    "total": {
+      "example": 2,
+      "format": "int32",
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "operationId": "getTransactions",
+  "method": "GET",
+  "path": "/api/v1/transactions",
+  "summary": "List transactions",
+  "description": "Lists transactions on the network. This includes successful and unsuccessful transactions.",
+  "tags": [
+    "transactions"
+  ],
+  "parameters": [
+    {
+      "name": "account.id",
+      "in": "query",
+      "description": "The ID of the account to return information for",
+      "required": false
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "description": "The maximum number of items to return",
+      "required": false
+    },
+    {
+      "name": "order",
+      "in": "query",
+      "description": "The order in which items are listed",
+      "required": false
+    },
+    {
+      "name": "timestamp",
+      "in": "query",
+      "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.",
+      "required": false
+    },
+    {
+      "name": "transactiontype",
+      "in": "query",
+      "description": "",
+      "required": false
+    },
+    {
+      "name": "result",
+      "in": "query",
+      "description": "The transaction success type.",
+      "required": false
+    },
+    {
+      "name": "type",
+      "in": "query",
+      "description": "The transaction account balance modification type.",
+      "required": false
+    }
+  ],
+  "responses": {
+    "200": "OK",
+    "400": "Invalid parameter"
+  }
+}
