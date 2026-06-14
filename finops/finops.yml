@@ -1,0 +1,66 @@
+name: Hedera Mirror Node REST API FinOps
+description: >-
+  The Hedera Mirror Node REST API is free to use for read-only queries against
+  the public mirror node. There are no per-query fees for accessing historical
+  data via the REST API. Cost considerations arise when writing transactions to
+  the Hedera mainnet (which requires HBAR fees) or when using commercial
+  third-party mirror node providers for higher throughput or SLA guarantees.
+costs:
+  - name: Mirror Node REST API Access
+    description: >-
+      Accessing the public Hedera-operated Mirror Node REST API is free of
+      charge. No account, API key, or payment method is required. The API is
+      rate-limited at 50 requests per second per IP address.
+    model: free
+    unit: N/A
+    price: 0.00
+    currency: USD
+  - name: Hedera Transaction Fees (Write Operations)
+    description: >-
+      While the Mirror Node REST API is read-only and free, submitting
+      transactions to the Hedera network (e.g., token transfers, contract
+      calls, consensus message submissions) incurs fees denominated in HBAR.
+      Fees are set in USD and converted to HBAR at the time of the transaction.
+      These are network-level fees, not API access fees.
+    model: per-transaction
+    unit: transaction
+    currency: HBAR (USD-denominated, converted at time of transaction)
+    feeCalculator: https://hedera.com/fees
+    examples:
+      - service: Cryptocurrency Transfer
+        cost: approximately $0.0001 USD
+      - service: HTS Token Transfer
+        cost: approximately $0.001 USD
+      - service: HCS Topic Message
+        cost: approximately $0.0001 USD
+      - service: Smart Contract Call
+        cost: variable, based on gas consumed
+  - name: Commercial Mirror Node Providers
+    description: >-
+      Third-party mirror node providers offer tiered commercial plans with
+      higher rate limits, dedicated endpoints, SLA guarantees, and support.
+      Pricing varies by provider and usage tier.
+    model: subscription or usage-based
+    providers:
+      - name: Validation Cloud
+        url: https://validationcloud.io
+        pricing: contact-for-pricing
+      - name: DragonGlass
+        url: https://dragonglass.me
+        pricing: contact-for-pricing
+      - name: Arkhia
+        url: https://arkhia.io
+        pricing: tiered-subscription
+      - name: QuickNode
+        url: https://quicknode.com/docs/hedera
+        pricing: tiered-subscription
+notes:
+  - >-
+    The public Mirror Node REST API does not require HBAR to use — it is a
+    free read-only data service provided by Hedera for ecosystem developers.
+  - >-
+    HBAR fees only apply when submitting transactions to consensus nodes, not
+    when querying historical data via the mirror node.
+  - >-
+    Organizations running high-volume applications should consider commercial
+    mirror node providers to avoid public rate limit constraints.

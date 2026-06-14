@@ -1,0 +1,104 @@
+name: Hedera
+description: >-
+  Hedera is an enterprise-grade public distributed ledger platform built for
+  the digital economy and governed by a council of leading global institutions.
+  The Hedera Mirror Node REST API provides read-only access to historical
+  network data including transactions, accounts, tokens, NFTs, smart contracts,
+  consensus topics, blocks, schedules, and network-level information. The public
+  API requires no authentication and supports mainnet, testnet, and previewnet
+  environments.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Distributed Ledger
+  - Blockchain
+  - DLT
+  - Hashgraph
+  - Transactions
+  - Tokens
+  - NFTs
+  - Smart Contracts
+  - Enterprise
+url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+apis:
+  - name: Hedera Mirror Node REST API
+    description: >-
+      The Hedera Mirror Node REST API provides read-only access to historical
+      data from the Hedera distributed ledger. It allows querying of
+      transactions, account information, token balances and metadata, NFT
+      ownership and transfers, smart contract results and logs, consensus topic
+      messages, block data, schedule transactions, and network supply, fees,
+      exchange rates, nodes, and staking information. No authentication is
+      required for public endpoints. The API is throttled at 50 requests per
+      second per IP address on the public mainnet endpoint.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+    baseURL: https://mainnet.mirrornode.hedera.com
+    tags:
+      - Transactions
+      - Accounts
+      - Tokens
+      - NFTs
+      - Smart Contracts
+      - Consensus Topics
+      - Blocks
+      - Schedules
+      - Network
+      - Balances
+    properties:
+      - type: Documentation
+        url: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+      - type: OpenAPI
+        url: https://mainnet.mirrornode.hedera.com/api/v1/docs/swagger.json
+      - type: Swagger
+        url: https://mainnet.mirrornode.hedera.com/api/v1/docs/
+      - type: SwaggerTestnet
+        url: https://testnet.mirrornode.hedera.com/api/v1/docs/
+      - type: SwaggerPreviewnet
+        url: https://previewnet.mirrornode.hedera.com/api/v1/docs/
+      - type: Plans
+        url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/plans/plans.yml
+      - type: RateLimits
+        url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/rate-limits/rate-limits.yml
+      - type: FinOps
+        url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
+    contact:
+      - FN: Hedera Developer Support
+        url: https://hedera.com/support
+        email: ''
+common:
+  - type: Portal
+    url: https://portal.hedera.com
+  - type: Documentation
+    url: https://docs.hedera.com/hedera
+  - type: GitHub
+    url: https://github.com/hashgraph
+  - type: MirrorNodeSource
+    url: https://github.com/hiero-ledger/hiero-mirror-node
+  - type: Blog
+    url: https://hedera.com/blog
+  - type: Fees
+    url: https://hedera.com/fees
+  - type: Status
+    url: https://status.hedera.com
+  - type: Discord
+    url: https://hedera.com/discord
+  - type: Twitter
+    url: https://twitter.com/hedera
+  - type: LinkedIn
+    url: https://linkedin.com/company/hashgraph
+  - type: YouTube
+    url: https://youtube.com/hederahashgraph
+  - type: Foundation
+    url: https://hedera.foundation
+  - type: Governance
+    url: https://hederacouncil.org
+  - type: TermsOfService
+    url: https://hedera.com/terms
+  - type: PrivacyPolicy
+    url: https://hedera.com/privacy
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

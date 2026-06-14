@@ -1,0 +1,51 @@
+name: Hedera Mirror Node REST API Rate Limits
+description: >-
+  The public Hedera-operated Mirror Node REST API is throttled to control
+  usage and protect the infrastructure. Rate limits apply per IP address and
+  are subject to change. Historical data queries are also subject to a 60-day
+  rolling window restriction on certain endpoints when no timestamp parameter
+  is provided.
+rateLimits:
+  - name: Public Mainnet Request Rate
+    description: >-
+      The public mainnet mirror node is throttled at 50 requests per second
+      per IP address. Exceeding this limit may result in HTTP 429 responses.
+      Hedera may adjust this limit in future releases.
+    limit: 50
+    unit: requests
+    period: second
+    scope: per-IP
+    endpoint: https://mainnet.mirrornode.hedera.com/api/v1
+  - name: Historical Data Window
+    description: >-
+      Certain endpoints restrict default queries to a 60-day rolling window
+      when no explicit timestamp parameter is included. Providing a timestamp
+      parameter allows access to older historical data. Affected endpoints
+      include /api/v1/accounts/{id}, /api/v1/contracts/results,
+      /api/v1/contracts/results/logs, and /api/v1/transactions.
+    limit: 60
+    unit: days
+    period: rolling-window
+    scope: per-query
+    affectedEndpoints:
+      - /api/v1/accounts/{id}
+      - /api/v1/contracts/results
+      - /api/v1/contracts/results/logs
+      - /api/v1/transactions
+    workaround: >-
+      Include an explicit timestamp parameter in the query to access data
+      beyond the 60-day default window.
+notes:
+  - >-
+    No authentication is currently required for the public mirror node. Hedera
+    may introduce API keys or other authentication mechanisms in a future
+    release.
+  - >-
+    Community-operated mirror nodes (Validation Cloud, DragonGlass, Arkhia)
+    offer higher rate limits under commercial agreements.
+  - >-
+    The gRPC streaming API is also available but has separate rate limiting
+    characteristics.
+  - >-
+    Rate limits are applied globally across the public endpoint infrastructure
+    and may be adjusted without prior notice.

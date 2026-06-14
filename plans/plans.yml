@@ -1,0 +1,47 @@
+name: Hedera Mirror Node REST API Plans
+description: >-
+  The Hedera Mirror Node REST API is publicly accessible with no authentication
+  required. Hedera operates a public mainnet mirror node endpoint available to
+  all developers. For higher throughput, dedicated infrastructure, or
+  enterprise-grade SLAs, third-party community mirror node providers offer
+  commercial plans.
+plans:
+  - name: Public Mainnet
+    description: >-
+      Free, unauthenticated access to the Hedera-operated public mainnet mirror
+      node. Suitable for development, testing, and low-to-moderate production
+      use. Throttled at 50 requests per second per IP address.
+    url: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+    authentication: none
+    rateLimit: 50 requests per second per IP
+    cost: free
+    environments:
+      - name: Mainnet
+        baseURL: https://mainnet.mirrornode.hedera.com/api/v1
+      - name: Testnet
+        baseURL: https://testnet.mirrornode.hedera.com/api/v1
+      - name: Previewnet
+        baseURL: https://previewnet.mirrornode.hedera.com/api/v1
+  - name: Community Provider - Validation Cloud
+    description: >-
+      Commercial mirror node access offered by Validation Cloud with enhanced
+      rate limits and uptime SLAs for enterprise use cases.
+    url: https://validationcloud.io
+    authentication: api-key
+    cost: contact-for-pricing
+  - name: Community Provider - DragonGlass
+    description: >-
+      Commercial mirror node and analytics platform by DragonGlass offering
+      enhanced access, analytics, and dedicated endpoints for the Hedera
+      network.
+    url: https://dragonglass.me
+    authentication: api-key
+    cost: contact-for-pricing
+  - name: Community Provider - Arkhia
+    description: >-
+      Arkhia provides a managed Hedera Mirror Node REST API service with
+      dedicated endpoints, API keys, and tiered rate limits for production
+      workloads.
+    url: https://arkhia.io
+    authentication: api-key
+    cost: tiered
