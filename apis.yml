@@ -7,7 +7,7 @@ description: >-
   consensus topics, blocks, schedules, and network-level information. The public
   API requires no authentication and supports mainnet, testnet, and previewnet
   environments.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Distributed Ledger
   - Blockchain
@@ -33,7 +33,7 @@ apis:
       exchange rates, nodes, and staking information. No authentication is
       required for public endpoints. The API is throttled at 50 requests per
       second per IP address on the public mainnet endpoint.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
     baseURL: https://mainnet.mirrornode.hedera.com
     tags:
