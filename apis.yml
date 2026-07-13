@@ -20,7 +20,7 @@ tags:
   - Enterprise
 url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/apis.yml
 created: '2026-06-13'
-modified: '2026-06-13'
+modified: '2026-07-12'
 specificationVersion: '0.19'
 apis:
   - name: Hedera Mirror Node REST API
@@ -101,6 +101,15 @@ common:
     url: https://hedera.com/terms
   - type: PrivacyPolicy
     url: https://hedera.com/privacy
+  - name: MCP Server
+    url: https://agentic-testnet-mcp.hedera.com/mcp
+    type: MCPServer
+  - name: MCP Documentation
+    url: https://docs.hedera.com/hedera/open-source-solutions/ai-studio-on-hedera/hosted-mcp-server
+    type: MCPDocumentation
+  - name: Agent Skills
+    url: https://github.com/hedera-dev/hedera-skills
+    type: AgentSkills
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
