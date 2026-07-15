@@ -69,6 +69,8 @@ apis:
         url: https://hedera.com/support
         email: ''
 common:
+  - type: AgenticAccess
+    url: agentic-access/hedera-agentic-access.yml
   - type: DomainSecurity
     url: security/hedera-domain-security.yml
   - type: Portal
