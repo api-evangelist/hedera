@@ -1,0 +1,386 @@
+openapi: 3.1.0
+info:
+  title: Mirror Node REST accounts schedules API
+  version: 0.156.0
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  description: 'The REST API offers the ability to query transactions and entity information from a mirror node.
+
+
+    Base url: [/api/v1](/api/v1)
+
+
+    OpenAPI Spec: [/api/v1/docs/openapi.yml](/api/v1/docs/openapi.yml)'
+  contact:
+    name: Mirror Node Team
+    email: mirrornode@hedera.com
+    url: https://github.com/hiero-ledger/hiero-mirror-node
+servers:
+- description: The current REST API server
+  url: ''
+- description: The production REST API servers
+  url: '{scheme}://{network}.mirrornode.hedera.com'
+  variables:
+    scheme:
+      default: https
+      description: The URI scheme
+      enum:
+      - http
+      - https
+    network:
+      default: testnet
+      description: The Hedera network in use
+      enum:
+      - mainnet-public
+      - mainnet
+      - previewnet
+      - testnet
+tags:
+- name: schedules
+  description: The schedules object represents the information associated with a schedule entity.The schedules list endpoints is cached and not updated as frequently as the schedule lookup by a specific ID endpoint.
+paths:
+  /api/v1/schedules:
+    get:
+      summary: List schedules entities
+      description: Lists schedules on the network that govern the execution logic of scheduled transactions. This includes executed and non executed schedules.
+      operationId: getSchedules
+      parameters:
+      - $ref: '#/components/parameters/accountIdQueryParam'
+      - $ref: '#/components/parameters/limitQueryParam'
+      - $ref: '#/components/parameters/orderQueryParam'
+      - $ref: '#/components/parameters/scheduleIdQueryParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchedulesResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+      tags:
+      - schedules
+  /api/v1/schedules/{scheduleId}:
+    get:
+      summary: Get schedule by id
+      description: Returns schedule information based on the given schedule id
+      operationId: getSchedule
+      parameters:
+      - $ref: '#/components/parameters/scheduleIdPathParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      tags:
+      - schedules
+components:
+  schemas:
+    Links:
+      type: object
+      properties:
+        next:
+          example: null
+          type:
+          - string
+          - 'null'
+    Schedule:
+      type: object
+      properties:
+        admin_key:
+          $ref: '#/components/schemas/Key'
+        consensus_timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        creator_account_id:
+          $ref: '#/components/schemas/EntityId'
+        deleted:
+          type: boolean
+          example: false
+        executed_timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        expiration_time:
+          $ref: '#/components/schemas/TimestampNullable'
+        memo:
+          type: string
+          example: created on 02/10/2021
+        payer_account_id:
+          $ref: '#/components/schemas/EntityId'
+        schedule_id:
+          $ref: '#/components/schemas/EntityId'
+        signatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduleSignature'
+        transaction_body:
+          type: string
+          format: byte
+          example: Kd6tvu8=
+        wait_for_expiry:
+          type: boolean
+    Schedules:
+      type: array
+      items:
+        $ref: '#/components/schemas/Schedule'
+    EntityId:
+      type:
+      - string
+      - 'null'
+      description: Network entity ID in the format of `shard.realm.num`
+      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
+      example: 0.0.2
+    TimestampNullable:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type:
+      - string
+      - 'null'
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    Error:
+      type: object
+      properties:
+        _status:
+          type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  data:
+                    description: Error message in hexadecimal
+                    example: '0x3000'
+                    format: binary
+                    pattern: ^0x[0-9a-fA-F]+$
+                    type:
+                    - string
+                    - 'null'
+                  detail:
+                    description: Detailed error message
+                    example: Generic detailed error message
+                    type:
+                    - string
+                    - 'null'
+                  message:
+                    description: Error message
+                    example: Generic error message
+                    type: string
+    EntityIdQuery:
+      type: string
+      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
+    SchedulesResponse:
+      type: object
+      properties:
+        schedules:
+          $ref: '#/components/schemas/Schedules'
+        links:
+          $ref: '#/components/schemas/Links'
+    Timestamp:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type: string
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    Key:
+      description: The public key which controls access to various network entities.
+      type:
+      - object
+      - 'null'
+      properties:
+        _type:
+          type: string
+          enum:
+          - ECDSA_SECP256K1
+          - ED25519
+          - ProtobufEncoded
+          example: ProtobufEncoded
+        key:
+          type: string
+          example: 15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743
+    ScheduleSignature:
+      type: object
+      properties:
+        consensus_timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        public_key_prefix:
+          type: string
+          format: byte
+          example: AAEBAwuqAwzB
+        signature:
+          type: string
+          format: byte
+          example: 3q2+7wABAQMLqgMMwQ==
+        type:
+          type: string
+          enum:
+          - CONTRACT
+          - ED25519
+          - RSA_3072
+          - ECDSA_384
+          - ECDSA_SECP256K1
+          - UNKNOWN
+          example: ED25519
+  responses:
+    InvalidParameterError:
+      description: Invalid parameter
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: 'Invalid parameter: account.id'
+              - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: Not found
+  parameters:
+    scheduleIdPathParam:
+      name: scheduleId
+      in: path
+      required: true
+      description: Schedule id
+      schema:
+        $ref: '#/components/schemas/EntityId'
+    scheduleIdQueryParam:
+      name: schedule.id
+      description: The ID of the schedule to return information for
+      in: query
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        entityNumNoOperator:
+          summary: Example of entityNum equals with no operator
+          value: 100
+        idNoOperator:
+          summary: Example of id equals with no operator
+          value: 0.0.100
+        entityNumEqOperator:
+          summary: Example of entityNum equals operator
+          value: eq:200
+        idEqOperator:
+          summary: Example of id equals operator
+          value: eq:0.0.200
+        entityNumNeOperator:
+          summary: Example of entityNum not equals operator
+          value: ne:300
+        idNeOperator:
+          summary: Example of id not equals operator
+          value: ne:0.0.300
+        entityNumGtOperator:
+          summary: Example of entityNum greater than operator
+          value: gt:400
+        idGtOperator:
+          summary: Example of id greater than operator
+          value: gt:0.0.400
+        entityNumGteOperator:
+          summary: Example of entityNum greater than or equals operator
+          value: gte:500
+        idGteOperator:
+          summary: Example of id greater than or equals operator
+          value: gte:0.0.500
+        entityNumLtOperator:
+          summary: Example of entityNum less than operator
+          value: lt:600
+        idLtOperator:
+          summary: Example of id less than operator
+          value: lt:0.0.600
+        entityNumLteOperator:
+          summary: Example of entityNum less than or equals operator
+          value: lte:700
+        idLteOperator:
+          summary: Example of id less than or equals operator
+          value: lte:0.0.700
+      schema:
+        $ref: '#/components/schemas/EntityIdQuery'
+    limitQueryParam:
+      name: limit
+      in: query
+      description: The maximum number of items to return
+      example: 2
+      schema:
+        format: int32
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    orderQueryParam:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: desc
+      schema:
+        enum:
+        - asc
+        - desc
+        default: asc
+    accountIdQueryParam:
+      name: account.id
+      in: query
+      description: The ID of the account to return information for
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        entityNumNoOperator:
+          summary: Example of entityNum equals with no operator
+          value: 100
+        idNoOperator:
+          summary: Example of id equals with no operator
+          value: 0.0.100
+        entityNumEqOperator:
+          summary: Example of entityNum equals operator
+          value: eq:200
+        idEqOperator:
+          summary: Example of id equals operator
+          value: eq:0.0.200
+        entityNumNeOperator:
+          summary: Example of entityNum not equals operator
+          value: ne:300
+        idNeOperator:
+          summary: Example of id not equals operator
+          value: ne:0.0.300
+        entityNumGtOperator:
+          summary: Example of entityNum greater than operator
+          value: gt:400
+        idGtOperator:
+          summary: Example of id greater than operator
+          value: gt:0.0.400
+        entityNumGteOperator:
+          summary: Example of entityNum greater than or equals operator
+          value: gte:500
+        idGteOperator:
+          summary: Example of id greater than or equals operator
+          value: gte:0.0.500
+        entityNumLtOperator:
+          summary: Example of entityNum less than operator
+          value: lt:600
+        idLtOperator:
+          summary: Example of id less than operator
+          value: lt:0.0.600
+        entityNumLteOperator:
+          summary: Example of entityNum less than or equals operator
+          value: lte:700
+        idLteOperator:
+          summary: Example of id less than or equals operator
+          value: lte:0.0.700
+      schema:
+        $ref: '#/components/schemas/EntityIdQuery'
+externalDocs:
+  description: REST API Docs
+  url: https://docs.hedera.com/guides/docs/mirror-node-api/cryptocurrency-api

@@ -1,0 +1,527 @@
+openapi: 3.1.0
+info:
+  title: Mirror Node REST accounts topics API
+  version: 0.156.0
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  description: 'The REST API offers the ability to query transactions and entity information from a mirror node.
+
+
+    Base url: [/api/v1](/api/v1)
+
+
+    OpenAPI Spec: [/api/v1/docs/openapi.yml](/api/v1/docs/openapi.yml)'
+  contact:
+    name: Mirror Node Team
+    email: mirrornode@hedera.com
+    url: https://github.com/hiero-ledger/hiero-mirror-node
+servers:
+- description: The current REST API server
+  url: ''
+- description: The production REST API servers
+  url: '{scheme}://{network}.mirrornode.hedera.com'
+  variables:
+    scheme:
+      default: https
+      description: The URI scheme
+      enum:
+      - http
+      - https
+    network:
+      default: testnet
+      description: The Hedera network in use
+      enum:
+      - mainnet-public
+      - mainnet
+      - previewnet
+      - testnet
+tags:
+- name: topics
+  description: The topics object represents the information associated with a topic entity and returns topic messages information.
+  externalDocs:
+    url: https://docs.hedera.com/guides/docs/mirror-node-api/cryptocurrency-api#topic-messages
+paths:
+  /api/v1/topics/{topicId}:
+    get:
+      summary: Get topic by ID
+      description: Returns the topic details for the given topic ID.
+      operationId: getTopic
+      parameters:
+      - $ref: '#/components/parameters/topicIdPathParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      tags:
+      - topics
+  /api/v1/topics/{topicId}/messages:
+    get:
+      summary: List topic messages by id
+      description: Returns the list of topic messages for the given topic id.
+      operationId: getTopicMessages
+      parameters:
+      - $ref: '#/components/parameters/topicIdPathParam'
+      - name: encoding
+        in: query
+        example: base64
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limitQueryParam'
+      - $ref: '#/components/parameters/orderQueryParam'
+      - name: sequencenumber
+        in: query
+        example: 2
+        schema:
+          format: int64
+          minimum: 0
+          type: integer
+      - $ref: '#/components/parameters/timestampQueryParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicMessagesResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+        '404':
+          $ref: '#/components/responses/TopicNotFound'
+      tags:
+      - topics
+  /api/v1/topics/{topicId}/messages/{sequenceNumber}:
+    get:
+      summary: Get topic message by id and sequence number
+      description: Returns a single topic message for the given topic id and sequence number.
+      operationId: getTopicMessageByIdAndSequenceNumber
+      parameters:
+      - $ref: '#/components/parameters/topicIdPathParam'
+      - name: sequenceNumber
+        in: path
+        required: true
+        description: Topic message sequence number
+        example: 2
+        schema:
+          format: int64
+          minimum: 0
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicMessage'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      tags:
+      - topics
+  /api/v1/topics/messages/{timestamp}:
+    get:
+      summary: Get topic message by consensusTimestamp
+      description: Returns a topic message the given the consensusTimestamp.
+      operationId: getTopicMessageByTimestamp
+      parameters:
+      - $ref: '#/components/parameters/timestampPathParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicMessage'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      tags:
+      - topics
+components:
+  schemas:
+    FixedCustomFee:
+      type: object
+      properties:
+        amount:
+          example: 100
+          format: int64
+          type: integer
+        collector_account_id:
+          $ref: '#/components/schemas/EntityId'
+        denominating_token_id:
+          $ref: '#/components/schemas/EntityId'
+    ChunkInfo:
+      type:
+      - object
+      - 'null'
+      properties:
+        initial_transaction_id:
+          $ref: '#/components/schemas/TransactionId'
+        number:
+          example: 1
+          format: int32
+          type: integer
+        total:
+          example: 2
+          format: int32
+          type: integer
+    Key:
+      description: The public key which controls access to various network entities.
+      type:
+      - object
+      - 'null'
+      properties:
+        _type:
+          type: string
+          enum:
+          - ECDSA_SECP256K1
+          - ED25519
+          - ProtobufEncoded
+          example: ProtobufEncoded
+        key:
+          type: string
+          example: 15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743
+    TopicMessages:
+      type: array
+      items:
+        $ref: '#/components/schemas/TopicMessage'
+    TimestampRange:
+      type: object
+      description: A timestamp range an entity is valid for
+      properties:
+        from:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The inclusive from timestamp in seconds
+        to:
+          allOf:
+          - $ref: '#/components/schemas/TimestampNullable'
+          - description: The exclusive to timestamp in seconds
+    TimestampNullable:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type:
+      - string
+      - 'null'
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    TransactionId:
+      type: object
+      properties:
+        account_id:
+          $ref: '#/components/schemas/EntityId'
+        nonce:
+          example: 0
+          format: int32
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+        scheduled:
+          example: false
+          type:
+          - boolean
+          - 'null'
+        transaction_valid_start:
+          $ref: '#/components/schemas/Timestamp'
+    Links:
+      type: object
+      properties:
+        next:
+          example: null
+          type:
+          - string
+          - 'null'
+    EntityId:
+      type:
+      - string
+      - 'null'
+      description: Network entity ID in the format of `shard.realm.num`
+      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
+      example: 0.0.2
+    TopicMessage:
+      type: object
+      properties:
+        chunk_info:
+          $ref: '#/components/schemas/ChunkInfo'
+        consensus_timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        message:
+          type: string
+        payer_account_id:
+          $ref: '#/components/schemas/EntityId'
+        running_hash:
+          type: string
+          format: byte
+        running_hash_version:
+          format: int32
+          type: integer
+        sequence_number:
+          format: int64
+          type: integer
+        topic_id:
+          $ref: '#/components/schemas/EntityId'
+      required:
+      - consensus_timestamp
+      - message
+      - payer_account_id
+      - running_hash
+      - running_hash_version
+      - sequence_number
+      - topic_id
+      example:
+        chunk_info:
+          initial_transaction_id: 0.0.10-1234567890-000000321
+          nonce: 3
+          number: 1
+          total: 2
+          scheduled: true
+        consensus_timestamp: '1234567890.000000001'
+        message: bWVzc2FnZQ==
+        payer_account_id: 0.0.10
+        running_hash: cnVubmluZ19oYXNo
+        running_hash_version: 2
+        sequence_number: 1
+        topic_id: 0.0.7
+    ConsensusCustomFees:
+      description: Custom fees assessed for each message submitted to the topic
+      type: object
+      properties:
+        created_timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        fixed_fees:
+          type: array
+          items:
+            $ref: '#/components/schemas/FixedCustomFee'
+    Timestamp:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type: string
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    TopicMessagesResponse:
+      type: object
+      properties:
+        messages:
+          $ref: '#/components/schemas/TopicMessages'
+        links:
+          $ref: '#/components/schemas/Links'
+    Error:
+      type: object
+      properties:
+        _status:
+          type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  data:
+                    description: Error message in hexadecimal
+                    example: '0x3000'
+                    format: binary
+                    pattern: ^0x[0-9a-fA-F]+$
+                    type:
+                    - string
+                    - 'null'
+                  detail:
+                    description: Detailed error message
+                    example: Generic detailed error message
+                    type:
+                    - string
+                    - 'null'
+                  message:
+                    description: Error message
+                    example: Generic error message
+                    type: string
+    Topic:
+      type: object
+      properties:
+        admin_key:
+          $ref: '#/components/schemas/Key'
+        auto_renew_account:
+          $ref: '#/components/schemas/EntityId'
+        auto_renew_period:
+          description: The amount of time to attempt to extend the topic's lifetime after expiration.
+          example: 7776000
+          format: int64
+          type:
+          - integer
+          - 'null'
+        created_timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        custom_fees:
+          $ref: '#/components/schemas/ConsensusCustomFees'
+        deleted:
+          description: Whether the topic is deleted or not.
+          example: false
+          type:
+          - boolean
+          - 'null'
+        fee_exempt_key_list:
+          description: Keys permitted to submit messages to the topic without paying custom fees
+          type: array
+          items:
+            $ref: '#/components/schemas/Key'
+        fee_schedule_key:
+          $ref: '#/components/schemas/Key'
+        memo:
+          description: The memo associated with the topic.
+          example: topic memo
+          type: string
+        submit_key:
+          $ref: '#/components/schemas/Key'
+        timestamp:
+          $ref: '#/components/schemas/TimestampRange'
+        topic_id:
+          $ref: '#/components/schemas/EntityId'
+      required:
+      - admin_key
+      - auto_renew_account
+      - auto_renew_period
+      - created_timestamp
+      - custom_fees
+      - deleted
+      - fee_exempt_key_list
+      - fee_schedule_key
+      - memo
+      - submit_key
+      - timestamp
+      - topic_id
+  responses:
+    InvalidParameterError:
+      description: Invalid parameter
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: 'Invalid parameter: account.id'
+              - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: Not found
+    TopicNotFound:
+      description: Topic Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: No such topic id - 7
+  parameters:
+    topicIdPathParam:
+      name: topicId
+      in: path
+      required: true
+      description: Topic id
+      schema:
+        $ref: '#/components/schemas/EntityId'
+    orderQueryParam:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: desc
+      schema:
+        enum:
+        - asc
+        - desc
+        default: asc
+    timestampPathParam:
+      name: timestamp
+      in: path
+      description: The Unix timestamp in seconds.nanoseconds format, the timestamp at which the associated transaction reached consensus. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
+      required: true
+      example: 1234567890.0000007
+      schema:
+        type: string
+        pattern: ^\d{1,10}(\.\d{1,9})?$
+    limitQueryParam:
+      name: limit
+      in: query
+      description: The maximum number of items to return
+      example: 2
+      schema:
+        format: int32
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    timestampQueryParam:
+      description: The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
+      name: timestamp
+      in: query
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        secondsNoOperator:
+          summary: Example of seconds equals with no operator
+          value: 1234567890
+        timestampNoOperator:
+          summary: Example of timestamp equals with no operator
+          value: 1234567890
+        secondsEqOperator:
+          summary: Example of seconds equals with operator
+          value: eq:1234567890
+        timestampEqOperator:
+          summary: Example of timestamp equals with operator
+          value: eq:1234567890.000000200
+        secondsNeOperator:
+          summary: Example of seconds not equals operator
+          value: ne:1234567890
+        timestampNeOperator:
+          summary: Example of timestamp not equals operator
+          value: ne:1234567890.000000300
+        secondsGtOperator:
+          summary: Example of seconds greater than operator
+          value: gt:1234567890
+        timestampGtOperator:
+          summary: Example of timestamp greater than operator
+          value: gt:1234567890.000000400
+        secondsGteOperator:
+          summary: Example of seconds greater than or equals operator
+          value: gte:1234567890
+        timestampGteOperator:
+          summary: Example of timestamp greater than or equals operator
+          value: gte:1234567890.000000500
+        secondsLtOperator:
+          summary: Example of seconds less than operator
+          value: lt:1234567890
+        timestampLtOperator:
+          summary: Example of timestamp less than operator
+          value: lt:1234567890.000000600
+        secondsLteOperator:
+          summary: Example of seconds less than or equals operator
+          value: lte:1234567890
+        timestampLteOperator:
+          summary: Example of timestamp less than or equals operator
+          value: lte:1234567890.000000700
+      schema:
+        type: array
+        items:
+          type: string
+          pattern: ^((eq|gt|gte|lt|lte|ne):)?\d{1,10}(\.\d{1,9})?$
+externalDocs:
+  description: REST API Docs
+  url: https://docs.hedera.com/guides/docs/mirror-node-api/cryptocurrency-api

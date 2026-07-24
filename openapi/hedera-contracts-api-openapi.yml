@@ -1,0 +1,1962 @@
+openapi: 3.1.0
+info:
+  title: Mirror Node REST accounts contracts API
+  version: 0.156.0
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  description: 'The REST API offers the ability to query transactions and entity information from a mirror node.
+
+
+    Base url: [/api/v1](/api/v1)
+
+
+    OpenAPI Spec: [/api/v1/docs/openapi.yml](/api/v1/docs/openapi.yml)'
+  contact:
+    name: Mirror Node Team
+    email: mirrornode@hedera.com
+    url: https://github.com/hiero-ledger/hiero-mirror-node
+servers:
+- description: The current REST API server
+  url: ''
+- description: The production REST API servers
+  url: '{scheme}://{network}.mirrornode.hedera.com'
+  variables:
+    scheme:
+      default: https
+      description: The URI scheme
+      enum:
+      - http
+      - https
+    network:
+      default: testnet
+      description: The Hedera network in use
+      enum:
+      - mainnet-public
+      - mainnet
+      - previewnet
+      - testnet
+tags:
+- name: contracts
+  description: The contracts objects represents the information associated with contract entities.The contracts list endpoint is cached and not updated as frequently as the contract lookup by a specific ID endpoint.
+paths:
+  /api/v1/contracts/call:
+    post:
+      summary: Invoke a smart contract
+      description: Returns a result from EVM execution such as cost-free execution of read-only smart contract queries, gas estimation, and transient simulation of read-write operations. If the `estimate` field is set to true gas estimation is executed. This API can process calls against the `latest` block or specific historical blocks when a hexadecimal or decimal block number is provided in the `block` field.
+      operationId: contractCall
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContractCallRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractCallResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '415':
+          description: Unsupported media type error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Generic error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '501':
+          description: Not implemented error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+      - contracts
+  /api/v1/contracts:
+    get:
+      summary: List contract entities on network
+      description: Returns a list of all contract entity items on the network.
+      operationId: getContracts
+      parameters:
+      - $ref: '#/components/parameters/contractIdQueryParam'
+      - $ref: '#/components/parameters/limitQueryParam'
+      - $ref: '#/components/parameters/orderQueryParamDesc'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractsResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+      tags:
+      - contracts
+  /api/v1/contracts/{contractIdOrAddress}:
+    get:
+      summary: Get contract by id
+      description: Return the contract information given an id
+      operationId: getContract
+      parameters:
+      - $ref: '#/components/parameters/contractIdOrAddressPathParam'
+      - $ref: '#/components/parameters/timestampQueryParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      tags:
+      - contracts
+  /api/v1/contracts/{contractIdOrAddress}/results:
+    get:
+      summary: List contract results from a contract on the network
+      description: Returns a list of all ContractResults for a contract's function executions.
+      operationId: getContractResultsByContractId
+      parameters:
+      - $ref: '#/components/parameters/contractIdOrAddressPathParam'
+      - $ref: '#/components/parameters/blockHashQueryParam'
+      - $ref: '#/components/parameters/contractsBlockNumberQueryParam'
+      - $ref: '#/components/parameters/fromQueryParam'
+      - $ref: '#/components/parameters/internalQueryParam'
+      - $ref: '#/components/parameters/limitQueryParam'
+      - $ref: '#/components/parameters/orderQueryParamDesc'
+      - $ref: '#/components/parameters/timestampQueryParam'
+      - $ref: '#/components/parameters/transactionIndexQueryParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractResultsResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+      tags:
+      - contracts
+  /api/v1/contracts/{contractIdOrAddress}/state:
+    get:
+      summary: The contract state from a contract on the network
+      description: Returns a list of all contract's slots. If no timestamp is provided, returns the current state.
+      operationId: getContractState
+      parameters:
+      - $ref: '#/components/parameters/contractIdOrAddressPathParam'
+      - $ref: '#/components/parameters/limitQueryParam'
+      - $ref: '#/components/parameters/orderQueryParam'
+      - $ref: '#/components/parameters/slotQueryParam'
+      - $ref: '#/components/parameters/stateTimestampQueryParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractStateResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+      tags:
+      - contracts
+  /api/v1/contracts/{contractIdOrAddress}/results/{timestamp}:
+    get:
+      summary: Get the contract result from a contract on the network executed at a given timestamp
+      description: Returns a single ContractResult for a contract's function executions at a specific timestamp.
+      operationId: getContractResultByIdAndTimestamp
+      parameters:
+      - $ref: '#/components/parameters/contractIdOrAddressPathParam'
+      - $ref: '#/components/parameters/hbarQueryParam'
+      - $ref: '#/components/parameters/timestampPathParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractResultDetails'
+        '206':
+          description: Partial Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractResultDetails'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      tags:
+      - contracts
+  /api/v1/contracts/results:
+    get:
+      summary: List contract results from all contracts on the network
+      description: Returns a list of all ContractResults for all contract's function executions.
+      operationId: getContractsResults
+      parameters:
+      - $ref: '#/components/parameters/fromQueryParam'
+      - $ref: '#/components/parameters/blockHashQueryParam'
+      - $ref: '#/components/parameters/contractsBlockNumberQueryParam'
+      - $ref: '#/components/parameters/hbarQueryParam'
+      - $ref: '#/components/parameters/internalQueryParam'
+      - $ref: '#/components/parameters/limitQueryParam'
+      - $ref: '#/components/parameters/orderQueryParamDesc'
+      - $ref: '#/components/parameters/timestampQueryParam'
+      - $ref: '#/components/parameters/transactionIndexQueryParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractResultsResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+      tags:
+      - contracts
+  /api/v1/contracts/results/{transactionIdOrHash}:
+    get:
+      summary: Get the contract result from a contract on the network for a given transactionId or ethereum transaction hash
+      description: Returns a single ContractResult for a contract's function executions for a given transactionId or ethereum transaction hash.
+      operationId: getContractResultByTransactionIdOrHash
+      parameters:
+      - $ref: '#/components/parameters/transactionIdOrEthHashPathParam'
+      - $ref: '#/components/parameters/hbarQueryParam'
+      - $ref: '#/components/parameters/nonceQueryParamWithDefault'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractResultDetails'
+        '206':
+          description: Partial Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractResultDetails'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      tags:
+      - contracts
+  /api/v1/contracts/results/{transactionIdOrHash}/actions:
+    get:
+      summary: Get the contract actions from a contract on the network for a given transactionId or ethereum transaction hash
+      description: Returns a list of ContractActions for a contract's function executions for a given transactionId or ethereum transaction hash.
+      operationId: getContractActions
+      parameters:
+      - $ref: '#/components/parameters/transactionIdOrEthHashPathParam'
+      - $ref: '#/components/parameters/contractActionsIndexQueryParam'
+      - $ref: '#/components/parameters/limitQueryParam'
+      - $ref: '#/components/parameters/orderQueryParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractActionsResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      tags:
+      - contracts
+  /api/v1/contracts/results/{transactionIdOrHash}/opcodes:
+    get:
+      summary: Get the opcode traces for a historical transaction on the network with the given transaction ID or hash
+      description: 'Re-executes a transaction and returns a result containing detailed information for the execution,
+
+        including all values from the {@code stack}, {@code memory} and {@code storage}
+
+        and the entire trace of opcodes that were executed during the replay.
+
+
+        Note that to provide the output, the transaction needs to be re-executed on the EVM,
+
+        which may take a significant amount of time to complete if stack and memory information is requested.
+
+        '
+      operationId: getContractOpcodes
+      parameters:
+      - $ref: '#/components/parameters/transactionIdOrEthHashPathParam'
+      - $ref: '#/components/parameters/stack'
+      - $ref: '#/components/parameters/memory'
+      - $ref: '#/components/parameters/storage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpcodesResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Transaction or record file not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+      - contracts
+  /api/v1/contracts/{contractIdOrAddress}/results/logs:
+    get:
+      summary: List contract logs from a contract on the network
+      description: 'Search the logs of a specific contract across multiple contract calls. Chained logs are not
+
+        included but can be found by calling `/api/v1/contracts/{contractId}/results/{timestamp}`
+
+        or `/api/v1/contracts/results/{transactionId}`. When searching by topic a timestamp parameter must be supplied
+
+        and span a time range of at most seven days.
+
+
+        ## Ordering
+
+        The order is governed by the combination of timestamp and index values. If the index param is omitted, the order is determined by the timestamp only.
+
+
+        Note: The default order for this API is currently DESC
+
+
+        ## Filtering
+
+        When filtering there are some restrictions enforced to ensure correctness and scalability.
+
+
+        **The table below defines the restrictions and support for the endpoint**
+
+
+        | Query Param   | Comparison Operator | Support | Description           | Example |
+
+        | ------------- | ------------------- | ------- | --------------------- | ------- |
+
+        | index         | eq                  | Y       | Single occurrence only. Requires the presence of timestamp | ?index=X |
+
+        |               | ne                  | N       | | |
+
+        |               | lt(e)               | Y       | Single occurrence only. Requires the presence of timestamp | ?index=lte:X |
+
+        |               | gt(e)               | Y       | Single occurrence only. Requires the presence of timestamp | ?index=gte:X |
+
+        | timestamp     | eq                  | Y       | Single occurrence only. | ?timestamp=Y
+
+        |               | ne                  | N       | | |
+
+        |               | lt(e)               | Y       | Single occurrence only. Optional second timestamp **gt(e)** | ?timestamp=lte:Y
+
+        |               | gt(e)               | Y       | Single occurrence only. Optional second timestamp **lt(e)** | ?timestamp=gte:Y
+
+
+
+        Both filters must be a single occurrence of **gt(e)** or **lt(e)** which provide a lower and or upper boundary for search.
+
+        '
+      operationId: getContractLogsByContractId
+      parameters:
+      - $ref: '#/components/parameters/contractIdOrAddressPathParam'
+      - $ref: '#/components/parameters/logIndexQueryParam'
+      - $ref: '#/components/parameters/limitQueryParam'
+      - $ref: '#/components/parameters/orderQueryParamDesc'
+      - $ref: '#/components/parameters/timestampQueryParam'
+      - $ref: '#/components/parameters/logTopic0QueryParam'
+      - $ref: '#/components/parameters/logTopic1QueryParam'
+      - $ref: '#/components/parameters/logTopic2QueryParam'
+      - $ref: '#/components/parameters/logTopic3QueryParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractLogsResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+      tags:
+      - contracts
+  /api/v1/contracts/results/logs:
+    get:
+      summary: List contracts logs across many contracts on the network
+      description: 'Search the logs across many contracts with multiple contract calls. Chained logs are not
+
+        included but can be found by calling `/api/v1/contracts/{contractId}/results/{timestamp}`
+
+        or `/api/v1/contracts/results/{transactionId}`. When searching by topic a timestamp parameter must be supplied
+
+        and span a time range of at most seven days.
+
+
+        ## Ordering
+
+        The order is governed by the combination of timestamp and index values. If the index param is omitted, the order is determined by the timestamp only.
+
+
+        Note: The default order for this API is currently DESC
+
+
+        ## Filtering
+
+        When filtering there are some restrictions enforced to ensure correctness and scalability.
+
+
+        **The table below defines the restrictions and support for the endpoint**
+
+
+        | Query Param   | Comparison Operator | Support | Description           | Example |
+
+        | ------------- | ------------------- | ------- | --------------------- | ------- |
+
+        | index         | eq                  | Y       | Single occurrence only. Requires the presence of timestamp | ?index=X |
+
+        |               | ne                  | N       | | |
+
+        |               | lt(e)               | Y       | Single occurrence only. Requires the presence of timestamp | ?index=lte:X |
+
+        |               | gt(e)               | Y       | Single occurrence only. Requires the presence of timestamp | ?index=gte:X |
+
+        | timestamp     | eq                  | Y       | Single occurrence only. | ?timestamp=Y
+
+        |               | ne                  | N       | | |
+
+        |               | lt(e)               | Y       | Single occurrence only. Optional second timestamp **gt(e)** | ?timestamp=lte:Y
+
+        |               | gt(e)               | Y       | Single occurrence only. Optional second timestamp **lt(e)** | ?timestamp=gte:Y
+
+
+
+        Both filters must be a single occurrence of **gt(e)** or **lt(e)** which provide a lower and or upper boundary for search.
+
+        '
+      operationId: getContractsLogs
+      parameters:
+      - $ref: '#/components/parameters/logIndexQueryParam'
+      - $ref: '#/components/parameters/limitQueryParam'
+      - $ref: '#/components/parameters/orderQueryParamDesc'
+      - $ref: '#/components/parameters/timestampQueryParam'
+      - $ref: '#/components/parameters/logTopic0QueryParam'
+      - $ref: '#/components/parameters/logTopic1QueryParam'
+      - $ref: '#/components/parameters/logTopic2QueryParam'
+      - $ref: '#/components/parameters/logTopic3QueryParam'
+      - $ref: '#/components/parameters/transactionHashQueryParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractLogsResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+      tags:
+      - contracts
+components:
+  parameters:
+    hbarQueryParam:
+      name: hbar
+      in: query
+      description: Controls the unit used for monetary fields (`amount`, `gas_price`, `max_fee_per_gas`, `max_priority_fee_per_gas`). When `true` (default), values are returned in tinybars. When `false`, values are returned in weibars (the native Ethereum unit, where 1 tinybar = 10,000,000,000 weibars).
+      example: false
+      schema:
+        type: boolean
+        default: true
+    memory:
+      name: memory
+      description: If provided and set to true, memory information will be included in the response
+      in: query
+      example: false
+      schema:
+        type: boolean
+        default: false
+    nonceQueryParamWithDefault:
+      name: nonce
+      in: query
+      description: Filter the query result by the nonce of the transaction. A zero nonce represents user submitted transactions while a non-zero nonce is generated by main nodes. The filter honors the last value. Default is 0 when not specified.
+      example: 1
+      schema:
+        format: int32
+        type: integer
+        default: 0
+        minimum: 0
+    stateTimestampQueryParam:
+      description: The consensus timestamp of the contract state as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
+      name: timestamp
+      in: query
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        secondsNoOperator:
+          summary: Example of seconds equals with no operator
+          value: 1234567890
+        timestampNoOperator:
+          summary: Example of timestamp equals with no operator
+          value: 1234567890
+        secondsEqOperator:
+          summary: Example of seconds equals with operator
+          value: eq:1234567890
+        timestampEqOperator:
+          summary: Example of timestamp equals with operator
+          value: eq:1234567890.000000200
+        secondsGtOperator:
+          summary: Example of seconds greater than operator
+          value: gt:1234567890
+        timestampGtOperator:
+          summary: Example of timestamp greater than operator
+          value: gt:1234567890.000000400
+        secondsGteOperator:
+          summary: Example of seconds greater than or equals operator
+          value: gte:1234567890
+        timestampGteOperator:
+          summary: Example of timestamp greater than or equals operator
+          value: gte:1234567890.000000500
+        secondsLtOperator:
+          summary: Example of seconds less than operator
+          value: lt:1234567890
+        timestampLtOperator:
+          summary: Example of timestamp less than operator
+          value: lt:1234567890.000000600
+        secondsLteOperator:
+          summary: Example of seconds less than or equals operator
+          value: lte:1234567890
+        timestampLteOperator:
+          summary: Example of timestamp less than or equals operator
+          value: lte:1234567890.000000700
+      schema:
+        type: array
+        items:
+          type: string
+          pattern: ^((eq|gt|gte|lt|lte):)?\d{1,10}(\.\d{1,9})?$
+    internalQueryParam:
+      name: internal
+      in: query
+      description: Whether to include child transactions or not
+      example: true
+      schema:
+        type: boolean
+        default: false
+    orderQueryParamDesc:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: asc
+      schema:
+        enum:
+        - asc
+        - desc
+        default: desc
+    orderQueryParam:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: desc
+      schema:
+        enum:
+        - asc
+        - desc
+        default: asc
+    fromQueryParam:
+      name: from
+      in: query
+      description: Account ID or EVM address executing the contract
+      schema:
+        pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}|(0x)?[A-Fa-f0-9]{40}$
+        type: string
+    transactionIndexQueryParam:
+      name: transaction.index
+      in: query
+      description: The transaction index in the block
+      example: 1
+      schema:
+        format: int32
+        minimum: 0
+        type: integer
+    stack:
+      name: stack
+      description: If provided and set to false, stack information will not be included in the response
+      in: query
+      example: true
+      schema:
+        type: boolean
+        default: true
+    transactionIdOrEthHashPathParam:
+      name: transactionIdOrHash
+      in: path
+      schema:
+        pattern: ^(0x)?[A-Fa-f0-9]{64}|(\d{1,10})\.(\d{1,10})\.(\d{1,10})-(\d{1,19})-(\d{1,9})$
+        type: string
+      required: true
+      description: Transaction Id or a 32 byte hash with optional 0x prefix
+      examples:
+        transactionId:
+          value: 0.0.10-1234567890-000000000
+        transactionHash:
+          value: ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+        transactionHashWith0xPrefix:
+          value: '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
+    transactionHashQueryParam:
+      name: transaction.hash
+      in: query
+      schema:
+        pattern: ^(eq:)?(0x)?([0-9A-Fa-f]{64}|[0-9A-Fa-f]{96})$
+        type: string
+      required: false
+      description: A hex encoded 32-byte ethereum transaction hash or 48-byte hedera transaction hash.
+      examples:
+        transactionHash:
+          value: ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+        transactionHashWith0xPrefix:
+          value: '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
+    logTopic2QueryParam:
+      name: topic2
+      in: query
+      description: The third topic associated with a contract log. Requires a timestamp range also be populated.
+      schema:
+        $ref: '#/components/schemas/LogTopicQueryParam'
+    timestampPathParam:
+      name: timestamp
+      in: path
+      description: The Unix timestamp in seconds.nanoseconds format, the timestamp at which the associated transaction reached consensus. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
+      required: true
+      example: 1234567890.0000007
+      schema:
+        type: string
+        pattern: ^\d{1,10}(\.\d{1,9})?$
+    logIndexQueryParam:
+      name: index
+      in: query
+      description: Contract log index
+      schema:
+        type: string
+        pattern: ^((eq|gt|gte|lt|lte):)?\d{1,10}$
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        indexNoOperator:
+          summary: Example of index equals with no operator
+          value: 2
+        indexEqOperator:
+          summary: Example of index equals with operator
+          value: eq:2
+        indexGtOperator:
+          summary: Example of index greater than operator
+          value: gt:2
+        indexGteOperator:
+          summary: Example of index greater than or equals operator
+          value: gte:2
+        indexLtOperator:
+          summary: Example of index less than operator
+          value: lt:2
+        indexLteOperator:
+          summary: Example of index less than or equals operator
+          value: lte:2
+    contractActionsIndexQueryParam:
+      name: index
+      in: query
+      description: The index of a contract action
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        noOperator:
+          summary: Example of equals with no operator
+          value: 1
+        eqOperator:
+          summary: Example of equals operator
+          value: eq:2
+        gtOperator:
+          summary: Example of greater than operator
+          value: gt:4
+        gteOperator:
+          summary: Example of greater than or equals operator
+          value: gte:5
+        ltOperator:
+          summary: Example of less than operator
+          value: lt:6
+        lteOperator:
+          summary: Example of less than or equals operator
+          value: lte:7
+      schema:
+        type: string
+        pattern: ^((gte?|lte?|eq|ne)\:)?\d{1,10}$
+    logTopic3QueryParam:
+      name: topic3
+      in: query
+      description: The fourth topic associated with a contract log. Requires a timestamp range also be populated.
+      schema:
+        $ref: '#/components/schemas/LogTopicQueryParam'
+    contractIdOrAddressPathParam:
+      name: contractIdOrAddress
+      in: path
+      required: true
+      description: Contract or account identifier in format shard.realm.num, realm.num, num or a 20-byte EVM address (with or without 0x prefix).
+      schema:
+        pattern: ^(\d{1,10}\.){0,2}(\d{1,10}|(0x)?[A-Fa-f0-9]{40})$
+        type: string
+    logTopic1QueryParam:
+      name: topic1
+      in: query
+      description: The second topic associated with a contract log. Requires a timestamp range also be populated.
+      schema:
+        $ref: '#/components/schemas/LogTopicQueryParam'
+    storage:
+      name: storage
+      description: If provided and set to true, storage information will be included in the response
+      in: query
+      example: false
+      schema:
+        type: boolean
+        default: false
+    logTopic0QueryParam:
+      name: topic0
+      in: query
+      explode: true
+      description: The first topic associated with a contract log. Requires a timestamp range also be populated.
+      schema:
+        $ref: '#/components/schemas/LogTopicQueryParam'
+    contractsBlockNumberQueryParam:
+      name: block.number
+      in: query
+      description: The block's number
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        noOperator:
+          summary: Example of block.number equals with no operator
+          value: 1
+        eqOperator:
+          summary: Example of block.number equals operator
+          value: eq:2
+        hexEncoded:
+          summary: Example of hex encoded block.number equals with no operator
+          value: '0xa0'
+        hexEncodedEqOperator:
+          summary: Example of hex encoded block.number equals with equals operator
+          value: eq:0xa0
+      schema:
+        type: string
+        pattern: ^(eq:)?(\d{1,19}|0x[a-fA-f0-9]+)$
+    limitQueryParam:
+      name: limit
+      in: query
+      description: The maximum number of items to return
+      example: 2
+      schema:
+        format: int32
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    slotQueryParam:
+      name: slot
+      in: query
+      description: The slot's number
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        noOperator:
+          summary: Example of slot equals with no operator
+          value: 1
+        eqOperator:
+          summary: Example of slot equals operator
+          value: eq:2
+        gtOperator:
+          summary: Example of slot gt operator
+          value: gt:2
+        gteOperator:
+          summary: Example of slot gte operator
+          value: gte:2
+        ltOperator:
+          summary: Example of slot lt operator
+          value: lt:2
+        lteOperator:
+          summary: Example of slot lte operator
+          value: lte:2
+      schema:
+        type: string
+        pattern: ^((eq|gte?|lte?)\:)?(0x)?[0-9A-Fa-f]{1,64}$
+    blockHashQueryParam:
+      name: block.hash
+      in: query
+      description: The block's hash. If multiple values are provided the last value will be the only value used.
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        32ByteNoOperator:
+          summary: Example of 32 byte block.hash equals with no operator
+          value: ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+        48ByteNoOperator:
+          summary: Example of 48 byte block.hash equals with no operator
+          value: 1eaf1abbd64bbcac7f473f0272671c66d3d1d64f584112b11cd4d2063e736305312fcb305804a48baa41571e71c39c61
+        32ByteEqOperator:
+          summary: Example of 32 byte block.hash with equals operator
+          value: eq:ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+        48ByteEqOperator:
+          summary: Example of 48 byte block.hash with equals operator
+          value: eq:1eaf1abbd64bbcac7f473f0272671c66d3d1d64f584112b11cd4d2063e736305312fcb305804a48baa41571e71c39c61
+        32Byte0xPrefixNoOperator:
+          summary: Example of 32 byte block.hash equals with 0x prefix and no operator
+          value: '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
+        48Byte0xPrefixNoOperator:
+          summary: Example of 48 byte block.hash equals with 0x prefix and no operator
+          value: '0x1eaf1abbd64bbcac7f473f0272671c66d3d1d64f584112b11cd4d2063e736305312fcb305804a48baa41571e71c39c61'
+        32Byte0xPrefixEqOperator:
+          summary: Example of 32 byte block.hash with 0x prefix and equals operator
+          value: eq:0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+        48Byte0xPrefixEqOperator:
+          summary: Example of 48 byte block.hash with 0x prefix and equals operator
+          value: eq:0x1eaf1abbd64bbcac7f473f0272671c66d3d1d64f584112b11cd4d2063e736305312fcb305804a48baa41571e71c39c61
+      schema:
+        type: string
+        pattern: ^(eq:)?(0x)?([0-9A-Fa-f]{64}|[0-9A-Fa-f]{96})$
+    contractIdQueryParam:
+      name: contract.id
+      description: The ID of the smart contract
+      in: query
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        entityNumNoOperator:
+          summary: Example of entityNum equals with no operator
+          value: 100
+        idNoOperator:
+          summary: Example of id equals with no operator
+          value: 0.0.100
+        evmAddressNoOperator:
+          summary: A hex encoded EVM address with no operator.
+          value: 0.0.1d8bfdc5d46dc4f61d6b6115972536ebe6a8854c
+        entityNumEqOperator:
+          summary: Example of entityNum equals operator
+          value: eq:200
+        idEqOperator:
+          summary: Example of id equals operator
+          value: eq:0.0.200
+        entityNumNeOperator:
+          summary: Example of entityNum not equals operator
+          value: ne:300
+        idNeOperator:
+          summary: Example of id not equals operator
+          value: ne:0.0.300
+        entityNumGtOperator:
+          summary: Example of entityNum greater than operator
+          value: gt:400
+        idGtOperator:
+          summary: Example of id greater than operator
+          value: gt:0.0.400
+        entityNumGteOperator:
+          summary: Example of entityNum greater than or equals operator
+          value: gte:500
+        idGteOperator:
+          summary: Example of id greater than or equals operator
+          value: gte:0.0.500
+        entityNumLtOperator:
+          summary: Example of entityNum less than operator
+          value: lt:600
+        idLtOperator:
+          summary: Example of id less than operator
+          value: lt:0.0.600
+        entityNumLteOperator:
+          summary: Example of entityNum less than or equals operator
+          value: lte:700
+        idLteOperator:
+          summary: Example of id less than or equals operator
+          value: lte:0.0.700
+      schema:
+        pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}|(\d{1,10}\.){0,2}[A-Fa-f0-9]{40}$
+        type: string
+    timestampQueryParam:
+      description: The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
+      name: timestamp
+      in: query
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        secondsNoOperator:
+          summary: Example of seconds equals with no operator
+          value: 1234567890
+        timestampNoOperator:
+          summary: Example of timestamp equals with no operator
+          value: 1234567890
+        secondsEqOperator:
+          summary: Example of seconds equals with operator
+          value: eq:1234567890
+        timestampEqOperator:
+          summary: Example of timestamp equals with operator
+          value: eq:1234567890.000000200
+        secondsNeOperator:
+          summary: Example of seconds not equals operator
+          value: ne:1234567890
+        timestampNeOperator:
+          summary: Example of timestamp not equals operator
+          value: ne:1234567890.000000300
+        secondsGtOperator:
+          summary: Example of seconds greater than operator
+          value: gt:1234567890
+        timestampGtOperator:
+          summary: Example of timestamp greater than operator
+          value: gt:1234567890.000000400
+        secondsGteOperator:
+          summary: Example of seconds greater than or equals operator
+          value: gte:1234567890
+        timestampGteOperator:
+          summary: Example of timestamp greater than or equals operator
+          value: gte:1234567890.000000500
+        secondsLtOperator:
+          summary: Example of seconds less than operator
+          value: lt:1234567890
+        timestampLtOperator:
+          summary: Example of timestamp less than operator
+          value: lt:1234567890.000000600
+        secondsLteOperator:
+          summary: Example of seconds less than or equals operator
+          value: lte:1234567890
+        timestampLteOperator:
+          summary: Example of timestamp less than or equals operator
+          value: lte:1234567890.000000700
+      schema:
+        type: array
+        items:
+          type: string
+          pattern: ^((eq|gt|gte|lt|lte|ne):)?\d{1,10}(\.\d{1,9})?$
+  responses:
+    InvalidParameterError:
+      description: Invalid parameter
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: 'Invalid parameter: account.id'
+              - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: Not found
+  schemas:
+    ContractsResponse:
+      type: object
+      properties:
+        contracts:
+          $ref: '#/components/schemas/Contracts'
+        links:
+          $ref: '#/components/schemas/Links'
+    ContractLogTopics:
+      description: A list of hex encoded topics associated with this log event
+      example:
+      - '0xf4757a49b326036464bec6fe419a4ae38c8a02ce3e68bf0809674f6aab8ad300'
+      items:
+        type: string
+      type: array
+    ContractResult:
+      type: object
+      properties:
+        access_list:
+          description: The access list of the wrapped ethereum transaction
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessList'
+        address:
+          description: The hex encoded evm address of contract
+          example: '0x25fe26adc577cc89172e6156c9e24f7b9751b762'
+          type: string
+        authorization_list:
+          description: The authorization list of the wrapped EIP-7702 ethereum transaction
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationList'
+        amount:
+          description: The amount sent to the function. When `hbar=true` (default), the value is in tinybars. When `hbar=false`, the value is in weibars.
+          example: 10
+          format: int64
+          type:
+          - integer
+          - 'null'
+        block_gas_used:
+          description: The total amount of gas used in the block
+          example: 2000
+          format: int64
+          type:
+          - integer
+          - 'null'
+        block_hash:
+          description: The hex encoded block (record file chain) hash
+          example: '0x6ceecd8bb224da491'
+          type:
+          - string
+          - 'null'
+        block_number:
+          description: The block height calculated as the number of record files starting from zero since network start.
+          example: 10
+          format: int64
+          type:
+          - integer
+          - 'null'
+        bloom:
+          allOf:
+          - $ref: '#/components/schemas/Bloom'
+          - description: The hex encoded bloom filter of the contract result
+        call_result:
+          description: The hex encoded result returned by the function
+          example: '0x2b048531b38d2882e86044bc972e940ee0a01938'
+          type:
+          - string
+          - 'null'
+        chain_id:
+          description: The hex encoded chain_id of the wrapped ethereum transaction
+          type:
+          - string
+          - 'null'
+          example: '0x127'
+        contract_id:
+          $ref: '#/components/schemas/EntityId'
+        created_contract_ids:
+          description: The list of smart contracts that were created by the function call.
+          items:
+            $ref: '#/components/schemas/EntityId'
+          type:
+          - array
+          - 'null'
+        error_message:
+          description: The message when an error occurs during smart contract execution
+          example: Out of gas
+          type:
+          - string
+          - 'null'
+        failed_initcode:
+          description: The hex encoded initcode of a failed contract create transaction
+          example: '0x856739'
+          type: string
+        from:
+          $ref: '#/components/schemas/EvmAddressNullable'
+        function_parameters:
+          description: The hex encoded parameters passed to the function
+          example: '0xbb9f02dc6f0e3289f57a1f33b71c73aa8548ab8b'
+          type:
+          - string
+          - 'null'
+        gas_consumed:
+          description: The units of consumed gas by the EVM to execute contract
+          example: 35000
+          format: int64
+          type:
+          - integer
+          - 'null'
+        gas_limit:
+          description: The maximum units of gas allowed for contract execution
+          example: 100000
+          format: int64
+          type: integer
+        gas_price:
+          description: The hex encoded gas_price of the wrapped ethereum transaction. When `hbar=true` (default), the value is converted to tinybars. When `hbar=false`, the value is in weibars.
+          type:
+          - string
+          - 'null'
+          example: '0x4a817c800'
+        gas_used:
+          description: The units of gas used to execute contract
+          example: 80000
+          format: int64
+          type:
+          - integer
+          - 'null'
+        hash:
+          description: A hex encoded 32 byte hash and it is only populated for Ethereum transaction case
+          example: '0xfebbaa29c513d124a6377246ea3506ad917d740c21a88f61a1c55ba338fc2bb1'
+          type: string
+        max_fee_per_gas:
+          description: The hex encoded max_fee_per_gas of the wrapped ethereum transaction. When `hbar=true` (default), the value is converted to tinybars. When `hbar=false`, the value is in weibars.
+          type:
+          - string
+          - 'null'
+          example: '0x5'
+        max_priority_fee_per_gas:
+          description: The hex encoded max_priority_fee_per_gas of the wrapped ethereum transaction. When `hbar=true` (default), the value is converted to tinybars. When `hbar=false`, the value is in weibars.
+          type:
+          - string
+          - 'null'
+          example: '0x100'
+        nonce:
+          description: The nonce of the wrapped ethereum transaction
+          format: int64
+          type:
+          - integer
+          - 'null'
+          example: 1
+        r:
+          description: The hex encoded signature_r of the wrapped ethereum transaction
+          type:
+          - string
+          - 'null'
+          example: '0xd693b532a80fed6392b428604171fb32fdbf953728a3a7ecc7d4062b1652c043'
+        result:
+          description: The result of the transaction
+          example: SUCCESS
+          type: string
+        s:
+          description: The hex encoded signature_s of the wrapped ethereum transaction
+          type:
+          - string
+          - 'null'
+          example: '0x24e9c602ac800b983b035700a14b23f78a253ab762deab5dc27e3555a750b355'
+        status:
+          description: The status of the transaction, 0x1 for a SUCCESS transaction and 0x0 for all else
+          example: 1
+          type: string
+        timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        to:
+          $ref: '#/components/schemas/EvmAddressNullable'
+        transaction_index:
+          description: The position of the transaction in the block
+          format: int64
+          type:
+          - integer
+          - 'null'
+          example: 1
+        type:
+          description: The type of the wrapped ethereum transaction, 0 (Pre-Eip1559) or 2 (Post-Eip1559)
+          type:
+          - integer
+          - 'null'
+          example: 2
+        v:
+          description: The recovery_id of the wrapped ethereum transaction
+          type:
+          - integer
+          - 'null'
+          example: 1
+    AuthorizationList:
+      type: object
+      properties:
+        address:
+          description: The hex encoded address to be delegated to
+          example: '0x0000000000000000000000000000000000000001'
+          format: binary
+          type: string
+        chain_id:
+          description: The hex encoded chain id
+          example: '0x127'
+          type: string
+        nonce:
+          description: The nonce of the authorization
+          example: 5
+          format: int64
+          type: integer
+        r:
+          description: The hex encoded signature r value
+          example: '0x2222222222222222222222222222222222222222222222222222222222222222'
+          format: binary
+          type: string
+        s:
+          description: The hex encoded signature s value
+          example: '0x3333333333333333333333333333333333333333333333333333333333333333'
+          format: binary
+          type: string
+        y_parity:
+          description: The hex encoded parity of the y-coordinate of the signature point
+          example: '0x1'
+          type: string
+    ContractState:
+      type: object
+      required:
+      - address
+      - contract_id
+      - timestamp
+      - slot
+      - value
+      properties:
+        address:
+          $ref: '#/components/schemas/EvmAddress'
+        contract_id:
+          $ref: '#/components/schemas/EntityId'
+        timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        slot:
+          description: The hex encoded storage slot.
+          format: binary
+          example: '0x00000000000000000000000000000000000000000000000000000000000000fa'
+          type: string
+        value:
+          description: The hex encoded value to the slot. `0x` implies no value written.
+          example: '0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925'
+          format: binary
+          type: string
+    ContractResultStateChange:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/EvmAddress'
+        contract_id:
+          $ref: '#/components/schemas/EntityId'
+        slot:
+          description: The hex encoded storage slot changed.
+          format: binary
+          example: '0x00000000000000000000000000000000000000000000000000000000000000fa'
+          type: string
+        value_read:
+          description: The hex encoded value read from the storage slot.
+          example: '0x97c1fc0a6ed5551bc831571325e9bdb365d06803100dc20648640ba24ce69750'
+          format: binary
+          type: string
+        value_written:
+          description: The hex encoded value written to the slot. `null` implies no value written.
+          example: '0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925'
+          format: binary
+          type:
+          - string
+          - 'null'
+    Key:
+      description: The public key which controls access to various network entities.
+      type:
+      - object
+      - 'null'
+      properties:
+        _type:
+          type: string
+          enum:
+          - ECDSA_SECP256K1
+          - ED25519
+          - ProtobufEncoded
+          example: ProtobufEncoded
+        key:
+          type: string
+          example: 15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743
+    ContractCallResponse:
+      type: object
+      properties:
+        result:
+          description: Result in hexadecimal from executed contract call.
+          example: '0x0000000000006d8d'
+          format: binary
+          pattern: ^0x[0-9a-fA-F]+$
+          type: string
+    ContractLogs:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContractLog'
+    TimestampRange:
+      type: object
+      description: A timestamp range an entity is valid for
+      properties:
+        from:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The inclusive from timestamp in seconds
+        to:
+          allOf:
+          - $ref: '#/components/schemas/TimestampNullable'
+          - description: The exclusive to timestamp in seconds
+    ContractResultLog:
+      type: object
+      properties:
+        address:
+          description: The hex encoded EVM address of the contract
+          example: '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
+          pattern: ^0x[0-9A-Fa-f]{40}$
+          type: string
+        bloom:
+          allOf:
+          - $ref: '#/components/schemas/Bloom'
+          - description: The hex encoded bloom filter of the contract log
+        contract_id:
+          $ref: '#/components/schemas/EntityId'
+        data:
+          description: The hex encoded data of the contract log
+          example: '0x00000000000000000000000000000000000000000000000000000000000000fa'
+          type:
+          - string
+          - 'null'
+        index:
+          description: The index of the contract log in the chain of logs for an execution
+          example: 0
+          type: integer
+        topics:
+          $ref: '#/components/schemas/ContractLogTopics'
+    TimestampNullable:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type:
+      - string
+      - 'null'
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    ContractStateResponse:
+      type: object
+      properties:
+        state:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractState'
+        links:
+          $ref: '#/components/schemas/Links'
+    Opcode:
+      description: Represents a struct/opcode log entry in a trace
+      type: object
+      required:
+      - depth
+      - gas
+      - gas_cost
+      - memory
+      - op
+      - pc
+      - stack
+      - storage
+      properties:
+        depth:
+          description: The current call depth
+          type: integer
+          format: int32
+        gas:
+          description: The remaining gas
+          type: integer
+          format: int64
+        gas_cost:
+          description: The cost for executing op
+          type: integer
+          format: int64
+        memory:
+          description: The EVM memory with items in hex
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: binary
+        op:
+          description: The opcode to execute
+          type: string
+        pc:
+          description: The program counter
+          type: integer
+          format: int32
+        reason:
+          description: The revert reason in hex
+          type:
+          - string
+          - 'null'
+          format: binary
+        stack:
+          description: The EVM stack with items in hex
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: binary
+        storage:
+          description: The storage slots (keys and values in hex) of the current contract which is read from and written to
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            format: binary
+    ContractActions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContractAction'
+    AccessList:
+      type: object
+      properties:
+        address:
+          description: The hex encoded address of the accessed contract
+          example: '0xa02457e5dfd32bda5fc7e1f1b008aa5979568150'
+          format: binary
+          type: string
+        storage_keys:
+          description: The list of accessed hex encoded storage keys
+          type: array
+          items:
+            format: binary
+            type: string
+          example:
+          - '0x0000000000000000000000000000000000000000000000000000000000000081'
+    Bloom:
+      example: '0x549358c4c2e573e02410ef7b5a5ffa5f36dd7398'
+      format: binary
+      type:
+      - string
+      - 'null'
+    Links:
+      type: object
+      properties:
+        next:
+          example: null
+          type:
+          - string
+          - 'null'
+    ContractResponse:
+      allOf:
+      - $ref: '#/components/schemas/Contract'
+      - type: object
+        properties:
+          bytecode:
+            type:
+            - string
+            - 'null'
+            format: binary
+            description: The contract bytecode in hex during deployment
+            example: '0x01021a1fdc9b'
+          runtime_bytecode:
+            type:
+            - string
+            - 'null'
+            format: binary
+            description: The contract bytecode in hex after deployment
+            example: '0x0302fa1ad39c'
+    EntityId:
+      type:
+      - string
+      - 'null'
+      description: Network entity ID in the format of `shard.realm.num`
+      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
+      example: 0.0.2
+    EvmAddress:
+      type: string
+      description: A network entity encoded as an EVM address in hex.
+      format: binary
+      minLength: 40
+      maxLength: 42
+      pattern: ^(0x)?[A-Fa-f0-9]{40}$
+      example: 0000000000000000000000000000000000001f41
+    ContractResultsResponse:
+      type: object
+      properties:
+        results:
+          $ref: '#/components/schemas/ContractResults'
+        links:
+          $ref: '#/components/schemas/Links'
+    ContractCallRequest:
+      type: object
+      properties:
+        block:
+          description: Hexadecimal block number or the string "latest", "pending", "earliest". Defaults to "latest".
+          example: latest
+          pattern: ^((0x)?[0-9a-fA-F]+|(earliest|pending|latest))$
+          type:
+          - string
+          - 'null'
+        data:
+          description: Hexadecimal method signature and encoded parameters. Up to 131072 bytes as at most 262146 hexadecimal digits including optional leading 0x.
+          example: '0x47f1aae7'
+          format: binary
+          maxLength: 262146
+          pattern: ^(0x)?[0-9a-fA-F]+$
+          type:
+          - string
+          - 'null'
+        estimate:
+          description: Whether gas estimation is called. Defaults to false.
+          example: true
+          type:
+          - boolean
+          - 'null'
+        from:
+          description: The 20-byte hexadecimal EVM address the transaction is sent from.
+          example: 00000000000000000000000000000000000004e2
+          format: binary
+          maxLength: 42
+          minLength: 40
+          pattern: ^(0x)?[A-Fa-f0-9]{40}$
+          type:
+          - string
+          - 'null'
+        gas:
+          description: Gas provided for the transaction execution. Defaults to 15000000.
+          example: 15000000
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        gasPrice:
+          description: Gas price used for each paid gas.
+          example: 100000000
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        to:
+          description: The 20-byte hexadecimal EVM address the transaction is directed to.
+          example: '0xd9d0c5c0ff85758bdf05a7636f8036d4d065f5b6'
+          format: binary
+          maxLength: 42
+          minLength: 40
+          pattern: ^(0x)?[A-Fa-f0-9]{40}$
+          type: string
+        value:
+          description: Value sent with this transaction. Defaults to 0.
+          example: 0
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+      required:
+      - to
+    OpcodesResponse:
+      type: object
+      required:
+      - address
+      - contract_id
+      - failed
+      - gas
+      - opcodes
+      - return_value
+      properties:
+        address:
+          description: 'The address of the transaction recipient in hex.
+
+            Zero address is set for transactions without a recipient (e.g., contract create)
+
+            '
+          type: string
+          format: binary
+        contract_id:
+          $ref: '#/components/schemas/EntityId'
+        failed:
+          description: Whether the transaction failed to be completely processed.
+          type: boolean
+        gas:
+          description: The gas used in tinybars
+          type: integer
+          format: int64
+        opcodes:
+          description: The logs produced by the opcode logger
+          type: array
+          items:
+            $ref: '#/components/schemas/Opcode'
+        return_value:
+          description: The returned data from the transaction in hex
+          type: string
+          format: binary
+    ContractLogsResponse:
+      type: object
+      properties:
+        logs:
+          $ref: '#/components/schemas/ContractLogs'
+        links:
+          $ref: '#/components/schemas/Links'
+    Contract:
+      type: object
+      properties:
+        admin_key:
+          $ref: '#/components/schemas/Key'
+        auto_renew_account:
+          $ref: '#/components/schemas/EntityId'
+        auto_renew_period:
+          example: 7776000
+          format: int64
+          type:
+          - integer
+          - 'null'
+        contract_id:
+          $ref: '#/components/schemas/EntityId'
+        created_timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        deleted:
+          type: boolean
+          example: false
+        evm_address:
+          $ref: '#/components/schemas/EvmAddress'
+        expiration_timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        file_id:
+          $ref: '#/components/schemas/EntityId'
+        max_automatic_token_associations:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        memo:
+          example: contract memo
+          type: string
+        nonce:
+          description: The nonce of the contract
+          format: int64
+          type:
+          - integer
+          - 'null'
+          example: 1
+        obtainer_id:
+          $ref: '#/components/schemas/EntityId'
+        permanent_removal:
+          type:
+          - boolean
+          - 'null'
+        proxy_account_id:
+          $ref: '#/components/schemas/EntityId'
+        timestamp:
+          $ref: '#/components/schemas/TimestampRange'
+    Timestamp:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type: string
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    ContractResultLogs:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContractResultLog'
+    ContractLog:
+      allOf:
+      - $ref: '#/components/schemas/ContractResultLog'
+      - type: object
+        properties:
+          block_hash:
+            description: The hex encoded block (record file chain) hash
+            example: '0x553f9311833391c0a3b2f9ed64540a89f2190a511986cd94889f1c0cf7fa63e898b1c6730f14a61755d1fb4ca05fb073'
+            type: string
+          block_number:
+            description: The block height calculated as the number of record files starting from zero since network start.
+            example: 10
+            format: int64
+            type: integer
+          root_contract_id:
+            allOf:
+            - $ref: '#/components/schemas/EntityId'
+            - description: The executed contract that created this contract log
+          timestamp:
+            $ref: '#/components/schemas/Timestamp'
+          transaction_hash:
+            type: string
+            description: A hex encoded transaction hash
+            example: '0x397022d1e5baeb89d0ab66e6bf602640610e6fb7e55d78638db861e2c6339aa9'
+          transaction_index:
+            description: The position of the transaction in the block
+            format: int32
+            type:
+            - integer
+            - 'null'
+            example: 1
+    ContractResultStateChanges:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContractResultStateChange'
+    ContractAction:
+      type: object
+      properties:
+        call_depth:
+          description: The nesting depth of the call
+          example: 1
+          format: int32
+          type: integer
+        call_operation_type:
+          description: The type of the call operation
+          enum:
+          - CALL
+          - CALLCODE
+          - CREATE
+          - CREATE2
+          - DELEGATECALL
+          - STATICCALL
+          - UNKNOWN
+          example: CALL
+          type: string
+        call_type:
+          description: The type of the call
+          enum:
+          - NO_ACTION
+          - CALL
+          - CREATE
+          - PRECOMPILE
+          - SYSTEM
+          example: CALL
+          type: string
+        caller:
+          $ref: '#/components/schemas/EntityId'
+        caller_type:
+          description: The entity type of the caller
+          type: string
+          enum:
+          - ACCOUNT
+          - CONTRACT
+          example: ACCOUNT
+        from:
+          description: The EVM address of the caller
+          example: '0x0000000000000000000000000000000000000065'
+          type: string
+        gas:
+          description: Gas cost in tinybars
+          example: 50000
+          format: int64
+          type: integer
+        gas_used:
+          description: Gas used in tinybars
+          example: 50000
+          format: int64
+          type: integer
+        index:
+          description: The position of the action within the ordered list of actions
+          example: 0
+          format: int32
+          type: integer
+        input:
+          description: The hex encoded input data
+          example: '0x123456'
+          type:
+          - string
+          - 'null'
+        recipient:
+          $ref: '#/components/schemas/EntityId'
+        recipient_type:
+          description: The entity type of the recipient
+          type:
+          - string
+          - 'null'
+          enum:
+          - ACCOUNT
+          - CONTRACT
+          example: ACCOUNT
+        result_data:
+          description: The hex encoded result data
+          example: '0x123456'
+          type:
+          - string
+          - 'null'
+        result_data_type:
+          description: The type of the result data
+          enum:
+          - OUTPUT
+          - REVERT_REASON
+          - ERROR
+          example: OUTPUT
+          type: string
+        timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        to:
+          $ref: '#/components/schemas/EvmAddressNullable'
+        value:
+          description: The value of the transaction in tinybars
+          example: 50000
+          format: int64
+          type: integer
+    EvmAddressNullable:
+      type:
+      - string
+      - 'null'
+      description: A network entity encoded as an EVM address in hex.
+      format: binary
+      minLength: 40
+      maxLength: 42
+      pattern: ^(0x)?[A-Fa-f0-9]{40}$
+      example: '0x0000000000000000000000000000000000001f41'
+    ContractResultDetails:
+      allOf:
+      - $ref: '#/components/schemas/ContractResult'
+      - type: object
+        properties:
+          access_list:
+            description: The access list of the wrapped ethereum transaction
+            type: array
+            items:
+              $ref: '#/components/schemas/AccessList'
+          address:
+            description: The hex encoded evm address of contract
+            example: '0x25fe26adc577cc89172e6156c9e24f7b9751b762'
+            type: string
+          authorization_list:
+            description: The authorization list of the wrapped EIP-7702 ethereum transaction
+            type: array
+            items:
+              $ref: '#/components/schemas/AuthorizationList'
+          block_gas_used:
+            description: The total amount of gas used in the block
+            example: 2000
+            format: int64
+            type:
+            - integer
+            - 'null'
+          block_hash:
+            description: The hex encoded block (record file chain) hash
+            example: '0x6ceecd8bb224da491'
+            type:
+            - string
+            - 'null'
+          block_number:
+            description: The block height calculated as the number of record files starting from zero since network start.
+            example: 10
+            format: int64
+            type:
+            - integer
+            - 'null'
+          chain_id:
+            description: The hex encoded chain_id of the wrapped ethereum transaction
+            type:
+            - string
+            - 'null'
+            example: '0x127'
+          failed_initcode:
+            description: The hex encoded initcode of a failed contract create transaction
+            example: '0x856739'
+            type: string
+          gas_price:
+            description: The hex encoded gas_price of the wrapped ethereum transaction
+            type:
+            - string
+            - 'null'
+            example: '0x4a817c800'
+          hash:
+            description: The hex encoded transaction hash
+            example: '0x3531396130303866616264653464'
+            type: string
+          logs:
+            $ref: '#/components/schemas/ContractResultLogs'
+          max_fee_per_gas:
+            description: The hex encoded max_fee_per_gas of the wrapped ethereum transaction
+            type:
+            - string
+            - 'null'
+            example: '0x5'
+          max_priority_fee_per_gas:
+            description: The hex encoded max_priority_fee_per_gas of the wrapped ethereum transaction
+            type:
+            - string
+            - 'null'
+            example: '0x100'
+          nonce:
+            description: The nonce of the wrapped ethereum transaction
+            format: int64
+            type:
+            - integer
+            - 'null'
+            example: 1
+          r:
+            description: The hex encoded signature_r of the wrapped ethereum transaction
+            type:
+            - string
+            - 'null'
+            example: '0xd693b532a80fed6392b428604171fb32fdbf953728a3a7ecc7d4062b1652c043'
+          s:
+            description: The hex encoded signature_s of the wrapped ethereum transaction
+            type:
+            - string
+            - 'null'
+            example: '0x24e9c602ac800b983b035700a14b23f78a253ab762deab5dc27e3555a750b355'
+          state_changes:
+            $ref: '#/components/schemas/ContractResultStateChanges'
+          transaction_index:
+            description: The position of the transaction in the block
+            format: int64
+            type:
+            - integer
+            - 'null'
+            example: 1
+          type:
+            description: The type of the wrapped ethereum transaction, 0 (Pre-Eip1559) or 2 (Post-Eip1559)
+            type:
+            - integer
+            - 'null'
+            example: 2
+          v:
+            description: The recovery_id of the wrapped ethereum transaction
+            type:
+            - integer
+            - 'null'
+            example: 1
+    Error:
+      type: object
+      properties:
+        _status:
+          type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  data:
+                    description: Error message in hexadecimal
+                    example: '0x3000'
+                    format: binary
+                    pattern: ^0x[0-9a-fA-F]+$
+                    type:
+                    - string
+                    - 'null'
+                  detail:
+                    description: Detailed error message
+                    example: Generic detailed error message
+                    type:
+                    - string
+                    - 'null'
+                  message:
+                    description: Error message
+                    example: Generic error message
+                    type: string
+    ContractResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContractResult'
+    Contracts:
+      type: array
+      items:
+        $ref: '#/components/schemas/Contract'
+    LogTopicQueryParam:
+      type: array
+      items:
+        type: string
+        pattern: ^(0x)?[0-9A-Fa-f]{1,64}$
+    ContractActionsResponse:
+      type: object
+      properties:
+        actions:
+          $ref: '#/components/schemas/ContractActions'
+        links:
+          $ref: '#/components/schemas/Links'
+externalDocs:
+  description: REST API Docs
+  url: https://docs.hedera.com/guides/docs/mirror-node-api/cryptocurrency-api

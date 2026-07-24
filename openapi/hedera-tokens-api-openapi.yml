@@ -1,0 +1,1178 @@
+openapi: 3.1.0
+info:
+  title: Mirror Node REST accounts tokens API
+  version: 0.156.0
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  description: 'The REST API offers the ability to query transactions and entity information from a mirror node.
+
+
+    Base url: [/api/v1](/api/v1)
+
+
+    OpenAPI Spec: [/api/v1/docs/openapi.yml](/api/v1/docs/openapi.yml)'
+  contact:
+    name: Mirror Node Team
+    email: mirrornode@hedera.com
+    url: https://github.com/hiero-ledger/hiero-mirror-node
+servers:
+- description: The current REST API server
+  url: ''
+- description: The production REST API servers
+  url: '{scheme}://{network}.mirrornode.hedera.com'
+  variables:
+    scheme:
+      default: https
+      description: The URI scheme
+      enum:
+      - http
+      - https
+    network:
+      default: testnet
+      description: The Hedera network in use
+      enum:
+      - mainnet-public
+      - mainnet
+      - previewnet
+      - testnet
+tags:
+- name: tokens
+  description: The tokens object represents the information associated with a token entity and returns a list of token information.The tokens list endpoint is cached and not updated as frequently as the token lookup by a specific ID.
+paths:
+  /api/v1/tokens:
+    get:
+      summary: List tokens
+      description: Returns a list of tokens on the network.
+      operationId: getTokens
+      parameters:
+      - $ref: '#/components/parameters/accountIdQueryParam'
+      - $ref: '#/components/parameters/limitQueryParam'
+      - $ref: '#/components/parameters/tokenNameQueryParam'
+      - $ref: '#/components/parameters/orderQueryParam'
+      - $ref: '#/components/parameters/publicKeyQueryParam'
+      - $ref: '#/components/parameters/tokenIdQueryParam'
+      - $ref: '#/components/parameters/tokenTypeQueryParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokensResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+      tags:
+      - tokens
+  /api/v1/tokens/{tokenId}:
+    get:
+      summary: Get token by id
+      description: Returns token entity information given the id
+      operationId: getToken
+      parameters:
+      - $ref: '#/components/parameters/tokenIdPathParam'
+      - $ref: '#/components/parameters/tokenInfoTimestampQueryParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenInfo'
+              examples:
+                FungibleToken:
+                  value:
+                    admin_key:
+                      _type: ProtobufEncoded
+                      key: 10101
+                    auto_renew_account: 0.1.2
+                    auto_renew_period: null
+                    created_timestamp: '1234567890.000000001'
+                    deleted: false
+                    decimals: 1000
+                    expiry_timestamp: null
+                    freeze_default: false
+                    freeze_key:
+                      _type: ProtobufEncoded
+                      key: 10101
+                    initial_supply: 1000000
+                    kyc_key:
+                      _type: ProtobufEncoded
+                      key: 10101
+                    max_supply: 9223372036854776000
+                    memo: token memo
+                    modified_timestamp: '1234567890.000000001'
+                    name: Token name
+                    pause_key:
+                      _type: ProtobufEncoded
+                      key: 10101
+                    pause_status: UNPAUSED
+                    supply_key:
+                      _type: ProtobufEncoded
+                      key: 10101
+                    supply_type: INFINITE
+                    symbol: ORIGINALRDKSE
+                    token_id: 0.10.1
+                    total_supply: 1000000
+                    treasury_account_id: 0.1.2
+                    type: FUNGIBLE_COMMON
+                    wipe_key:
+                      _type: ProtobufEncoded
+                      key: 10101
+                    custom_fees:
+                      created_timestamp: '1234567890.000000001'
+                      fixed_fees:
+                      - amount: 100
+                        collector_account_id: 0.1.5
+                        denominating_token_id: 0.10.8
+                      fractional_fees:
+                      - amount:
+                          numerator: 12
+                          denominator: 29
+                        collector_account_id: 0.1.6
+                        denominating_token_id: 0.10.9
+                        maximum: 120
+                        minimum: 30
+                        net_of_transfers: true
+                NonFungibleToken:
+                  value:
+                    admin_key:
+                      _type: ProtobufEncoded
+                      key: 10101
+                    auto_renew_account: 0.1.2
+                    auto_renew_period: null
+                    created_timestamp: '1234567890.000000001'
+                    deleted: false
+                    decimals: 0
+                    expiry_timestamp: null
+                    freeze_default: false
+                    freeze_key:
+                      _type: ProtobufEncoded
+                      key: 10101
+                    initial_supply: 0
+                    kyc_key:
+                      _type: ProtobufEncoded
+                      key: 10101
+                    max_supply: 9223372036854776000
+                    memo: token memo
+                    modified_timestamp: '1234567890.000000001'
+                    name: Token name
+                    pause_key:
+                      _type: ProtobufEncoded
+                      key: 10101
+                    pause_status: UNPAUSED
+                    supply_key:
+                      _type: ProtobufEncoded
+                      key: 10101
+                    supply_type: INFINITE
+                    symbol: ORIGINALRDKSE
+                    token_id: 0.10.1
+                    total_supply: 1000000
+                    treasury_account_id: 0.1.2
+                    type: NON_FUNGIBLE_UNIQUE
+                    wipe_key:
+                      _type: ProtobufEncoded
+                      key: 10101
+                    custom_fees:
+                      created_timestamp: '1234567890.000000001'
+                      fixed_fees:
+                      - amount: 100
+                        collector_account_id: 0.1.5
+                        denominating_token_id: 0.10.6
+                      royalty_fees:
+                      - amount:
+                          numerator: 15
+                          denominator: 37
+                        collector_account_id: 0.1.6
+                        fallback_fee:
+                          amount: 100
+                          denominating_token_id: 0.10.7
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      tags:
+      - tokens
+  /api/v1/tokens/{tokenId}/balances:
+    get:
+      summary: List token balances
+      description: Returns a list of token balances given the id. This represents the Token supply distribution across the network
+      operationId: getTokenBalances
+      parameters:
+      - $ref: '#/components/parameters/tokenIdPathParam'
+      - $ref: '#/components/parameters/accountBalanceQueryParam'
+      - $ref: '#/components/parameters/accountIdQueryParam'
+      - $ref: '#/components/parameters/accountPublicKeyQueryParam'
+      - $ref: '#/components/parameters/limitQueryParam'
+      - $ref: '#/components/parameters/orderQueryParamDesc'
+      - $ref: '#/components/parameters/timestampQueryParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenBalancesResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+      tags:
+      - tokens
+  /api/v1/tokens/{tokenId}/nfts:
+    get:
+      summary: List nfts
+      description: Returns a list of non-fungible tokens
+      operationId: getNfts
+      parameters:
+      - $ref: '#/components/parameters/tokenIdPathParam'
+      - $ref: '#/components/parameters/accountIdQueryParam'
+      - $ref: '#/components/parameters/limitQueryParam'
+      - $ref: '#/components/parameters/orderQueryParamDesc'
+      - $ref: '#/components/parameters/serialNumberQueryParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nfts'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+      tags:
+      - tokens
+  /api/v1/tokens/{tokenId}/nfts/{serialNumber}:
+    get:
+      summary: Get nft info
+      description: Returns information for a non-fungible token
+      operationId: getNft
+      parameters:
+      - $ref: '#/components/parameters/tokenIdPathParam'
+      - $ref: '#/components/parameters/serialNumberPathParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nft'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      tags:
+      - tokens
+  /api/v1/tokens/{tokenId}/nfts/{serialNumber}/transactions:
+    get:
+      summary: Get an nfts transction history
+      description: Returns a list of transactions for a given non-fungible token
+      operationId: getNftTransactions
+      parameters:
+      - $ref: '#/components/parameters/tokenIdPathParam'
+      - $ref: '#/components/parameters/serialNumberPathParam'
+      - $ref: '#/components/parameters/limitQueryParam'
+      - $ref: '#/components/parameters/orderQueryParamDesc'
+      - $ref: '#/components/parameters/timestampQueryParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NftTransactionHistory'
+        '206':
+          description: Partial Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NftTransactionHistory'
+        '400':
+          $ref: '#/components/responses/InvalidParameterError'
+      tags:
+      - tokens
+components:
+  schemas:
+    Token:
+      type: object
+      properties:
+        admin_key:
+          $ref: '#/components/schemas/Key'
+        decimals:
+          format: int64
+          type: integer
+        metadata:
+          description: Arbitrary binary data associated with this token class encoded in base64.
+          type: string
+          format: byte
+        name:
+          type: string
+        symbol:
+          type: string
+        token_id:
+          $ref: '#/components/schemas/EntityId'
+        type:
+          type: string
+      required:
+      - admin_key
+      - decimals
+      - name
+      - symbol
+      - token_id
+      - type
+      example:
+        admin_key: null
+        decimals: 3
+        metadata: VGhpcyBpcyBhIHRlc3QgTkZU
+        name: First Mover
+        symbol: FIRSTMOVERLPDJH
+        token_id: 0.0.1
+        type: FUNGIBLE_COMMON
+    Tokens:
+      type: array
+      items:
+        $ref: '#/components/schemas/Token'
+    NftTransactionTransfer:
+      type: object
+      properties:
+        consensus_timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        is_approval:
+          type: boolean
+        nonce:
+          type: integer
+          minimum: 0
+        receiver_account_id:
+          $ref: '#/components/schemas/EntityId'
+        sender_account_id:
+          $ref: '#/components/schemas/EntityId'
+        transaction_id:
+          type: string
+        type:
+          $ref: '#/components/schemas/TransactionTypes'
+      example:
+        consensus_timestamp: '1618591023.997420021'
+        is_approval: false
+        nonce: 0
+        receiver_account_id: 0.0.11
+        sender_account_id: 0.0.10
+        transaction_id: 0.0.19789-1618591023-997420021
+        type: CRYPTOTRANSFER
+      required:
+      - consensus_timestamp
+      - is_approval
+      - nonce
+      - receiver_account_id
+      - sender_account_id
+      - transaction_id
+      - type
+    EntityIdQuery:
+      type: string
+      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
+    Nft:
+      type: object
+      properties:
+        account_id:
+          $ref: '#/components/schemas/EntityId'
+        created_timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        delegating_spender:
+          $ref: '#/components/schemas/EntityId'
+        deleted:
+          description: whether the nft or the token it belongs to has been deleted
+          type: boolean
+        metadata:
+          description: Arbitrary binary data associated with this NFT encoded in base64.
+          type: string
+          format: byte
+        modified_timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        serial_number:
+          example: 1
+          format: int64
+          type: integer
+        spender:
+          $ref: '#/components/schemas/EntityId'
+        token_id:
+          $ref: '#/components/schemas/EntityId'
+      example:
+        account_id: 0.1.2
+        created_timestamp: '1234567890.000000001'
+        delegating_spender: 0.0.400
+        deleted: false
+        metadata: VGhpcyBpcyBhIHRlc3QgTkZU
+        modified_timestamp: '1610682445.003266001'
+        serial_number: 124
+        spender_id: 0.0.500
+        token_id: 0.0.222
+    TokensResponse:
+      type: object
+      properties:
+        tokens:
+          $ref: '#/components/schemas/Tokens'
+        links:
+          $ref: '#/components/schemas/Links'
+    Nfts:
+      type: object
+      properties:
+        nfts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nft'
+        links:
+          $ref: '#/components/schemas/Links'
+    Key:
+      description: The public key which controls access to various network entities.
+      type:
+      - object
+      - 'null'
+      properties:
+        _type:
+          type: string
+          enum:
+          - ECDSA_SECP256K1
+          - ED25519
+          - ProtobufEncoded
+          example: ProtobufEncoded
+        key:
+          type: string
+          example: 15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743
+    FractionalFee:
+      type: object
+      properties:
+        all_collectors_are_exempt:
+          type: boolean
+          example: false
+        amount:
+          type: object
+          properties:
+            numerator:
+              example: 12
+              format: int64
+              type: integer
+            denominator:
+              example: 29
+              format: int64
+              type: integer
+        collector_account_id:
+          $ref: '#/components/schemas/EntityId'
+        denominating_token_id:
+          $ref: '#/components/schemas/EntityId'
+        maximum:
+          example: 120
+          format: int64
+          type:
+          - integer
+          - 'null'
+        minimum:
+          example: 30
+          format: int64
+          type: integer
+        net_of_transfers:
+          type: boolean
+          example: true
+    TimestampNullable:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type:
+      - string
+      - 'null'
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    TokenBalancesResponse:
+      type: object
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        balances:
+          $ref: '#/components/schemas/TokenDistribution'
+        links:
+          $ref: '#/components/schemas/Links'
+    TransactionTypes:
+      type: string
+      enum:
+      - ATOMICBATCH
+      - CONSENSUSCREATETOPIC
+      - CONSENSUSDELETETOPIC
+      - CONSENSUSSUBMITMESSAGE
+      - CONSENSUSUPDATETOPIC
+      - CONTRACTCALL
+      - CONTRACTCREATEINSTANCE
+      - CONTRACTDELETEINSTANCE
+      - CONTRACTUPDATEINSTANCE
+      - CRSPUBLICATION
+      - CRYPTOADDLIVEHASH
+      - CRYPTOAPPROVEALLOWANCE
+      - CRYPTOCREATEACCOUNT
+      - CRYPTODELETE
+      - CRYPTODELETEALLOWANCE
+      - CRYPTODELETELIVEHASH
+      - CRYPTOTRANSFER
+      - CRYPTOUPDATEACCOUNT
+      - ETHEREUMTRANSACTION
+      - FILEAPPEND
+      - FILECREATE
+      - FILEDELETE
+      - FILEUPDATE
+      - FREEZE
+      - HINTSKEYPUBLICATION
+      - HINTSPARTIALSIGNATURE
+      - HINTSPREPROCESSINGVOTE
+      - HISTORYPROOFKEYPUBLICATION
+      - HISTORYPROOFSIGNATURE
+      - HISTORYPROOFVOTE
+      - HOOKSTORE
+      - LEDGERIDPUBLICATION
+      - MIGRATIONROOTHASHVOTE
+      - NODECREATE
+      - NODEDELETE
+      - NODESTAKEUPDATE
+      - NODEUPDATE
+      - REGISTEREDNODECREATE
+      - REGISTEREDNODEDELETE
+      - REGISTEREDNODEUPDATE
+      - SCHEDULECREATE
+      - SCHEDULEDELETE
+      - SCHEDULESIGN
+      - STATESIGNATURETRANSACTION
+      - SYSTEMDELETE
+      - SYSTEMUNDELETE
+      - TOKENAIRDROP
+      - TOKENASSOCIATE
+      - TOKENBURN
+      - TOKENCANCELAIRDROP
+      - TOKENCLAIMAIRDROP
+      - TOKENCREATION
+      - TOKENDELETION
+      - TOKENDISSOCIATE
+      - TOKENFEESCHEDULEUPDATE
+      - TOKENFREEZE
+      - TOKENGRANTKYC
+      - TOKENMINT
+      - TOKENPAUSE
+      - TOKENREJECT
+      - TOKENREVOKEKYC
+      - TOKENUNFREEZE
+      - TOKENUNPAUSE
+      - TOKENUPDATE
+      - TOKENUPDATENFTS
+      - TOKENWIPE
+      - UNCHECKEDSUBMIT
+      - UTILPRNG
+    NftTransactionHistory:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/NftTransactionTransfer'
+        links:
+          $ref: '#/components/schemas/Links'
+      required:
+      - transactions
+      - links
+    Links:
+      type: object
+      properties:
+        next:
+          example: null
+          type:
+          - string
+          - 'null'
+    EntityId:
+      type:
+      - string
+      - 'null'
+      description: Network entity ID in the format of `shard.realm.num`
+      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
+      example: 0.0.2
+    CustomFees:
+      type: object
+      properties:
+        created_timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        fixed_fees:
+          type: array
+          items:
+            $ref: '#/components/schemas/FixedFee'
+        fractional_fees:
+          type: array
+          items:
+            $ref: '#/components/schemas/FractionalFee'
+        royalty_fees:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoyaltyFee'
+    TokenDistribution:
+      type: array
+      items:
+        type: object
+        properties:
+          account:
+            $ref: '#/components/schemas/EntityId'
+          balance:
+            format: int64
+            type: integer
+          decimals:
+            format: int64
+            type: integer
+        required:
+        - account
+        - balance
+        - decimals
+      example:
+      - account: 0.15.2
+        balance: 1000
+        decimals: 3
+    RoyaltyFee:
+      type: object
+      properties:
+        all_collectors_are_exempt:
+          type: boolean
+          example: false
+        amount:
+          type: object
+          properties:
+            numerator:
+              example: 15
+              format: int64
+              type: integer
+            denominator:
+              example: 37
+              format: int64
+              type: integer
+        collector_account_id:
+          $ref: '#/components/schemas/EntityId'
+        fallback_fee:
+          type: object
+          properties:
+            amount:
+              example: 100
+              format: int64
+              type: integer
+            denominating_token_id:
+              $ref: '#/components/schemas/EntityId'
+    Timestamp:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type: string
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    FixedFee:
+      type: object
+      properties:
+        all_collectors_are_exempt:
+          type: boolean
+          example: false
+        amount:
+          example: 100
+          format: int64
+          type: integer
+        collector_account_id:
+          $ref: '#/components/schemas/EntityId'
+        denominating_token_id:
+          $ref: '#/components/schemas/EntityId'
+    Error:
+      type: object
+      properties:
+        _status:
+          type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  data:
+                    description: Error message in hexadecimal
+                    example: '0x3000'
+                    format: binary
+                    pattern: ^0x[0-9a-fA-F]+$
+                    type:
+                    - string
+                    - 'null'
+                  detail:
+                    description: Detailed error message
+                    example: Generic detailed error message
+                    type:
+                    - string
+                    - 'null'
+                  message:
+                    description: Error message
+                    example: Generic error message
+                    type: string
+    TokenInfo:
+      type: object
+      properties:
+        admin_key:
+          $ref: '#/components/schemas/Key'
+        auto_renew_account:
+          $ref: '#/components/schemas/EntityId'
+        auto_renew_period:
+          example: null
+          format: int64
+          type:
+          - integer
+          - 'null'
+        created_timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        decimals:
+          type: string
+          example: 1000
+        deleted:
+          type:
+          - boolean
+          - 'null'
+          example: true
+        expiry_timestamp:
+          description: The token's expiration time in nanoseconds since the Unix epoch. Note that this encoding differs from other entity expiry timestamps (e.g., accounts) which use a seconds.nanoseconds string format. This inconsistency is a known issue retained for backwards compatibility.
+          example: 1234567890100000
+          format: int64
+          type:
+          - integer
+          - 'null'
+        fee_schedule_key:
+          $ref: '#/components/schemas/Key'
+        freeze_default:
+          type: boolean
+          example: false
+        freeze_key:
+          $ref: '#/components/schemas/Key'
+        initial_supply:
+          type: string
+          example: '1000000'
+        kyc_key:
+          $ref: '#/components/schemas/Key'
+        max_supply:
+          type: string
+          example: '9223372036854775807'
+        metadata:
+          description: Arbitrary binary data associated with this token class encoded in base64.
+          type: string
+          format: byte
+        metadata_key:
+          allOf:
+          - $ref: '#/components/schemas/Key'
+          - description: The key which can change the metadata of a token and individual NFTs.
+        modified_timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        name:
+          type: string
+          example: Token name
+        memo:
+          type: string
+          example: token memo
+        pause_key:
+          $ref: '#/components/schemas/Key'
+        pause_status:
+          type: string
+          enum:
+          - NOT_APPLICABLE
+          - PAUSED
+          - UNPAUSED
+          example: UNPAUSED
+        supply_key:
+          $ref: '#/components/schemas/Key'
+        supply_type:
+          type: string
+          enum:
+          - FINITE
+          - INFINITE
+          example: INFINITE
+        symbol:
+          type: string
+          example: ORIGINALRDKSE
+        token_id:
+          $ref: '#/components/schemas/EntityId'
+        total_supply:
+          type: string
+          example: '1000000'
+        treasury_account_id:
+          $ref: '#/components/schemas/EntityId'
+        type:
+          type: string
+          enum:
+          - FUNGIBLE_COMMON
+          - NON_FUNGIBLE_UNIQUE
+          example: FUNGIBLE_COMMON
+        wipe_key:
+          $ref: '#/components/schemas/Key'
+        custom_fees:
+          $ref: '#/components/schemas/CustomFees'
+  responses:
+    InvalidParameterError:
+      description: Invalid parameter
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: 'Invalid parameter: account.id'
+              - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: Not found
+  parameters:
+    serialNumberQueryParam:
+      name: serialnumber
+      in: query
+      explode: true
+      description: The nft serial number (64 bit type). Requires a tokenId value also be populated.
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        serialNumNoOperator:
+          summary: Example of serialNum equals with no operator
+          value: 100
+        serialNumEqOperator:
+          summary: Example of serialNum equals operator
+          value: eq:200
+        serialNumGtOperator:
+          summary: Example of serialNum greater than operator
+          value: gt:400
+        serialNumGteOperator:
+          summary: Example of serialNum greater than or equals operator
+          value: gte:500
+        serialNumLtOperator:
+          summary: Example of serialNum less than operator
+          value: lt:600
+        serialNumLteOperator:
+          summary: Example of serialNum less than or equals operator
+          value: lte:700
+      schema:
+        type: string
+        pattern: ^((eq|gt|gte|lt|lte):)?\d{1,19}?$
+    tokenInfoTimestampQueryParam:
+      description: The Unix timestamp in seconds.nanoseconds format. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
+      name: timestamp
+      in: query
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        secondsNoOperator:
+          summary: Example of seconds equals with no operator
+          value: 1234567890
+        timestampNoOperator:
+          summary: Example of timestamp equals with no operator
+          value: 1234567890
+        secondsEqOperator:
+          summary: Example of seconds equals with operator
+          value: eq:1234567890
+        timestampEqOperator:
+          summary: Example of timestamp equals with operator
+          value: eq:1234567890.000000200
+        secondsLtOperator:
+          summary: Example of seconds less than operator
+          value: lt:1234567890
+        timestampLtOperator:
+          summary: Example of timestamp less than operator
+          value: lt:1234567890.000000600
+        secondsLteOperator:
+          summary: Example of seconds less than or equals operator
+          value: lte:1234567890
+        timestampLteOperator:
+          summary: Example of timestamp less than or equals operator
+          value: lte:1234567890.000000700
+      schema:
+        type: string
+        pattern: ^((eq|lt|lte):)?\d{1,10}(\.\d{1,9})?$
+    accountBalanceQueryParam:
+      name: account.balance
+      in: query
+      description: The optional balance value to compare against
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        noOperator:
+          summary: Example of equals with no operator
+          value: 100
+        eqOperator:
+          summary: Example of equals operator
+          value: eq:200
+        neOperator:
+          summary: Example of not equals operator
+          value: ne:300
+        gtOperator:
+          summary: Example of greater than operator
+          value: gt:400
+        gteOperator:
+          summary: Example of greater than or equals operator
+          value: gte:500
+        ltOperator:
+          summary: Example of less than operator
+          value: lt:600
+        lteOperator:
+          summary: Example of less than or equals operator
+          value: lte:700
+      schema:
+        type: string
+        pattern: ^((gte?|lte?|eq|ne)\:)?\d{1,10}$
+    orderQueryParamDesc:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: asc
+      schema:
+        enum:
+        - asc
+        - desc
+        default: desc
+    orderQueryParam:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: desc
+      schema:
+        enum:
+        - asc
+        - desc
+        default: asc
+    accountIdQueryParam:
+      name: account.id
+      in: query
+      description: The ID of the account to return information for
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        entityNumNoOperator:
+          summary: Example of entityNum equals with no operator
+          value: 100
+        idNoOperator:
+          summary: Example of id equals with no operator
+          value: 0.0.100
+        entityNumEqOperator:
+          summary: Example of entityNum equals operator
+          value: eq:200
+        idEqOperator:
+          summary: Example of id equals operator
+          value: eq:0.0.200
+        entityNumNeOperator:
+          summary: Example of entityNum not equals operator
+          value: ne:300
+        idNeOperator:
+          summary: Example of id not equals operator
+          value: ne:0.0.300
+        entityNumGtOperator:
+          summary: Example of entityNum greater than operator
+          value: gt:400
+        idGtOperator:
+          summary: Example of id greater than operator
+          value: gt:0.0.400
+        entityNumGteOperator:
+          summary: Example of entityNum greater than or equals operator
+          value: gte:500
+        idGteOperator:
+          summary: Example of id greater than or equals operator
+          value: gte:0.0.500
+        entityNumLtOperator:
+          summary: Example of entityNum less than operator
+          value: lt:600
+        idLtOperator:
+          summary: Example of id less than operator
+          value: lt:0.0.600
+        entityNumLteOperator:
+          summary: Example of entityNum less than or equals operator
+          value: lte:700
+        idLteOperator:
+          summary: Example of id less than or equals operator
+          value: lte:0.0.700
+      schema:
+        $ref: '#/components/schemas/EntityIdQuery'
+    accountPublicKeyQueryParam:
+      name: account.publickey
+      in: query
+      description: The account's public key to compare against
+      example: 3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be
+      schema:
+        type: string
+    tokenTypeQueryParam:
+      name: type
+      in: query
+      example:
+      - ALL
+      - FUNGIBLE_COMMON
+      - NON_FUNGIBLE_UNIQUE
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+    tokenNameQueryParam:
+      name: name
+      in: query
+      description: Partial or full token name. Not allowed to be used with token.id or account.id parameter. Pagination is not supported with the use of this parameter and results are ordered by token.id with respect to the order parameter.
+      schema:
+        type: string
+        maxLength: 100
+        minLength: 3
+    tokenIdPathParam:
+      name: tokenId
+      in: path
+      required: true
+      description: Token id
+      examples:
+        tokenNumAlias:
+          value: 1135
+        shardRealmTokenNumAlias:
+          value: 0.0.000000000000000000000000000000000000046F
+        tokenNum:
+          value: 1135
+        shardRealmTokenNum:
+          value: 0.0.1135
+      schema:
+        $ref: '#/components/schemas/EntityId'
+    publicKeyQueryParam:
+      name: publickey
+      in: query
+      description: The public key to compare against
+      example: 3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be
+      schema:
+        type: string
+    limitQueryParam:
+      name: limit
+      in: query
+      description: The maximum number of items to return
+      example: 2
+      schema:
+        format: int32
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    serialNumberPathParam:
+      name: serialNumber
+      in: path
+      required: true
+      description: The nft serial number
+      example: 1
+      schema:
+        type: integer
+        format: int64
+        default: 1
+        minimum: 1
+        maximum: 9223372036854776000
+    tokenIdQueryParam:
+      name: token.id
+      description: The ID of the token to return information for
+      in: query
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        tokenNumAlias:
+          summary: Example of token num alias equals with no operator
+          value: 64
+        entityNumNoOperator:
+          summary: Example of entityNum equals with no operator
+          value: 100
+        idNoOperator:
+          summary: Example of id equals with no operator
+          value: 0.0.100
+        entityNumEqOperator:
+          summary: Example of entityNum equals operator
+          value: eq:200
+        idEqOperator:
+          summary: Example of id equals operator
+          value: eq:0.0.200
+        entityNumNeOperator:
+          summary: Example of entityNum not equals operator
+          value: ne:300
+        idNeOperator:
+          summary: Example of id not equals operator
+          value: ne:0.0.300
+        entityNumGtOperator:
+          summary: Example of entityNum greater than operator
+          value: gt:400
+        idGtOperator:
+          summary: Example of id greater than operator
+          value: gt:0.0.400
+        entityNumGteOperator:
+          summary: Example of entityNum greater than or equals operator
+          value: gte:500
+        idGteOperator:
+          summary: Example of id greater than or equals operator
+          value: gte:0.0.500
+        entityNumLtOperator:
+          summary: Example of entityNum less than operator
+          value: lt:600
+        idLtOperator:
+          summary: Example of id less than operator
+          value: lt:0.0.600
+        entityNumLteOperator:
+          summary: Example of entityNum less than or equals operator
+          value: lte:700
+        idLteOperator:
+          summary: Example of id less than or equals operator
+          value: lte:0.0.700
+      schema:
+        $ref: '#/components/schemas/EntityIdQuery'
+    timestampQueryParam:
+      description: The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
+      name: timestamp
+      in: query
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        secondsNoOperator:
+          summary: Example of seconds equals with no operator
+          value: 1234567890
+        timestampNoOperator:
+          summary: Example of timestamp equals with no operator
+          value: 1234567890
+        secondsEqOperator:
+          summary: Example of seconds equals with operator
+          value: eq:1234567890
+        timestampEqOperator:
+          summary: Example of timestamp equals with operator
+          value: eq:1234567890.000000200
+        secondsNeOperator:
+          summary: Example of seconds not equals operator
+          value: ne:1234567890
+        timestampNeOperator:
+          summary: Example of timestamp not equals operator
+          value: ne:1234567890.000000300
+        secondsGtOperator:
+          summary: Example of seconds greater than operator
+          value: gt:1234567890
+        timestampGtOperator:
+          summary: Example of timestamp greater than operator
+          value: gt:1234567890.000000400
+        secondsGteOperator:
+          summary: Example of seconds greater than or equals operator
+          value: gte:1234567890
+        timestampGteOperator:
+          summary: Example of timestamp greater than or equals operator
+          value: gte:1234567890.000000500
+        secondsLtOperator:
+          summary: Example of seconds less than operator
+          value: lt:1234567890
+        timestampLtOperator:
+          summary: Example of timestamp less than operator
+          value: lt:1234567890.000000600
+        secondsLteOperator:
+          summary: Example of seconds less than or equals operator
+          value: lte:1234567890
+        timestampLteOperator:
+          summary: Example of timestamp less than or equals operator
+          value: lte:1234567890.000000700
+      schema:
+        type: array
+        items:
+          type: string
+          pattern: ^((eq|gt|gte|lt|lte|ne):)?\d{1,10}(\.\d{1,9})?$
+externalDocs:
+  description: REST API Docs
+  url: https://docs.hedera.com/guides/docs/mirror-node-api/cryptocurrency-api
