@@ -7,7 +7,19 @@ description: >-
   consensus topics, blocks, schedules, and network-level information. The public
   API requires no authentication and supports mainnet, testnet, and previewnet
   environments.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: open
+  trial: false
+  try_now: true
+  public: true
+  label: Freemium · Open access
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/hedera.png
 tags:
   - Distributed Ledger
   - Blockchain
@@ -23,51 +35,278 @@ created: '2026-06-13'
 modified: '2026-07-12'
 specificationVersion: '0.19'
 apis:
-  - name: Hedera Mirror Node REST API
-    description: >-
-      The Hedera Mirror Node REST API provides read-only access to historical
-      data from the Hedera distributed ledger. It allows querying of
-      transactions, account information, token balances and metadata, NFT
-      ownership and transfers, smart contract results and logs, consensus topic
-      messages, block data, schedule transactions, and network supply, fees,
-      exchange rates, nodes, and staking information. No authentication is
-      required for public endpoints. The API is throttled at 50 requests per
-      second per IP address on the public mainnet endpoint.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
-    baseURL: https://mainnet.mirrornode.hedera.com
-    tags:
-      - Transactions
-      - Accounts
-      - Tokens
-      - NFTs
-      - Smart Contracts
-      - Consensus Topics
-      - Blocks
-      - Schedules
-      - Network
-      - Balances
-    properties:
-      - type: Documentation
-        url: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
-      - type: OpenAPI
-        url: https://mainnet.mirrornode.hedera.com/api/v1/docs/swagger.json
-      - type: Swagger
-        url: https://mainnet.mirrornode.hedera.com/api/v1/docs/
-      - type: SwaggerTestnet
-        url: https://testnet.mirrornode.hedera.com/api/v1/docs/
-      - type: SwaggerPreviewnet
-        url: https://previewnet.mirrornode.hedera.com/api/v1/docs/
-      - type: Plans
-        url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/plans/plans.yml
-      - type: RateLimits
-        url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/rate-limits/rate-limits.yml
-      - type: FinOps
-        url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
-    contact:
-      - FN: Hedera Developer Support
-        url: https://hedera.com/support
-        email: ''
+- aid: hedera:hedera-accounts-api
+  name: Hedera accounts API
+  description: >-
+    The accounts object represents the information associated with an account entity and returns a list
+    of account information.The accounts list endpoint is cached and not updated as frequently as the account
+    lookup by a specific ID endpoint.
+  humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  baseURL: https://mainnet.mirrornode.hedera.com
+  tags:
+  - accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/hedera-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  - type: Swagger
+    url: https://mainnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerTestnet
+    url: https://testnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerPreviewnet
+    url: https://previewnet.mirrornode.hedera.com/api/v1/docs/
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
+- aid: hedera:hedera-airdrops-api
+  name: Hedera airdrops API
+  description: The airdrops API from Hedera — 2 operation(s) for airdrops.
+  humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  baseURL: https://mainnet.mirrornode.hedera.com
+  tags:
+  - airdrops
+  properties:
+  - type: OpenAPI
+    url: openapi/hedera-airdrops-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  - type: Swagger
+    url: https://mainnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerTestnet
+    url: https://testnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerPreviewnet
+    url: https://previewnet.mirrornode.hedera.com/api/v1/docs/
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
+- aid: hedera:hedera-balances-api
+  name: Hedera balances API
+  description: The balance object represents the balance of accounts on the Hedera network.
+  humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  baseURL: https://mainnet.mirrornode.hedera.com
+  tags:
+  - balances
+  properties:
+  - type: OpenAPI
+    url: openapi/hedera-balances-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  - type: Swagger
+    url: https://mainnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerTestnet
+    url: https://testnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerPreviewnet
+    url: https://previewnet.mirrornode.hedera.com/api/v1/docs/
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
+- aid: hedera:hedera-blocks-api
+  name: Hedera blocks API
+  description: The blocks API from Hedera — 2 operation(s) for blocks.
+  humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  baseURL: https://mainnet.mirrornode.hedera.com
+  tags:
+  - blocks
+  properties:
+  - type: OpenAPI
+    url: openapi/hedera-blocks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  - type: Swagger
+    url: https://mainnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerTestnet
+    url: https://testnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerPreviewnet
+    url: https://previewnet.mirrornode.hedera.com/api/v1/docs/
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
+- aid: hedera:hedera-contracts-api
+  name: Hedera contracts API
+  description: >-
+    The contracts objects represents the information associated with contract entities.The contracts list
+    endpoint is cached and not updated as frequently as the contract lookup by a specific ID endpoint.
+  humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  baseURL: https://mainnet.mirrornode.hedera.com
+  tags:
+  - contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/hedera-contracts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  - type: Swagger
+    url: https://mainnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerTestnet
+    url: https://testnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerPreviewnet
+    url: https://previewnet.mirrornode.hedera.com/api/v1/docs/
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
+- aid: hedera:hedera-network-api
+  name: Hedera network API
+  description: The network API from Hedera — 6 operation(s) for network.
+  humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  baseURL: https://mainnet.mirrornode.hedera.com
+  tags:
+  - network
+  properties:
+  - type: OpenAPI
+    url: openapi/hedera-network-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  - type: Swagger
+    url: https://mainnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerTestnet
+    url: https://testnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerPreviewnet
+    url: https://previewnet.mirrornode.hedera.com/api/v1/docs/
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
+- aid: hedera:hedera-schedules-api
+  name: Hedera schedules API
+  description: >-
+    The schedules object represents the information associated with a schedule entity.The schedules list
+    endpoints is cached and not updated as frequently as the schedule lookup by a specific ID endpoint.
+  humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  baseURL: https://mainnet.mirrornode.hedera.com
+  tags:
+  - schedules
+  properties:
+  - type: OpenAPI
+    url: openapi/hedera-schedules-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  - type: Swagger
+    url: https://mainnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerTestnet
+    url: https://testnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerPreviewnet
+    url: https://previewnet.mirrornode.hedera.com/api/v1/docs/
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
+- aid: hedera:hedera-tokens-api
+  name: Hedera tokens API
+  description: >-
+    The tokens object represents the information associated with a token entity and returns a list of
+    token information.The tokens list endpoint is cached and not updated as frequently as the token lookup
+    by a specific ID.
+  humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  baseURL: https://mainnet.mirrornode.hedera.com
+  tags:
+  - tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/hedera-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  - type: Swagger
+    url: https://mainnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerTestnet
+    url: https://testnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerPreviewnet
+    url: https://previewnet.mirrornode.hedera.com/api/v1/docs/
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
+- aid: hedera:hedera-topics-api
+  name: Hedera topics API
+  description: >-
+    The topics object represents the information associated with a topic entity and returns topic messages
+    information.
+  humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  baseURL: https://mainnet.mirrornode.hedera.com
+  tags:
+  - topics
+  properties:
+  - type: OpenAPI
+    url: openapi/hedera-topics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  - type: Swagger
+    url: https://mainnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerTestnet
+    url: https://testnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerPreviewnet
+    url: https://previewnet.mirrornode.hedera.com/api/v1/docs/
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
+- aid: hedera:hedera-transactions-api
+  name: Hedera transactions API
+  description: The transaction object represents the transactions processed on the Hedera network.
+  humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  baseURL: https://mainnet.mirrornode.hedera.com
+  tags:
+  - transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/hedera-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
+  - type: Swagger
+    url: https://mainnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerTestnet
+    url: https://testnet.mirrornode.hedera.com/api/v1/docs/
+  - type: SwaggerPreviewnet
+    url: https://previewnet.mirrornode.hedera.com/api/v1/docs/
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
 common:
   - type: AgenticAccess
     url: agentic-access/hedera-agentic-access.yml
