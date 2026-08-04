@@ -1,0 +1,32 @@
+{
+  "provider": "hedera",
+  "sources": [
+    "hedera-accounts-api-openapi.yml",
+    "hedera-airdrops-api-openapi.yml",
+    "hedera-balances-api-openapi.yml",
+    "hedera-blocks-api-openapi.yml",
+    "hedera-contracts-api-openapi.yml",
+    "hedera-network-api-openapi.yml",
+    "hedera-schedules-api-openapi.yml",
+    "hedera-tokens-api-openapi.yml",
+    "hedera-topics-api-openapi.yml",
+    "hedera-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "hedera-accounts-api-openapi.yml",
+    "hedera-airdrops-api-openapi.yml",
+    "hedera-balances-api-openapi.yml",
+    "hedera-blocks-api-openapi.yml",
+    "hedera-contracts-api-openapi.yml",
+    "hedera-network-api-openapi.yml",
+    "hedera-schedules-api-openapi.yml",
+    "hedera-tokens-api-openapi.yml",
+    "hedera-topics-api-openapi.yml",
+    "hedera-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
