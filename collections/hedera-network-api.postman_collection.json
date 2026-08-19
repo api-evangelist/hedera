@@ -1,0 +1,1468 @@
+{
+  "item": [
+    {
+      "id": "b433c17b-bcc1-4d63-b91d-6d0b8c3f91a8",
+      "name": "network",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ba82df63-4c24-4995-b343-02b82d0428e2",
+          "name": "Get the network exchange rate to estimate costs",
+          "request": {
+            "name": "Get the network exchange rate to estimate costs",
+            "description": {
+              "content": "Returns the network's exchange rate, current and next.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "network",
+                "exchangerate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<string>",
+                  "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<string>",
+                  "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c039f527-2058-4f56-baee-78e86369952a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "exchangerate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_rate\": {\n    \"cent_equivalent\": 596987,\n    \"expiration_time\": 1649689200,\n    \"hbar_equivalent\": 30000\n  },\n  \"next_rate\": {\n    \"cent_equivalent\": 596987,\n    \"expiration_time\": 1649689200,\n    \"hbar_equivalent\": 30000\n  },\n  \"timestamp\": \"1586567700.453054000\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13a6b662-95af-4936-a384-b7d4d5c21518",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "exchangerate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c0d0b3a-6007-469a-8f97-3759579962e5",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "exchangerate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dddea2d7-b3a8-415f-a491-e0350e21b707",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "exchangerate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Require at least 1/3 signature files to prove consensus, got 1 out of 4 for file 2019-10-11T13_33_25.526889Z.rcd_sig\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c9354d8-4ec5-4eee-99ee-cd559928daa2",
+          "name": "Get the network fees",
+          "request": {
+            "name": "Get the network fees",
+            "description": {
+              "content": "Returns the estimated gas in tinybars per each transaction type. Default order is ASC. Currently only `ContractCall`, `ContractCreate` and `EthereumTransaction` transaction types are supported.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "network",
+                "fees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "asc",
+                  "description": "The order in which items are listed"
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<string>",
+                  "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<string>",
+                  "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d4ea6ca-9819-4d44-8f49-cf2ec94419be",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fees\": [\n    {\n      \"gas\": 1023,\n      \"transaction_type\": \"string\"\n    },\n    {\n      \"gas\": 3375,\n      \"transaction_type\": \"string\"\n    }\n  ],\n  \"timestamp\": \"1586567700.453054000\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d01d316-1f89-4c7f-9877-052152885e2c",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0e75c13-8916-4236-bf4f-7630be0ae716",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df8af60f-2e35-4043-a1cc-ec1da854cec3",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Require at least 1/3 signature files to prove consensus, got 1 out of 4 for file 2019-10-11T13_33_25.526889Z.rcd_sig\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82f120ee-9afe-496c-b4da-4f319977de23",
+          "name": "Estimate network fees",
+          "request": {
+            "name": "Estimate network fees",
+            "description": {
+              "content": "Given a HAPI transaction, estimate the network fees in tinycents.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "network",
+                "fees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "INTRINSIC",
+                  "description": "Estimate solely based on the transaction's inherent properties or use network state."
+                },
+                {
+                  "disabled": false,
+                  "key": "high_volume_throttle",
+                  "value": "0",
+                  "description": "The high-volume throttle utilization in basis points where 10000 equals 100%. A value of 0, the default, indicates no high-volume pricing."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/protobuf"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<binary>"
+            }
+          },
+          "response": [
+            {
+              "id": "8cd059f0-8e4a-44f8-a310-c67be99fef4e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "mode",
+                      "value": "INTRINSIC"
+                    },
+                    {
+                      "key": "high_volume_throttle",
+                      "value": "10000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"high_volume_multiplier\": 100,\n  \"network\": {\n    \"multiplier\": 2,\n    \"subtotal\": 1200\n  },\n  \"node\": {\n    \"base\": 1000,\n    \"extras\": [\n      {\n        \"charged\": 1,\n        \"count\": 2,\n        \"fee_per_unit\": 100,\n        \"included\": 1,\n        \"name\": \"Signatures\",\n        \"subtotal\": 100\n      },\n      {\n        \"charged\": 1,\n        \"count\": 2,\n        \"fee_per_unit\": 100,\n        \"included\": 1,\n        \"name\": \"Signatures\",\n        \"subtotal\": 100\n      }\n    ]\n  },\n  \"service\": {\n    \"base\": 1000,\n    \"extras\": [\n      {\n        \"charged\": 1,\n        \"count\": 2,\n        \"fee_per_unit\": 100,\n        \"included\": 1,\n        \"name\": \"Signatures\",\n        \"subtotal\": 100\n      },\n      {\n        \"charged\": 1,\n        \"count\": 2,\n        \"fee_per_unit\": 100,\n        \"included\": 1,\n        \"name\": \"Signatures\",\n        \"subtotal\": 100\n      }\n    ]\n  },\n  \"total\": 1000\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce6e2a90-6433-4dc5-8dbc-7cace75cd3a1",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "mode",
+                      "value": "INTRINSIC"
+                    },
+                    {
+                      "key": "high_volume_throttle",
+                      "value": "10000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d39f98c5-4039-4288-9a00-859e2a61df12",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "mode",
+                      "value": "INTRINSIC"
+                    },
+                    {
+                      "key": "high_volume_throttle",
+                      "value": "10000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Require at least 1/3 signature files to prove consensus, got 1 out of 4 for file 2019-10-11T13_33_25.526889Z.rcd_sig\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "536f5cb2-6fe5-4397-a038-570e7c127366",
+          "name": "Get the network address book nodes",
+          "request": {
+            "name": "Get the network address book nodes",
+            "description": {
+              "content": "Returns the network's list of nodes used in consensus",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "network",
+                "nodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "file.id",
+                  "value": "<string>",
+                  "description": "The ID of the file entity"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "node.id",
+                  "value": "<string>",
+                  "description": "The ID of the node"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "asc",
+                  "description": "The order in which items are listed"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "832f6f21-36e0-4391-849c-c159f769c3e0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "file.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "node.id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nodes\": [\n    {\n      \"admin_key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"associated_registered_nodes\": [\n        9110,\n        2974\n      ],\n      \"decline_reward\": false,\n      \"description\": \"string\",\n      \"file_id\": \"0.0.2\",\n      \"grpc_proxy_endpoint\": {\n        \"domain_name\": \"www.example.com\",\n        \"ip_address_v4\": \"127.0.0.1\",\n        \"port\": 50211\n      },\n      \"max_stake\": 2972,\n      \"memo\": \"string\",\n      \"min_stake\": 5678,\n      \"node_account_id\": \"0.0.2\",\n      \"node_id\": 3973,\n      \"node_cert_hash\": \"string\",\n      \"public_key\": \"string\",\n      \"reward_rate_start\": 9625,\n      \"service_endpoints\": [\n        {\n          \"domain_name\": \"www.example.com\",\n          \"ip_address_v4\": \"127.0.0.1\",\n          \"port\": 50211\n        },\n        {\n          \"domain_name\": \"www.example.com\",\n          \"ip_address_v4\": \"127.0.0.1\",\n          \"port\": 50211\n        }\n      ],\n      \"stake\": 1105,\n      \"stake_not_rewarded\": 547,\n      \"stake_rewarded\": 3134,\n      \"staking_period\": {\n        \"from\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n          \"description\": \"The inclusive from timestamp in seconds\"\n        },\n        \"to\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n          \"description\": \"The exclusive to timestamp in seconds\"\n        }\n      },\n      \"timestamp\": {\n        \"from\": \"1586567700.453054000\",\n        \"to\": \"1586567700.453054000\"\n      }\n    },\n    {\n      \"admin_key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"associated_registered_nodes\": [\n        2836,\n        602\n      ],\n      \"decline_reward\": true,\n      \"description\": \"string\",\n      \"file_id\": \"0.0.2\",\n      \"grpc_proxy_endpoint\": {\n        \"domain_name\": \"www.example.com\",\n        \"ip_address_v4\": \"127.0.0.1\",\n        \"port\": 50211\n      },\n      \"max_stake\": 6780,\n      \"memo\": \"string\",\n      \"min_stake\": 1668,\n      \"node_account_id\": \"0.0.2\",\n      \"node_id\": 4712,\n      \"node_cert_hash\": \"string\",\n      \"public_key\": \"string\",\n      \"reward_rate_start\": 5559,\n      \"service_endpoints\": [\n        {\n          \"domain_name\": \"www.example.com\",\n          \"ip_address_v4\": \"127.0.0.1\",\n          \"port\": 50211\n        },\n        {\n          \"domain_name\": \"www.example.com\",\n          \"ip_address_v4\": \"127.0.0.1\",\n          \"port\": 50211\n        }\n      ],\n      \"stake\": 6216,\n      \"stake_not_rewarded\": 5160,\n      \"stake_rewarded\": 2973,\n      \"staking_period\": {\n        \"from\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n          \"description\": \"The inclusive from timestamp in seconds\"\n        },\n        \"to\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n          \"description\": \"The exclusive to timestamp in seconds\"\n        }\n      },\n      \"timestamp\": {\n        \"from\": \"1586567700.453054000\",\n        \"to\": \"1586567700.453054000\"\n      }\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3ff4b2e-e033-4ebc-ba8b-112fbed8073b",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "file.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "node.id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca29c4a4-30b9-4753-91c6-6360f431ba0e",
+          "name": "Get registered nodes",
+          "request": {
+            "name": "Get registered nodes",
+            "description": {
+              "content": "Returns the list of registered nodes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "network",
+                "registered-nodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "asc",
+                  "description": "The order in which items are listed"
+                },
+                {
+                  "disabled": false,
+                  "key": "registerednode.id",
+                  "value": "<string>",
+                  "description": "The ID of the registered node"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bdb14044-11dc-46f3-8466-db6f2c005c28",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "registered-nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "registerednode.id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "BLOCK_NODE"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"next\": \"string\"\n  },\n  \"registered_nodes\": [\n    {\n      \"admin_key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"created_timestamp\": \"1586567700.453054000\",\n      \"description\": \"string\",\n      \"registered_node_id\": 6070,\n      \"service_endpoints\": [\n        {\n          \"block_node\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"general_service\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mirror_node\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"port\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rpc_relay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requires_tls\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"domain_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ip_address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"block_node\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"general_service\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mirror_node\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"port\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rpc_relay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requires_tls\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"domain_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ip_address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"timestamp\": {\n        \"from\": \"1586567700.453054000\",\n        \"to\": \"1586567700.453054000\"\n      }\n    },\n    {\n      \"admin_key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"created_timestamp\": \"1586567700.453054000\",\n      \"description\": \"string\",\n      \"registered_node_id\": 4366,\n      \"service_endpoints\": [\n        {\n          \"block_node\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"general_service\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mirror_node\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"port\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rpc_relay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requires_tls\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"domain_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ip_address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"block_node\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"general_service\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mirror_node\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"port\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rpc_relay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requires_tls\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"domain_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ip_address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"timestamp\": {\n        \"from\": \"1586567700.453054000\",\n        \"to\": \"1586567700.453054000\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96560e07-c637-45d6-93ff-abb7e4a386eb",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "registered-nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "registerednode.id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "BLOCK_NODE"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b08276a8-50c8-4aaf-8e18-6cb5f6feab36",
+          "name": "Get network stake information",
+          "request": {
+            "name": "Get network stake information",
+            "description": {
+              "content": "Returns the network's current stake information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "network",
+                "stake"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01fc9903-786c-4a90-92f1-5158892c6096",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "stake"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"max_stake_rewarded\": 10,\n  \"max_staking_reward_rate_per_hbar\": 17808,\n  \"max_total_reward\": 20,\n  \"node_reward_fee_fraction\": 1,\n  \"reserved_staking_rewards\": 30,\n  \"reward_balance_threshold\": 40,\n  \"stake_total\": 35000000000000000,\n  \"staking_period\": {\n    \"from\": \"1655164800.000000000\",\n    \"to\": \"1655251200.000000000\"\n  },\n  \"staking_period_duration\": 1440,\n  \"staking_periods_stored\": 365,\n  \"staking_reward_fee_fraction\": 1,\n  \"staking_reward_rate\": 100000000000,\n  \"staking_start_threshold\": 25000000000000000,\n  \"unreserved_staking_reward_balance\": 50\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c02a3e8-a83b-4916-9982-5566987ecc90",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "stake"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b76524c0-5d62-4873-8056-7f25fc7a63f3",
+              "name": "No network stake data found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "stake"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"detail\": \"No network stake data found\",\n        \"message\": \"Not Found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bba53d16-f722-4bb8-bf5e-fe4e51b81cb5",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "stake"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Require at least 1/3 signature files to prove consensus, got 1 out of 4 for file 2019-10-11T13_33_25.526889Z.rcd_sig\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89f399aa-b0a0-4b2d-977d-705346f2b463",
+          "name": "Get the network supply",
+          "request": {
+            "name": "Get the network supply",
+            "description": {
+              "content": "Returns the network's released supply of hbars",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "network",
+                "supply"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<string>",
+                  "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<string>",
+                  "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85271ccf-76e3-49d4-9b9e-54666dc62b01",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "supply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"released_supply\": \"3999999999999999949\",\n  \"timestamp\": \"1586567700.453054000\",\n  \"total_supply\": \"5000000000000000000\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8db4620c-c979-4119-a86e-32f78b10e9b8",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "supply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "386c9278-5f04-453d-bcf7-47ec2c26e9a9",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "network",
+                    "supply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3990860e-bbf4-4a62-9ccf-bddad11883d5",
+    "name": "Mirror Node REST accounts network API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The REST API offers the ability to query transactions and entity information from a mirror node.\n\nBase url: [/api/v1](/api/v1)\n\nOpenAPI Spec: [/api/v1/docs/openapi.yml](/api/v1/docs/openapi.yml)\n\nContact Support:\n Name: Mirror Node Team\n Email: mirrornode@hedera.com",
+      "type": "text/plain"
+    }
+  }
+}

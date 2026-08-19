@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirror Node REST accounts airdrops API",
+    "version": "0.156.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "airdrops",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get outstanding token airdrops sent by an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/accounts/:idOrAliasOrEvmAddress/airdrops/outstanding",
+            "params": [
+              {
+                "name": "idOrAliasOrEvmAddress",
+                "value": "",
+                "type": "path",
+                "description": "Account alias or account id or evm address"
+              },
+              {
+                "name": "limit",
+                "value": "2",
+                "type": "query",
+                "description": "The maximum number of items to return"
+              },
+              {
+                "name": "order",
+                "value": "desc",
+                "type": "query",
+                "description": "The order in which items are listed"
+              },
+              {
+                "name": "receiver.id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the receiver to return information for"
+              },
+              {
+                "name": "serialnumber",
+                "value": "",
+                "type": "query",
+                "description": "The nft serial number (64 bit type). Requires a tokenId value also be populated."
+              },
+              {
+                "name": "token.id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the token to return information for"
+              }
+            ]
+          },
+          "docs": "Returns outstanding token airdrops that have been sent by an account.\n"
+        },
+        {
+          "info": {
+            "name": "Get pending token airdrops received by an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/accounts/:idOrAliasOrEvmAddress/airdrops/pending",
+            "params": [
+              {
+                "name": "idOrAliasOrEvmAddress",
+                "value": "",
+                "type": "path",
+                "description": "Account alias or account id or evm address"
+              },
+              {
+                "name": "limit",
+                "value": "2",
+                "type": "query",
+                "description": "The maximum number of items to return"
+              },
+              {
+                "name": "order",
+                "value": "desc",
+                "type": "query",
+                "description": "The order in which items are listed"
+              },
+              {
+                "name": "sender.id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the sender to return information for"
+              },
+              {
+                "name": "serialnumber",
+                "value": "",
+                "type": "query",
+                "description": "The nft serial number (64 bit type). Requires a tokenId value also be populated."
+              },
+              {
+                "name": "token.id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the token to return information for"
+              }
+            ]
+          },
+          "docs": "Returns pending token airdrops that have been received by an account.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

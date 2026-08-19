@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirror Node REST accounts blocks API",
+    "version": "0.156.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "blocks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/blocks",
+            "params": [
+              {
+                "name": "block.number",
+                "value": "",
+                "type": "query",
+                "description": "The block's number"
+              },
+              {
+                "name": "limit",
+                "value": "2",
+                "type": "query",
+                "description": "The maximum number of items to return"
+              },
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "The order in which items are listed"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+              }
+            ]
+          },
+          "docs": "Returns a list of blocks on the network."
+        },
+        {
+          "info": {
+            "name": "Get block by hash or number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/blocks/:hashOrNumber",
+            "params": [
+              {
+                "name": "hashOrNumber",
+                "value": "",
+                "type": "path",
+                "description": "Accepts both eth and hedera hash format or block number"
+              }
+            ]
+          },
+          "docs": "Returns the block information by given hash or number."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirror Node REST accounts topics API",
+    "version": "0.156.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "topics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get topic by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/topics/:topicId",
+            "params": [
+              {
+                "name": "topicId",
+                "value": "",
+                "type": "path",
+                "description": "Topic id"
+              }
+            ]
+          },
+          "docs": "Returns the topic details for the given topic ID."
+        },
+        {
+          "info": {
+            "name": "List topic messages by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/topics/:topicId/messages",
+            "params": [
+              {
+                "name": "topicId",
+                "value": "",
+                "type": "path",
+                "description": "Topic id"
+              },
+              {
+                "name": "encoding",
+                "value": "base64",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "2",
+                "type": "query",
+                "description": "The maximum number of items to return"
+              },
+              {
+                "name": "order",
+                "value": "desc",
+                "type": "query",
+                "description": "The order in which items are listed"
+              },
+              {
+                "name": "sequencenumber",
+                "value": "2",
+                "type": "query"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+              }
+            ]
+          },
+          "docs": "Returns the list of topic messages for the given topic id."
+        },
+        {
+          "info": {
+            "name": "Get topic message by id and sequence number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/topics/:topicId/messages/:sequenceNumber",
+            "params": [
+              {
+                "name": "topicId",
+                "value": "",
+                "type": "path",
+                "description": "Topic id"
+              },
+              {
+                "name": "sequenceNumber",
+                "value": "2",
+                "type": "path",
+                "description": "Topic message sequence number"
+              }
+            ]
+          },
+          "docs": "Returns a single topic message for the given topic id and sequence number."
+        },
+        {
+          "info": {
+            "name": "Get topic message by consensusTimestamp",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/topics/messages/:timestamp",
+            "params": [
+              {
+                "name": "timestamp",
+                "value": "1234567890.0000007",
+                "type": "path",
+                "description": "The Unix timestamp in seconds.nanoseconds format, the timestamp at which the associated transaction reached consensus. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+              }
+            ]
+          },
+          "docs": "Returns a topic message the given the consensusTimestamp."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

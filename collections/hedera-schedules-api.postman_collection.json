@@ -1,0 +1,386 @@
+{
+  "item": [
+    {
+      "id": "42a303c6-e435-48ff-844b-793d853d67d0",
+      "name": "schedules",
+      "description": {
+        "content": "The schedules object represents the information associated with a schedule entity.The schedules list endpoints is cached and not updated as frequently as the schedule lookup by a specific ID endpoint.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b08d2ef2-08bd-42f7-b382-58d42c39a28b",
+          "name": "List schedules entities",
+          "request": {
+            "name": "List schedules entities",
+            "description": {
+              "content": "Lists schedules on the network that govern the execution logic of scheduled transactions. This includes executed and non executed schedules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "schedules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account.id",
+                  "value": "<string>",
+                  "description": "The ID of the account to return information for"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "asc",
+                  "description": "The order in which items are listed"
+                },
+                {
+                  "disabled": false,
+                  "key": "schedule.id",
+                  "value": "<string>",
+                  "description": "The ID of the schedule to return information for"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5154be90-2a43-410c-8788-082965b7f70e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "schedule.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schedules\": [\n    {\n      \"admin_key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"consensus_timestamp\": \"1586567700.453054000\",\n      \"creator_account_id\": \"0.0.2\",\n      \"deleted\": false,\n      \"executed_timestamp\": \"1586567700.453054000\",\n      \"expiration_time\": \"1586567700.453054000\",\n      \"memo\": \"created on 02/10/2021\",\n      \"payer_account_id\": \"0.0.2\",\n      \"schedule_id\": \"0.0.2\",\n      \"signatures\": [\n        {\n          \"consensus_timestamp\": \"1586567700.453054000\",\n          \"public_key_prefix\": \"AAEBAwuqAwzB\",\n          \"signature\": \"3q2+7wABAQMLqgMMwQ==\",\n          \"type\": \"ED25519\"\n        },\n        {\n          \"consensus_timestamp\": \"1586567700.453054000\",\n          \"public_key_prefix\": \"AAEBAwuqAwzB\",\n          \"signature\": \"3q2+7wABAQMLqgMMwQ==\",\n          \"type\": \"ED25519\"\n        }\n      ],\n      \"transaction_body\": \"Kd6tvu8=\",\n      \"wait_for_expiry\": true\n    },\n    {\n      \"admin_key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"consensus_timestamp\": \"1586567700.453054000\",\n      \"creator_account_id\": \"0.0.2\",\n      \"deleted\": false,\n      \"executed_timestamp\": \"1586567700.453054000\",\n      \"expiration_time\": \"1586567700.453054000\",\n      \"memo\": \"created on 02/10/2021\",\n      \"payer_account_id\": \"0.0.2\",\n      \"schedule_id\": \"0.0.2\",\n      \"signatures\": [\n        {\n          \"consensus_timestamp\": \"1586567700.453054000\",\n          \"public_key_prefix\": \"AAEBAwuqAwzB\",\n          \"signature\": \"3q2+7wABAQMLqgMMwQ==\",\n          \"type\": \"ED25519\"\n        },\n        {\n          \"consensus_timestamp\": \"1586567700.453054000\",\n          \"public_key_prefix\": \"AAEBAwuqAwzB\",\n          \"signature\": \"3q2+7wABAQMLqgMMwQ==\",\n          \"type\": \"ED25519\"\n        }\n      ],\n      \"transaction_body\": \"Kd6tvu8=\",\n      \"wait_for_expiry\": true\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a40d9d70-5ce5-4eab-8003-920559d93461",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "schedule.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3929377-7632-4ade-8a1e-c821d8817712",
+          "name": "Get schedule by id",
+          "request": {
+            "name": "Get schedule by id",
+            "description": {
+              "content": "Returns schedule information based on the given schedule id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "schedules",
+                ":scheduleId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string,null>",
+                  "key": "scheduleId",
+                  "description": "(Required) Schedule id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6145d6ae-fb56-4b23-9b23-25e18bd875fc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "schedules",
+                    ":scheduleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string,null>",
+                      "key": "scheduleId",
+                      "description": "(Required) Schedule id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"admin_key\": {\n    \"_type\": \"ProtobufEncoded\",\n    \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n  },\n  \"consensus_timestamp\": \"1586567700.453054000\",\n  \"creator_account_id\": \"0.0.2\",\n  \"deleted\": false,\n  \"executed_timestamp\": \"1586567700.453054000\",\n  \"expiration_time\": \"1586567700.453054000\",\n  \"memo\": \"created on 02/10/2021\",\n  \"payer_account_id\": \"0.0.2\",\n  \"schedule_id\": \"0.0.2\",\n  \"signatures\": [\n    {\n      \"consensus_timestamp\": \"1586567700.453054000\",\n      \"public_key_prefix\": \"AAEBAwuqAwzB\",\n      \"signature\": \"3q2+7wABAQMLqgMMwQ==\",\n      \"type\": \"ED25519\"\n    },\n    {\n      \"consensus_timestamp\": \"1586567700.453054000\",\n      \"public_key_prefix\": \"AAEBAwuqAwzB\",\n      \"signature\": \"3q2+7wABAQMLqgMMwQ==\",\n      \"type\": \"ED25519\"\n    }\n  ],\n  \"transaction_body\": \"Kd6tvu8=\",\n  \"wait_for_expiry\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e49258e-23cc-4912-b737-895453422f7a",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "schedules",
+                    ":scheduleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string,null>",
+                      "key": "scheduleId",
+                      "description": "(Required) Schedule id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6488b9f4-50fc-4ec2-8418-c498e839fcfd",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "schedules",
+                    ":scheduleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string,null>",
+                      "key": "scheduleId",
+                      "description": "(Required) Schedule id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "270a4d30-7778-42af-b9a0-685c1d89539d",
+    "name": "Mirror Node REST accounts schedules API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The REST API offers the ability to query transactions and entity information from a mirror node.\n\nBase url: [/api/v1](/api/v1)\n\nOpenAPI Spec: [/api/v1/docs/openapi.yml](/api/v1/docs/openapi.yml)\n\nContact Support:\n Name: Mirror Node Team\n Email: mirrornode@hedera.com",
+      "type": "text/plain"
+    }
+  }
+}

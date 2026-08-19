@@ -1,0 +1,2685 @@
+{
+  "item": [
+    {
+      "id": "0cf1e57d-ba65-4fb1-8e8a-d3ee7fb05ae7",
+      "name": "accounts",
+      "description": {
+        "content": "The accounts object represents the information associated with an account entity and returns a list of account information.The accounts list endpoint is cached and not updated as frequently as the account lookup by a specific ID endpoint.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ffd23f3-ae45-45bc-ba81-7e098656ab4b",
+          "name": "List account entities on network",
+          "request": {
+            "name": "List account entities on network",
+            "description": {
+              "content": "Returns a list of all account entity items on the network.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account.balance",
+                  "value": "<string>",
+                  "description": "The optional balance value to compare against"
+                },
+                {
+                  "disabled": false,
+                  "key": "account.id",
+                  "value": "<string>",
+                  "description": "The ID of the account to return information for"
+                },
+                {
+                  "disabled": false,
+                  "key": "account.publickey",
+                  "value": "<string>",
+                  "description": "The account's public key to compare against"
+                },
+                {
+                  "disabled": false,
+                  "key": "balance",
+                  "value": "true",
+                  "description": "Whether to include balance information or not. If included, token balances are limited to at most 50 per account as outlined in HIP-367. If multiple values are provided the last value will be the only value used."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "asc",
+                  "description": "The order in which items are listed"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f7965374-8bf5-4393-a389-d25da8f25d6b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account.balance",
+                      "value": ""
+                    },
+                    {
+                      "key": "account.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "account.publickey",
+                      "value": "3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be"
+                    },
+                    {
+                      "key": "balance",
+                      "value": "true"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accounts\": [\n    {\n      \"account\": \"0.0.2\",\n      \"alias\": \"HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA\",\n      \"auto_renew_period\": 3581,\n      \"balance\": {\n        \"timestamp\": \"0.000002345\",\n        \"balance\": 80,\n        \"tokens\": [\n          {\n            \"token_id\": \"0.0.200001\",\n            \"balance\": 8\n          }\n        ]\n      },\n      \"created_timestamp\": \"1586567700.453054000\",\n      \"decline_reward\": false,\n      \"deleted\": true,\n      \"ethereum_nonce\": 176,\n      \"evm_address\": \"0x0000000000000000000000000000000000001f41\",\n      \"expiry_timestamp\": \"1586567700.453054000\",\n      \"key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"max_automatic_token_associations\": 7568,\n      \"memo\": \"string\",\n      \"receiver_sig_required\": false,\n      \"staked_account_id\": \"0.0.2\",\n      \"staked_node_id\": 9826,\n      \"stake_period_start\": \"1586567700.453054000\",\n      \"pending_reward\": 6155\n    },\n    {\n      \"account\": \"0.0.2\",\n      \"alias\": \"HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA\",\n      \"auto_renew_period\": 1428,\n      \"balance\": {\n        \"timestamp\": \"0.000002345\",\n        \"balance\": 80,\n        \"tokens\": [\n          {\n            \"token_id\": \"0.0.200001\",\n            \"balance\": 8\n          }\n        ]\n      },\n      \"created_timestamp\": \"1586567700.453054000\",\n      \"decline_reward\": true,\n      \"deleted\": false,\n      \"ethereum_nonce\": 1320,\n      \"evm_address\": \"0x0000000000000000000000000000000000001f41\",\n      \"expiry_timestamp\": \"1586567700.453054000\",\n      \"key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"max_automatic_token_associations\": 971,\n      \"memo\": \"string\",\n      \"receiver_sig_required\": true,\n      \"staked_account_id\": \"0.0.2\",\n      \"staked_node_id\": 326,\n      \"stake_period_start\": \"1586567700.453054000\",\n      \"pending_reward\": 4229\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f40fb307-2662-4012-b7c4-8a1cd166e12a",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account.balance",
+                      "value": ""
+                    },
+                    {
+                      "key": "account.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "account.publickey",
+                      "value": "3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be"
+                    },
+                    {
+                      "key": "balance",
+                      "value": "true"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e525c3a-2572-4117-b14d-a7eafa75d9a5",
+          "name": "Get account by alias, id, or evm address",
+          "request": {
+            "name": "Get account by alias, id, or evm address",
+            "description": {
+              "content": "Return the account transactions and balance information given an account alias, an account id, or an evm address. The information will be limited to at most 1000 token balances for the account as outlined in HIP-367.\nWhen the timestamp parameter is supplied, we will return transactions and account state for the relevant timestamp query. Balance information will be accurate to within 15 minutes of the provided timestamp query.\nHistorical ethereum nonce information is currently not available and may not be the exact value at a provided timestamp.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":idOrAliasOrEvmAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "desc",
+                  "description": "The order in which items are listed"
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<string>",
+                  "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<string>",
+                  "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactiontype",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactions",
+                  "value": "true",
+                  "description": "If provided and set to false transactions will not be included in the response"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idOrAliasOrEvmAddress",
+                  "description": "(Required) Account alias or account id or evm address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fcdd87d-d8db-409c-8187-48ffbc7991b1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactiontype",
+                      "value": "TOKENBURN"
+                    },
+                    {
+                      "key": "transactions",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"account\": \"0.0.2\",\n  \"alias\": \"HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA\",\n  \"auto_renew_period\": 7481,\n  \"balance\": {\n    \"timestamp\": \"0.000002345\",\n    \"balance\": 80,\n    \"tokens\": [\n      {\n        \"token_id\": \"0.0.200001\",\n        \"balance\": 8\n      }\n    ]\n  },\n  \"created_timestamp\": \"1586567700.453054000\",\n  \"decline_reward\": false,\n  \"deleted\": true,\n  \"ethereum_nonce\": 4609,\n  \"evm_address\": \"0x0000000000000000000000000000000000001f41\",\n  \"expiry_timestamp\": \"1586567700.453054000\",\n  \"key\": {\n    \"_type\": \"ProtobufEncoded\",\n    \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n  },\n  \"links\": {\n    \"next\": \"string\"\n  },\n  \"max_automatic_token_associations\": 3989,\n  \"memo\": \"string\",\n  \"receiver_sig_required\": true,\n  \"stake_period_start\": \"1586567700.453054000\",\n  \"staked_account_id\": \"0.0.2\",\n  \"staked_node_id\": 623,\n  \"transactions\": [\n    {\n      \"batch_key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"bytes\": \"string\",\n      \"charged_tx_fee\": 5008,\n      \"consensus_timestamp\": \"1586567700.453054000\",\n      \"entity_id\": \"0.0.2\",\n      \"high_volume\": true,\n      \"high_volume_pricing_multiplier\": 7942,\n      \"max_custom_fees\": [\n        {\n          \"account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 100,\n          \"denominating_token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 100,\n          \"denominating_token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"max_fee\": \"string\",\n      \"memo_base64\": \"string\",\n      \"name\": \"ATOMICBATCH\",\n      \"nft_transfers\": [\n        {\n          \"is_approval\": false,\n          \"receiver_account_id\": \"0.0.2\",\n          \"sender_account_id\": \"0.0.2\",\n          \"token_id\": \"0.0.2\",\n          \"serial_number\": 1\n        },\n        {\n          \"is_approval\": true,\n          \"receiver_account_id\": \"0.0.2\",\n          \"sender_account_id\": \"0.0.2\",\n          \"token_id\": \"0.0.2\",\n          \"serial_number\": 1\n        }\n      ],\n      \"node\": \"0.0.2\",\n      \"nonce\": 157,\n      \"parent_consensus_timestamp\": \"1586567700.453054000\",\n      \"result\": \"string\",\n      \"scheduled\": false,\n      \"staking_reward_transfers\": [\n        {\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"token_transfers\": [\n        {\n          \"token_id\": \"0.0.2\",\n          \"account\": \"0.0.2\",\n          \"amount\": 2214,\n          \"is_approval\": true\n        },\n        {\n          \"token_id\": \"0.0.2\",\n          \"account\": \"0.0.2\",\n          \"amount\": 9422,\n          \"is_approval\": true\n        }\n      ],\n      \"transaction_hash\": \"string\",\n      \"transaction_id\": \"string\",\n      \"transfers\": [\n        {\n          \"account\": \"0.0.2\",\n          \"amount\": 3567,\n          \"is_approval\": false\n        },\n        {\n          \"account\": \"0.0.2\",\n          \"amount\": 5644,\n          \"is_approval\": true\n        }\n      ],\n      \"valid_duration_seconds\": \"string\",\n      \"valid_start_timestamp\": \"1586567700.453054000\"\n    },\n    {\n      \"batch_key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"bytes\": \"string\",\n      \"charged_tx_fee\": 9502,\n      \"consensus_timestamp\": \"1586567700.453054000\",\n      \"entity_id\": \"0.0.2\",\n      \"high_volume\": true,\n      \"high_volume_pricing_multiplier\": 6874,\n      \"max_custom_fees\": [\n        {\n          \"account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 100,\n          \"denominating_token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 100,\n          \"denominating_token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"max_fee\": \"string\",\n      \"memo_base64\": \"string\",\n      \"name\": \"CRYPTOUPDATEACCOUNT\",\n      \"nft_transfers\": [\n        {\n          \"is_approval\": false,\n          \"receiver_account_id\": \"0.0.2\",\n          \"sender_account_id\": \"0.0.2\",\n          \"token_id\": \"0.0.2\",\n          \"serial_number\": 1\n        },\n        {\n          \"is_approval\": false,\n          \"receiver_account_id\": \"0.0.2\",\n          \"sender_account_id\": \"0.0.2\",\n          \"token_id\": \"0.0.2\",\n          \"serial_number\": 1\n        }\n      ],\n      \"node\": \"0.0.2\",\n      \"nonce\": 7902,\n      \"parent_consensus_timestamp\": \"1586567700.453054000\",\n      \"result\": \"string\",\n      \"scheduled\": true,\n      \"staking_reward_transfers\": [\n        {\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"token_transfers\": [\n        {\n          \"token_id\": \"0.0.2\",\n          \"account\": \"0.0.2\",\n          \"amount\": 9649,\n          \"is_approval\": false\n        },\n        {\n          \"token_id\": \"0.0.2\",\n          \"account\": \"0.0.2\",\n          \"amount\": 4630,\n          \"is_approval\": true\n        }\n      ],\n      \"transaction_hash\": \"string\",\n      \"transaction_id\": \"string\",\n      \"transfers\": [\n        {\n          \"account\": \"0.0.2\",\n          \"amount\": 8687,\n          \"is_approval\": true\n        },\n        {\n          \"account\": \"0.0.2\",\n          \"amount\": 7975,\n          \"is_approval\": true\n        }\n      ],\n      \"valid_duration_seconds\": \"string\",\n      \"valid_start_timestamp\": \"1586567700.453054000\"\n    }\n  ],\n  \"pending_reward\": 8519\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87ed2f6c-c52f-4a6f-af6d-349cd4c1c783",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactiontype",
+                      "value": "TOKENBURN"
+                    },
+                    {
+                      "key": "transactions",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63d0dc9c-fa04-4a2d-9e79-4ad26fb1296b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactiontype",
+                      "value": "TOKENBURN"
+                    },
+                    {
+                      "key": "transactions",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82792d6f-3ac0-4249-886a-6bf3131fa0c0",
+          "name": "List hooks for an account",
+          "request": {
+            "name": "List hooks for an account",
+            "description": {
+              "content": "Returns a list of hooks associated with a given account ID, alias, or EVM address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":idOrAliasOrEvmAddress",
+                "hooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "hook.id",
+                  "value": "<long>",
+                  "description": "The ID of the hook"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "desc",
+                  "description": "The order in which items are listed"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idOrAliasOrEvmAddress",
+                  "description": "(Required) Account alias or account id or evm address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0453991a-303f-4d71-8996-9b09d7a45fea",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "hooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hook.id",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hooks\": [\n    {\n      \"admin_key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"contract_id\": \"0.0.2\",\n      \"created_timestamp\": \"1586567700.453054000\",\n      \"deleted\": false,\n      \"extension_point\": \"ACCOUNT_ALLOWANCE_HOOK\",\n      \"hook_id\": 1,\n      \"owner_id\": \"0.0.2\",\n      \"timestamp_range\": {\n        \"from\": \"1586567700.453054000\",\n        \"to\": \"1586567700.453054000\"\n      },\n      \"type\": \"EVM\"\n    },\n    {\n      \"admin_key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"contract_id\": \"0.0.2\",\n      \"created_timestamp\": \"1586567700.453054000\",\n      \"deleted\": false,\n      \"extension_point\": \"ACCOUNT_ALLOWANCE_HOOK\",\n      \"hook_id\": 1,\n      \"owner_id\": \"0.0.2\",\n      \"timestamp_range\": {\n        \"from\": \"1586567700.453054000\",\n        \"to\": \"1586567700.453054000\"\n      },\n      \"type\": \"EVM\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "135c02eb-b7dd-4977-8da4-0169c148adcf",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "hooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hook.id",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "775e01c1-5a8f-4799-8e7d-7e1dac3534a2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "hooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hook.id",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4399b8f5-0894-4ac0-85cb-4c442fae219e",
+          "name": "Get hook storage slots",
+          "request": {
+            "name": "Get hook storage slots",
+            "description": {
+              "content": "Returns a list of hook storage slots associated with a given hook.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":idOrAliasOrEvmAddress",
+                "hooks",
+                ":hookId",
+                "storage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "A string representing a pair of operator:address of a hook storage entry"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "asc",
+                  "description": "The order in which items are listed"
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<string>",
+                  "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<string>",
+                  "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idOrAliasOrEvmAddress",
+                  "description": "(Required) Account alias or account id or evm address"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "hookId",
+                  "description": "(Required) The ID of the hook"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9a7be17e-58ae-4ff1-a9a5-c103afeeb564",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "hooks",
+                    ":hookId",
+                    "storage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "eq:0x00000000000000000000000000000000000000000000000000000000000f9a15"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "hookId",
+                      "description": "(Required) The ID of the hook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hook_id\": 1,\n  \"links\": {\n    \"next\": \"string\"\n  },\n  \"owner_id\": \"0.0.2\",\n  \"storage\": [\n    {\n      \"key\": \"0x00000000000000000000000000000000000000000000000000000000000f9a17\",\n      \"timestamp\": \"1586567700.453054000\",\n      \"value\": \"0x00000000000000000000000000000000000000000000000000000000000f9a17\"\n    },\n    {\n      \"key\": \"0x00000000000000000000000000000000000000000000000000000000000f9a17\",\n      \"timestamp\": \"1586567700.453054000\",\n      \"value\": \"0x00000000000000000000000000000000000000000000000000000000000f9a17\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f6e3b3f-becd-49e8-ab97-fa50f2498a62",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "hooks",
+                    ":hookId",
+                    "storage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "eq:0x00000000000000000000000000000000000000000000000000000000000f9a15"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "hookId",
+                      "description": "(Required) The ID of the hook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33bd1012-5c57-45eb-9ba4-3788b5cf6b0e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "hooks",
+                    ":hookId",
+                    "storage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "eq:0x00000000000000000000000000000000000000000000000000000000000f9a15"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "hookId",
+                      "description": "(Required) The ID of the hook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95b3dc01-a4a1-47af-bb58-f43c5af40eeb",
+          "name": "Get nfts for an account info",
+          "request": {
+            "name": "Get nfts for an account info",
+            "description": {
+              "content": "Returns information for all non-fungible tokens for an account.\n\n## Ordering\nWhen considering NFTs, their order is governed by a combination of their numerical **token.Id** and **serialnumber** values, with **token.id** being the parent column.\nA serialnumbers value governs its order within the given token.id\n\nIn that regard, if a user acquired a set of NFTs in the order (2-2, 2-4 1-5, 1-1, 1-3, 3-3, 3-4), the following layouts illustrate the ordering expectations for ownership listing\n1. **All NFTs in ASC order**: 1-1, 1-3, 1-5, 2-2, 2-4, 3-3, 3-4\n2. **All NFTs in DESC order**: 3-4, 3-3, 2-4, 2-2, 1-5, 1-3, 1-1\n3. **NFTs above 1-1 in ASC order**: 1-3, 1-5, 2-2, 2-4, 3-3, 3-4\n4. **NFTs below 3-3 in ASC order**: 1-1, 1-3, 1-5, 2-2, 2-4\n5. **NFTs between 1-3 and 3-3 inclusive in DESC order**: 3-4, 3-3, 2-4, 2-2, 1-5, 1-3\n\nNote: The default order for this API is currently DESC\n\n## Filtering\nWhen filtering there are some restrictions enforced to ensure correctness and scalability.\n\n**The table below defines the restrictions and support for the NFT ownership endpoint**\n\n| Query Param   | Comparison Operator | Support | Description           | Example |\n| ------------- | ------------------- | ------- | --------------------- | ------- |\n| token.id      | eq                  | Y       | Single occurrence only. | ?token.id=X |\n|               | ne                  | N       | | |\n|               | lt(e)               | Y       | Single occurrence only. | ?token.id=lte:X |\n|               | gt(e)               | Y       | Single occurrence only. | ?token.id=gte:X |\n| serialnumber  | eq                  | Y       | Single occurrence only. Requires the presence of a **token.id** query | ?serialnumber=Y |\n|               | ne                  | N       | | |\n|               | lt(e)               | Y       | Single occurrence only. Requires the presence of an **lte** or **eq** **token.id** query | ?token.id=lte:X&serialnumber=lt:Y |\n|               | gt(e)               | Y       | Single occurrence only. Requires the presence of an **gte** or **eq** **token.id** query | ?token.id=gte:X&serialnumber=gt:Y |\n| spender.id    | eq                  | Y       | | ?spender.id=Z |\n|               | ne                  | N       | | |\n|               | lt(e)               | Y       | | ?spender.id=lt:Z |\n|               | gt(e)               | Y       | | ?spender.id=gt:Z |\n\nNote: When searching across a range for individual NFTs a **serialnumber** with an additional **token.id** query filter must be provided.\nBoth filters must be a single occurrence of **gt(e)** or **lt(e)** which provide a lower and or upper boundary for search.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":idOrAliasOrEvmAddress",
+                "nfts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "desc",
+                  "description": "The order in which items are listed"
+                },
+                {
+                  "disabled": false,
+                  "key": "serialnumber",
+                  "value": "<string>",
+                  "description": "The nft serial number (64 bit type). Requires a tokenId value also be populated."
+                },
+                {
+                  "disabled": false,
+                  "key": "spender.id",
+                  "value": "<string>",
+                  "description": "The ID of the spender to return information for"
+                },
+                {
+                  "disabled": false,
+                  "key": "token.id",
+                  "value": "<string>",
+                  "description": "The ID of the token to return information for"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idOrAliasOrEvmAddress",
+                  "description": "(Required) Account alias or account id or evm address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b0ddb46-9aad-40bc-8def-f77b2ccc9cb8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "nfts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "serialnumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spender.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nfts\": [\n    {\n      \"account_id\": \"0.1.2\",\n      \"created_timestamp\": \"1234567890.000000001\",\n      \"delegating_spender\": \"0.0.400\",\n      \"deleted\": false,\n      \"metadata\": \"VGhpcyBpcyBhIHRlc3QgTkZU\",\n      \"modified_timestamp\": \"1610682445.003266001\",\n      \"serial_number\": 124,\n      \"spender_id\": \"0.0.500\",\n      \"token_id\": \"0.0.222\"\n    },\n    {\n      \"account_id\": \"0.1.2\",\n      \"created_timestamp\": \"1234567890.000000001\",\n      \"delegating_spender\": \"0.0.400\",\n      \"deleted\": false,\n      \"metadata\": \"VGhpcyBpcyBhIHRlc3QgTkZU\",\n      \"modified_timestamp\": \"1610682445.003266001\",\n      \"serial_number\": 124,\n      \"spender_id\": \"0.0.500\",\n      \"token_id\": \"0.0.222\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5553b2f-ba92-461a-a110-ff0247755819",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "nfts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "serialnumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spender.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "306ccb67-adab-4e21-b3da-33cef29c7a43",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "nfts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "serialnumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spender.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d98a696-e541-444f-8b19-bf3a28cea993",
+          "name": "Get past staking reward payouts for an account",
+          "request": {
+            "name": "Get past staking reward payouts for an account",
+            "description": {
+              "content": "Returns information for all past staking reward payouts for an account.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":idOrAliasOrEvmAddress",
+                "rewards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "desc",
+                  "description": "The order in which items are listed"
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<string>",
+                  "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<string>",
+                  "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idOrAliasOrEvmAddress",
+                  "description": "(Required) Account alias or account id or evm address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "04e963d6-a531-4d92-9535-0135994d0cc9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rewards\": [\n    {\n      \"account_id\": \"0.0.1000\",\n      \"amount\": 10,\n      \"timestamp\": \"1234567890.000000001\"\n    },\n    {\n      \"account_id\": \"0.0.1000\",\n      \"amount\": 10,\n      \"timestamp\": \"1234567890.000000001\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f467547-499c-4f0f-bd3f-96414efe36fb",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9782f7fd-b192-4038-9581-fea44834a7e1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d14bdcc-7b1a-402a-a586-eca1604b8c8a",
+          "name": "Get token relationships info for an account",
+          "request": {
+            "name": "Get token relationships info for an account",
+            "description": {
+              "content": "Returns information for all token relationships for an account.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":idOrAliasOrEvmAddress",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "asc",
+                  "description": "The order in which items are listed"
+                },
+                {
+                  "disabled": false,
+                  "key": "token.id",
+                  "value": "<string>",
+                  "description": "The ID of the token to return information for"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idOrAliasOrEvmAddress",
+                  "description": "(Required) Account alias or account id or evm address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "75ee05bf-1451-44e8-bc89-8b69d2037770",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tokens\": [\n    {\n      \"automatic_association\": true,\n      \"balance\": 5,\n      \"created_timestamp\": \"123456789.000000001\",\n      \"decimals\": 3,\n      \"freeze_status\": \"UNFROZEN\",\n      \"kyc_status\": \"GRANTED\",\n      \"token_id\": \"0.0.27335\"\n    },\n    {\n      \"automatic_association\": true,\n      \"balance\": 5,\n      \"created_timestamp\": \"123456789.000000001\",\n      \"decimals\": 3,\n      \"freeze_status\": \"UNFROZEN\",\n      \"kyc_status\": \"GRANTED\",\n      \"token_id\": \"0.0.27335\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "923c6092-6f17-4891-8327-43560f29b132",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cddd2798-0f91-4d63-9bcb-5d5412df543c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d88a20c-c8de-40fd-997a-16c01d8f87cb",
+          "name": "Get crypto allowances for an account info",
+          "request": {
+            "name": "Get crypto allowances for an account info",
+            "description": {
+              "content": "Returns information for all crypto allowances for an account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":idOrAliasOrEvmAddress",
+                "allowances",
+                "crypto"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "desc",
+                  "description": "The order in which items are listed"
+                },
+                {
+                  "disabled": false,
+                  "key": "spender.id",
+                  "value": "<string>",
+                  "description": "The ID of the spender to return information for"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idOrAliasOrEvmAddress",
+                  "description": "(Required) Account alias or account id or evm address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c1597d9-1f34-4363-8ce4-026b24ee0a9e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "allowances",
+                    "crypto"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "spender.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allowances\": [\n    {\n      \"amount\": 75,\n      \"amount_granted\": 100,\n      \"owner\": \"0.0.2\",\n      \"spender\": \"0.0.2\",\n      \"timestamp\": {\n        \"from\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"to\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"amount\": 75,\n      \"amount_granted\": 100,\n      \"owner\": \"0.0.2\",\n      \"spender\": \"0.0.2\",\n      \"timestamp\": {\n        \"from\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"to\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d2ce034-0e76-4a91-b403-945845ff3dd2",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "allowances",
+                    "crypto"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "spender.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65aea8e7-be0f-471b-9a26-dd539b769c9a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "allowances",
+                    "crypto"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "spender.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eeb5371b-d64c-4abb-9807-6677fa7776e7",
+          "name": "Get fungible token allowances for an account",
+          "request": {
+            "name": "Get fungible token allowances for an account",
+            "description": {
+              "content": "Returns information for fungible token allowances for an account.\n\n## Ordering\nThe order is governed by a combination of the spender id and the token id values, with spender id being the parent column.\nThe token id value governs its order within the given spender id.\n\nNote: The default order for this API is currently ASC\n\n## Filtering\nWhen filtering there are some restrictions enforced to ensure correctness and scalability.\n\n**The table below defines the restrictions and support for the endpoint**\n\n| Query Param   | Comparison Operator | Support | Description           | Example |\n| ------------- | ------------------- | ------- | --------------------- | ------- |\n| spender.id    | eq                  | Y       | Single occurrence only. | ?spender.id=X |\n|               | ne                  | N       | | |\n|               | lt(e)               | Y       | Single occurrence only. | ?spender.id=lte:X |\n|               | gt(e)               | Y       | Single occurrence only. | ?spender.id=gte:X |\n| token.id      | eq                  | Y       | Single occurrence only. Requires the presence of a **spender.id** query | ?token.id=lt:Y |\n|               | ne                  | N       | | |\n|               | lt(e)               | Y       | Single occurrence only. Requires the presence of an **lte** or **eq** **spender.id** query | ?spender.id=lte:X&token.id=lt:Y |\n|               | gt(e)               | Y       | Single occurrence only. Requires the presence of an **gte** or **eq** **spender.id** query | ?spender.id=gte:X&token.id=gt:Y |\n\nBoth filters must be a single occurrence of **gt(e)** or **lt(e)** which provide a lower and or upper boundary for search.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":idOrAliasOrEvmAddress",
+                "allowances",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "asc",
+                  "description": "The order in which items are listed"
+                },
+                {
+                  "disabled": false,
+                  "key": "spender.id",
+                  "value": "<string>",
+                  "description": "The ID of the spender to return information for"
+                },
+                {
+                  "disabled": false,
+                  "key": "token.id",
+                  "value": "<string>",
+                  "description": "The ID of the token to return information for"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idOrAliasOrEvmAddress",
+                  "description": "(Required) Account alias or account id or evm address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9198445-9adf-4492-b6a7-1e5e011f41dd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "allowances",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "spender.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allowances\": [\n    {\n      \"amount\": 75,\n      \"amount_granted\": 100,\n      \"owner\": \"0.0.2\",\n      \"spender\": \"0.0.2\",\n      \"timestamp\": {\n        \"from\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"to\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"token_id\": \"0.0.2\"\n    },\n    {\n      \"amount\": 75,\n      \"amount_granted\": 100,\n      \"owner\": \"0.0.2\",\n      \"spender\": \"0.0.2\",\n      \"timestamp\": {\n        \"from\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"to\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"token_id\": \"0.0.2\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36402a3f-a8eb-4633-a9af-d4d9e07ab3ea",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "allowances",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "spender.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4effa477-6a00-437e-a1dc-ec0616d592b0",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "allowances",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "spender.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71d6140b-dd2d-45e6-b1ae-9a89a398b57f",
+          "name": "Get non fungible token allowances for an account",
+          "request": {
+            "name": "Get non fungible token allowances for an account",
+            "description": {
+              "content": "Returns an account's non-fungible token allowances.\n\n## Ordering\nThe order is governed by a combination of the account ID and the token ID values, with account ID being the parent column.\nThe token ID value governs its order within the given account ID.\n\nNote: The default order for this API is currently ascending. The account ID can be the owner or the spender ID depending upon the owner flag.\n\n## Filtering\nWhen filtering there are some restrictions enforced to ensure correctness and scalability.\n\n**The table below defines the restrictions and support for the endpoint**\n\n| Query Param   | Comparison Operator | Support | Description           | Example |\n| ------------- | ------------------- | ------- | --------------------- | ------- |\n| account.id    | eq                  | Y       | Single occurrence only. | ?account.id=X |\n|               | ne                  | N       | | |\n|               | lt(e)               | Y       | Single occurrence only. | ?account.id=lte:X |\n|               | gt(e)               | Y       | Single occurrence only. | ?account.id=gte:X |\n| token.id      | eq                  | Y       | Single occurrence only. Requires the presence of an **account.id** parameter | ?account.id=X&token.id=eq:Y |\n|               | ne                  | N       | | |\n|               | lt(e)               | Y       | Single occurrence only. Requires the presence of an **lte** or **eq** **account.id** parameter | ?account.id=lte:X&token.id=lt:Y |\n|               | gt(e)               | Y       | Single occurrence only. Requires the presence of an **gte** or **eq** **account.id** parameter | ?account.id=gte:X&token.id=gt:Y |\n\nBoth filters must be a single occurrence of **gt(e)** or **lt(e)** which provide a lower and or upper boundary for search.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":idOrAliasOrEvmAddress",
+                "allowances",
+                "nfts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "asc",
+                  "description": "The order in which items are listed"
+                },
+                {
+                  "disabled": false,
+                  "key": "account.id",
+                  "value": "<string>",
+                  "description": "The ID of the account to return information for"
+                },
+                {
+                  "disabled": false,
+                  "key": "token.id",
+                  "value": "<string>",
+                  "description": "The ID of the token to return information for"
+                },
+                {
+                  "disabled": false,
+                  "key": "owner",
+                  "value": "true",
+                  "description": "When the owner value is true or omitted, the accountId path parameter will specify the ID of the owner, and the API will retrieve the allowances that the owner has granted to different spenders. Conversely, when the owner value is false, the accountId path parameter will indicate the ID of the spender who has an allowance, and the API will instead provide the allowances granted to the spender by different owners of those tokens."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idOrAliasOrEvmAddress",
+                  "description": "(Required) Account alias or account id or evm address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a477e77-4b91-4995-b68c-9fdf342165f2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "allowances",
+                    "nfts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "account.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "owner",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allowances\": [\n    {\n      \"approved_for_all\": false,\n      \"owner\": \"0.0.11\",\n      \"payer_account_id\": \"0.0.10\",\n      \"spender\": \"0.0.15\",\n      \"timestamp\": {\n        \"from\": \"1651560386.060890949\",\n        \"to\": \"1651560386.661997287\"\n      },\n      \"token_id\": \"0.0.99\"\n    },\n    {\n      \"approved_for_all\": false,\n      \"owner\": \"0.0.11\",\n      \"payer_account_id\": \"0.0.10\",\n      \"spender\": \"0.0.15\",\n      \"timestamp\": {\n        \"from\": \"1651560386.060890949\",\n        \"to\": \"1651560386.661997287\"\n      },\n      \"token_id\": \"0.0.99\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6ff2daf-204c-4563-b35e-8e569d64ffee",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "allowances",
+                    "nfts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "account.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "owner",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "654f04aa-dc3d-4c4b-8690-8a9f84612820",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "allowances",
+                    "nfts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "account.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "owner",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d80c9601-9e69-41cd-a59c-b1414937e3f0",
+    "name": "Mirror Node REST accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The REST API offers the ability to query transactions and entity information from a mirror node.\n\nBase url: [/api/v1](/api/v1)\n\nOpenAPI Spec: [/api/v1/docs/openapi.yml](/api/v1/docs/openapi.yml)\n\nContact Support:\n Name: Mirror Node Team\n Email: mirrornode@hedera.com",
+      "type": "text/plain"
+    }
+  }
+}

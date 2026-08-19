@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirror Node REST accounts schedules API",
+    "version": "0.156.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "schedules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List schedules entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/schedules",
+            "params": [
+              {
+                "name": "account.id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the account to return information for"
+              },
+              {
+                "name": "limit",
+                "value": "2",
+                "type": "query",
+                "description": "The maximum number of items to return"
+              },
+              {
+                "name": "order",
+                "value": "desc",
+                "type": "query",
+                "description": "The order in which items are listed"
+              },
+              {
+                "name": "schedule.id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the schedule to return information for"
+              }
+            ]
+          },
+          "docs": "Lists schedules on the network that govern the execution logic of scheduled transactions. This includes executed and non executed schedules."
+        },
+        {
+          "info": {
+            "name": "Get schedule by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/schedules/:scheduleId",
+            "params": [
+              {
+                "name": "scheduleId",
+                "value": "",
+                "type": "path",
+                "description": "Schedule id"
+              }
+            ]
+          },
+          "docs": "Returns schedule information based on the given schedule id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

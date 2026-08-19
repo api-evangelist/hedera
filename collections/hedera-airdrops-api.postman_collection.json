@@ -1,0 +1,604 @@
+{
+  "item": [
+    {
+      "id": "d016dbe4-460a-477f-a9ff-fab345d8df0e",
+      "name": "airdrops",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a25d0c9-6535-493a-8fd0-52ebeb1584ab",
+          "name": "Get outstanding token airdrops sent by an account",
+          "request": {
+            "name": "Get outstanding token airdrops sent by an account",
+            "description": {
+              "content": "Returns outstanding token airdrops that have been sent by an account.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":idOrAliasOrEvmAddress",
+                "airdrops",
+                "outstanding"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "asc",
+                  "description": "The order in which items are listed"
+                },
+                {
+                  "disabled": false,
+                  "key": "receiver.id",
+                  "value": "<string>",
+                  "description": "The ID of the receiver to return information for"
+                },
+                {
+                  "disabled": false,
+                  "key": "serialnumber",
+                  "value": "<string>",
+                  "description": "The nft serial number (64 bit type). Requires a tokenId value also be populated."
+                },
+                {
+                  "disabled": false,
+                  "key": "token.id",
+                  "value": "<string>",
+                  "description": "The ID of the token to return information for"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idOrAliasOrEvmAddress",
+                  "description": "(Required) Account alias or account id or evm address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7a6f27b-f88d-4015-beb6-678a4d5d91e5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "airdrops",
+                    "outstanding"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "receiver.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "serialnumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"airdrops\": [\n    {\n      \"amount\": 5444,\n      \"receiver_id\": \"0.0.2\",\n      \"sender_id\": \"0.0.2\",\n      \"timestamp\": {\n        \"from\": \"1586567700.453054000\",\n        \"to\": \"1586567700.453054000\"\n      },\n      \"token_id\": \"0.0.2\",\n      \"serial_number\": 1\n    },\n    {\n      \"amount\": 9885,\n      \"receiver_id\": \"0.0.2\",\n      \"sender_id\": \"0.0.2\",\n      \"timestamp\": {\n        \"from\": \"1586567700.453054000\",\n        \"to\": \"1586567700.453054000\"\n      },\n      \"token_id\": \"0.0.2\",\n      \"serial_number\": 1\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6495d6c-08dd-462c-9817-9cd55a71f5db",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "airdrops",
+                    "outstanding"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "receiver.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "serialnumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4e998b4-be2a-44a4-9a19-834fe3eb84ae",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "airdrops",
+                    "outstanding"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "receiver.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "serialnumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4d1c523-6fdc-4625-9494-35cf8975f9c6",
+          "name": "Get pending token airdrops received by an account",
+          "request": {
+            "name": "Get pending token airdrops received by an account",
+            "description": {
+              "content": "Returns pending token airdrops that have been received by an account.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":idOrAliasOrEvmAddress",
+                "airdrops",
+                "pending"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "asc",
+                  "description": "The order in which items are listed"
+                },
+                {
+                  "disabled": false,
+                  "key": "sender.id",
+                  "value": "<string>",
+                  "description": "The ID of the sender to return information for"
+                },
+                {
+                  "disabled": false,
+                  "key": "serialnumber",
+                  "value": "<string>",
+                  "description": "The nft serial number (64 bit type). Requires a tokenId value also be populated."
+                },
+                {
+                  "disabled": false,
+                  "key": "token.id",
+                  "value": "<string>",
+                  "description": "The ID of the token to return information for"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idOrAliasOrEvmAddress",
+                  "description": "(Required) Account alias or account id or evm address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2982dc3f-e934-4baf-bb08-10a360900035",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "airdrops",
+                    "pending"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "sender.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "serialnumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"airdrops\": [\n    {\n      \"amount\": 5444,\n      \"receiver_id\": \"0.0.2\",\n      \"sender_id\": \"0.0.2\",\n      \"timestamp\": {\n        \"from\": \"1586567700.453054000\",\n        \"to\": \"1586567700.453054000\"\n      },\n      \"token_id\": \"0.0.2\",\n      \"serial_number\": 1\n    },\n    {\n      \"amount\": 9885,\n      \"receiver_id\": \"0.0.2\",\n      \"sender_id\": \"0.0.2\",\n      \"timestamp\": {\n        \"from\": \"1586567700.453054000\",\n        \"to\": \"1586567700.453054000\"\n      },\n      \"token_id\": \"0.0.2\",\n      \"serial_number\": 1\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e531abe8-907a-408c-b251-20d4bc8a4219",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "airdrops",
+                    "pending"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "sender.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "serialnumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebecf619-1323-4f76-a777-4cff8abb072d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":idOrAliasOrEvmAddress",
+                    "airdrops",
+                    "pending"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "sender.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "serialnumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token.id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idOrAliasOrEvmAddress",
+                      "description": "(Required) Account alias or account id or evm address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6ef4839d-326f-4ae4-bccd-e16545336d08",
+    "name": "Mirror Node REST accounts airdrops API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The REST API offers the ability to query transactions and entity information from a mirror node.\n\nBase url: [/api/v1](/api/v1)\n\nOpenAPI Spec: [/api/v1/docs/openapi.yml](/api/v1/docs/openapi.yml)\n\nContact Support:\n Name: Mirror Node Team\n Email: mirrornode@hedera.com",
+      "type": "text/plain"
+    }
+  }
+}

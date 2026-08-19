@@ -1,0 +1,190 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirror Node REST accounts network API",
+    "version": "0.156.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "network",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the network exchange rate to estimate costs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/network/exchangerate",
+            "params": [
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+              }
+            ]
+          },
+          "docs": "Returns the network's exchange rate, current and next."
+        },
+        {
+          "info": {
+            "name": "Get the network fees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/network/fees",
+            "params": [
+              {
+                "name": "order",
+                "value": "desc",
+                "type": "query",
+                "description": "The order in which items are listed"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+              }
+            ]
+          },
+          "docs": "Returns the estimated gas in tinybars per each transaction type. Default order is ASC. Currently only `ContractCall`, `ContractCreate` and `EthereumTransaction` transaction types are supported."
+        },
+        {
+          "info": {
+            "name": "Estimate network fees",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v1/network/fees",
+            "params": [
+              {
+                "name": "mode",
+                "value": "INTRINSIC",
+                "type": "query",
+                "description": "Estimate solely based on the transaction's inherent properties or use network state."
+              },
+              {
+                "name": "high_volume_throttle",
+                "value": "10000",
+                "type": "query",
+                "description": "The high-volume throttle utilization in basis points where 10000 equals 100%. A value of 0, the default, indicates no high-volume pricing."
+              }
+            ]
+          },
+          "docs": "Given a HAPI transaction, estimate the network fees in tinycents."
+        },
+        {
+          "info": {
+            "name": "Get the network address book nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/network/nodes",
+            "params": [
+              {
+                "name": "file.id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the file entity"
+              },
+              {
+                "name": "limit",
+                "value": "2",
+                "type": "query",
+                "description": "The maximum number of items to return"
+              },
+              {
+                "name": "node.id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the node"
+              },
+              {
+                "name": "order",
+                "value": "desc",
+                "type": "query",
+                "description": "The order in which items are listed"
+              }
+            ]
+          },
+          "docs": "Returns the network's list of nodes used in consensus"
+        },
+        {
+          "info": {
+            "name": "Get registered nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/network/registered-nodes",
+            "params": [
+              {
+                "name": "limit",
+                "value": "2",
+                "type": "query",
+                "description": "The maximum number of items to return"
+              },
+              {
+                "name": "order",
+                "value": "desc",
+                "type": "query",
+                "description": "The order in which items are listed"
+              },
+              {
+                "name": "registerednode.id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the registered node"
+              },
+              {
+                "name": "type",
+                "value": "BLOCK_NODE",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the list of registered nodes"
+        },
+        {
+          "info": {
+            "name": "Get network stake information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/network/stake"
+          },
+          "docs": "Returns the network's current stake information."
+        },
+        {
+          "info": {
+            "name": "Get the network supply",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/network/supply",
+            "params": [
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+              }
+            ]
+          },
+          "docs": "Returns the network's released supply of hbars"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

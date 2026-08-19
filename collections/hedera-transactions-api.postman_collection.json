@@ -1,0 +1,481 @@
+{
+  "item": [
+    {
+      "id": "e476f437-5692-40b0-a21b-cbec4016672c",
+      "name": "transactions",
+      "description": {
+        "content": "The transaction object represents the transactions processed on the Hedera network.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b8831aaa-28c4-46fb-82e9-be01f05ca8da",
+          "name": "List transactions",
+          "request": {
+            "name": "List transactions",
+            "description": {
+              "content": "Lists transactions on the network. This includes successful and unsuccessful transactions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account.id",
+                  "value": "<string>",
+                  "description": "The ID of the account to return information for"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "desc",
+                  "description": "The order in which items are listed"
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<string>",
+                  "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<string>",
+                  "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactiontype",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "result",
+                  "value": "<string>",
+                  "description": "The transaction success type."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "The transaction account balance modification type."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4005d2ba-d6cf-45f6-984a-b2d491590945",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactiontype",
+                      "value": "SYSTEMDELETE"
+                    },
+                    {
+                      "key": "result",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactions\": [\n    {\n      \"batch_key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"bytes\": \"string\",\n      \"charged_tx_fee\": 4620,\n      \"consensus_timestamp\": \"1586567700.453054000\",\n      \"entity_id\": \"0.0.2\",\n      \"high_volume\": false,\n      \"high_volume_pricing_multiplier\": 2656,\n      \"max_custom_fees\": [\n        {\n          \"account_id\": \"0.0.2\",\n          \"amount\": 100,\n          \"denominating_token_id\": \"0.0.2\"\n        },\n        {\n          \"account_id\": \"0.0.2\",\n          \"amount\": 100,\n          \"denominating_token_id\": \"0.0.2\"\n        }\n      ],\n      \"max_fee\": \"string\",\n      \"memo_base64\": \"string\",\n      \"name\": \"TOKENPAUSE\",\n      \"nft_transfers\": [\n        {\n          \"is_approval\": true,\n          \"receiver_account_id\": \"0.0.2\",\n          \"sender_account_id\": \"0.0.2\",\n          \"token_id\": \"0.0.2\",\n          \"serial_number\": 1\n        },\n        {\n          \"is_approval\": false,\n          \"receiver_account_id\": \"0.0.2\",\n          \"sender_account_id\": \"0.0.2\",\n          \"token_id\": \"0.0.2\",\n          \"serial_number\": 1\n        }\n      ],\n      \"node\": \"0.0.2\",\n      \"nonce\": 6902,\n      \"parent_consensus_timestamp\": \"1586567700.453054000\",\n      \"result\": \"string\",\n      \"scheduled\": true,\n      \"staking_reward_transfers\": [\n        {\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 10\n        },\n        {\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 10\n        }\n      ],\n      \"token_transfers\": [\n        {\n          \"token_id\": \"0.0.2\",\n          \"account\": \"0.0.2\",\n          \"amount\": 4117,\n          \"is_approval\": false\n        },\n        {\n          \"token_id\": \"0.0.2\",\n          \"account\": \"0.0.2\",\n          \"amount\": 8806,\n          \"is_approval\": false\n        }\n      ],\n      \"transaction_hash\": \"string\",\n      \"transaction_id\": \"string\",\n      \"transfers\": [\n        {\n          \"account\": \"0.0.2\",\n          \"amount\": 3773,\n          \"is_approval\": true\n        },\n        {\n          \"account\": \"0.0.2\",\n          \"amount\": 2814,\n          \"is_approval\": true\n        }\n      ],\n      \"valid_duration_seconds\": \"string\",\n      \"valid_start_timestamp\": \"1586567700.453054000\"\n    },\n    {\n      \"batch_key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"bytes\": \"string\",\n      \"charged_tx_fee\": 4913,\n      \"consensus_timestamp\": \"1586567700.453054000\",\n      \"entity_id\": \"0.0.2\",\n      \"high_volume\": true,\n      \"high_volume_pricing_multiplier\": 3262,\n      \"max_custom_fees\": [\n        {\n          \"account_id\": \"0.0.2\",\n          \"amount\": 100,\n          \"denominating_token_id\": \"0.0.2\"\n        },\n        {\n          \"account_id\": \"0.0.2\",\n          \"amount\": 100,\n          \"denominating_token_id\": \"0.0.2\"\n        }\n      ],\n      \"max_fee\": \"string\",\n      \"memo_base64\": \"string\",\n      \"name\": \"REGISTEREDNODEUPDATE\",\n      \"nft_transfers\": [\n        {\n          \"is_approval\": true,\n          \"receiver_account_id\": \"0.0.2\",\n          \"sender_account_id\": \"0.0.2\",\n          \"token_id\": \"0.0.2\",\n          \"serial_number\": 1\n        },\n        {\n          \"is_approval\": true,\n          \"receiver_account_id\": \"0.0.2\",\n          \"sender_account_id\": \"0.0.2\",\n          \"token_id\": \"0.0.2\",\n          \"serial_number\": 1\n        }\n      ],\n      \"node\": \"0.0.2\",\n      \"nonce\": 7755,\n      \"parent_consensus_timestamp\": \"1586567700.453054000\",\n      \"result\": \"string\",\n      \"scheduled\": true,\n      \"staking_reward_transfers\": [\n        {\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 10\n        },\n        {\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 10\n        }\n      ],\n      \"token_transfers\": [\n        {\n          \"token_id\": \"0.0.2\",\n          \"account\": \"0.0.2\",\n          \"amount\": 5944,\n          \"is_approval\": true\n        },\n        {\n          \"token_id\": \"0.0.2\",\n          \"account\": \"0.0.2\",\n          \"amount\": 6162,\n          \"is_approval\": true\n        }\n      ],\n      \"transaction_hash\": \"string\",\n      \"transaction_id\": \"string\",\n      \"transfers\": [\n        {\n          \"account\": \"0.0.2\",\n          \"amount\": 4236,\n          \"is_approval\": false\n        },\n        {\n          \"account\": \"0.0.2\",\n          \"amount\": 6441,\n          \"is_approval\": true\n        }\n      ],\n      \"valid_duration_seconds\": \"string\",\n      \"valid_start_timestamp\": \"1586567700.453054000\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0669c794-ce5a-4ad4-9e94-b0ebbcd00b21",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account.id",
+                      "value": ""
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactiontype",
+                      "value": "SYSTEMDELETE"
+                    },
+                    {
+                      "key": "result",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "894fa4d6-d456-4951-9df3-b1833709129b",
+          "name": "Get transaction by id",
+          "request": {
+            "name": "Get transaction by id",
+            "description": {
+              "content": "Returns transaction information based on the given transaction id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "transactions",
+                ":transactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "nonce",
+                  "value": "<integer>",
+                  "description": "Filter the query result by the nonce of the transaction. A zero nonce represents user submitted transactions while a non-zero nonce is generated by main nodes. The filter honors the last value. If not specified, all transactions with specified payer account ID and valid start timestamp match. If multiple values are provided the last value will be the only value used."
+                },
+                {
+                  "disabled": false,
+                  "key": "scheduled",
+                  "value": "<boolean>",
+                  "description": "Filter transactions by the scheduled flag. If true, return information for the scheduled transaction. If false, return information for the non-scheduled transaction. If not present, return information for all transactions matching transactionId. If multiple values are provided the last value will be the only value used."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Transaction id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3bb6313-b05d-4740-929c-d01a34fa1ba3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nonce",
+                      "value": "0"
+                    },
+                    {
+                      "key": "scheduled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactions\": [\n    {\n      \"batch_key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"bytes\": \"string\",\n      \"charged_tx_fee\": 448,\n      \"consensus_timestamp\": \"1586567700.453054000\",\n      \"entity_id\": \"0.0.2\",\n      \"high_volume\": true,\n      \"high_volume_pricing_multiplier\": 9713,\n      \"max_custom_fees\": [\n        {\n          \"account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"denominating_token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"denominating_token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"max_fee\": \"string\",\n      \"memo_base64\": \"string\",\n      \"name\": \"UTILPRNG\",\n      \"nft_transfers\": [\n        {\n          \"is_approval\": false,\n          \"receiver_account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sender_account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"serial_number\": 1\n        },\n        {\n          \"is_approval\": true,\n          \"receiver_account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sender_account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"serial_number\": 1\n        }\n      ],\n      \"node\": \"0.0.2\",\n      \"nonce\": 3966,\n      \"parent_consensus_timestamp\": \"1586567700.453054000\",\n      \"result\": \"string\",\n      \"scheduled\": true,\n      \"staking_reward_transfers\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"token_transfers\": [\n        {\n          \"token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 8389,\n          \"is_approval\": false\n        },\n        {\n          \"token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 3843,\n          \"is_approval\": true\n        }\n      ],\n      \"transaction_hash\": \"string\",\n      \"transaction_id\": \"string\",\n      \"transfers\": [\n        {\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 9405,\n          \"is_approval\": true\n        },\n        {\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 4859,\n          \"is_approval\": false\n        }\n      ],\n      \"valid_duration_seconds\": \"string\",\n      \"valid_start_timestamp\": \"1586567700.453054000\",\n      \"assessed_custom_fees\": [\n        {\n          \"amount\": 5021,\n          \"collector_account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"effective_payer_account_ids\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"amount\": 520,\n          \"collector_account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"effective_payer_account_ids\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"batch_key\": {\n        \"_type\": \"ProtobufEncoded\",\n        \"key\": \"15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743\"\n      },\n      \"bytes\": \"string\",\n      \"charged_tx_fee\": 148,\n      \"consensus_timestamp\": \"1586567700.453054000\",\n      \"entity_id\": \"0.0.2\",\n      \"high_volume\": true,\n      \"high_volume_pricing_multiplier\": 4436,\n      \"max_custom_fees\": [\n        {\n          \"account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"denominating_token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"denominating_token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"max_fee\": \"string\",\n      \"memo_base64\": \"string\",\n      \"name\": \"REGISTEREDNODEUPDATE\",\n      \"nft_transfers\": [\n        {\n          \"is_approval\": true,\n          \"receiver_account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sender_account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"serial_number\": 1\n        },\n        {\n          \"is_approval\": true,\n          \"receiver_account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sender_account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"serial_number\": 1\n        }\n      ],\n      \"node\": \"0.0.2\",\n      \"nonce\": 5686,\n      \"parent_consensus_timestamp\": \"1586567700.453054000\",\n      \"result\": \"string\",\n      \"scheduled\": true,\n      \"staking_reward_transfers\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"token_transfers\": [\n        {\n          \"token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 1465,\n          \"is_approval\": true\n        },\n        {\n          \"token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 7507,\n          \"is_approval\": true\n        }\n      ],\n      \"transaction_hash\": \"string\",\n      \"transaction_id\": \"string\",\n      \"transfers\": [\n        {\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 6698,\n          \"is_approval\": false\n        },\n        {\n          \"account\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": 2281,\n          \"is_approval\": true\n        }\n      ],\n      \"valid_duration_seconds\": \"string\",\n      \"valid_start_timestamp\": \"1586567700.453054000\",\n      \"assessed_custom_fees\": [\n        {\n          \"amount\": 3750,\n          \"collector_account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"effective_payer_account_ids\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"amount\": 4535,\n          \"collector_account_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"effective_payer_account_ids\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"token_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "729ddc85-fded-4a43-a56a-667388743ef1",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nonce",
+                      "value": "0"
+                    },
+                    {
+                      "key": "scheduled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Invalid parameter: account.id\"\n      },\n      {\n        \"message\": \"Invalid Transaction id. Please use \\\\shard.realm.num-sss-nnn\\\\ format where sss are seconds and nnn are nanoseconds\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60b46abf-1c4d-4bfe-9b68-db7c12088062",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nonce",
+                      "value": "0"
+                    },
+                    {
+                      "key": "scheduled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_status\": {\n    \"messages\": [\n      {\n        \"message\": \"Not found\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b896f30c-373b-4840-a284-ae5645c8271f",
+    "name": "Mirror Node REST accounts transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The REST API offers the ability to query transactions and entity information from a mirror node.\n\nBase url: [/api/v1](/api/v1)\n\nOpenAPI Spec: [/api/v1/docs/openapi.yml](/api/v1/docs/openapi.yml)\n\nContact Support:\n Name: Mirror Node Team\n Email: mirrornode@hedera.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirror Node REST accounts tokens API",
+    "version": "0.156.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/tokens",
+            "params": [
+              {
+                "name": "account.id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the account to return information for"
+              },
+              {
+                "name": "limit",
+                "value": "2",
+                "type": "query",
+                "description": "The maximum number of items to return"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Partial or full token name. Not allowed to be used with token.id or account.id parameter. Pagination is not supported with the use of this parameter and results are ordered by token.id with respect to the order parameter."
+              },
+              {
+                "name": "order",
+                "value": "desc",
+                "type": "query",
+                "description": "The order in which items are listed"
+              },
+              {
+                "name": "publickey",
+                "value": "3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be",
+                "type": "query",
+                "description": "The public key to compare against"
+              },
+              {
+                "name": "token.id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the token to return information for"
+              },
+              {
+                "name": "type",
+                "value": "ALL,FUNGIBLE_COMMON,NON_FUNGIBLE_UNIQUE",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of tokens on the network."
+        },
+        {
+          "info": {
+            "name": "Get token by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/tokens/:tokenId",
+            "params": [
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "path",
+                "description": "Token id"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The Unix timestamp in seconds.nanoseconds format. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+              }
+            ]
+          },
+          "docs": "Returns token entity information given the id"
+        },
+        {
+          "info": {
+            "name": "List token balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/tokens/:tokenId/balances",
+            "params": [
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "path",
+                "description": "Token id"
+              },
+              {
+                "name": "account.balance",
+                "value": "",
+                "type": "query",
+                "description": "The optional balance value to compare against"
+              },
+              {
+                "name": "account.id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the account to return information for"
+              },
+              {
+                "name": "account.publickey",
+                "value": "3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be",
+                "type": "query",
+                "description": "The account's public key to compare against"
+              },
+              {
+                "name": "limit",
+                "value": "2",
+                "type": "query",
+                "description": "The maximum number of items to return"
+              },
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "The order in which items are listed"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+              }
+            ]
+          },
+          "docs": "Returns a list of token balances given the id. This represents the Token supply distribution across the network"
+        },
+        {
+          "info": {
+            "name": "List nfts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/tokens/:tokenId/nfts",
+            "params": [
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "path",
+                "description": "Token id"
+              },
+              {
+                "name": "account.id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the account to return information for"
+              },
+              {
+                "name": "limit",
+                "value": "2",
+                "type": "query",
+                "description": "The maximum number of items to return"
+              },
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "The order in which items are listed"
+              },
+              {
+                "name": "serialnumber",
+                "value": "",
+                "type": "query",
+                "description": "The nft serial number (64 bit type). Requires a tokenId value also be populated."
+              }
+            ]
+          },
+          "docs": "Returns a list of non-fungible tokens"
+        },
+        {
+          "info": {
+            "name": "Get nft info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/tokens/:tokenId/nfts/:serialNumber",
+            "params": [
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "path",
+                "description": "Token id"
+              },
+              {
+                "name": "serialNumber",
+                "value": "1",
+                "type": "path",
+                "description": "The nft serial number"
+              }
+            ]
+          },
+          "docs": "Returns information for a non-fungible token"
+        },
+        {
+          "info": {
+            "name": "Get an nfts transction history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/tokens/:tokenId/nfts/:serialNumber/transactions",
+            "params": [
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "path",
+                "description": "Token id"
+              },
+              {
+                "name": "serialNumber",
+                "value": "1",
+                "type": "path",
+                "description": "The nft serial number"
+              },
+              {
+                "name": "limit",
+                "value": "2",
+                "type": "query",
+                "description": "The maximum number of items to return"
+              },
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "The order in which items are listed"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+              }
+            ]
+          },
+          "docs": "Returns a list of transactions for a given non-fungible token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

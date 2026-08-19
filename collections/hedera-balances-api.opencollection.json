@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirror Node REST accounts balances API",
+    "version": "0.156.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "balances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List account balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/balances",
+            "params": [
+              {
+                "name": "account.id",
+                "value": "",
+                "type": "query",
+                "description": "Account id or account alias with no shard realm or evm address with no shard realm"
+              },
+              {
+                "name": "account.balance",
+                "value": "",
+                "type": "query",
+                "description": "The optional balance value to compare against"
+              },
+              {
+                "name": "account.publickey",
+                "value": "3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be",
+                "type": "query",
+                "description": "The account's public key to compare against"
+              },
+              {
+                "name": "limit",
+                "value": "2",
+                "type": "query",
+                "description": "The maximum number of items to return"
+              },
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "The order in which items are listed"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time."
+              }
+            ]
+          },
+          "docs": "Returns a list of account and token balances on the network. The latest balance information is returned when there is no timestamp query parameter, otherwise, the information is retrieved from snapshots with 15-minute granularity. This information is limited to at most 50 token balances per account as outlined in HIP-367. As such, it's not recommended for general use and we instead recommend using either `/api/v1/accounts/{id}/tokens` or `/api/v1/tokens/{id}/balances` to obtain the current token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
