@@ -7,6 +7,18 @@ description: >-
   consensus topics, blocks, schedules, and network-level information. The public
   API requires no authentication and supports mainnet, testnet, and previewnet
   environments.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: open
