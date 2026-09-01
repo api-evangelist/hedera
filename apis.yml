@@ -39,7 +39,7 @@ tags:
   - Hashgraph
   - Transaction
   - Tokens
-  - NFTs
+  - NFT
   - Smart Contracts
   - Enterprise
 tags_raw:
@@ -94,7 +94,7 @@ apis:
   humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
   baseURL: https://mainnet.mirrornode.hedera.com
   tags:
-  - airdrops
+  - Airdrops
   tags_raw:
   - airdrops
   properties:
@@ -180,7 +180,7 @@ apis:
   humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
   baseURL: https://mainnet.mirrornode.hedera.com
   tags:
-  - contracts
+  - Contracts
   tags_raw:
   - contracts
   properties:
