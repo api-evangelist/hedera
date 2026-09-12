@@ -350,6 +350,8 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
 common:
+  - type: Website
+    url: https://www.hedera.com/
   - type: AgenticAccess
     url: agentic-access/hedera-agentic-access.yml
   - type: DomainSecurity
