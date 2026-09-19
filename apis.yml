@@ -42,8 +42,8 @@ tags:
   - NFT
   - Smart Contracts
   - Enterprise
-  - Hedera
 tags_raw:
+  - Hedera
   - Distributed Ledger
   - Blockchain
   - DLT
@@ -209,7 +209,7 @@ apis:
   humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
   baseURL: https://mainnet.mirrornode.hedera.com
   tags:
-  - Network
+  - Networks
   tags_raw:
   - network
   properties:
@@ -239,7 +239,7 @@ apis:
   humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
   baseURL: https://mainnet.mirrornode.hedera.com
   tags:
-  - Schedules
+  - Schedule
   tags_raw:
   - schedules
   properties:
@@ -300,7 +300,7 @@ apis:
   humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
   baseURL: https://mainnet.mirrornode.hedera.com
   tags:
-  - Topics
+  - Topic
   tags_raw:
   - topics
   properties:
