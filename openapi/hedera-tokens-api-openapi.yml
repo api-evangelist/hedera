@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mirror Node REST accounts tokens API
+  title: Mirror Node REST Tokens API
   version: 0.156.0
   license:
     name: Apache-2.0
@@ -8,10 +8,10 @@ info:
   description: 'The REST API offers the ability to query transactions and entity information from a mirror node.
 
 
-    Base url: [/api/v1](/api/v1)
+    Base url: /api/v1
 
 
-    OpenAPI Spec: [/api/v1/docs/openapi.yml](/api/v1/docs/openapi.yml)'
+    OpenAPI Spec: /api/v1/docs/openapi.yml'
   contact:
     name: Mirror Node Team
     email: mirrornode@hedera.com
@@ -37,7 +37,7 @@ servers:
       - previewnet
       - testnet
 tags:
-- name: tokens
+- name: Tokens
   description: The tokens object represents the information associated with a token entity and returns a list of token information.The tokens list endpoint is cached and not updated as frequently as the token lookup by a specific ID.
 paths:
   /api/v1/tokens:
@@ -63,7 +63,7 @@ paths:
         '400':
           $ref: '#/components/responses/InvalidParameterError'
       tags:
-      - tokens
+      - Tokens
   /api/v1/tokens/{tokenId}:
     get:
       summary: Get token by id
@@ -192,7 +192,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFoundError'
       tags:
-      - tokens
+      - Tokens
   /api/v1/tokens/{tokenId}/balances:
     get:
       summary: List token balances
@@ -216,7 +216,7 @@ paths:
         '400':
           $ref: '#/components/responses/InvalidParameterError'
       tags:
-      - tokens
+      - Tokens
   /api/v1/tokens/{tokenId}/nfts:
     get:
       summary: List nfts
@@ -238,7 +238,7 @@ paths:
         '400':
           $ref: '#/components/responses/InvalidParameterError'
       tags:
-      - tokens
+      - Tokens
   /api/v1/tokens/{tokenId}/nfts/{serialNumber}:
     get:
       summary: Get nft info
@@ -259,7 +259,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFoundError'
       tags:
-      - tokens
+      - Tokens
   /api/v1/tokens/{tokenId}/nfts/{serialNumber}/transactions:
     get:
       summary: Get an nfts transction history
@@ -287,48 +287,44 @@ paths:
         '400':
           $ref: '#/components/responses/InvalidParameterError'
       tags:
-      - tokens
+      - Tokens
 components:
   schemas:
-    Token:
+    EntityId:
+      type:
+      - string
+      - 'null'
+      description: Network entity ID in the format of `shard.realm.num`
+      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
+      example: 0.0.2
+    RoyaltyFee:
       type: object
       properties:
-        admin_key:
-          $ref: '#/components/schemas/Key'
-        decimals:
-          format: int64
-          type: integer
-        metadata:
-          description: Arbitrary binary data associated with this token class encoded in base64.
-          type: string
-          format: byte
-        name:
-          type: string
-        symbol:
-          type: string
-        token_id:
+        all_collectors_are_exempt:
+          type: boolean
+          example: false
+        amount:
+          type: object
+          properties:
+            numerator:
+              example: 15
+              format: int64
+              type: integer
+            denominator:
+              example: 37
+              format: int64
+              type: integer
+        collector_account_id:
           $ref: '#/components/schemas/EntityId'
-        type:
-          type: string
-      required:
-      - admin_key
-      - decimals
-      - name
-      - symbol
-      - token_id
-      - type
-      example:
-        admin_key: null
-        decimals: 3
-        metadata: VGhpcyBpcyBhIHRlc3QgTkZU
-        name: First Mover
-        symbol: FIRSTMOVERLPDJH
-        token_id: 0.0.1
-        type: FUNGIBLE_COMMON
-    Tokens:
-      type: array
-      items:
-        $ref: '#/components/schemas/Token'
+        fallback_fee:
+          type: object
+          properties:
+            amount:
+              example: 100
+              format: int64
+              type: integer
+            denominating_token_id:
+              $ref: '#/components/schemas/EntityId'
     NftTransactionTransfer:
       type: object
       properties:
@@ -363,9 +359,72 @@ components:
       - sender_account_id
       - transaction_id
       - type
+    TokenBalancesResponse:
+      type: object
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        balances:
+          $ref: '#/components/schemas/TokenDistribution'
+        links:
+          $ref: '#/components/schemas/Links'
+    CustomFees:
+      type: object
+      properties:
+        created_timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        fixed_fees:
+          type: array
+          items:
+            $ref: '#/components/schemas/FixedFee'
+        fractional_fees:
+          type: array
+          items:
+            $ref: '#/components/schemas/FractionalFee'
+        royalty_fees:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoyaltyFee'
+    FixedFee:
+      type: object
+      properties:
+        all_collectors_are_exempt:
+          type: boolean
+          example: false
+        amount:
+          example: 100
+          format: int64
+          type: integer
+        collector_account_id:
+          $ref: '#/components/schemas/EntityId'
+        denominating_token_id:
+          $ref: '#/components/schemas/EntityId'
     EntityIdQuery:
       type: string
       pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
+    Key:
+      description: The public key which controls access to various network entities.
+      type:
+      - object
+      - 'null'
+      properties:
+        _type:
+          type: string
+          enum:
+          - ECDSA_SECP256K1
+          - ED25519
+          - ProtobufEncoded
+          example: ProtobufEncoded
+        key:
+          type: string
+          example: 15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743
+    TimestampNullable:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type:
+      - string
+      - 'null'
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
     Nft:
       type: object
       properties:
@@ -402,88 +461,6 @@ components:
         serial_number: 124
         spender_id: 0.0.500
         token_id: 0.0.222
-    TokensResponse:
-      type: object
-      properties:
-        tokens:
-          $ref: '#/components/schemas/Tokens'
-        links:
-          $ref: '#/components/schemas/Links'
-    Nfts:
-      type: object
-      properties:
-        nfts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Nft'
-        links:
-          $ref: '#/components/schemas/Links'
-    Key:
-      description: The public key which controls access to various network entities.
-      type:
-      - object
-      - 'null'
-      properties:
-        _type:
-          type: string
-          enum:
-          - ECDSA_SECP256K1
-          - ED25519
-          - ProtobufEncoded
-          example: ProtobufEncoded
-        key:
-          type: string
-          example: 15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743
-    FractionalFee:
-      type: object
-      properties:
-        all_collectors_are_exempt:
-          type: boolean
-          example: false
-        amount:
-          type: object
-          properties:
-            numerator:
-              example: 12
-              format: int64
-              type: integer
-            denominator:
-              example: 29
-              format: int64
-              type: integer
-        collector_account_id:
-          $ref: '#/components/schemas/EntityId'
-        denominating_token_id:
-          $ref: '#/components/schemas/EntityId'
-        maximum:
-          example: 120
-          format: int64
-          type:
-          - integer
-          - 'null'
-        minimum:
-          example: 30
-          format: int64
-          type: integer
-        net_of_transfers:
-          type: boolean
-          example: true
-    TimestampNullable:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type:
-      - string
-      - 'null'
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
-    TokenBalancesResponse:
-      type: object
-      properties:
-        timestamp:
-          $ref: '#/components/schemas/TimestampNullable'
-        balances:
-          $ref: '#/components/schemas/TokenDistribution'
-        links:
-          $ref: '#/components/schemas/Links'
     TransactionTypes:
       type: string
       enum:
@@ -555,18 +532,27 @@ components:
       - TOKENWIPE
       - UNCHECKEDSUBMIT
       - UTILPRNG
-    NftTransactionHistory:
+    Timestamp:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type: string
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    TokensResponse:
       type: object
       properties:
-        transactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/NftTransactionTransfer'
+        tokens:
+          $ref: '#/components/schemas/Tokens'
         links:
           $ref: '#/components/schemas/Links'
-      required:
-      - transactions
-      - links
+    Nfts:
+      type: object
+      properties:
+        nfts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nft'
+        links:
+          $ref: '#/components/schemas/Links'
     Links:
       type: object
       properties:
@@ -575,127 +561,41 @@ components:
           type:
           - string
           - 'null'
-    EntityId:
-      type:
-      - string
-      - 'null'
-      description: Network entity ID in the format of `shard.realm.num`
-      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
-      example: 0.0.2
-    CustomFees:
+    Token:
       type: object
       properties:
-        created_timestamp:
-          $ref: '#/components/schemas/Timestamp'
-        fixed_fees:
-          type: array
-          items:
-            $ref: '#/components/schemas/FixedFee'
-        fractional_fees:
-          type: array
-          items:
-            $ref: '#/components/schemas/FractionalFee'
-        royalty_fees:
-          type: array
-          items:
-            $ref: '#/components/schemas/RoyaltyFee'
-    TokenDistribution:
-      type: array
-      items:
-        type: object
-        properties:
-          account:
-            $ref: '#/components/schemas/EntityId'
-          balance:
-            format: int64
-            type: integer
-          decimals:
-            format: int64
-            type: integer
-        required:
-        - account
-        - balance
-        - decimals
-      example:
-      - account: 0.15.2
-        balance: 1000
-        decimals: 3
-    RoyaltyFee:
-      type: object
-      properties:
-        all_collectors_are_exempt:
-          type: boolean
-          example: false
-        amount:
-          type: object
-          properties:
-            numerator:
-              example: 15
-              format: int64
-              type: integer
-            denominator:
-              example: 37
-              format: int64
-              type: integer
-        collector_account_id:
-          $ref: '#/components/schemas/EntityId'
-        fallback_fee:
-          type: object
-          properties:
-            amount:
-              example: 100
-              format: int64
-              type: integer
-            denominating_token_id:
-              $ref: '#/components/schemas/EntityId'
-    Timestamp:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type: string
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
-    FixedFee:
-      type: object
-      properties:
-        all_collectors_are_exempt:
-          type: boolean
-          example: false
-        amount:
-          example: 100
+        admin_key:
+          $ref: '#/components/schemas/Key'
+        decimals:
           format: int64
           type: integer
-        collector_account_id:
+        metadata:
+          description: Arbitrary binary data associated with this token class encoded in base64.
+          type: string
+          format: byte
+        name:
+          type: string
+        symbol:
+          type: string
+        token_id:
           $ref: '#/components/schemas/EntityId'
-        denominating_token_id:
-          $ref: '#/components/schemas/EntityId'
-    Error:
-      type: object
-      properties:
-        _status:
-          type: object
-          properties:
-            messages:
-              type: array
-              items:
-                type: object
-                properties:
-                  data:
-                    description: Error message in hexadecimal
-                    example: '0x3000'
-                    format: binary
-                    pattern: ^0x[0-9a-fA-F]+$
-                    type:
-                    - string
-                    - 'null'
-                  detail:
-                    description: Detailed error message
-                    example: Generic detailed error message
-                    type:
-                    - string
-                    - 'null'
-                  message:
-                    description: Error message
-                    example: Generic error message
-                    type: string
+        type:
+          type: string
+      required:
+      - admin_key
+      - decimals
+      - name
+      - symbol
+      - token_id
+      - type
+      example:
+        admin_key: null
+        decimals: 3
+        metadata: VGhpcyBpcyBhIHRlc3QgTkZU
+        name: First Mover
+        symbol: FIRSTMOVERLPDJH
+        token_id: 0.0.1
+        type: FUNGIBLE_COMMON
     TokenInfo:
       type: object
       properties:
@@ -794,148 +694,119 @@ components:
           $ref: '#/components/schemas/Key'
         custom_fees:
           $ref: '#/components/schemas/CustomFees'
-  responses:
-    InvalidParameterError:
-      description: Invalid parameter
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            _status:
-              messages:
-              - message: 'Invalid parameter: account.id'
-              - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
-    NotFoundError:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            _status:
-              messages:
-              - message: Not found
+    FractionalFee:
+      type: object
+      properties:
+        all_collectors_are_exempt:
+          type: boolean
+          example: false
+        amount:
+          type: object
+          properties:
+            numerator:
+              example: 12
+              format: int64
+              type: integer
+            denominator:
+              example: 29
+              format: int64
+              type: integer
+        collector_account_id:
+          $ref: '#/components/schemas/EntityId'
+        denominating_token_id:
+          $ref: '#/components/schemas/EntityId'
+        maximum:
+          example: 120
+          format: int64
+          type:
+          - integer
+          - 'null'
+        minimum:
+          example: 30
+          format: int64
+          type: integer
+        net_of_transfers:
+          type: boolean
+          example: true
+    Error:
+      type: object
+      properties:
+        _status:
+          type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  data:
+                    description: Error message in hexadecimal
+                    example: '0x3000'
+                    format: binary
+                    pattern: ^0x[0-9a-fA-F]+$
+                    type:
+                    - string
+                    - 'null'
+                  detail:
+                    description: Detailed error message
+                    example: Generic detailed error message
+                    type:
+                    - string
+                    - 'null'
+                  message:
+                    description: Error message
+                    example: Generic error message
+                    type: string
+    TokenDistribution:
+      type: array
+      items:
+        type: object
+        properties:
+          account:
+            $ref: '#/components/schemas/EntityId'
+          balance:
+            format: int64
+            type: integer
+          decimals:
+            format: int64
+            type: integer
+        required:
+        - account
+        - balance
+        - decimals
+      example:
+      - account: 0.15.2
+        balance: 1000
+        decimals: 3
+    NftTransactionHistory:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/NftTransactionTransfer'
+        links:
+          $ref: '#/components/schemas/Links'
+      required:
+      - transactions
+      - links
+    Tokens:
+      type: array
+      items:
+        $ref: '#/components/schemas/Token'
   parameters:
-    serialNumberQueryParam:
-      name: serialnumber
-      in: query
-      explode: true
-      description: The nft serial number (64 bit type). Requires a tokenId value also be populated.
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        serialNumNoOperator:
-          summary: Example of serialNum equals with no operator
-          value: 100
-        serialNumEqOperator:
-          summary: Example of serialNum equals operator
-          value: eq:200
-        serialNumGtOperator:
-          summary: Example of serialNum greater than operator
-          value: gt:400
-        serialNumGteOperator:
-          summary: Example of serialNum greater than or equals operator
-          value: gte:500
-        serialNumLtOperator:
-          summary: Example of serialNum less than operator
-          value: lt:600
-        serialNumLteOperator:
-          summary: Example of serialNum less than or equals operator
-          value: lte:700
+    serialNumberPathParam:
+      name: serialNumber
+      in: path
+      required: true
+      description: The nft serial number
+      example: 1
       schema:
-        type: string
-        pattern: ^((eq|gt|gte|lt|lte):)?\d{1,19}?$
-    tokenInfoTimestampQueryParam:
-      description: The Unix timestamp in seconds.nanoseconds format. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
-      name: timestamp
-      in: query
-      explode: true
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        secondsNoOperator:
-          summary: Example of seconds equals with no operator
-          value: 1234567890
-        timestampNoOperator:
-          summary: Example of timestamp equals with no operator
-          value: 1234567890
-        secondsEqOperator:
-          summary: Example of seconds equals with operator
-          value: eq:1234567890
-        timestampEqOperator:
-          summary: Example of timestamp equals with operator
-          value: eq:1234567890.000000200
-        secondsLtOperator:
-          summary: Example of seconds less than operator
-          value: lt:1234567890
-        timestampLtOperator:
-          summary: Example of timestamp less than operator
-          value: lt:1234567890.000000600
-        secondsLteOperator:
-          summary: Example of seconds less than or equals operator
-          value: lte:1234567890
-        timestampLteOperator:
-          summary: Example of timestamp less than or equals operator
-          value: lte:1234567890.000000700
-      schema:
-        type: string
-        pattern: ^((eq|lt|lte):)?\d{1,10}(\.\d{1,9})?$
-    accountBalanceQueryParam:
-      name: account.balance
-      in: query
-      description: The optional balance value to compare against
-      explode: true
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        noOperator:
-          summary: Example of equals with no operator
-          value: 100
-        eqOperator:
-          summary: Example of equals operator
-          value: eq:200
-        neOperator:
-          summary: Example of not equals operator
-          value: ne:300
-        gtOperator:
-          summary: Example of greater than operator
-          value: gt:400
-        gteOperator:
-          summary: Example of greater than or equals operator
-          value: gte:500
-        ltOperator:
-          summary: Example of less than operator
-          value: lt:600
-        lteOperator:
-          summary: Example of less than or equals operator
-          value: lte:700
-      schema:
-        type: string
-        pattern: ^((gte?|lte?|eq|ne)\:)?\d{1,10}$
-    orderQueryParamDesc:
-      name: order
-      in: query
-      description: The order in which items are listed
-      example: asc
-      schema:
-        enum:
-        - asc
-        - desc
-        default: desc
-    orderQueryParam:
-      name: order
-      in: query
-      description: The order in which items are listed
-      example: desc
-      schema:
-        enum:
-        - asc
-        - desc
-        default: asc
+        type: integer
+        format: int64
+        default: 1
+        minimum: 1
+        maximum: 9223372036854776000
     accountIdQueryParam:
       name: account.id
       in: query
@@ -989,134 +860,72 @@ components:
           value: lte:0.0.700
       schema:
         $ref: '#/components/schemas/EntityIdQuery'
-    accountPublicKeyQueryParam:
-      name: account.publickey
+    tokenInfoTimestampQueryParam:
+      description: The Unix timestamp in seconds.nanoseconds format. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
+      name: timestamp
       in: query
-      description: The account's public key to compare against
-      example: 3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be
-      schema:
-        type: string
-    tokenTypeQueryParam:
-      name: type
-      in: query
-      example:
-      - ALL
-      - FUNGIBLE_COMMON
-      - NON_FUNGIBLE_UNIQUE
       explode: true
-      schema:
-        type: array
-        items:
-          type: string
-    tokenNameQueryParam:
-      name: name
-      in: query
-      description: Partial or full token name. Not allowed to be used with token.id or account.id parameter. Pagination is not supported with the use of this parameter and results are ordered by token.id with respect to the order parameter.
-      schema:
-        type: string
-        maxLength: 100
-        minLength: 3
-    tokenIdPathParam:
-      name: tokenId
-      in: path
-      required: true
-      description: Token id
-      examples:
-        tokenNumAlias:
-          value: 1135
-        shardRealmTokenNumAlias:
-          value: 0.0.000000000000000000000000000000000000046F
-        tokenNum:
-          value: 1135
-        shardRealmTokenNum:
-          value: 0.0.1135
-      schema:
-        $ref: '#/components/schemas/EntityId'
-    publicKeyQueryParam:
-      name: publickey
-      in: query
-      description: The public key to compare against
-      example: 3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be
-      schema:
-        type: string
-    limitQueryParam:
-      name: limit
-      in: query
-      description: The maximum number of items to return
-      example: 2
-      schema:
-        format: int32
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 100
-    serialNumberPathParam:
-      name: serialNumber
-      in: path
-      required: true
-      description: The nft serial number
-      example: 1
-      schema:
-        type: integer
-        format: int64
-        default: 1
-        minimum: 1
-        maximum: 9223372036854776000
-    tokenIdQueryParam:
-      name: token.id
-      description: The ID of the token to return information for
-      in: query
       examples:
         noValue:
           summary: --
           value: ''
-        tokenNumAlias:
-          summary: Example of token num alias equals with no operator
-          value: 64
-        entityNumNoOperator:
-          summary: Example of entityNum equals with no operator
-          value: 100
-        idNoOperator:
-          summary: Example of id equals with no operator
-          value: 0.0.100
-        entityNumEqOperator:
-          summary: Example of entityNum equals operator
-          value: eq:200
-        idEqOperator:
-          summary: Example of id equals operator
-          value: eq:0.0.200
-        entityNumNeOperator:
-          summary: Example of entityNum not equals operator
-          value: ne:300
-        idNeOperator:
-          summary: Example of id not equals operator
-          value: ne:0.0.300
-        entityNumGtOperator:
-          summary: Example of entityNum greater than operator
-          value: gt:400
-        idGtOperator:
-          summary: Example of id greater than operator
-          value: gt:0.0.400
-        entityNumGteOperator:
-          summary: Example of entityNum greater than or equals operator
-          value: gte:500
-        idGteOperator:
-          summary: Example of id greater than or equals operator
-          value: gte:0.0.500
-        entityNumLtOperator:
-          summary: Example of entityNum less than operator
-          value: lt:600
-        idLtOperator:
-          summary: Example of id less than operator
-          value: lt:0.0.600
-        entityNumLteOperator:
-          summary: Example of entityNum less than or equals operator
-          value: lte:700
-        idLteOperator:
-          summary: Example of id less than or equals operator
-          value: lte:0.0.700
+        secondsNoOperator:
+          summary: Example of seconds equals with no operator
+          value: 1234567890
+        timestampNoOperator:
+          summary: Example of timestamp equals with no operator
+          value: 1234567890
+        secondsEqOperator:
+          summary: Example of seconds equals with operator
+          value: eq:1234567890
+        timestampEqOperator:
+          summary: Example of timestamp equals with operator
+          value: eq:1234567890.000000200
+        secondsLtOperator:
+          summary: Example of seconds less than operator
+          value: lt:1234567890
+        timestampLtOperator:
+          summary: Example of timestamp less than operator
+          value: lt:1234567890.000000600
+        secondsLteOperator:
+          summary: Example of seconds less than or equals operator
+          value: lte:1234567890
+        timestampLteOperator:
+          summary: Example of timestamp less than or equals operator
+          value: lte:1234567890.000000700
       schema:
-        $ref: '#/components/schemas/EntityIdQuery'
+        type: string
+        pattern: ^((eq|lt|lte):)?\d{1,10}(\.\d{1,9})?$
+    serialNumberQueryParam:
+      name: serialnumber
+      in: query
+      explode: true
+      description: The nft serial number (64 bit type). Requires a tokenId value also be populated.
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        serialNumNoOperator:
+          summary: Example of serialNum equals with no operator
+          value: 100
+        serialNumEqOperator:
+          summary: Example of serialNum equals operator
+          value: eq:200
+        serialNumGtOperator:
+          summary: Example of serialNum greater than operator
+          value: gt:400
+        serialNumGteOperator:
+          summary: Example of serialNum greater than or equals operator
+          value: gte:500
+        serialNumLtOperator:
+          summary: Example of serialNum less than operator
+          value: lt:600
+        serialNumLteOperator:
+          summary: Example of serialNum less than or equals operator
+          value: lte:700
+      schema:
+        type: string
+        pattern: ^((eq|gt|gte|lt|lte):)?\d{1,19}?$
     timestampQueryParam:
       description: The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
       name: timestamp
@@ -1173,6 +982,197 @@ components:
         items:
           type: string
           pattern: ^((eq|gt|gte|lt|lte|ne):)?\d{1,10}(\.\d{1,9})?$
+    tokenIdPathParam:
+      name: tokenId
+      in: path
+      required: true
+      description: Token id
+      examples:
+        tokenNumAlias:
+          value: 1135
+        shardRealmTokenNumAlias:
+          value: 0.0.000000000000000000000000000000000000046F
+        tokenNum:
+          value: 1135
+        shardRealmTokenNum:
+          value: 0.0.1135
+      schema:
+        $ref: '#/components/schemas/EntityId'
+    publicKeyQueryParam:
+      name: publickey
+      in: query
+      description: The public key to compare against
+      example: 3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be
+      schema:
+        type: string
+    tokenTypeQueryParam:
+      name: type
+      in: query
+      example:
+      - ALL
+      - FUNGIBLE_COMMON
+      - NON_FUNGIBLE_UNIQUE
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+    accountBalanceQueryParam:
+      name: account.balance
+      in: query
+      description: The optional balance value to compare against
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        noOperator:
+          summary: Example of equals with no operator
+          value: 100
+        eqOperator:
+          summary: Example of equals operator
+          value: eq:200
+        neOperator:
+          summary: Example of not equals operator
+          value: ne:300
+        gtOperator:
+          summary: Example of greater than operator
+          value: gt:400
+        gteOperator:
+          summary: Example of greater than or equals operator
+          value: gte:500
+        ltOperator:
+          summary: Example of less than operator
+          value: lt:600
+        lteOperator:
+          summary: Example of less than or equals operator
+          value: lte:700
+      schema:
+        type: string
+        pattern: ^((gte?|lte?|eq|ne)\:)?\d{1,10}$
+    orderQueryParamDesc:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: asc
+      schema:
+        enum:
+        - asc
+        - desc
+        default: desc
+    limitQueryParam:
+      name: limit
+      in: query
+      description: The maximum number of items to return
+      example: 2
+      schema:
+        format: int32
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    tokenNameQueryParam:
+      name: name
+      in: query
+      description: Partial or full token name. Not allowed to be used with token.id or account.id parameter. Pagination is not supported with the use of this parameter and results are ordered by token.id with respect to the order parameter.
+      schema:
+        type: string
+        maxLength: 100
+        minLength: 3
+    orderQueryParam:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: desc
+      schema:
+        enum:
+        - asc
+        - desc
+        default: asc
+    accountPublicKeyQueryParam:
+      name: account.publickey
+      in: query
+      description: The account's public key to compare against
+      example: 3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be
+      schema:
+        type: string
+    tokenIdQueryParam:
+      name: token.id
+      description: The ID of the token to return information for
+      in: query
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        tokenNumAlias:
+          summary: Example of token num alias equals with no operator
+          value: 64
+        entityNumNoOperator:
+          summary: Example of entityNum equals with no operator
+          value: 100
+        idNoOperator:
+          summary: Example of id equals with no operator
+          value: 0.0.100
+        entityNumEqOperator:
+          summary: Example of entityNum equals operator
+          value: eq:200
+        idEqOperator:
+          summary: Example of id equals operator
+          value: eq:0.0.200
+        entityNumNeOperator:
+          summary: Example of entityNum not equals operator
+          value: ne:300
+        idNeOperator:
+          summary: Example of id not equals operator
+          value: ne:0.0.300
+        entityNumGtOperator:
+          summary: Example of entityNum greater than operator
+          value: gt:400
+        idGtOperator:
+          summary: Example of id greater than operator
+          value: gt:0.0.400
+        entityNumGteOperator:
+          summary: Example of entityNum greater than or equals operator
+          value: gte:500
+        idGteOperator:
+          summary: Example of id greater than or equals operator
+          value: gte:0.0.500
+        entityNumLtOperator:
+          summary: Example of entityNum less than operator
+          value: lt:600
+        idLtOperator:
+          summary: Example of id less than operator
+          value: lt:0.0.600
+        entityNumLteOperator:
+          summary: Example of entityNum less than or equals operator
+          value: lte:700
+        idLteOperator:
+          summary: Example of id less than or equals operator
+          value: lte:0.0.700
+      schema:
+        $ref: '#/components/schemas/EntityIdQuery'
+  responses:
+    InvalidParameterError:
+      description: Invalid parameter
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: 'Invalid parameter: account.id'
+              - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: Not found
 externalDocs:
   description: REST API Docs
   url: https://docs.hedera.com/guides/docs/mirror-node-api/cryptocurrency-api

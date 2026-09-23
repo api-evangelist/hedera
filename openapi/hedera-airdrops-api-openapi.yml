@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mirror Node REST accounts airdrops API
+  title: Mirror Node REST Airdrops API
   version: 0.156.0
   license:
     name: Apache-2.0
@@ -8,10 +8,10 @@ info:
   description: 'The REST API offers the ability to query transactions and entity information from a mirror node.
 
 
-    Base url: [/api/v1](/api/v1)
+    Base url: /api/v1
 
 
-    OpenAPI Spec: [/api/v1/docs/openapi.yml](/api/v1/docs/openapi.yml)'
+    OpenAPI Spec: /api/v1/docs/openapi.yml'
   contact:
     name: Mirror Node Team
     email: mirrornode@hedera.com
@@ -37,14 +37,12 @@ servers:
       - previewnet
       - testnet
 tags:
-- name: airdrops
+- name: Airdrops
 paths:
   /api/v1/accounts/{idOrAliasOrEvmAddress}/airdrops/outstanding:
     get:
       summary: Get outstanding token airdrops sent by an account
-      description: 'Returns outstanding token airdrops that have been sent by an account.
-
-        '
+      description: Returns outstanding token airdrops that have been sent by an account.
       operationId: getOutstandingTokenAirdrops
       parameters:
       - $ref: '#/components/parameters/accountIdOrAliasOrEvmAddressPathParam'
@@ -65,13 +63,11 @@ paths:
         '404':
           $ref: '#/components/responses/NotFoundError'
       tags:
-      - airdrops
+      - Airdrops
   /api/v1/accounts/{idOrAliasOrEvmAddress}/airdrops/pending:
     get:
       summary: Get pending token airdrops received by an account
-      description: 'Returns pending token airdrops that have been received by an account.
-
-        '
+      description: Returns pending token airdrops that have been received by an account.
       operationId: getPendingTokenAirdrops
       parameters:
       - $ref: '#/components/parameters/accountIdOrAliasOrEvmAddressPathParam'
@@ -92,31 +88,157 @@ paths:
         '404':
           $ref: '#/components/responses/NotFoundError'
       tags:
-      - airdrops
+      - Airdrops
 components:
-  responses:
-    InvalidParameterError:
-      description: Invalid parameter
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            _status:
-              messages:
-              - message: 'Invalid parameter: account.id'
-              - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
-    NotFoundError:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            _status:
-              messages:
-              - message: Not found
+  schemas:
+    EntityId:
+      type:
+      - string
+      - 'null'
+      description: Network entity ID in the format of `shard.realm.num`
+      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
+      example: 0.0.2
+    TokenAirdropsResponse:
+      type: object
+      properties:
+        airdrops:
+          $ref: '#/components/schemas/TokenAirdrops'
+        links:
+          $ref: '#/components/schemas/Links'
+    EntityIdQuery:
+      type: string
+      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
+    TimestampNullable:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type:
+      - string
+      - 'null'
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    Timestamp:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type: string
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    TokenAirdrops:
+      type: array
+      items:
+        $ref: '#/components/schemas/TokenAirdrop'
+    TokenAirdrop:
+      type: object
+      properties:
+        amount:
+          format: int64
+          type: integer
+        receiver_id:
+          $ref: '#/components/schemas/EntityId'
+        sender_id:
+          $ref: '#/components/schemas/EntityId'
+        serial_number:
+          example: 1
+          format: int64
+          type:
+          - integer
+          - 'null'
+        timestamp:
+          $ref: '#/components/schemas/TimestampRange'
+        token_id:
+          $ref: '#/components/schemas/EntityId'
+      example:
+        amount: 10
+        receiver_id: 0.0.15
+        sender_id: 0.0.10
+        serial_number: null
+        timestamp:
+          from: '1651560386.060890949'
+          to: '1651560386.661997287'
+        token_id: 0.0.99
+      required:
+      - amount
+      - receiver_id
+      - sender_id
+      - timestamp
+      - token_id
+    Links:
+      type: object
+      properties:
+        next:
+          example: null
+          type:
+          - string
+          - 'null'
+    Error:
+      type: object
+      properties:
+        _status:
+          type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  data:
+                    description: Error message in hexadecimal
+                    example: '0x3000'
+                    format: binary
+                    pattern: ^0x[0-9a-fA-F]+$
+                    type:
+                    - string
+                    - 'null'
+                  detail:
+                    description: Detailed error message
+                    example: Generic detailed error message
+                    type:
+                    - string
+                    - 'null'
+                  message:
+                    description: Error message
+                    example: Generic error message
+                    type: string
+    TimestampRange:
+      type: object
+      description: A timestamp range an entity is valid for
+      properties:
+        from:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The inclusive from timestamp in seconds
+        to:
+          allOf:
+          - $ref: '#/components/schemas/TimestampNullable'
+          - description: The exclusive to timestamp in seconds
   parameters:
+    serialNumberQueryParam:
+      name: serialnumber
+      in: query
+      explode: true
+      description: The nft serial number (64 bit type). Requires a tokenId value also be populated.
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        serialNumNoOperator:
+          summary: Example of serialNum equals with no operator
+          value: 100
+        serialNumEqOperator:
+          summary: Example of serialNum equals operator
+          value: eq:200
+        serialNumGtOperator:
+          summary: Example of serialNum greater than operator
+          value: gt:400
+        serialNumGteOperator:
+          summary: Example of serialNum greater than or equals operator
+          value: gte:500
+        serialNumLtOperator:
+          summary: Example of serialNum less than operator
+          value: lt:600
+        serialNumLteOperator:
+          summary: Example of serialNum less than or equals operator
+          value: lte:700
+      schema:
+        type: string
+        pattern: ^((eq|gt|gte|lt|lte):)?\d{1,19}?$
     receiverIdQueryParam:
       name: receiver.id
       description: The ID of the receiver to return information for
@@ -151,46 +273,6 @@ components:
           value: lte:0.0.200
       schema:
         $ref: '#/components/schemas/EntityIdQuery'
-    serialNumberQueryParam:
-      name: serialnumber
-      in: query
-      explode: true
-      description: The nft serial number (64 bit type). Requires a tokenId value also be populated.
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        serialNumNoOperator:
-          summary: Example of serialNum equals with no operator
-          value: 100
-        serialNumEqOperator:
-          summary: Example of serialNum equals operator
-          value: eq:200
-        serialNumGtOperator:
-          summary: Example of serialNum greater than operator
-          value: gt:400
-        serialNumGteOperator:
-          summary: Example of serialNum greater than or equals operator
-          value: gte:500
-        serialNumLtOperator:
-          summary: Example of serialNum less than operator
-          value: lt:600
-        serialNumLteOperator:
-          summary: Example of serialNum less than or equals operator
-          value: lte:700
-      schema:
-        type: string
-        pattern: ^((eq|gt|gte|lt|lte):)?\d{1,19}?$
-    orderQueryParam:
-      name: order
-      in: query
-      description: The order in which items are listed
-      example: desc
-      schema:
-        enum:
-        - asc
-        - desc
-        default: asc
     accountIdOrAliasOrEvmAddressPathParam:
       name: idOrAliasOrEvmAddress
       in: path
@@ -229,40 +311,16 @@ components:
         default: 25
         minimum: 1
         maximum: 100
-    senderIdQueryParam:
-      name: sender.id
-      description: The ID of the sender to return information for
+    orderQueryParam:
+      name: order
       in: query
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        entityNumNoOperator:
-          summary: Example of entityNum equals with no operator
-          value: 100
-        idNoOperator:
-          summary: Example of id equals with no operator
-          value: 0.0.100
-        entityNumEqOperator:
-          summary: Example of entityNum equals operator
-          value: eq:200
-        idEqOperator:
-          summary: Example of id equals operator
-          value: eq:0.0.200
-        idGtOperator:
-          summary: Example of id greather than operator
-          value: gt:0.0.200
-        idGteOperator:
-          summary: Example of id greather than or equal to operator
-          value: gte:0.0.200
-        idLtOperator:
-          summary: Example of id less than operator
-          value: lt:0.0.200
-        idLteOperator:
-          summary: Example of id less than or equal to operator
-          value: lte:0.0.200
+      description: The order in which items are listed
+      example: desc
       schema:
-        $ref: '#/components/schemas/EntityIdQuery'
+        enum:
+        - asc
+        - desc
+        default: asc
     tokenIdQueryParam:
       name: token.id
       description: The ID of the token to return information for
@@ -318,124 +376,62 @@ components:
           value: lte:0.0.700
       schema:
         $ref: '#/components/schemas/EntityIdQuery'
-  schemas:
-    EntityIdQuery:
-      type: string
-      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
-    TimestampRange:
-      type: object
-      description: A timestamp range an entity is valid for
-      properties:
-        from:
-          allOf:
-          - $ref: '#/components/schemas/Timestamp'
-          - description: The inclusive from timestamp in seconds
-        to:
-          allOf:
-          - $ref: '#/components/schemas/TimestampNullable'
-          - description: The exclusive to timestamp in seconds
-    TimestampNullable:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type:
-      - string
-      - 'null'
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
-    TokenAirdrop:
-      type: object
-      properties:
-        amount:
-          format: int64
-          type: integer
-        receiver_id:
-          $ref: '#/components/schemas/EntityId'
-        sender_id:
-          $ref: '#/components/schemas/EntityId'
-        serial_number:
-          example: 1
-          format: int64
-          type:
-          - integer
-          - 'null'
-        timestamp:
-          $ref: '#/components/schemas/TimestampRange'
-        token_id:
-          $ref: '#/components/schemas/EntityId'
-      example:
-        amount: 10
-        receiver_id: 0.0.15
-        sender_id: 0.0.10
-        serial_number: null
-        timestamp:
-          from: '1651560386.060890949'
-          to: '1651560386.661997287'
-        token_id: 0.0.99
-      required:
-      - amount
-      - receiver_id
-      - sender_id
-      - timestamp
-      - token_id
-    TokenAirdropsResponse:
-      type: object
-      properties:
-        airdrops:
-          $ref: '#/components/schemas/TokenAirdrops'
-        links:
-          $ref: '#/components/schemas/Links'
-    Links:
-      type: object
-      properties:
-        next:
-          example: null
-          type:
-          - string
-          - 'null'
-    EntityId:
-      type:
-      - string
-      - 'null'
-      description: Network entity ID in the format of `shard.realm.num`
-      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
-      example: 0.0.2
-    Timestamp:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type: string
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
-    Error:
-      type: object
-      properties:
-        _status:
-          type: object
-          properties:
-            messages:
-              type: array
-              items:
-                type: object
-                properties:
-                  data:
-                    description: Error message in hexadecimal
-                    example: '0x3000'
-                    format: binary
-                    pattern: ^0x[0-9a-fA-F]+$
-                    type:
-                    - string
-                    - 'null'
-                  detail:
-                    description: Detailed error message
-                    example: Generic detailed error message
-                    type:
-                    - string
-                    - 'null'
-                  message:
-                    description: Error message
-                    example: Generic error message
-                    type: string
-    TokenAirdrops:
-      type: array
-      items:
-        $ref: '#/components/schemas/TokenAirdrop'
+    senderIdQueryParam:
+      name: sender.id
+      description: The ID of the sender to return information for
+      in: query
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        entityNumNoOperator:
+          summary: Example of entityNum equals with no operator
+          value: 100
+        idNoOperator:
+          summary: Example of id equals with no operator
+          value: 0.0.100
+        entityNumEqOperator:
+          summary: Example of entityNum equals operator
+          value: eq:200
+        idEqOperator:
+          summary: Example of id equals operator
+          value: eq:0.0.200
+        idGtOperator:
+          summary: Example of id greather than operator
+          value: gt:0.0.200
+        idGteOperator:
+          summary: Example of id greather than or equal to operator
+          value: gte:0.0.200
+        idLtOperator:
+          summary: Example of id less than operator
+          value: lt:0.0.200
+        idLteOperator:
+          summary: Example of id less than or equal to operator
+          value: lte:0.0.200
+      schema:
+        $ref: '#/components/schemas/EntityIdQuery'
+  responses:
+    InvalidParameterError:
+      description: Invalid parameter
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: 'Invalid parameter: account.id'
+              - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: Not found
 externalDocs:
   description: REST API Docs
   url: https://docs.hedera.com/guides/docs/mirror-node-api/cryptocurrency-api

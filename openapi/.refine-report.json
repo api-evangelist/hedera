@@ -1,16 +1,7 @@
 {
   "provider": "hedera",
   "sources": [
-    "hedera-accounts-api-openapi.yml",
-    "hedera-airdrops-api-openapi.yml",
-    "hedera-balances-api-openapi.yml",
-    "hedera-blocks-api-openapi.yml",
-    "hedera-contracts-api-openapi.yml",
-    "hedera-network-api-openapi.yml",
-    "hedera-schedules-api-openapi.yml",
-    "hedera-tokens-api-openapi.yml",
-    "hedera-topics-api-openapi.yml",
-    "hedera-transactions-api-openapi.yml"
+    "_original/openapi.json"
   ],
   "outputs": [
     "hedera-accounts-api-openapi.yml",
@@ -27,6 +18,24 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "openapi.json: declared missing tag: airdrops",
+    "openapi.json: declared missing tag: blocks",
+    "openapi.json: declared missing tag: network",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "hedera-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hedera-airdrops-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hedera-balances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hedera-blocks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hedera-contracts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hedera-network-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hedera-schedules-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hedera-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hedera-topics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hedera-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
