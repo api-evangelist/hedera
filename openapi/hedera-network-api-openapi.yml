@@ -200,23 +200,6 @@ paths:
       - Network
 components:
   schemas:
-    EntityId:
-      type:
-      - string
-      - 'null'
-      description: Network entity ID in the format of `shard.realm.num`
-      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
-      example: 0.0.2
-    NetworkFee:
-      type: object
-      properties:
-        gas:
-          description: gas cost in tinybars
-          format: int64
-          type: integer
-        transaction_type:
-          description: type of the transaction
-          type: string
     NetworkExchangeRateSetResponse:
       type: object
       properties:
@@ -226,142 +209,77 @@ components:
           $ref: '#/components/schemas/ExchangeRate'
         timestamp:
           $ref: '#/components/schemas/Timestamp'
-    NetworkStakeResponse:
-      type: object
-      required:
-      - max_stake_rewarded
-      - max_staking_reward_rate_per_hbar
-      - max_total_reward
-      - node_reward_fee_fraction
-      - reserved_staking_rewards
-      - reward_balance_threshold
-      - stake_total
-      - staking_period
-      - staking_period_duration
-      - staking_periods_stored
-      - staking_reward_fee_fraction
-      - staking_reward_rate
-      - staking_start_threshold
-      - unreserved_staking_reward_balance
+    FeeEstimate:
+      description: The fee estimate for the network component. Includes the base fee and any extras associated with it.
       properties:
-        max_stake_rewarded:
-          description: 'The maximum amount of tinybar that can be staked for reward while still achieving
-
-            the maximum per-hbar reward rate
-
-            '
+        base:
+          description: The base fee price, in tinycents.
+          example: 1000
           format: int64
+          minimum: 0
           type: integer
-        max_staking_reward_rate_per_hbar:
-          description: The maximum reward rate, in tinybars per whole hbar, that any account can receive in a day
-          type: integer
-          format: int64
-        max_total_reward:
-          description: 'The total tinybars to be paid as staking rewards in the ending period,
-
-            after applying the settings for the 0.0.800 balance threshold and the maximum stake rewarded
-
-            '
-          format: int64
-          type: integer
-        node_reward_fee_fraction:
-          description: The fraction between zero and one of the network and service fees paid to the node reward account 0.0.801
-          type: number
-          format: float
-        reserved_staking_rewards:
-          description: 'The amount of the staking reward funds of account 0.0.800 reserved to pay pending
-
-            rewards that have been earned but not collected
-
-            '
-          format: int64
-          type: integer
-        reward_balance_threshold:
-          description: 'The unreserved tinybar balance of account 0.0.800 required to achieve the
-
-            maximum per-hbar reward rate
-
-            '
-          format: int64
-          type: integer
-        stake_total:
-          description: The total amount staked to the network in tinybars the start of the current staking period
-          type: integer
-          format: int64
-        staking_period:
-          allOf:
-          - $ref: '#/components/schemas/TimestampRange'
-          - description: The timestamp range of the staking period
-        staking_period_duration:
-          description: The number of minutes in a staking period
-          type: integer
-          format: int64
-        staking_periods_stored:
-          description: The number of staking periods for which the reward is stored for each node
-          type: integer
-          format: int64
-        staking_reward_fee_fraction:
-          description: The fraction between zero and one of the network and service fees paid to the staking reward account 0.0.800
-          type: number
-          format: float
-        staking_reward_rate:
-          description: The total number of tinybars to be distributed as staking rewards each period
-          type: integer
-          format: int64
-        staking_start_threshold:
-          description: The minimum balance of staking reward account 0.0.800 required to active rewards
-          type: integer
-          format: int64
-        unreserved_staking_reward_balance:
-          description: 'The unreserved balance of account 0.0.800 at the close of the just-ending period;
-
-            this value is used to compute the HIP-782 balance ratio
-
-            '
-          format: int64
-          type: integer
-      example:
-        max_stake_rewarded: 10
-        max_staking_reward_rate_per_hbar: 17808
-        max_total_reward: 20
-        node_reward_fee_fraction: 1
-        reserved_staking_rewards: 30
-        reward_balance_threshold: 40
-        stake_total: 35000000000000000
-        staking_period:
-          from: '1655164800.000000000'
-          to: '1655251200.000000000'
-        staking_period_duration: 1440
-        staking_periods_stored: 365
-        staking_reward_fee_fraction: 1
-        staking_reward_rate: 100000000000
-        staking_start_threshold: 25000000000000000
-        unreserved_staking_reward_balance: 50
-    ServiceEndpoint:
-      type: object
+        extras:
+          description: The extra fees that apply for this fee component.
+          items:
+            $ref: '#/components/schemas/FeeExtra'
+          type: array
       required:
-      - domain_name
-      - ip_address_v4
-      - port
+      - base
+      - extras
+      type: object
+    Error:
+      type: object
       properties:
-        domain_name:
-          type: string
-        ip_address_v4:
-          type: string
-        port:
+        _status:
+          type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  data:
+                    description: Error message in hexadecimal
+                    example: '0x3000'
+                    format: binary
+                    pattern: ^0x[0-9a-fA-F]+$
+                    type:
+                    - string
+                    - 'null'
+                  detail:
+                    description: Detailed error message
+                    example: Generic detailed error message
+                    type:
+                    - string
+                    - 'null'
+                  message:
+                    description: Error message
+                    example: Generic error message
+                    type: string
+    ExchangeRate:
+      type: object
+      properties:
+        cent_equivalent:
+          format: int32
+          example: 596987
+          type: integer
+        expiration_time:
+          format: int64
+          example: 1649689200
+          type: integer
+        hbar_equivalent:
+          example: 30000
           format: int32
           type: integer
-      example:
-        domain_name: www.example.com
-        ip_address_v4: 127.0.0.1
-        port: 50211
-    RegisteredBlockNodeEndpoint:
-      type: object
-      properties:
-        endpoint_apis:
-          type: array
-          items:
-            $ref: '#/components/schemas/RegisteredBlockNodeApi'
+    RegisteredBlockNodeApi:
+      type: string
+      enum:
+      - OTHER
+      - STATUS
+      - PUBLISH
+      - SUBSCRIBE_STREAM
+      - STATE_PROOF
+      - UNRECOGNIZED
     FeeEstimateResponse:
       description: The response containing the estimated transaction fees.
       properties:
@@ -394,11 +312,52 @@ components:
       - service
       - total
       type: object
-    RegisteredGeneralServiceEndpoint:
+    RegisteredNodeType:
+      description: Registered node type.
+      enum:
+      - BLOCK_NODE
+      - GENERAL_SERVICE
+      - MIRROR_NODE
+      - RPC_RELAY
+      example: BLOCK_NODE
+      type: string
+    NetworkNodesResponse:
+      type: object
+      required:
+      - nodes
+      - links
+      properties:
+        nodes:
+          $ref: '#/components/schemas/NetworkNodes'
+        links:
+          $ref: '#/components/schemas/Links'
+    Timestamp:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type: string
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    NetworkSupplyResponse:
       type: object
       properties:
-        description:
+        released_supply:
+          description: The network's released supply of hbars in tinybars
+          example: '3999999999999999949'
           type: string
+        timestamp:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The consensus timestamp at which the released supply was valid
+        total_supply:
+          description: The network's total supply of hbars in tinybars
+          example: '5000000000000000000'
+          type: string
+    EntityId:
+      type:
+      - string
+      - 'null'
+      description: Network entity ID in the format of `shard.realm.num`
+      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
+      example: 0.0.2
     FeeExtra:
       description: The extra fee charged for the transaction.
       properties:
@@ -444,9 +403,18 @@ components:
       - name
       - subtotal
       type: object
-    EntityIdQuery:
-      type: string
-      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
+    NetworkNodes:
+      type: array
+      items:
+        $ref: '#/components/schemas/NetworkNode'
+    Links:
+      type: object
+      properties:
+        next:
+          example: null
+          type:
+          - string
+          - 'null'
     Key:
       description: The public key which controls access to various network entities.
       type:
@@ -463,22 +431,6 @@ components:
         key:
           type: string
           example: 15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743
-    TimestampNullable:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type:
-      - string
-      - 'null'
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
-    RegisteredRpcRelayEndpoint:
-      type: object
-    FeeEstimateMode:
-      description: Estimate solely based on the transaction's inherent properties or use network state.
-      default: INTRINSIC
-      enum:
-      - INTRINSIC
-      - STATE
-      type: string
     RegisteredServiceEndpoint:
       type: object
       required:
@@ -535,26 +487,6 @@ components:
         requires_tls: false
         rpc_relay: null
         type: BLOCK_NODE
-    NetworkFees:
-      type: array
-      items:
-        $ref: '#/components/schemas/NetworkFee'
-    RegisteredMirrorNodeEndpoint:
-      type: object
-    Timestamp:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type: string
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
-    RegisteredBlockNodeApi:
-      type: string
-      enum:
-      - OTHER
-      - STATUS
-      - PUBLISH
-      - SUBSCRIBE_STREAM
-      - STATE_PROOF
-      - UNRECOGNIZED
     TimestampRangeNullable:
       type:
       - object
@@ -569,21 +501,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/TimestampNullable'
           - description: The exclusive to timestamp in seconds
-    NetworkSupplyResponse:
-      type: object
-      properties:
-        released_supply:
-          description: The network's released supply of hbars in tinybars
-          example: '3999999999999999949'
-          type: string
-        timestamp:
-          allOf:
-          - $ref: '#/components/schemas/Timestamp'
-          - description: The consensus timestamp at which the released supply was valid
-        total_supply:
-          description: The network's total supply of hbars in tinybars
-          example: '5000000000000000000'
-          type: string
     NetworkFeesResponse:
       type: object
       properties:
@@ -591,24 +508,49 @@ components:
           $ref: '#/components/schemas/NetworkFees'
         timestamp:
           $ref: '#/components/schemas/Timestamp'
-    FeeEstimate:
-      description: The fee estimate for the network component. Includes the base fee and any extras associated with it.
-      properties:
-        base:
-          description: The base fee price, in tinycents.
-          example: 1000
-          format: int64
-          minimum: 0
-          type: integer
-        extras:
-          description: The extra fees that apply for this fee component.
-          items:
-            $ref: '#/components/schemas/FeeExtra'
-          type: array
-      required:
-      - base
-      - extras
+    EntityIdQuery:
+      type: string
+      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
+    RegisteredNode:
       type: object
+      required:
+      - admin_key
+      - created_timestamp
+      - description
+      - registered_node_id
+      - service_endpoints
+      - timestamp
+      properties:
+        admin_key:
+          $ref: '#/components/schemas/Key'
+        created_timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        description:
+          description: A short description of the node
+          type:
+          - string
+          - 'null'
+        registered_node_id:
+          description: An identifier for the registered node
+          format: int64
+          type: integer
+        service_endpoints:
+          $ref: '#/components/schemas/RegisteredServiceEndpoints'
+        timestamp:
+          $ref: '#/components/schemas/TimestampRange'
+      example:
+        admin_key:
+          _type: ProtobufEncoded
+          key: 421050820e1485acdd59726088e0e4a2130ebbbb70009f640ad95c78dd5a7b38
+        created_timestamp: '1586567700.453054001'
+        description: alpha
+        registered_node_id: 1
+        service_endpoints:
+        - ip_address_v4: 128.0.0.6
+          port: 50216
+        timestamp:
+          from: '187654.000123457'
+          to: null
     RegisteredNodesResponse:
       type: object
       required:
@@ -619,27 +561,50 @@ components:
           $ref: '#/components/schemas/RegisteredNodes'
         links:
           $ref: '#/components/schemas/Links'
+    RegisteredNodes:
+      type: array
+      items:
+        $ref: '#/components/schemas/RegisteredNode'
+    ServiceEndpoint:
+      type: object
+      required:
+      - domain_name
+      - ip_address_v4
+      - port
+      properties:
+        domain_name:
+          type: string
+        ip_address_v4:
+          type: string
+        port:
+          format: int32
+          type: integer
+      example:
+        domain_name: www.example.com
+        ip_address_v4: 127.0.0.1
+        port: 50211
     RegisteredServiceEndpoints:
       type: array
       items:
         $ref: '#/components/schemas/RegisteredServiceEndpoint'
-    Links:
+    RegisteredGeneralServiceEndpoint:
       type: object
       properties:
-        next:
-          example: null
-          type:
-          - string
-          - 'null'
-    RegisteredNodeType:
-      description: Registered node type.
-      enum:
-      - BLOCK_NODE
-      - GENERAL_SERVICE
-      - MIRROR_NODE
-      - RPC_RELAY
-      example: BLOCK_NODE
-      type: string
+        description:
+          type: string
+    RegisteredRpcRelayEndpoint:
+      type: object
+    RegisteredBlockNodeEndpoint:
+      type: object
+      properties:
+        endpoint_apis:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegisteredBlockNodeApi'
+    NetworkFees:
+      type: array
+      items:
+        $ref: '#/components/schemas/NetworkFee'
     NetworkNode:
       type: object
       required:
@@ -791,14 +756,20 @@ components:
         timestamp:
           from: '187654.000123457'
           to: null
-    ServiceEndpoints:
-      type: array
-      items:
-        $ref: '#/components/schemas/ServiceEndpoint'
-    NetworkNodes:
-      type: array
-      items:
-        $ref: '#/components/schemas/NetworkNode'
+    FeeEstimateMode:
+      description: Estimate solely based on the transaction's inherent properties or use network state.
+      default: INTRINSIC
+      enum:
+      - INTRINSIC
+      - STATE
+      type: string
+    TimestampNullable:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type:
+      - string
+      - 'null'
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
     FeeEstimateNetwork:
       description: The network fee component which covers the cost of gossip, consensus, signature verifications, fee payment, and storage.
       properties:
@@ -818,89 +789,6 @@ components:
       - multiplier
       - subtotal
       type: object
-    RegisteredNode:
-      type: object
-      required:
-      - admin_key
-      - created_timestamp
-      - description
-      - registered_node_id
-      - service_endpoints
-      - timestamp
-      properties:
-        admin_key:
-          $ref: '#/components/schemas/Key'
-        created_timestamp:
-          $ref: '#/components/schemas/TimestampNullable'
-        description:
-          description: A short description of the node
-          type:
-          - string
-          - 'null'
-        registered_node_id:
-          description: An identifier for the registered node
-          format: int64
-          type: integer
-        service_endpoints:
-          $ref: '#/components/schemas/RegisteredServiceEndpoints'
-        timestamp:
-          $ref: '#/components/schemas/TimestampRange'
-      example:
-        admin_key:
-          _type: ProtobufEncoded
-          key: 421050820e1485acdd59726088e0e4a2130ebbbb70009f640ad95c78dd5a7b38
-        created_timestamp: '1586567700.453054001'
-        description: alpha
-        registered_node_id: 1
-        service_endpoints:
-        - ip_address_v4: 128.0.0.6
-          port: 50216
-        timestamp:
-          from: '187654.000123457'
-          to: null
-    RegisteredNodes:
-      type: array
-      items:
-        $ref: '#/components/schemas/RegisteredNode'
-    Error:
-      type: object
-      properties:
-        _status:
-          type: object
-          properties:
-            messages:
-              type: array
-              items:
-                type: object
-                properties:
-                  data:
-                    description: Error message in hexadecimal
-                    example: '0x3000'
-                    format: binary
-                    pattern: ^0x[0-9a-fA-F]+$
-                    type:
-                    - string
-                    - 'null'
-                  detail:
-                    description: Detailed error message
-                    example: Generic detailed error message
-                    type:
-                    - string
-                    - 'null'
-                  message:
-                    description: Error message
-                    example: Generic error message
-                    type: string
-    NetworkNodesResponse:
-      type: object
-      required:
-      - nodes
-      - links
-      properties:
-        nodes:
-          $ref: '#/components/schemas/NetworkNodes'
-        links:
-          $ref: '#/components/schemas/Links'
     TimestampRange:
       type: object
       description: A timestamp range an entity is valid for
@@ -913,65 +801,183 @@ components:
           allOf:
           - $ref: '#/components/schemas/TimestampNullable'
           - description: The exclusive to timestamp in seconds
-    ExchangeRate:
+    ServiceEndpoints:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServiceEndpoint'
+    RegisteredMirrorNodeEndpoint:
+      type: object
+    NetworkFee:
       type: object
       properties:
-        cent_equivalent:
-          format: int32
-          example: 596987
-          type: integer
-        expiration_time:
+        gas:
+          description: gas cost in tinybars
           format: int64
-          example: 1649689200
           type: integer
-        hbar_equivalent:
-          example: 30000
-          format: int32
+        transaction_type:
+          description: type of the transaction
+          type: string
+    NetworkStakeResponse:
+      type: object
+      required:
+      - max_stake_rewarded
+      - max_staking_reward_rate_per_hbar
+      - max_total_reward
+      - node_reward_fee_fraction
+      - reserved_staking_rewards
+      - reward_balance_threshold
+      - stake_total
+      - staking_period
+      - staking_period_duration
+      - staking_periods_stored
+      - staking_reward_fee_fraction
+      - staking_reward_rate
+      - staking_start_threshold
+      - unreserved_staking_reward_balance
+      properties:
+        max_stake_rewarded:
+          description: 'The maximum amount of tinybar that can be staked for reward while still achieving
+
+            the maximum per-hbar reward rate
+
+            '
+          format: int64
           type: integer
-  responses:
-    ServiceUnavailableError:
-      description: Service Unavailable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            _status:
-              messages:
-              - message: Require at least 1/3 signature files to prove consensus, got 1 out of 4 for file 2019-10-11T13_33_25.526889Z.rcd_sig
-    NotFoundError:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            _status:
-              messages:
-              - message: Not found
-    InvalidParameterError:
-      description: Invalid parameter
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            _status:
-              messages:
-              - message: 'Invalid parameter: account.id'
-              - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
-    NetworkStakeNotFound:
-      description: No network stake data found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            _status:
-              messages:
-              - detail: No network stake data found
-                message: Not Found
+        max_staking_reward_rate_per_hbar:
+          description: The maximum reward rate, in tinybars per whole hbar, that any account can receive in a day
+          type: integer
+          format: int64
+        max_total_reward:
+          description: 'The total tinybars to be paid as staking rewards in the ending period,
+
+            after applying the settings for the 0.0.800 balance threshold and the maximum stake rewarded
+
+            '
+          format: int64
+          type: integer
+        node_reward_fee_fraction:
+          description: The fraction between zero and one of the network and service fees paid to the node reward account 0.0.801
+          type: number
+          format: float
+        reserved_staking_rewards:
+          description: 'The amount of the staking reward funds of account 0.0.800 reserved to pay pending
+
+            rewards that have been earned but not collected
+
+            '
+          format: int64
+          type: integer
+        reward_balance_threshold:
+          description: 'The unreserved tinybar balance of account 0.0.800 required to achieve the
+
+            maximum per-hbar reward rate
+
+            '
+          format: int64
+          type: integer
+        stake_total:
+          description: The total amount staked to the network in tinybars the start of the current staking period
+          type: integer
+          format: int64
+        staking_period:
+          allOf:
+          - $ref: '#/components/schemas/TimestampRange'
+          - description: The timestamp range of the staking period
+        staking_period_duration:
+          description: The number of minutes in a staking period
+          type: integer
+          format: int64
+        staking_periods_stored:
+          description: The number of staking periods for which the reward is stored for each node
+          type: integer
+          format: int64
+        staking_reward_fee_fraction:
+          description: The fraction between zero and one of the network and service fees paid to the staking reward account 0.0.800
+          type: number
+          format: float
+        staking_reward_rate:
+          description: The total number of tinybars to be distributed as staking rewards each period
+          type: integer
+          format: int64
+        staking_start_threshold:
+          description: The minimum balance of staking reward account 0.0.800 required to active rewards
+          type: integer
+          format: int64
+        unreserved_staking_reward_balance:
+          description: 'The unreserved balance of account 0.0.800 at the close of the just-ending period;
+
+            this value is used to compute the HIP-782 balance ratio
+
+            '
+          format: int64
+          type: integer
+      example:
+        max_stake_rewarded: 10
+        max_staking_reward_rate_per_hbar: 17808
+        max_total_reward: 20
+        node_reward_fee_fraction: 1
+        reserved_staking_rewards: 30
+        reward_balance_threshold: 40
+        stake_total: 35000000000000000
+        staking_period:
+          from: '1655164800.000000000'
+          to: '1655251200.000000000'
+        staking_period_duration: 1440
+        staking_periods_stored: 365
+        staking_reward_fee_fraction: 1
+        staking_reward_rate: 100000000000
+        staking_start_threshold: 25000000000000000
+        unreserved_staking_reward_balance: 50
   parameters:
+    limitQueryParam:
+      name: limit
+      in: query
+      description: The maximum number of items to return
+      example: 2
+      schema:
+        format: int32
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    highVolumeThrottleQueryParam:
+      description: The high-volume throttle utilization in basis points where 10000 equals 100%. A value of 0, the default, indicates no high-volume pricing.
+      in: query
+      name: high_volume_throttle
+      example: 10000
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 10000
+        default: 0
+    fileIdQueryParam:
+      name: file.id
+      description: The ID of the file entity
+      in: query
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        entityNumNoOperator:
+          summary: Example of entityNum equals with no operator
+          value: 100
+        idNoOperator:
+          summary: Example of id equals with no operator
+          value: 0.0.100
+        entityNumEqOperator:
+          summary: Example of entityNum equals operator
+          value: eq:200
+        idEqOperator:
+          summary: Example of id equals operator
+          value: eq:0.0.200
+      schema:
+        $ref: '#/components/schemas/EntityIdQuery'
+    registeredNodeTypeQueryParam:
+      example: BLOCK_NODE
+      in: query
+      name: type
+      schema:
+        $ref: '#/components/schemas/RegisteredNodeType'
     registeredNodeIdQueryParam:
       name: registerednode.id
       description: The ID of the registered node
@@ -1001,12 +1007,6 @@ components:
       schema:
         type: string
         pattern: ^((eq|gt|gte|lt|lte):)?\d{1,19}$
-    registeredNodeTypeQueryParam:
-      example: BLOCK_NODE
-      in: query
-      name: type
-      schema:
-        $ref: '#/components/schemas/RegisteredNodeType'
     timestampQueryParam:
       description: The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
       name: timestamp
@@ -1092,17 +1092,13 @@ components:
       schema:
         type: string
         pattern: ^((eq|gt|gte|lt|lte):)?\d{1,19}$
-    limitQueryParam:
-      name: limit
+    estimateModeQueryParam:
+      description: Estimate solely based on the transaction's inherent properties or use network state.
       in: query
-      description: The maximum number of items to return
-      example: 2
+      name: mode
+      example: INTRINSIC
       schema:
-        format: int32
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 100
+        $ref: '#/components/schemas/FeeEstimateMode'
     orderQueryParam:
       name: order
       in: query
@@ -1113,45 +1109,49 @@ components:
         - asc
         - desc
         default: asc
-    fileIdQueryParam:
-      name: file.id
-      description: The ID of the file entity
-      in: query
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        entityNumNoOperator:
-          summary: Example of entityNum equals with no operator
-          value: 100
-        idNoOperator:
-          summary: Example of id equals with no operator
-          value: 0.0.100
-        entityNumEqOperator:
-          summary: Example of entityNum equals operator
-          value: eq:200
-        idEqOperator:
-          summary: Example of id equals operator
-          value: eq:0.0.200
-      schema:
-        $ref: '#/components/schemas/EntityIdQuery'
-    highVolumeThrottleQueryParam:
-      description: The high-volume throttle utilization in basis points where 10000 equals 100%. A value of 0, the default, indicates no high-volume pricing.
-      in: query
-      name: high_volume_throttle
-      example: 10000
-      schema:
-        type: integer
-        minimum: 0
-        maximum: 10000
-        default: 0
-    estimateModeQueryParam:
-      description: Estimate solely based on the transaction's inherent properties or use network state.
-      in: query
-      name: mode
-      example: INTRINSIC
-      schema:
-        $ref: '#/components/schemas/FeeEstimateMode'
+  responses:
+    NetworkStakeNotFound:
+      description: No network stake data found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - detail: No network stake data found
+                message: Not Found
+    InvalidParameterError:
+      description: Invalid parameter
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: 'Invalid parameter: account.id'
+              - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
+    ServiceUnavailableError:
+      description: Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: Require at least 1/3 signature files to prove consensus, got 1 out of 4 for file 2019-10-11T13_33_25.526889Z.rcd_sig
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: Not found
 externalDocs:
   description: REST API Docs
   url: https://docs.hedera.com/guides/docs/mirror-node-api/cryptocurrency-api

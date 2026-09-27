@@ -83,6 +83,15 @@ paths:
       - Schedules
 components:
   schemas:
+    Schedules:
+      type: array
+      items:
+        $ref: '#/components/schemas/Schedule'
+    Timestamp:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type: string
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
     EntityId:
       type:
       - string
@@ -90,9 +99,6 @@ components:
       description: Network entity ID in the format of `shard.realm.num`
       pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
       example: 0.0.2
-    EntityIdQuery:
-      type: string
-      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
     Error:
       type: object
       properties:
@@ -122,63 +128,6 @@ components:
                     description: Error message
                     example: Generic error message
                     type: string
-    Schedules:
-      type: array
-      items:
-        $ref: '#/components/schemas/Schedule'
-    ScheduleSignature:
-      type: object
-      properties:
-        consensus_timestamp:
-          $ref: '#/components/schemas/Timestamp'
-        public_key_prefix:
-          type: string
-          format: byte
-          example: AAEBAwuqAwzB
-        signature:
-          type: string
-          format: byte
-          example: 3q2+7wABAQMLqgMMwQ==
-        type:
-          type: string
-          enum:
-          - CONTRACT
-          - ED25519
-          - RSA_3072
-          - ECDSA_384
-          - ECDSA_SECP256K1
-          - UNKNOWN
-          example: ED25519
-    SchedulesResponse:
-      type: object
-      properties:
-        schedules:
-          $ref: '#/components/schemas/Schedules'
-        links:
-          $ref: '#/components/schemas/Links'
-    Key:
-      description: The public key which controls access to various network entities.
-      type:
-      - object
-      - 'null'
-      properties:
-        _type:
-          type: string
-          enum:
-          - ECDSA_SECP256K1
-          - ED25519
-          - ProtobufEncoded
-          example: ProtobufEncoded
-        key:
-          type: string
-          example: 15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743
-    TimestampNullable:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type:
-      - string
-      - 'null'
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
     Schedule:
       type: object
       properties:
@@ -220,12 +169,133 @@ components:
           type:
           - string
           - 'null'
-    Timestamp:
+    SchedulesResponse:
+      type: object
+      properties:
+        schedules:
+          $ref: '#/components/schemas/Schedules'
+        links:
+          $ref: '#/components/schemas/Links'
+    TimestampNullable:
       description: A Unix timestamp in seconds.nanoseconds format
-      type: string
+      type:
+      - string
+      - 'null'
       example: '1586567700.453054000'
       pattern: ^\d{1,10}(\.\d{1,9})?$
+    Key:
+      description: The public key which controls access to various network entities.
+      type:
+      - object
+      - 'null'
+      properties:
+        _type:
+          type: string
+          enum:
+          - ECDSA_SECP256K1
+          - ED25519
+          - ProtobufEncoded
+          example: ProtobufEncoded
+        key:
+          type: string
+          example: 15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743
+    ScheduleSignature:
+      type: object
+      properties:
+        consensus_timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        public_key_prefix:
+          type: string
+          format: byte
+          example: AAEBAwuqAwzB
+        signature:
+          type: string
+          format: byte
+          example: 3q2+7wABAQMLqgMMwQ==
+        type:
+          type: string
+          enum:
+          - CONTRACT
+          - ED25519
+          - RSA_3072
+          - ECDSA_384
+          - ECDSA_SECP256K1
+          - UNKNOWN
+          example: ED25519
+    EntityIdQuery:
+      type: string
+      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
   parameters:
+    scheduleIdPathParam:
+      name: scheduleId
+      in: path
+      required: true
+      description: Schedule id
+      schema:
+        $ref: '#/components/schemas/EntityId'
+    accountIdQueryParam:
+      name: account.id
+      in: query
+      description: The ID of the account to return information for
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        entityNumNoOperator:
+          summary: Example of entityNum equals with no operator
+          value: 100
+        idNoOperator:
+          summary: Example of id equals with no operator
+          value: 0.0.100
+        entityNumEqOperator:
+          summary: Example of entityNum equals operator
+          value: eq:200
+        idEqOperator:
+          summary: Example of id equals operator
+          value: eq:0.0.200
+        entityNumNeOperator:
+          summary: Example of entityNum not equals operator
+          value: ne:300
+        idNeOperator:
+          summary: Example of id not equals operator
+          value: ne:0.0.300
+        entityNumGtOperator:
+          summary: Example of entityNum greater than operator
+          value: gt:400
+        idGtOperator:
+          summary: Example of id greater than operator
+          value: gt:0.0.400
+        entityNumGteOperator:
+          summary: Example of entityNum greater than or equals operator
+          value: gte:500
+        idGteOperator:
+          summary: Example of id greater than or equals operator
+          value: gte:0.0.500
+        entityNumLtOperator:
+          summary: Example of entityNum less than operator
+          value: lt:600
+        idLtOperator:
+          summary: Example of id less than operator
+          value: lt:0.0.600
+        entityNumLteOperator:
+          summary: Example of entityNum less than or equals operator
+          value: lte:700
+        idLteOperator:
+          summary: Example of id less than or equals operator
+          value: lte:0.0.700
+      schema:
+        $ref: '#/components/schemas/EntityIdQuery'
+    orderQueryParam:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: desc
+      schema:
+        enum:
+        - asc
+        - desc
+        default: asc
     scheduleIdQueryParam:
       name: schedule.id
       description: The ID of the schedule to return information for
@@ -289,76 +359,6 @@ components:
         default: 25
         minimum: 1
         maximum: 100
-    orderQueryParam:
-      name: order
-      in: query
-      description: The order in which items are listed
-      example: desc
-      schema:
-        enum:
-        - asc
-        - desc
-        default: asc
-    accountIdQueryParam:
-      name: account.id
-      in: query
-      description: The ID of the account to return information for
-      explode: true
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        entityNumNoOperator:
-          summary: Example of entityNum equals with no operator
-          value: 100
-        idNoOperator:
-          summary: Example of id equals with no operator
-          value: 0.0.100
-        entityNumEqOperator:
-          summary: Example of entityNum equals operator
-          value: eq:200
-        idEqOperator:
-          summary: Example of id equals operator
-          value: eq:0.0.200
-        entityNumNeOperator:
-          summary: Example of entityNum not equals operator
-          value: ne:300
-        idNeOperator:
-          summary: Example of id not equals operator
-          value: ne:0.0.300
-        entityNumGtOperator:
-          summary: Example of entityNum greater than operator
-          value: gt:400
-        idGtOperator:
-          summary: Example of id greater than operator
-          value: gt:0.0.400
-        entityNumGteOperator:
-          summary: Example of entityNum greater than or equals operator
-          value: gte:500
-        idGteOperator:
-          summary: Example of id greater than or equals operator
-          value: gte:0.0.500
-        entityNumLtOperator:
-          summary: Example of entityNum less than operator
-          value: lt:600
-        idLtOperator:
-          summary: Example of id less than operator
-          value: lt:0.0.600
-        entityNumLteOperator:
-          summary: Example of entityNum less than or equals operator
-          value: lte:700
-        idLteOperator:
-          summary: Example of id less than or equals operator
-          value: lte:0.0.700
-      schema:
-        $ref: '#/components/schemas/EntityIdQuery'
-    scheduleIdPathParam:
-      name: scheduleId
-      in: path
-      required: true
-      description: Schedule id
-      schema:
-        $ref: '#/components/schemas/EntityId'
   responses:
     InvalidParameterError:
       description: Invalid parameter

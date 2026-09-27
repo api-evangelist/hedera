@@ -91,6 +91,40 @@ paths:
       - Airdrops
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        _status:
+          type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  data:
+                    description: Error message in hexadecimal
+                    example: '0x3000'
+                    format: binary
+                    pattern: ^0x[0-9a-fA-F]+$
+                    type:
+                    - string
+                    - 'null'
+                  detail:
+                    description: Detailed error message
+                    example: Generic detailed error message
+                    type:
+                    - string
+                    - 'null'
+                  message:
+                    description: Error message
+                    example: Generic error message
+                    type: string
+    Timestamp:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type: string
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
     EntityId:
       type:
       - string
@@ -98,6 +132,21 @@ components:
       description: Network entity ID in the format of `shard.realm.num`
       pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
       example: 0.0.2
+    Links:
+      type: object
+      properties:
+        next:
+          example: null
+          type:
+          - string
+          - 'null'
+    EntityIdQuery:
+      type: string
+      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
+    TokenAirdrops:
+      type: array
+      items:
+        $ref: '#/components/schemas/TokenAirdrop'
     TokenAirdropsResponse:
       type: object
       properties:
@@ -105,25 +154,6 @@ components:
           $ref: '#/components/schemas/TokenAirdrops'
         links:
           $ref: '#/components/schemas/Links'
-    EntityIdQuery:
-      type: string
-      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
-    TimestampNullable:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type:
-      - string
-      - 'null'
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
-    Timestamp:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type: string
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
-    TokenAirdrops:
-      type: array
-      items:
-        $ref: '#/components/schemas/TokenAirdrop'
     TokenAirdrop:
       type: object
       properties:
@@ -159,43 +189,13 @@ components:
       - sender_id
       - timestamp
       - token_id
-    Links:
-      type: object
-      properties:
-        next:
-          example: null
-          type:
-          - string
-          - 'null'
-    Error:
-      type: object
-      properties:
-        _status:
-          type: object
-          properties:
-            messages:
-              type: array
-              items:
-                type: object
-                properties:
-                  data:
-                    description: Error message in hexadecimal
-                    example: '0x3000'
-                    format: binary
-                    pattern: ^0x[0-9a-fA-F]+$
-                    type:
-                    - string
-                    - 'null'
-                  detail:
-                    description: Detailed error message
-                    example: Generic detailed error message
-                    type:
-                    - string
-                    - 'null'
-                  message:
-                    description: Error message
-                    example: Generic error message
-                    type: string
+    TimestampNullable:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type:
+      - string
+      - 'null'
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
     TimestampRange:
       type: object
       description: A timestamp range an entity is valid for
@@ -209,36 +209,40 @@ components:
           - $ref: '#/components/schemas/TimestampNullable'
           - description: The exclusive to timestamp in seconds
   parameters:
-    serialNumberQueryParam:
-      name: serialnumber
+    senderIdQueryParam:
+      name: sender.id
+      description: The ID of the sender to return information for
       in: query
-      explode: true
-      description: The nft serial number (64 bit type). Requires a tokenId value also be populated.
       examples:
         noValue:
           summary: --
           value: ''
-        serialNumNoOperator:
-          summary: Example of serialNum equals with no operator
+        entityNumNoOperator:
+          summary: Example of entityNum equals with no operator
           value: 100
-        serialNumEqOperator:
-          summary: Example of serialNum equals operator
+        idNoOperator:
+          summary: Example of id equals with no operator
+          value: 0.0.100
+        entityNumEqOperator:
+          summary: Example of entityNum equals operator
           value: eq:200
-        serialNumGtOperator:
-          summary: Example of serialNum greater than operator
-          value: gt:400
-        serialNumGteOperator:
-          summary: Example of serialNum greater than or equals operator
-          value: gte:500
-        serialNumLtOperator:
-          summary: Example of serialNum less than operator
-          value: lt:600
-        serialNumLteOperator:
-          summary: Example of serialNum less than or equals operator
-          value: lte:700
+        idEqOperator:
+          summary: Example of id equals operator
+          value: eq:0.0.200
+        idGtOperator:
+          summary: Example of id greather than operator
+          value: gt:0.0.200
+        idGteOperator:
+          summary: Example of id greather than or equal to operator
+          value: gte:0.0.200
+        idLtOperator:
+          summary: Example of id less than operator
+          value: lt:0.0.200
+        idLteOperator:
+          summary: Example of id less than or equal to operator
+          value: lte:0.0.200
       schema:
-        type: string
-        pattern: ^((eq|gt|gte|lt|lte):)?\d{1,19}?$
+        $ref: '#/components/schemas/EntityIdQuery'
     receiverIdQueryParam:
       name: receiver.id
       description: The ID of the receiver to return information for
@@ -273,33 +277,6 @@ components:
           value: lte:0.0.200
       schema:
         $ref: '#/components/schemas/EntityIdQuery'
-    accountIdOrAliasOrEvmAddressPathParam:
-      name: idOrAliasOrEvmAddress
-      in: path
-      description: Account alias or account id or evm address
-      required: true
-      examples:
-        aliasOnly:
-          value: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-        realmAlias:
-          value: 0.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-        shardRealmAlias:
-          value: 0.1.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-        accountNumOnly:
-          value: 8
-        realmAccountNum:
-          value: 0.8
-        shardRealmAccountNum:
-          value: 0.0.8
-        evmAddress:
-          value: ac384c53f03855fa1b3616052f8ba32c6c2a2fec
-        evmAddressWithPrefix:
-          value: 9.832019034092927e+47
-        evmAddressWithShardAndRealm:
-          value: 0.0.ac384c53f03855fa1b3616052f8ba32c6c2a2fec
-      schema:
-        pattern: ^(\d{1,10}\.){0,2}(\d{1,10}|(0x)?[A-Fa-f0-9]{40}|(?:[A-Z2-7]{8})*(?:[A-Z2-7]{2}|[A-Z2-7]{4,5}|[A-Z2-7]{7,8}))$
-        type: string
     limitQueryParam:
       name: limit
       in: query
@@ -311,16 +288,36 @@ components:
         default: 25
         minimum: 1
         maximum: 100
-    orderQueryParam:
-      name: order
+    serialNumberQueryParam:
+      name: serialnumber
       in: query
-      description: The order in which items are listed
-      example: desc
+      explode: true
+      description: The nft serial number (64 bit type). Requires a tokenId value also be populated.
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        serialNumNoOperator:
+          summary: Example of serialNum equals with no operator
+          value: 100
+        serialNumEqOperator:
+          summary: Example of serialNum equals operator
+          value: eq:200
+        serialNumGtOperator:
+          summary: Example of serialNum greater than operator
+          value: gt:400
+        serialNumGteOperator:
+          summary: Example of serialNum greater than or equals operator
+          value: gte:500
+        serialNumLtOperator:
+          summary: Example of serialNum less than operator
+          value: lt:600
+        serialNumLteOperator:
+          summary: Example of serialNum less than or equals operator
+          value: lte:700
       schema:
-        enum:
-        - asc
-        - desc
-        default: asc
+        type: string
+        pattern: ^((eq|gt|gte|lt|lte):)?\d{1,19}?$
     tokenIdQueryParam:
       name: token.id
       description: The ID of the token to return information for
@@ -376,40 +373,43 @@ components:
           value: lte:0.0.700
       schema:
         $ref: '#/components/schemas/EntityIdQuery'
-    senderIdQueryParam:
-      name: sender.id
-      description: The ID of the sender to return information for
-      in: query
+    accountIdOrAliasOrEvmAddressPathParam:
+      name: idOrAliasOrEvmAddress
+      in: path
+      description: Account alias or account id or evm address
+      required: true
       examples:
-        noValue:
-          summary: --
-          value: ''
-        entityNumNoOperator:
-          summary: Example of entityNum equals with no operator
-          value: 100
-        idNoOperator:
-          summary: Example of id equals with no operator
-          value: 0.0.100
-        entityNumEqOperator:
-          summary: Example of entityNum equals operator
-          value: eq:200
-        idEqOperator:
-          summary: Example of id equals operator
-          value: eq:0.0.200
-        idGtOperator:
-          summary: Example of id greather than operator
-          value: gt:0.0.200
-        idGteOperator:
-          summary: Example of id greather than or equal to operator
-          value: gte:0.0.200
-        idLtOperator:
-          summary: Example of id less than operator
-          value: lt:0.0.200
-        idLteOperator:
-          summary: Example of id less than or equal to operator
-          value: lte:0.0.200
+        aliasOnly:
+          value: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+        realmAlias:
+          value: 0.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+        shardRealmAlias:
+          value: 0.1.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+        accountNumOnly:
+          value: 8
+        realmAccountNum:
+          value: 0.8
+        shardRealmAccountNum:
+          value: 0.0.8
+        evmAddress:
+          value: ac384c53f03855fa1b3616052f8ba32c6c2a2fec
+        evmAddressWithPrefix:
+          value: 9.832019034092927e+47
+        evmAddressWithShardAndRealm:
+          value: 0.0.ac384c53f03855fa1b3616052f8ba32c6c2a2fec
       schema:
-        $ref: '#/components/schemas/EntityIdQuery'
+        pattern: ^(\d{1,10}\.){0,2}(\d{1,10}|(0x)?[A-Fa-f0-9]{40}|(?:[A-Z2-7]{8})*(?:[A-Z2-7]{2}|[A-Z2-7]{4,5}|[A-Z2-7]{7,8}))$
+        type: string
+    orderQueryParam:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: desc
+      schema:
+        enum:
+        - asc
+        - desc
+        default: asc
   responses:
     InvalidParameterError:
       description: Invalid parameter

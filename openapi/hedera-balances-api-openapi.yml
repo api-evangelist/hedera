@@ -66,105 +66,6 @@ paths:
       tags:
       - Balances
 components:
-  schemas:
-    TokenBalance:
-      type: object
-      required:
-      - token_id
-      - balance
-      properties:
-        token_id:
-          $ref: '#/components/schemas/EntityId'
-        balance:
-          format: int64
-          type: integer
-      example:
-        token_id: 0.0.200001
-        balance: 8
-    EntityId:
-      type:
-      - string
-      - 'null'
-      description: Network entity ID in the format of `shard.realm.num`
-      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
-      example: 0.0.2
-    Error:
-      type: object
-      properties:
-        _status:
-          type: object
-          properties:
-            messages:
-              type: array
-              items:
-                type: object
-                properties:
-                  data:
-                    description: Error message in hexadecimal
-                    example: '0x3000'
-                    format: binary
-                    pattern: ^0x[0-9a-fA-F]+$
-                    type:
-                    - string
-                    - 'null'
-                  detail:
-                    description: Detailed error message
-                    example: Generic detailed error message
-                    type:
-                    - string
-                    - 'null'
-                  message:
-                    description: Error message
-                    example: Generic error message
-                    type: string
-    AccountBalance:
-      type: object
-      required:
-      - account
-      - balance
-      - tokens
-      properties:
-        account:
-          $ref: '#/components/schemas/EntityId'
-        balance:
-          format: int64
-          type: integer
-        tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/TokenBalance'
-      example:
-        account: 0.15.10
-        balance: 80
-        tokens:
-        - token_id: 0.0.200001
-          balance: 8
-    TimestampNullable:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type:
-      - string
-      - 'null'
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
-    BalancesResponse:
-      type: object
-      properties:
-        timestamp:
-          $ref: '#/components/schemas/TimestampNullable'
-        balances:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountBalance'
-        links:
-          $ref: '#/components/schemas/Links'
-    Links:
-      type: object
-      properties:
-        next:
-          example: null
-          type:
-          - string
-          - 'null'
   parameters:
     orderQueryParamDesc:
       name: order
@@ -303,6 +204,105 @@ components:
       schema:
         type: string
         pattern: ^((gte?|lte?|eq|ne)\:)?\d{1,10}$
+  schemas:
+    EntityId:
+      type:
+      - string
+      - 'null'
+      description: Network entity ID in the format of `shard.realm.num`
+      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
+      example: 0.0.2
+    TokenBalance:
+      type: object
+      required:
+      - token_id
+      - balance
+      properties:
+        token_id:
+          $ref: '#/components/schemas/EntityId'
+        balance:
+          format: int64
+          type: integer
+      example:
+        token_id: 0.0.200001
+        balance: 8
+    Error:
+      type: object
+      properties:
+        _status:
+          type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  data:
+                    description: Error message in hexadecimal
+                    example: '0x3000'
+                    format: binary
+                    pattern: ^0x[0-9a-fA-F]+$
+                    type:
+                    - string
+                    - 'null'
+                  detail:
+                    description: Detailed error message
+                    example: Generic detailed error message
+                    type:
+                    - string
+                    - 'null'
+                  message:
+                    description: Error message
+                    example: Generic error message
+                    type: string
+    Links:
+      type: object
+      properties:
+        next:
+          example: null
+          type:
+          - string
+          - 'null'
+    TimestampNullable:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type:
+      - string
+      - 'null'
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    AccountBalance:
+      type: object
+      required:
+      - account
+      - balance
+      - tokens
+      properties:
+        account:
+          $ref: '#/components/schemas/EntityId'
+        balance:
+          format: int64
+          type: integer
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenBalance'
+      example:
+        account: 0.15.10
+        balance: 80
+        tokens:
+        - token_id: 0.0.200001
+          balance: 8
+    BalancesResponse:
+      type: object
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountBalance'
+        links:
+          $ref: '#/components/schemas/Links'
   responses:
     InvalidParameterError:
       description: Invalid parameter

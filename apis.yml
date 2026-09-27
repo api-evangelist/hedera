@@ -60,7 +60,7 @@ modified: '2026-07-12'
 specificationVersion: '0.23'
 apis:
 - aid: hedera:hedera-accounts-api
-  name: Hedera accounts API
+  name: Hedera Accounts API
   description: >-
     The accounts object represents the information associated with an account entity and returns a list
     of account information.The accounts list endpoint is cached and not updated as frequently as the account
@@ -91,7 +91,7 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
 - aid: hedera:hedera-airdrops-api
-  name: Hedera airdrops API
+  name: Hedera Airdrops API
   description: The airdrops API from Hedera — 2 operation(s) for airdrops.
   humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
   baseURL: https://mainnet.mirrornode.hedera.com
@@ -119,7 +119,7 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
 - aid: hedera:hedera-balances-api
-  name: Hedera balances API
+  name: Hedera Balances API
   description: The balance object represents the balance of accounts on the Hedera network.
   humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
   baseURL: https://mainnet.mirrornode.hedera.com
@@ -147,7 +147,7 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
 - aid: hedera:hedera-blocks-api
-  name: Hedera blocks API
+  name: Hedera Blocks API
   description: The blocks API from Hedera — 2 operation(s) for blocks.
   humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
   baseURL: https://mainnet.mirrornode.hedera.com
@@ -175,7 +175,7 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
 - aid: hedera:hedera-contracts-api
-  name: Hedera contracts API
+  name: Hedera Contracts API
   description: >-
     The contracts objects represents the information associated with contract entities.The contracts list
     endpoint is cached and not updated as frequently as the contract lookup by a specific ID endpoint.
@@ -205,7 +205,7 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
 - aid: hedera:hedera-network-api
-  name: Hedera network API
+  name: Hedera Network API
   description: The network API from Hedera — 6 operation(s) for network.
   humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
   baseURL: https://mainnet.mirrornode.hedera.com
@@ -233,7 +233,7 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
 - aid: hedera:hedera-schedules-api
-  name: Hedera schedules API
+  name: Hedera Schedules API
   description: >-
     The schedules object represents the information associated with a schedule entity.The schedules list
     endpoints is cached and not updated as frequently as the schedule lookup by a specific ID endpoint.
@@ -263,7 +263,7 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
 - aid: hedera:hedera-tokens-api
-  name: Hedera tokens API
+  name: Hedera Tokens API
   description: >-
     The tokens object represents the information associated with a token entity and returns a list of
     token information.The tokens list endpoint is cached and not updated as frequently as the token lookup
@@ -294,7 +294,7 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
 - aid: hedera:hedera-topics-api
-  name: Hedera topics API
+  name: Hedera Topics API
   description: >-
     The topics object represents the information associated with a topic entity and returns topic messages
     information.
@@ -324,7 +324,7 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml
 - aid: hedera:hedera-transactions-api
-  name: Hedera transactions API
+  name: Hedera Transactions API
   description: The transaction object represents the transactions processed on the Hedera network.
   humanURL: https://docs.hedera.com/hedera/sdks-and-apis/rest-api
   baseURL: https://mainnet.mirrornode.hedera.com

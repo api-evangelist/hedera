@@ -121,17 +121,6 @@ components:
       schema:
         type: string
         pattern: ^((eq|gt|gte|lt|lte):)?\d{1,19}$
-    limitQueryParam:
-      name: limit
-      in: query
-      description: The maximum number of items to return
-      example: 2
-      schema:
-        format: int32
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 100
     timestampQueryParam:
       description: The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
       name: timestamp
@@ -188,6 +177,17 @@ components:
         items:
           type: string
           pattern: ^((eq|gt|gte|lt|lte|ne):)?\d{1,10}(\.\d{1,9})?$
+    limitQueryParam:
+      name: limit
+      in: query
+      description: The maximum number of items to return
+      example: 2
+      schema:
+        format: int32
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
     hashOrNumberPathParam:
       name: hashOrNumber
       in: path
@@ -197,6 +197,18 @@ components:
         pattern: ^(\d{1,10}|(0x)?([A-Fa-f0-9]{64}|[A-Fa-f0-9]{96}))$
         type: string
   schemas:
+    Timestamp:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type: string
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    BlocksResponse:
+      type: object
+      properties:
+        blocks:
+          $ref: '#/components/schemas/Blocks'
+        links:
+          $ref: '#/components/schemas/Links'
     Error:
       type: object
       properties:
@@ -226,17 +238,6 @@ components:
                     description: Error message
                     example: Generic error message
                     type: string
-    Blocks:
-      type: array
-      items:
-        $ref: '#/components/schemas/Block'
-    TimestampNullable:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type:
-      - string
-      - 'null'
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
     Links:
       type: object
       properties:
@@ -245,23 +246,6 @@ components:
           type:
           - string
           - 'null'
-    TimestampRange:
-      type: object
-      description: A timestamp range an entity is valid for
-      properties:
-        from:
-          allOf:
-          - $ref: '#/components/schemas/Timestamp'
-          - description: The inclusive from timestamp in seconds
-        to:
-          allOf:
-          - $ref: '#/components/schemas/TimestampNullable'
-          - description: The exclusive to timestamp in seconds
-    Timestamp:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type: string
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
     Block:
       type: object
       properties:
@@ -312,13 +296,29 @@ components:
         timestamp:
           from: '1651560386.060890949'
           to: '1651560386.661997287'
-    BlocksResponse:
+    TimestampNullable:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type:
+      - string
+      - 'null'
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    TimestampRange:
       type: object
+      description: A timestamp range an entity is valid for
       properties:
-        blocks:
-          $ref: '#/components/schemas/Blocks'
-        links:
-          $ref: '#/components/schemas/Links'
+        from:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The inclusive from timestamp in seconds
+        to:
+          allOf:
+          - $ref: '#/components/schemas/TimestampNullable'
+          - description: The exclusive to timestamp in seconds
+    Blocks:
+      type: array
+      items:
+        $ref: '#/components/schemas/Block'
   responses:
     InvalidParameterError:
       description: Invalid parameter

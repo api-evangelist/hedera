@@ -435,7 +435,628 @@ paths:
       tags:
       - Accounts
 components:
+  parameters:
+    orderQueryParamDesc:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: asc
+      schema:
+        enum:
+        - asc
+        - desc
+        default: desc
+    spenderIdQueryParam:
+      name: spender.id
+      description: The ID of the spender to return information for
+      in: query
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        entityNumNoOperator:
+          summary: Example of entityNum equals with no operator
+          value: 100
+        idNoOperator:
+          summary: Example of id equals with no operator
+          value: 0.0.100
+        entityNumEqOperator:
+          summary: Example of entityNum equals operator
+          value: eq:200
+        idEqOperator:
+          summary: Example of id equals operator
+          value: eq:0.0.200
+        idGtOperator:
+          summary: Example of id greather than operator
+          value: gt:0.0.200
+        idGteOperator:
+          summary: Example of id greather than or equal to operator
+          value: gte:0.0.200
+        idLtOperator:
+          summary: Example of id less than operator
+          value: lt:0.0.200
+        idLteOperator:
+          summary: Example of id less than or equal to operator
+          value: lte:0.0.200
+      schema:
+        $ref: '#/components/schemas/EntityIdQuery'
+    limitQueryParam:
+      name: limit
+      in: query
+      description: The maximum number of items to return
+      example: 2
+      schema:
+        format: int32
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    serialNumberQueryParam:
+      name: serialnumber
+      in: query
+      explode: true
+      description: The nft serial number (64 bit type). Requires a tokenId value also be populated.
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        serialNumNoOperator:
+          summary: Example of serialNum equals with no operator
+          value: 100
+        serialNumEqOperator:
+          summary: Example of serialNum equals operator
+          value: eq:200
+        serialNumGtOperator:
+          summary: Example of serialNum greater than operator
+          value: gt:400
+        serialNumGteOperator:
+          summary: Example of serialNum greater than or equals operator
+          value: gte:500
+        serialNumLtOperator:
+          summary: Example of serialNum less than operator
+          value: lt:600
+        serialNumLteOperator:
+          summary: Example of serialNum less than or equals operator
+          value: lte:700
+      schema:
+        type: string
+        pattern: ^((eq|gt|gte|lt|lte):)?\d{1,19}?$
+    hookIdPathParam:
+      description: The ID of the hook
+      example: 1234
+      in: path
+      name: hookId
+      schema:
+        format: int64
+        type: integer
+        minimum: 0
+        maximum: 9223372036854776000
+      required: true
+    ownerQueryParam:
+      name: owner
+      description: When the owner value is true or omitted, the accountId path parameter will specify the ID of the owner, and the API will retrieve the allowances that the owner has granted to different spenders. Conversely, when the owner value is false, the accountId path parameter will indicate the ID of the spender who has an allowance, and the API will instead provide the allowances granted to the spender by different owners of those tokens.
+      in: query
+      example: true
+      schema:
+        type: boolean
+        default: true
+    timestampQueryParam:
+      description: The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
+      name: timestamp
+      in: query
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        secondsNoOperator:
+          summary: Example of seconds equals with no operator
+          value: 1234567890
+        timestampNoOperator:
+          summary: Example of timestamp equals with no operator
+          value: 1234567890
+        secondsEqOperator:
+          summary: Example of seconds equals with operator
+          value: eq:1234567890
+        timestampEqOperator:
+          summary: Example of timestamp equals with operator
+          value: eq:1234567890.000000200
+        secondsNeOperator:
+          summary: Example of seconds not equals operator
+          value: ne:1234567890
+        timestampNeOperator:
+          summary: Example of timestamp not equals operator
+          value: ne:1234567890.000000300
+        secondsGtOperator:
+          summary: Example of seconds greater than operator
+          value: gt:1234567890
+        timestampGtOperator:
+          summary: Example of timestamp greater than operator
+          value: gt:1234567890.000000400
+        secondsGteOperator:
+          summary: Example of seconds greater than or equals operator
+          value: gte:1234567890
+        timestampGteOperator:
+          summary: Example of timestamp greater than or equals operator
+          value: gte:1234567890.000000500
+        secondsLtOperator:
+          summary: Example of seconds less than operator
+          value: lt:1234567890
+        timestampLtOperator:
+          summary: Example of timestamp less than operator
+          value: lt:1234567890.000000600
+        secondsLteOperator:
+          summary: Example of seconds less than or equals operator
+          value: lte:1234567890
+        timestampLteOperator:
+          summary: Example of timestamp less than or equals operator
+          value: lte:1234567890.000000700
+      schema:
+        type: array
+        items:
+          type: string
+          pattern: ^((eq|gt|gte|lt|lte|ne):)?\d{1,10}(\.\d{1,9})?$
+    tokenIdQueryParam:
+      name: token.id
+      description: The ID of the token to return information for
+      in: query
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        tokenNumAlias:
+          summary: Example of token num alias equals with no operator
+          value: 64
+        entityNumNoOperator:
+          summary: Example of entityNum equals with no operator
+          value: 100
+        idNoOperator:
+          summary: Example of id equals with no operator
+          value: 0.0.100
+        entityNumEqOperator:
+          summary: Example of entityNum equals operator
+          value: eq:200
+        idEqOperator:
+          summary: Example of id equals operator
+          value: eq:0.0.200
+        entityNumNeOperator:
+          summary: Example of entityNum not equals operator
+          value: ne:300
+        idNeOperator:
+          summary: Example of id not equals operator
+          value: ne:0.0.300
+        entityNumGtOperator:
+          summary: Example of entityNum greater than operator
+          value: gt:400
+        idGtOperator:
+          summary: Example of id greater than operator
+          value: gt:0.0.400
+        entityNumGteOperator:
+          summary: Example of entityNum greater than or equals operator
+          value: gte:500
+        idGteOperator:
+          summary: Example of id greater than or equals operator
+          value: gte:0.0.500
+        entityNumLtOperator:
+          summary: Example of entityNum less than operator
+          value: lt:600
+        idLtOperator:
+          summary: Example of id less than operator
+          value: lt:0.0.600
+        entityNumLteOperator:
+          summary: Example of entityNum less than or equals operator
+          value: lte:700
+        idLteOperator:
+          summary: Example of id less than or equals operator
+          value: lte:0.0.700
+      schema:
+        $ref: '#/components/schemas/EntityIdQuery'
+    balanceQueryParam:
+      name: balance
+      in: query
+      description: Whether to include balance information or not. If included, token balances are limited to at most 50 per account as outlined in HIP-367. If multiple values are provided the last value will be the only value used.
+      example: true
+      schema:
+        type: boolean
+        default: true
+    transactionsQueryParam:
+      name: transactions
+      description: If provided and set to false transactions will not be included in the response
+      in: query
+      example: true
+      schema:
+        type: boolean
+        default: true
+    keyQueryParam:
+      description: A string representing a pair of operator:address of a hook storage entry
+      examples:
+        zeroXPrefix:
+          summary: Example of key equals operator with 0x prefix
+          value: eq:0x00000000000000000000000000000000000000000000000000000000000f9a15
+        noZeroPadding:
+          summary: Example of key equals operator without zero padding
+          value: eq:f9a15
+        noOperator:
+          summary: Example of key equals with no operator
+          value: 00000000000000000000000000000000000000000000000000000000000f9a15
+        eqOperator:
+          summary: Example of key equals operator
+          value: eq:00000000000000000000000000000000000000000000000000000000000f9a15
+        gtOperator:
+          summary: Example of key gt operator
+          value: gt:00000000000000000000000000000000000000000000000000000000000f9a15
+        gteOperator:
+          summary: Example of key gte operator
+          value: gte:00000000000000000000000000000000000000000000000000000000000f9a15
+        ltOperator:
+          summary: Example of key lt operator
+          value: lt:00000000000000000000000000000000000000000000000000000000000f9a15
+        lteOperator:
+          summary: Example of key lte operator
+          value: lte:00000000000000000000000000000000000000000000000000000000000f9a15
+      in: query
+      name: key
+      schema:
+        example: eq:0x00000000000000000000000000000000000000000000000000000000000f9a10
+        pattern: ^((eq|gte?|lte?)\:)?(0x)?[0-9A-Fa-f]{1,64}$
+        type: string
+    accountIdOrAliasOrEvmAddressPathParam:
+      name: idOrAliasOrEvmAddress
+      in: path
+      description: Account alias or account id or evm address
+      required: true
+      examples:
+        aliasOnly:
+          value: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+        realmAlias:
+          value: 0.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+        shardRealmAlias:
+          value: 0.1.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+        accountNumOnly:
+          value: 8
+        realmAccountNum:
+          value: 0.8
+        shardRealmAccountNum:
+          value: 0.0.8
+        evmAddress:
+          value: ac384c53f03855fa1b3616052f8ba32c6c2a2fec
+        evmAddressWithPrefix:
+          value: 9.832019034092927e+47
+        evmAddressWithShardAndRealm:
+          value: 0.0.ac384c53f03855fa1b3616052f8ba32c6c2a2fec
+      schema:
+        pattern: ^(\d{1,10}\.){0,2}(\d{1,10}|(0x)?[A-Fa-f0-9]{40}|(?:[A-Z2-7]{8})*(?:[A-Z2-7]{2}|[A-Z2-7]{4,5}|[A-Z2-7]{7,8}))$
+        type: string
+    hookIdQueryParam:
+      description: The ID of the hook
+      example: 1234
+      in: query
+      name: hook.id
+      schema:
+        format: int64
+        type: integer
+        minimum: 1
+        maximum: 9223372036854776000
+      required: false
+    accountBalanceQueryParam:
+      name: account.balance
+      in: query
+      description: The optional balance value to compare against
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        noOperator:
+          summary: Example of equals with no operator
+          value: 100
+        eqOperator:
+          summary: Example of equals operator
+          value: eq:200
+        neOperator:
+          summary: Example of not equals operator
+          value: ne:300
+        gtOperator:
+          summary: Example of greater than operator
+          value: gt:400
+        gteOperator:
+          summary: Example of greater than or equals operator
+          value: gte:500
+        ltOperator:
+          summary: Example of less than operator
+          value: lt:600
+        lteOperator:
+          summary: Example of less than or equals operator
+          value: lte:700
+      schema:
+        type: string
+        pattern: ^((gte?|lte?|eq|ne)\:)?\d{1,10}$
+    accountIdQueryParam:
+      name: account.id
+      in: query
+      description: The ID of the account to return information for
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        entityNumNoOperator:
+          summary: Example of entityNum equals with no operator
+          value: 100
+        idNoOperator:
+          summary: Example of id equals with no operator
+          value: 0.0.100
+        entityNumEqOperator:
+          summary: Example of entityNum equals operator
+          value: eq:200
+        idEqOperator:
+          summary: Example of id equals operator
+          value: eq:0.0.200
+        entityNumNeOperator:
+          summary: Example of entityNum not equals operator
+          value: ne:300
+        idNeOperator:
+          summary: Example of id not equals operator
+          value: ne:0.0.300
+        entityNumGtOperator:
+          summary: Example of entityNum greater than operator
+          value: gt:400
+        idGtOperator:
+          summary: Example of id greater than operator
+          value: gt:0.0.400
+        entityNumGteOperator:
+          summary: Example of entityNum greater than or equals operator
+          value: gte:500
+        idGteOperator:
+          summary: Example of id greater than or equals operator
+          value: gte:0.0.500
+        entityNumLtOperator:
+          summary: Example of entityNum less than operator
+          value: lt:600
+        idLtOperator:
+          summary: Example of id less than operator
+          value: lt:0.0.600
+        entityNumLteOperator:
+          summary: Example of entityNum less than or equals operator
+          value: lte:700
+        idLteOperator:
+          summary: Example of id less than or equals operator
+          value: lte:0.0.700
+      schema:
+        $ref: '#/components/schemas/EntityIdQuery'
+    transactionTypeQueryParam:
+      name: transactiontype
+      in: query
+      example: null
+      schema:
+        $ref: '#/components/schemas/TransactionTypes'
+    orderQueryParam:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: desc
+      schema:
+        enum:
+        - asc
+        - desc
+        default: asc
+    accountPublicKeyQueryParam:
+      name: account.publickey
+      in: query
+      description: The account's public key to compare against
+      example: 3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be
+      schema:
+        type: string
   schemas:
+    Hook:
+      type: object
+      required:
+      - admin_key
+      - contract_id
+      - created_timestamp
+      - deleted
+      - extension_point
+      - hook_id
+      - owner_id
+      - timestamp_range
+      - type
+      properties:
+        admin_key:
+          $ref: '#/components/schemas/Key'
+        contract_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+          description: The contract entity that contains the hook's executing bytecode
+        created_timestamp:
+          allOf:
+          - $ref: '#/components/schemas/TimestampNullable'
+          description: The consensus timestamp when the hook was created
+        deleted:
+          description: Whether the hook has been deleted
+          example: false
+          type: boolean
+        extension_point:
+          description: The extension point this hook implements
+          enum:
+          - ACCOUNT_ALLOWANCE_HOOK
+          example: ACCOUNT_ALLOWANCE_HOOK
+          type: string
+        hook_id:
+          description: The unique identifier for the hook within the owner's scope
+          example: 1
+          format: int64
+          type: integer
+        owner_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+          description: The entity that owns the hook
+        timestamp_range:
+          $ref: '#/components/schemas/TimestampRangeNullable'
+        type:
+          description: The type of the hook implementation
+          enum:
+          - EVM
+          example: EVM
+          type: string
+    Error:
+      type: object
+      properties:
+        _status:
+          type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  data:
+                    description: Error message in hexadecimal
+                    example: '0x3000'
+                    format: binary
+                    pattern: ^0x[0-9a-fA-F]+$
+                    type:
+                    - string
+                    - 'null'
+                  detail:
+                    description: Detailed error message
+                    example: Generic detailed error message
+                    type:
+                    - string
+                    - 'null'
+                  message:
+                    description: Error message
+                    example: Generic error message
+                    type: string
+    StakingRewardsResponse:
+      type: object
+      properties:
+        rewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/StakingReward'
+        links:
+          $ref: '#/components/schemas/Links'
+    AccountInfo:
+      type: object
+      required:
+      - account
+      - alias
+      - auto_renew_period
+      - balance
+      - created_timestamp
+      - decline_reward
+      - deleted
+      - ethereum_nonce
+      - evm_address
+      - expiry_timestamp
+      - key
+      - max_automatic_token_associations
+      - memo
+      - receiver_sig_required
+      - staked_account_id
+      - staked_node_id
+      - stake_period_start
+      properties:
+        account:
+          $ref: '#/components/schemas/EntityId'
+        alias:
+          $ref: '#/components/schemas/Alias'
+        auto_renew_period:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        balance:
+          $ref: '#/components/schemas/Balance'
+        created_timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        decline_reward:
+          description: Whether the account declines receiving a staking reward
+          type: boolean
+        deleted:
+          type:
+          - boolean
+          - 'null'
+        ethereum_nonce:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        evm_address:
+          $ref: '#/components/schemas/EvmAddressNullable'
+        expiry_timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        key:
+          $ref: '#/components/schemas/Key'
+        max_automatic_token_associations:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        memo:
+          type:
+          - string
+          - 'null'
+        pending_reward:
+          description: 'The pending reward in tinybars the account will receive in the next reward payout. Note the value is updated
+
+            at the end of each staking period and there may be delay to reflect the changes in the past staking period.
+
+            '
+          type: integer
+          format: int64
+        receiver_sig_required:
+          type:
+          - boolean
+          - 'null'
+        staked_account_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+          - description: The account to which this account is staking
+        staked_node_id:
+          description: The id of the node to which this account is staking
+          type:
+          - integer
+          - 'null'
+          format: int64
+        stake_period_start:
+          allOf:
+          - $ref: '#/components/schemas/TimestampNullable'
+          - description: 'The staking period during which either the staking settings for this account changed (such as starting
+
+              staking or changing stakedNode) or the most recent reward was earned, whichever is later. If this
+
+              account is not currently staked to a node, then the value is null
+
+              '
+      example:
+        account: 0.0.8
+        alias: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+        auto_renew_period: null
+        balance:
+          timestamp: '0.000002345'
+          balance: 80
+          tokens:
+          - token_id: 0.0.200001
+            balance: 8
+        created_timestamp: '1562591528.000123456'
+        decline_reward: false
+        deleted: false
+        ethereum_nonce: 10
+        evm_address: '0xac384c53f03855fa1b3616052f8ba32c6c2a2fec'
+        expiry_timestamp: null
+        key: null
+        max_automatic_token_associations: 200
+        memo: entity memo
+        pending_reward: 100
+        receiver_sig_required: false
+        staked_account_id: null
+        staked_node_id: 3
+        stake_period_start: '172800000.000000000'
+    CryptoAllowances:
+      type: array
+      items:
+        $ref: '#/components/schemas/CryptoAllowance'
     StakingReward:
       type: object
       properties:
@@ -456,6 +1077,139 @@ components:
         account_id: 0.0.1000
         amount: 10
         timestamp: '1234567890.000000001'
+    AccountsResponse:
+      type: object
+      required:
+      - accounts
+      - links
+      properties:
+        accounts:
+          $ref: '#/components/schemas/Accounts'
+        links:
+          $ref: '#/components/schemas/Links'
+    Transactions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Transaction'
+    EvmAddressNullable:
+      type:
+      - string
+      - 'null'
+      description: A network entity encoded as an EVM address in hex.
+      format: binary
+      minLength: 40
+      maxLength: 42
+      pattern: ^(0x)?[A-Fa-f0-9]{40}$
+      example: '0x0000000000000000000000000000000000001f41'
+    TokenAllowances:
+      type: array
+      items:
+        $ref: '#/components/schemas/TokenAllowance'
+    Nft:
+      type: object
+      properties:
+        account_id:
+          $ref: '#/components/schemas/EntityId'
+        created_timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        delegating_spender:
+          $ref: '#/components/schemas/EntityId'
+        deleted:
+          description: whether the nft or the token it belongs to has been deleted
+          type: boolean
+        metadata:
+          description: Arbitrary binary data associated with this NFT encoded in base64.
+          type: string
+          format: byte
+        modified_timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        serial_number:
+          example: 1
+          format: int64
+          type: integer
+        spender:
+          $ref: '#/components/schemas/EntityId'
+        token_id:
+          $ref: '#/components/schemas/EntityId'
+      example:
+        account_id: 0.1.2
+        created_timestamp: '1234567890.000000001'
+        delegating_spender: 0.0.400
+        deleted: false
+        metadata: VGhpcyBpcyBhIHRlc3QgTkZU
+        modified_timestamp: '1610682445.003266001'
+        serial_number: 124
+        spender_id: 0.0.500
+        token_id: 0.0.222
+    Balance:
+      type:
+      - object
+      - 'null'
+      required:
+      - timestamp
+      - balance
+      - tokens
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        balance:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        tokens:
+          type: array
+          items:
+            type: object
+            properties:
+              token_id:
+                $ref: '#/components/schemas/EntityId'
+              balance:
+                format: int64
+                type: integer
+      example:
+        timestamp: '0.000002345'
+        balance: 80
+        tokens:
+        - token_id: 0.0.200001
+          balance: 8
+    StakingRewardTransfers:
+      type: array
+      items:
+        $ref: '#/components/schemas/StakingRewardTransfer'
+    NftAllowances:
+      type: array
+      items:
+        $ref: '#/components/schemas/NftAllowance'
+    StakingRewardTransfer:
+      type: object
+      description: A staking reward transfer
+      required:
+      - account
+      - amount
+      properties:
+        account:
+          $ref: '#/components/schemas/EntityId'
+        amount:
+          description: The number of tinybars awarded
+          example: 10
+          format: int64
+          type: integer
+      example:
+        account_id: 0.0.1000
+        amount: 10
+    CryptoAllowancesResponse:
+      type: object
+      properties:
+        allowances:
+          $ref: '#/components/schemas/CryptoAllowances'
+        links:
+          $ref: '#/components/schemas/Links'
+    Timestamp:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type: string
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
     EntityId:
       type:
       - string
@@ -463,6 +1217,305 @@ components:
       description: Network entity ID in the format of `shard.realm.num`
       pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
       example: 0.0.2
+    Nfts:
+      type: object
+      properties:
+        nfts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nft'
+        links:
+          $ref: '#/components/schemas/Links'
+    TransactionTypes:
+      type: string
+      enum:
+      - ATOMICBATCH
+      - CONSENSUSCREATETOPIC
+      - CONSENSUSDELETETOPIC
+      - CONSENSUSSUBMITMESSAGE
+      - CONSENSUSUPDATETOPIC
+      - CONTRACTCALL
+      - CONTRACTCREATEINSTANCE
+      - CONTRACTDELETEINSTANCE
+      - CONTRACTUPDATEINSTANCE
+      - CRSPUBLICATION
+      - CRYPTOADDLIVEHASH
+      - CRYPTOAPPROVEALLOWANCE
+      - CRYPTOCREATEACCOUNT
+      - CRYPTODELETE
+      - CRYPTODELETEALLOWANCE
+      - CRYPTODELETELIVEHASH
+      - CRYPTOTRANSFER
+      - CRYPTOUPDATEACCOUNT
+      - ETHEREUMTRANSACTION
+      - FILEAPPEND
+      - FILECREATE
+      - FILEDELETE
+      - FILEUPDATE
+      - FREEZE
+      - HINTSKEYPUBLICATION
+      - HINTSPARTIALSIGNATURE
+      - HINTSPREPROCESSINGVOTE
+      - HISTORYPROOFKEYPUBLICATION
+      - HISTORYPROOFSIGNATURE
+      - HISTORYPROOFVOTE
+      - HOOKSTORE
+      - LEDGERIDPUBLICATION
+      - MIGRATIONROOTHASHVOTE
+      - NODECREATE
+      - NODEDELETE
+      - NODESTAKEUPDATE
+      - NODEUPDATE
+      - REGISTEREDNODECREATE
+      - REGISTEREDNODEDELETE
+      - REGISTEREDNODEUPDATE
+      - SCHEDULECREATE
+      - SCHEDULEDELETE
+      - SCHEDULESIGN
+      - STATESIGNATURETRANSACTION
+      - SYSTEMDELETE
+      - SYSTEMUNDELETE
+      - TOKENAIRDROP
+      - TOKENASSOCIATE
+      - TOKENBURN
+      - TOKENCANCELAIRDROP
+      - TOKENCLAIMAIRDROP
+      - TOKENCREATION
+      - TOKENDELETION
+      - TOKENDISSOCIATE
+      - TOKENFEESCHEDULEUPDATE
+      - TOKENFREEZE
+      - TOKENGRANTKYC
+      - TOKENMINT
+      - TOKENPAUSE
+      - TOKENREJECT
+      - TOKENREVOKEKYC
+      - TOKENUNFREEZE
+      - TOKENUNPAUSE
+      - TOKENUPDATE
+      - TOKENUPDATENFTS
+      - TOKENWIPE
+      - UNCHECKEDSUBMIT
+      - UTILPRNG
+    Links:
+      type: object
+      properties:
+        next:
+          example: null
+          type:
+          - string
+          - 'null'
+    Key:
+      description: The public key which controls access to various network entities.
+      type:
+      - object
+      - 'null'
+      properties:
+        _type:
+          type: string
+          enum:
+          - ECDSA_SECP256K1
+          - ED25519
+          - ProtobufEncoded
+          example: ProtobufEncoded
+        key:
+          type: string
+          example: 15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743
+    AccountBalanceTransactions:
+      allOf:
+      - $ref: '#/components/schemas/AccountInfo'
+      - type: object
+        required:
+        - transactions
+        - links
+        properties:
+          transactions:
+            $ref: '#/components/schemas/Transactions'
+          links:
+            $ref: '#/components/schemas/Links'
+    TokenAllowancesResponse:
+      type: object
+      properties:
+        allowances:
+          $ref: '#/components/schemas/TokenAllowances'
+        links:
+          $ref: '#/components/schemas/Links'
+    TimestampRangeNullable:
+      type:
+      - object
+      - 'null'
+      description: A timestamp range an entity is valid for
+      properties:
+        from:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The inclusive from timestamp in seconds
+        to:
+          allOf:
+          - $ref: '#/components/schemas/TimestampNullable'
+          - description: The exclusive to timestamp in seconds
+    EntityIdQuery:
+      type: string
+      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
+    Alias:
+      description: RFC4648 no-padding base32 encoded account alias
+      type:
+      - string
+      - 'null'
+      pattern: ^(?:[A-Z2-7]{8})*(?:[A-Z2-7]{2}|[A-Z2-7]{4,5}|[A-Z2-7]{7,8})$
+      example: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+    TokenRelationship:
+      type: object
+      properties:
+        automatic_association:
+          type: boolean
+          description: Specifies if the relationship is implicitly/explicitly associated.
+          example: true
+        balance:
+          format: int64
+          type: integer
+          description: For FUNGIBLE_COMMON, the balance that the account holds in the smallest denomination. For NON_FUNGIBLE_UNIQUE, the number of NFTs held by the account.
+          example: 5
+        created_timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        decimals:
+          format: int64
+          type: integer
+        freeze_status:
+          type: string
+          description: The Freeze status of the account.
+          example: UNFROZEN
+          enum:
+          - NOT_APPLICABLE
+          - FROZEN
+          - UNFROZEN
+        kyc_status:
+          type: string
+          description: The KYC status of the account.
+          example: GRANTED
+          enum:
+          - NOT_APPLICABLE
+          - GRANTED
+          - REVOKED
+        token_id:
+          $ref: '#/components/schemas/EntityId'
+      required:
+      - automatic_association
+      - balance
+      - created_timestamp
+      - decimals
+      - freeze_status
+      - kyc_status
+      - token_id
+      example:
+        automatic_association: true
+        balance: 5
+        created_timestamp: '123456789.000000001'
+        decimals: 3
+        freeze_status: UNFROZEN
+        kyc_status: GRANTED
+        token_id: 0.0.27335
+    HookStorage:
+      type: object
+      required:
+      - key
+      - timestamp
+      - value
+      properties:
+        key:
+          example: '0x00000000000000000000000000000000000000000000000000000000000f9a17'
+          format: binary
+          type: string
+        value:
+          example: '0x00000000000000000000000000000000000000000000000000000000000f9a17'
+          format: binary
+          type:
+          - string
+          - 'null'
+        timestamp:
+          $ref: '#/components/schemas/Timestamp'
+    TokenRelationshipResponse:
+      type: object
+      properties:
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenRelationship'
+        links:
+          $ref: '#/components/schemas/Links'
+    Allowance:
+      type: object
+      properties:
+        amount:
+          description: The amount remaining of the original amount granted.
+          format: int64
+          type: integer
+          example: 75
+        amount_granted:
+          description: The granted amount of the spender's allowance.
+          format: int64
+          type: integer
+          example: 100
+        owner:
+          $ref: '#/components/schemas/EntityId'
+        spender:
+          $ref: '#/components/schemas/EntityId'
+        timestamp:
+          $ref: '#/components/schemas/TimestampRange'
+    CryptoAllowance:
+      allOf:
+      - $ref: '#/components/schemas/Allowance'
+      - properties:
+          amount:
+            description: The amount remaining of the original amount granted in tinybars.
+            type: integer
+            format: int64
+          amount_granted:
+            description: The granted amount of the spender's allowance in tinybars.
+            type: integer
+            format: int64
+    HooksStorageResponse:
+      type: object
+      required:
+      - hook_id
+      - links
+      - owner_id
+      - storage
+      properties:
+        hook_id:
+          description: The unique identifier of the hook within the owner's scope
+          example: 1
+          format: int64
+          type: integer
+        links:
+          $ref: '#/components/schemas/Links'
+        owner_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+          - description: The entity that owns the hook
+        storage:
+          type: array
+          items:
+            $ref: '#/components/schemas/HookStorage'
+    NftAllowancesResponse:
+      type: object
+      properties:
+        allowances:
+          $ref: '#/components/schemas/NftAllowances'
+        links:
+          $ref: '#/components/schemas/Links'
+    HooksResponse:
+      type: object
+      required:
+      - hooks
+      - links
+      properties:
+        hooks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hook'
+        links:
+          $ref: '#/components/schemas/Links'
     Transaction:
       type: object
       properties:
@@ -681,141 +1734,19 @@ components:
       - spender
       - timestamp
       - token_id
-    Transactions:
-      type: array
-      items:
-        $ref: '#/components/schemas/Transaction'
-    TokenRelationship:
-      type: object
-      properties:
-        automatic_association:
-          type: boolean
-          description: Specifies if the relationship is implicitly/explicitly associated.
-          example: true
-        balance:
-          format: int64
-          type: integer
-          description: For FUNGIBLE_COMMON, the balance that the account holds in the smallest denomination. For NON_FUNGIBLE_UNIQUE, the number of NFTs held by the account.
-          example: 5
-        created_timestamp:
-          $ref: '#/components/schemas/Timestamp'
-        decimals:
-          format: int64
-          type: integer
-        freeze_status:
-          type: string
-          description: The Freeze status of the account.
-          example: UNFROZEN
-          enum:
-          - NOT_APPLICABLE
-          - FROZEN
-          - UNFROZEN
-        kyc_status:
-          type: string
-          description: The KYC status of the account.
-          example: GRANTED
-          enum:
-          - NOT_APPLICABLE
-          - GRANTED
-          - REVOKED
-        token_id:
-          $ref: '#/components/schemas/EntityId'
-      required:
-      - automatic_association
-      - balance
-      - created_timestamp
-      - decimals
-      - freeze_status
-      - kyc_status
-      - token_id
-      example:
-        automatic_association: true
-        balance: 5
-        created_timestamp: '123456789.000000001'
-        decimals: 3
-        freeze_status: UNFROZEN
-        kyc_status: GRANTED
-        token_id: 0.0.27335
-    HookStorage:
-      type: object
-      required:
-      - key
-      - timestamp
-      - value
-      properties:
-        key:
-          example: '0x00000000000000000000000000000000000000000000000000000000000f9a17'
-          format: binary
-          type: string
-        value:
-          example: '0x00000000000000000000000000000000000000000000000000000000000f9a17'
-          format: binary
-          type:
-          - string
-          - 'null'
-        timestamp:
-          $ref: '#/components/schemas/Timestamp'
-    CryptoAllowance:
+    TokenAllowance:
       allOf:
       - $ref: '#/components/schemas/Allowance'
       - properties:
-          amount:
-            description: The amount remaining of the original amount granted in tinybars.
-            type: integer
-            format: int64
-          amount_granted:
-            description: The granted amount of the spender's allowance in tinybars.
-            type: integer
-            format: int64
-    AccountBalanceTransactions:
-      allOf:
-      - $ref: '#/components/schemas/AccountInfo'
-      - type: object
-        required:
-        - transactions
-        - links
-        properties:
-          transactions:
-            $ref: '#/components/schemas/Transactions'
-          links:
-            $ref: '#/components/schemas/Links'
-    StakingRewardTransfers:
-      type: array
-      items:
-        $ref: '#/components/schemas/StakingRewardTransfer'
-    Alias:
-      description: RFC4648 no-padding base32 encoded account alias
+          token_id:
+            $ref: '#/components/schemas/EntityId'
+    TimestampNullable:
+      description: A Unix timestamp in seconds.nanoseconds format
       type:
       - string
       - 'null'
-      pattern: ^(?:[A-Z2-7]{8})*(?:[A-Z2-7]{2}|[A-Z2-7]{4,5}|[A-Z2-7]{7,8})$
-      example: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-    Accounts:
-      type: array
-      items:
-        $ref: '#/components/schemas/AccountInfo'
-    TokenAllowancesResponse:
-      type: object
-      properties:
-        allowances:
-          $ref: '#/components/schemas/TokenAllowances'
-        links:
-          $ref: '#/components/schemas/Links'
-    EntityIdQuery:
-      type: string
-      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
-    HooksResponse:
-      type: object
-      required:
-      - hooks
-      - links
-      properties:
-        hooks:
-          type: array
-          items:
-            $ref: '#/components/schemas/Hook'
-        links:
-          $ref: '#/components/schemas/Links'
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
     CustomFeeLimit:
       type: object
       properties:
@@ -827,529 +1758,6 @@ components:
           type: integer
         denominating_token_id:
           $ref: '#/components/schemas/EntityId'
-    Key:
-      description: The public key which controls access to various network entities.
-      type:
-      - object
-      - 'null'
-      properties:
-        _type:
-          type: string
-          enum:
-          - ECDSA_SECP256K1
-          - ED25519
-          - ProtobufEncoded
-          example: ProtobufEncoded
-        key:
-          type: string
-          example: 15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743
-    TimestampNullable:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type:
-      - string
-      - 'null'
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
-    AccountInfo:
-      type: object
-      required:
-      - account
-      - alias
-      - auto_renew_period
-      - balance
-      - created_timestamp
-      - decline_reward
-      - deleted
-      - ethereum_nonce
-      - evm_address
-      - expiry_timestamp
-      - key
-      - max_automatic_token_associations
-      - memo
-      - receiver_sig_required
-      - staked_account_id
-      - staked_node_id
-      - stake_period_start
-      properties:
-        account:
-          $ref: '#/components/schemas/EntityId'
-        alias:
-          $ref: '#/components/schemas/Alias'
-        auto_renew_period:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        balance:
-          $ref: '#/components/schemas/Balance'
-        created_timestamp:
-          $ref: '#/components/schemas/TimestampNullable'
-        decline_reward:
-          description: Whether the account declines receiving a staking reward
-          type: boolean
-        deleted:
-          type:
-          - boolean
-          - 'null'
-        ethereum_nonce:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        evm_address:
-          $ref: '#/components/schemas/EvmAddressNullable'
-        expiry_timestamp:
-          $ref: '#/components/schemas/TimestampNullable'
-        key:
-          $ref: '#/components/schemas/Key'
-        max_automatic_token_associations:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        memo:
-          type:
-          - string
-          - 'null'
-        pending_reward:
-          description: 'The pending reward in tinybars the account will receive in the next reward payout. Note the value is updated
-
-            at the end of each staking period and there may be delay to reflect the changes in the past staking period.
-
-            '
-          type: integer
-          format: int64
-        receiver_sig_required:
-          type:
-          - boolean
-          - 'null'
-        staked_account_id:
-          allOf:
-          - $ref: '#/components/schemas/EntityId'
-          - description: The account to which this account is staking
-        staked_node_id:
-          description: The id of the node to which this account is staking
-          type:
-          - integer
-          - 'null'
-          format: int64
-        stake_period_start:
-          allOf:
-          - $ref: '#/components/schemas/TimestampNullable'
-          - description: 'The staking period during which either the staking settings for this account changed (such as starting
-
-              staking or changing stakedNode) or the most recent reward was earned, whichever is later. If this
-
-              account is not currently staked to a node, then the value is null
-
-              '
-      example:
-        account: 0.0.8
-        alias: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-        auto_renew_period: null
-        balance:
-          timestamp: '0.000002345'
-          balance: 80
-          tokens:
-          - token_id: 0.0.200001
-            balance: 8
-        created_timestamp: '1562591528.000123456'
-        decline_reward: false
-        deleted: false
-        ethereum_nonce: 10
-        evm_address: '0xac384c53f03855fa1b3616052f8ba32c6c2a2fec'
-        expiry_timestamp: null
-        key: null
-        max_automatic_token_associations: 200
-        memo: entity memo
-        pending_reward: 100
-        receiver_sig_required: false
-        staked_account_id: null
-        staked_node_id: 3
-        stake_period_start: '172800000.000000000'
-    Nft:
-      type: object
-      properties:
-        account_id:
-          $ref: '#/components/schemas/EntityId'
-        created_timestamp:
-          $ref: '#/components/schemas/TimestampNullable'
-        delegating_spender:
-          $ref: '#/components/schemas/EntityId'
-        deleted:
-          description: whether the nft or the token it belongs to has been deleted
-          type: boolean
-        metadata:
-          description: Arbitrary binary data associated with this NFT encoded in base64.
-          type: string
-          format: byte
-        modified_timestamp:
-          $ref: '#/components/schemas/TimestampNullable'
-        serial_number:
-          example: 1
-          format: int64
-          type: integer
-        spender:
-          $ref: '#/components/schemas/EntityId'
-        token_id:
-          $ref: '#/components/schemas/EntityId'
-      example:
-        account_id: 0.1.2
-        created_timestamp: '1234567890.000000001'
-        delegating_spender: 0.0.400
-        deleted: false
-        metadata: VGhpcyBpcyBhIHRlc3QgTkZU
-        modified_timestamp: '1610682445.003266001'
-        serial_number: 124
-        spender_id: 0.0.500
-        token_id: 0.0.222
-    TransactionTypes:
-      type: string
-      enum:
-      - ATOMICBATCH
-      - CONSENSUSCREATETOPIC
-      - CONSENSUSDELETETOPIC
-      - CONSENSUSSUBMITMESSAGE
-      - CONSENSUSUPDATETOPIC
-      - CONTRACTCALL
-      - CONTRACTCREATEINSTANCE
-      - CONTRACTDELETEINSTANCE
-      - CONTRACTUPDATEINSTANCE
-      - CRSPUBLICATION
-      - CRYPTOADDLIVEHASH
-      - CRYPTOAPPROVEALLOWANCE
-      - CRYPTOCREATEACCOUNT
-      - CRYPTODELETE
-      - CRYPTODELETEALLOWANCE
-      - CRYPTODELETELIVEHASH
-      - CRYPTOTRANSFER
-      - CRYPTOUPDATEACCOUNT
-      - ETHEREUMTRANSACTION
-      - FILEAPPEND
-      - FILECREATE
-      - FILEDELETE
-      - FILEUPDATE
-      - FREEZE
-      - HINTSKEYPUBLICATION
-      - HINTSPARTIALSIGNATURE
-      - HINTSPREPROCESSINGVOTE
-      - HISTORYPROOFKEYPUBLICATION
-      - HISTORYPROOFSIGNATURE
-      - HISTORYPROOFVOTE
-      - HOOKSTORE
-      - LEDGERIDPUBLICATION
-      - MIGRATIONROOTHASHVOTE
-      - NODECREATE
-      - NODEDELETE
-      - NODESTAKEUPDATE
-      - NODEUPDATE
-      - REGISTEREDNODECREATE
-      - REGISTEREDNODEDELETE
-      - REGISTEREDNODEUPDATE
-      - SCHEDULECREATE
-      - SCHEDULEDELETE
-      - SCHEDULESIGN
-      - STATESIGNATURETRANSACTION
-      - SYSTEMDELETE
-      - SYSTEMUNDELETE
-      - TOKENAIRDROP
-      - TOKENASSOCIATE
-      - TOKENBURN
-      - TOKENCANCELAIRDROP
-      - TOKENCLAIMAIRDROP
-      - TOKENCREATION
-      - TOKENDELETION
-      - TOKENDISSOCIATE
-      - TOKENFEESCHEDULEUPDATE
-      - TOKENFREEZE
-      - TOKENGRANTKYC
-      - TOKENMINT
-      - TOKENPAUSE
-      - TOKENREJECT
-      - TOKENREVOKEKYC
-      - TOKENUNFREEZE
-      - TOKENUNPAUSE
-      - TOKENUPDATE
-      - TOKENUPDATENFTS
-      - TOKENWIPE
-      - UNCHECKEDSUBMIT
-      - UTILPRNG
-    CryptoAllowances:
-      type: array
-      items:
-        $ref: '#/components/schemas/CryptoAllowance'
-    TokenAllowance:
-      allOf:
-      - $ref: '#/components/schemas/Allowance'
-      - properties:
-          token_id:
-            $ref: '#/components/schemas/EntityId'
-    Timestamp:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type: string
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
-    TimestampRangeNullable:
-      type:
-      - object
-      - 'null'
-      description: A timestamp range an entity is valid for
-      properties:
-        from:
-          allOf:
-          - $ref: '#/components/schemas/Timestamp'
-          - description: The inclusive from timestamp in seconds
-        to:
-          allOf:
-          - $ref: '#/components/schemas/TimestampNullable'
-          - description: The exclusive to timestamp in seconds
-    NftAllowancesResponse:
-      type: object
-      properties:
-        allowances:
-          $ref: '#/components/schemas/NftAllowances'
-        links:
-          $ref: '#/components/schemas/Links'
-    Balance:
-      type:
-      - object
-      - 'null'
-      required:
-      - timestamp
-      - balance
-      - tokens
-      properties:
-        timestamp:
-          $ref: '#/components/schemas/TimestampNullable'
-        balance:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        tokens:
-          type: array
-          items:
-            type: object
-            properties:
-              token_id:
-                $ref: '#/components/schemas/EntityId'
-              balance:
-                format: int64
-                type: integer
-      example:
-        timestamp: '0.000002345'
-        balance: 80
-        tokens:
-        - token_id: 0.0.200001
-          balance: 8
-    NftAllowances:
-      type: array
-      items:
-        $ref: '#/components/schemas/NftAllowance'
-    Nfts:
-      type: object
-      properties:
-        nfts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Nft'
-        links:
-          $ref: '#/components/schemas/Links'
-    HooksStorageResponse:
-      type: object
-      required:
-      - hook_id
-      - links
-      - owner_id
-      - storage
-      properties:
-        hook_id:
-          description: The unique identifier of the hook within the owner's scope
-          example: 1
-          format: int64
-          type: integer
-        links:
-          $ref: '#/components/schemas/Links'
-        owner_id:
-          allOf:
-          - $ref: '#/components/schemas/EntityId'
-          - description: The entity that owns the hook
-        storage:
-          type: array
-          items:
-            $ref: '#/components/schemas/HookStorage'
-    Links:
-      type: object
-      properties:
-        next:
-          example: null
-          type:
-          - string
-          - 'null'
-    CryptoAllowancesResponse:
-      type: object
-      properties:
-        allowances:
-          $ref: '#/components/schemas/CryptoAllowances'
-        links:
-          $ref: '#/components/schemas/Links'
-    StakingRewardsResponse:
-      type: object
-      properties:
-        rewards:
-          type: array
-          items:
-            $ref: '#/components/schemas/StakingReward'
-        links:
-          $ref: '#/components/schemas/Links'
-    TokenRelationshipResponse:
-      type: object
-      properties:
-        tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/TokenRelationship'
-        links:
-          $ref: '#/components/schemas/Links'
-    Hook:
-      type: object
-      required:
-      - admin_key
-      - contract_id
-      - created_timestamp
-      - deleted
-      - extension_point
-      - hook_id
-      - owner_id
-      - timestamp_range
-      - type
-      properties:
-        admin_key:
-          $ref: '#/components/schemas/Key'
-        contract_id:
-          allOf:
-          - $ref: '#/components/schemas/EntityId'
-          description: The contract entity that contains the hook's executing bytecode
-        created_timestamp:
-          allOf:
-          - $ref: '#/components/schemas/TimestampNullable'
-          description: The consensus timestamp when the hook was created
-        deleted:
-          description: Whether the hook has been deleted
-          example: false
-          type: boolean
-        extension_point:
-          description: The extension point this hook implements
-          enum:
-          - ACCOUNT_ALLOWANCE_HOOK
-          example: ACCOUNT_ALLOWANCE_HOOK
-          type: string
-        hook_id:
-          description: The unique identifier for the hook within the owner's scope
-          example: 1
-          format: int64
-          type: integer
-        owner_id:
-          allOf:
-          - $ref: '#/components/schemas/EntityId'
-          description: The entity that owns the hook
-        timestamp_range:
-          $ref: '#/components/schemas/TimestampRangeNullable'
-        type:
-          description: The type of the hook implementation
-          enum:
-          - EVM
-          example: EVM
-          type: string
-    Allowance:
-      type: object
-      properties:
-        amount:
-          description: The amount remaining of the original amount granted.
-          format: int64
-          type: integer
-          example: 75
-        amount_granted:
-          description: The granted amount of the spender's allowance.
-          format: int64
-          type: integer
-          example: 100
-        owner:
-          $ref: '#/components/schemas/EntityId'
-        spender:
-          $ref: '#/components/schemas/EntityId'
-        timestamp:
-          $ref: '#/components/schemas/TimestampRange'
-    Error:
-      type: object
-      properties:
-        _status:
-          type: object
-          properties:
-            messages:
-              type: array
-              items:
-                type: object
-                properties:
-                  data:
-                    description: Error message in hexadecimal
-                    example: '0x3000'
-                    format: binary
-                    pattern: ^0x[0-9a-fA-F]+$
-                    type:
-                    - string
-                    - 'null'
-                  detail:
-                    description: Detailed error message
-                    example: Generic detailed error message
-                    type:
-                    - string
-                    - 'null'
-                  message:
-                    description: Error message
-                    example: Generic error message
-                    type: string
-    StakingRewardTransfer:
-      type: object
-      description: A staking reward transfer
-      required:
-      - account
-      - amount
-      properties:
-        account:
-          $ref: '#/components/schemas/EntityId'
-        amount:
-          description: The number of tinybars awarded
-          example: 10
-          format: int64
-          type: integer
-      example:
-        account_id: 0.0.1000
-        amount: 10
-    TokenAllowances:
-      type: array
-      items:
-        $ref: '#/components/schemas/TokenAllowance'
-    AccountsResponse:
-      type: object
-      required:
-      - accounts
-      - links
-      properties:
-        accounts:
-          $ref: '#/components/schemas/Accounts'
-        links:
-          $ref: '#/components/schemas/Links'
-    EvmAddressNullable:
-      type:
-      - string
-      - 'null'
-      description: A network entity encoded as an EVM address in hex.
-      format: binary
-      minLength: 40
-      maxLength: 42
-      pattern: ^(0x)?[A-Fa-f0-9]{40}$
-      example: '0x0000000000000000000000000000000000001f41'
     TimestampRange:
       type: object
       description: A timestamp range an entity is valid for
@@ -1362,418 +1770,10 @@ components:
           allOf:
           - $ref: '#/components/schemas/TimestampNullable'
           - description: The exclusive to timestamp in seconds
-  parameters:
-    balanceQueryParam:
-      name: balance
-      in: query
-      description: Whether to include balance information or not. If included, token balances are limited to at most 50 per account as outlined in HIP-367. If multiple values are provided the last value will be the only value used.
-      example: true
-      schema:
-        type: boolean
-        default: true
-    accountIdQueryParam:
-      name: account.id
-      in: query
-      description: The ID of the account to return information for
-      explode: true
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        entityNumNoOperator:
-          summary: Example of entityNum equals with no operator
-          value: 100
-        idNoOperator:
-          summary: Example of id equals with no operator
-          value: 0.0.100
-        entityNumEqOperator:
-          summary: Example of entityNum equals operator
-          value: eq:200
-        idEqOperator:
-          summary: Example of id equals operator
-          value: eq:0.0.200
-        entityNumNeOperator:
-          summary: Example of entityNum not equals operator
-          value: ne:300
-        idNeOperator:
-          summary: Example of id not equals operator
-          value: ne:0.0.300
-        entityNumGtOperator:
-          summary: Example of entityNum greater than operator
-          value: gt:400
-        idGtOperator:
-          summary: Example of id greater than operator
-          value: gt:0.0.400
-        entityNumGteOperator:
-          summary: Example of entityNum greater than or equals operator
-          value: gte:500
-        idGteOperator:
-          summary: Example of id greater than or equals operator
-          value: gte:0.0.500
-        entityNumLtOperator:
-          summary: Example of entityNum less than operator
-          value: lt:600
-        idLtOperator:
-          summary: Example of id less than operator
-          value: lt:0.0.600
-        entityNumLteOperator:
-          summary: Example of entityNum less than or equals operator
-          value: lte:700
-        idLteOperator:
-          summary: Example of id less than or equals operator
-          value: lte:0.0.700
-      schema:
-        $ref: '#/components/schemas/EntityIdQuery'
-    keyQueryParam:
-      description: A string representing a pair of operator:address of a hook storage entry
-      examples:
-        zeroXPrefix:
-          summary: Example of key equals operator with 0x prefix
-          value: eq:0x00000000000000000000000000000000000000000000000000000000000f9a15
-        noZeroPadding:
-          summary: Example of key equals operator without zero padding
-          value: eq:f9a15
-        noOperator:
-          summary: Example of key equals with no operator
-          value: 00000000000000000000000000000000000000000000000000000000000f9a15
-        eqOperator:
-          summary: Example of key equals operator
-          value: eq:00000000000000000000000000000000000000000000000000000000000f9a15
-        gtOperator:
-          summary: Example of key gt operator
-          value: gt:00000000000000000000000000000000000000000000000000000000000f9a15
-        gteOperator:
-          summary: Example of key gte operator
-          value: gte:00000000000000000000000000000000000000000000000000000000000f9a15
-        ltOperator:
-          summary: Example of key lt operator
-          value: lt:00000000000000000000000000000000000000000000000000000000000f9a15
-        lteOperator:
-          summary: Example of key lte operator
-          value: lte:00000000000000000000000000000000000000000000000000000000000f9a15
-      in: query
-      name: key
-      schema:
-        example: eq:0x00000000000000000000000000000000000000000000000000000000000f9a10
-        pattern: ^((eq|gte?|lte?)\:)?(0x)?[0-9A-Fa-f]{1,64}$
-        type: string
-    serialNumberQueryParam:
-      name: serialnumber
-      in: query
-      explode: true
-      description: The nft serial number (64 bit type). Requires a tokenId value also be populated.
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        serialNumNoOperator:
-          summary: Example of serialNum equals with no operator
-          value: 100
-        serialNumEqOperator:
-          summary: Example of serialNum equals operator
-          value: eq:200
-        serialNumGtOperator:
-          summary: Example of serialNum greater than operator
-          value: gt:400
-        serialNumGteOperator:
-          summary: Example of serialNum greater than or equals operator
-          value: gte:500
-        serialNumLtOperator:
-          summary: Example of serialNum less than operator
-          value: lt:600
-        serialNumLteOperator:
-          summary: Example of serialNum less than or equals operator
-          value: lte:700
-      schema:
-        type: string
-        pattern: ^((eq|gt|gte|lt|lte):)?\d{1,19}?$
-    timestampQueryParam:
-      description: The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
-      name: timestamp
-      in: query
-      explode: true
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        secondsNoOperator:
-          summary: Example of seconds equals with no operator
-          value: 1234567890
-        timestampNoOperator:
-          summary: Example of timestamp equals with no operator
-          value: 1234567890
-        secondsEqOperator:
-          summary: Example of seconds equals with operator
-          value: eq:1234567890
-        timestampEqOperator:
-          summary: Example of timestamp equals with operator
-          value: eq:1234567890.000000200
-        secondsNeOperator:
-          summary: Example of seconds not equals operator
-          value: ne:1234567890
-        timestampNeOperator:
-          summary: Example of timestamp not equals operator
-          value: ne:1234567890.000000300
-        secondsGtOperator:
-          summary: Example of seconds greater than operator
-          value: gt:1234567890
-        timestampGtOperator:
-          summary: Example of timestamp greater than operator
-          value: gt:1234567890.000000400
-        secondsGteOperator:
-          summary: Example of seconds greater than or equals operator
-          value: gte:1234567890
-        timestampGteOperator:
-          summary: Example of timestamp greater than or equals operator
-          value: gte:1234567890.000000500
-        secondsLtOperator:
-          summary: Example of seconds less than operator
-          value: lt:1234567890
-        timestampLtOperator:
-          summary: Example of timestamp less than operator
-          value: lt:1234567890.000000600
-        secondsLteOperator:
-          summary: Example of seconds less than or equals operator
-          value: lte:1234567890
-        timestampLteOperator:
-          summary: Example of timestamp less than or equals operator
-          value: lte:1234567890.000000700
-      schema:
-        type: array
-        items:
-          type: string
-          pattern: ^((eq|gt|gte|lt|lte|ne):)?\d{1,10}(\.\d{1,9})?$
-    hookIdQueryParam:
-      description: The ID of the hook
-      example: 1234
-      in: query
-      name: hook.id
-      schema:
-        format: int64
-        type: integer
-        minimum: 1
-        maximum: 9223372036854776000
-      required: false
-    accountIdOrAliasOrEvmAddressPathParam:
-      name: idOrAliasOrEvmAddress
-      in: path
-      description: Account alias or account id or evm address
-      required: true
-      examples:
-        aliasOnly:
-          value: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-        realmAlias:
-          value: 0.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-        shardRealmAlias:
-          value: 0.1.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-        accountNumOnly:
-          value: 8
-        realmAccountNum:
-          value: 0.8
-        shardRealmAccountNum:
-          value: 0.0.8
-        evmAddress:
-          value: ac384c53f03855fa1b3616052f8ba32c6c2a2fec
-        evmAddressWithPrefix:
-          value: 9.832019034092927e+47
-        evmAddressWithShardAndRealm:
-          value: 0.0.ac384c53f03855fa1b3616052f8ba32c6c2a2fec
-      schema:
-        pattern: ^(\d{1,10}\.){0,2}(\d{1,10}|(0x)?[A-Fa-f0-9]{40}|(?:[A-Z2-7]{8})*(?:[A-Z2-7]{2}|[A-Z2-7]{4,5}|[A-Z2-7]{7,8}))$
-        type: string
-    transactionsQueryParam:
-      name: transactions
-      description: If provided and set to false transactions will not be included in the response
-      in: query
-      example: true
-      schema:
-        type: boolean
-        default: true
-    ownerQueryParam:
-      name: owner
-      description: When the owner value is true or omitted, the accountId path parameter will specify the ID of the owner, and the API will retrieve the allowances that the owner has granted to different spenders. Conversely, when the owner value is false, the accountId path parameter will indicate the ID of the spender who has an allowance, and the API will instead provide the allowances granted to the spender by different owners of those tokens.
-      in: query
-      example: true
-      schema:
-        type: boolean
-        default: true
-    hookIdPathParam:
-      description: The ID of the hook
-      example: 1234
-      in: path
-      name: hookId
-      schema:
-        format: int64
-        type: integer
-        minimum: 0
-        maximum: 9223372036854776000
-      required: true
-    accountBalanceQueryParam:
-      name: account.balance
-      in: query
-      description: The optional balance value to compare against
-      explode: true
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        noOperator:
-          summary: Example of equals with no operator
-          value: 100
-        eqOperator:
-          summary: Example of equals operator
-          value: eq:200
-        neOperator:
-          summary: Example of not equals operator
-          value: ne:300
-        gtOperator:
-          summary: Example of greater than operator
-          value: gt:400
-        gteOperator:
-          summary: Example of greater than or equals operator
-          value: gte:500
-        ltOperator:
-          summary: Example of less than operator
-          value: lt:600
-        lteOperator:
-          summary: Example of less than or equals operator
-          value: lte:700
-      schema:
-        type: string
-        pattern: ^((gte?|lte?|eq|ne)\:)?\d{1,10}$
-    spenderIdQueryParam:
-      name: spender.id
-      description: The ID of the spender to return information for
-      in: query
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        entityNumNoOperator:
-          summary: Example of entityNum equals with no operator
-          value: 100
-        idNoOperator:
-          summary: Example of id equals with no operator
-          value: 0.0.100
-        entityNumEqOperator:
-          summary: Example of entityNum equals operator
-          value: eq:200
-        idEqOperator:
-          summary: Example of id equals operator
-          value: eq:0.0.200
-        idGtOperator:
-          summary: Example of id greather than operator
-          value: gt:0.0.200
-        idGteOperator:
-          summary: Example of id greather than or equal to operator
-          value: gte:0.0.200
-        idLtOperator:
-          summary: Example of id less than operator
-          value: lt:0.0.200
-        idLteOperator:
-          summary: Example of id less than or equal to operator
-          value: lte:0.0.200
-      schema:
-        $ref: '#/components/schemas/EntityIdQuery'
-    orderQueryParamDesc:
-      name: order
-      in: query
-      description: The order in which items are listed
-      example: asc
-      schema:
-        enum:
-        - asc
-        - desc
-        default: desc
-    limitQueryParam:
-      name: limit
-      in: query
-      description: The maximum number of items to return
-      example: 2
-      schema:
-        format: int32
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 100
-    orderQueryParam:
-      name: order
-      in: query
-      description: The order in which items are listed
-      example: desc
-      schema:
-        enum:
-        - asc
-        - desc
-        default: asc
-    accountPublicKeyQueryParam:
-      name: account.publickey
-      in: query
-      description: The account's public key to compare against
-      example: 3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be
-      schema:
-        type: string
-    transactionTypeQueryParam:
-      name: transactiontype
-      in: query
-      example: null
-      schema:
-        $ref: '#/components/schemas/TransactionTypes'
-    tokenIdQueryParam:
-      name: token.id
-      description: The ID of the token to return information for
-      in: query
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        tokenNumAlias:
-          summary: Example of token num alias equals with no operator
-          value: 64
-        entityNumNoOperator:
-          summary: Example of entityNum equals with no operator
-          value: 100
-        idNoOperator:
-          summary: Example of id equals with no operator
-          value: 0.0.100
-        entityNumEqOperator:
-          summary: Example of entityNum equals operator
-          value: eq:200
-        idEqOperator:
-          summary: Example of id equals operator
-          value: eq:0.0.200
-        entityNumNeOperator:
-          summary: Example of entityNum not equals operator
-          value: ne:300
-        idNeOperator:
-          summary: Example of id not equals operator
-          value: ne:0.0.300
-        entityNumGtOperator:
-          summary: Example of entityNum greater than operator
-          value: gt:400
-        idGtOperator:
-          summary: Example of id greater than operator
-          value: gt:0.0.400
-        entityNumGteOperator:
-          summary: Example of entityNum greater than or equals operator
-          value: gte:500
-        idGteOperator:
-          summary: Example of id greater than or equals operator
-          value: gte:0.0.500
-        entityNumLtOperator:
-          summary: Example of entityNum less than operator
-          value: lt:600
-        idLtOperator:
-          summary: Example of id less than operator
-          value: lt:0.0.600
-        entityNumLteOperator:
-          summary: Example of entityNum less than or equals operator
-          value: lte:700
-        idLteOperator:
-          summary: Example of id less than or equals operator
-          value: lte:0.0.700
-      schema:
-        $ref: '#/components/schemas/EntityIdQuery'
+    Accounts:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccountInfo'
   responses:
     InvalidParameterError:
       description: Invalid parameter
