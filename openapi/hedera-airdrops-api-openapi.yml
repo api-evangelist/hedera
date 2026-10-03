@@ -91,35 +91,9 @@ paths:
       - Airdrops
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        _status:
-          type: object
-          properties:
-            messages:
-              type: array
-              items:
-                type: object
-                properties:
-                  data:
-                    description: Error message in hexadecimal
-                    example: '0x3000'
-                    format: binary
-                    pattern: ^0x[0-9a-fA-F]+$
-                    type:
-                    - string
-                    - 'null'
-                  detail:
-                    description: Detailed error message
-                    example: Generic detailed error message
-                    type:
-                    - string
-                    - 'null'
-                  message:
-                    description: Error message
-                    example: Generic error message
-                    type: string
+    EntityIdQuery:
+      type: string
+      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
     Timestamp:
       description: A Unix timestamp in seconds.nanoseconds format
       type: string
@@ -132,28 +106,6 @@ components:
       description: Network entity ID in the format of `shard.realm.num`
       pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
       example: 0.0.2
-    Links:
-      type: object
-      properties:
-        next:
-          example: null
-          type:
-          - string
-          - 'null'
-    EntityIdQuery:
-      type: string
-      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
-    TokenAirdrops:
-      type: array
-      items:
-        $ref: '#/components/schemas/TokenAirdrop'
-    TokenAirdropsResponse:
-      type: object
-      properties:
-        airdrops:
-          $ref: '#/components/schemas/TokenAirdrops'
-        links:
-          $ref: '#/components/schemas/Links'
     TokenAirdrop:
       type: object
       properties:
@@ -189,6 +141,13 @@ components:
       - sender_id
       - timestamp
       - token_id
+    TokenAirdropsResponse:
+      type: object
+      properties:
+        airdrops:
+          $ref: '#/components/schemas/TokenAirdrops'
+        links:
+          $ref: '#/components/schemas/Links'
     TimestampNullable:
       description: A Unix timestamp in seconds.nanoseconds format
       type:
@@ -196,6 +155,47 @@ components:
       - 'null'
       example: '1586567700.453054000'
       pattern: ^\d{1,10}(\.\d{1,9})?$
+    Links:
+      type: object
+      properties:
+        next:
+          example: null
+          type:
+          - string
+          - 'null'
+    TokenAirdrops:
+      type: array
+      items:
+        $ref: '#/components/schemas/TokenAirdrop'
+    Error:
+      type: object
+      properties:
+        _status:
+          type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  data:
+                    description: Error message in hexadecimal
+                    example: '0x3000'
+                    format: binary
+                    pattern: ^0x[0-9a-fA-F]+$
+                    type:
+                    - string
+                    - 'null'
+                  detail:
+                    description: Detailed error message
+                    example: Generic detailed error message
+                    type:
+                    - string
+                    - 'null'
+                  message:
+                    description: Error message
+                    example: Generic error message
+                    type: string
     TimestampRange:
       type: object
       description: A timestamp range an entity is valid for
@@ -288,6 +288,43 @@ components:
         default: 25
         minimum: 1
         maximum: 100
+    orderQueryParam:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: desc
+      schema:
+        enum:
+        - asc
+        - desc
+        default: asc
+    accountIdOrAliasOrEvmAddressPathParam:
+      name: idOrAliasOrEvmAddress
+      in: path
+      description: Account alias or account id or evm address
+      required: true
+      examples:
+        aliasOnly:
+          value: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+        realmAlias:
+          value: 0.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+        shardRealmAlias:
+          value: 0.1.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+        accountNumOnly:
+          value: 8
+        realmAccountNum:
+          value: 0.8
+        shardRealmAccountNum:
+          value: 0.0.8
+        evmAddress:
+          value: ac384c53f03855fa1b3616052f8ba32c6c2a2fec
+        evmAddressWithPrefix:
+          value: 9.832019034092927e+47
+        evmAddressWithShardAndRealm:
+          value: 0.0.ac384c53f03855fa1b3616052f8ba32c6c2a2fec
+      schema:
+        pattern: ^(\d{1,10}\.){0,2}(\d{1,10}|(0x)?[A-Fa-f0-9]{40}|(?:[A-Z2-7]{8})*(?:[A-Z2-7]{2}|[A-Z2-7]{4,5}|[A-Z2-7]{7,8}))$
+        type: string
     serialNumberQueryParam:
       name: serialnumber
       in: query
@@ -373,44 +410,17 @@ components:
           value: lte:0.0.700
       schema:
         $ref: '#/components/schemas/EntityIdQuery'
-    accountIdOrAliasOrEvmAddressPathParam:
-      name: idOrAliasOrEvmAddress
-      in: path
-      description: Account alias or account id or evm address
-      required: true
-      examples:
-        aliasOnly:
-          value: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-        realmAlias:
-          value: 0.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-        shardRealmAlias:
-          value: 0.1.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-        accountNumOnly:
-          value: 8
-        realmAccountNum:
-          value: 0.8
-        shardRealmAccountNum:
-          value: 0.0.8
-        evmAddress:
-          value: ac384c53f03855fa1b3616052f8ba32c6c2a2fec
-        evmAddressWithPrefix:
-          value: 9.832019034092927e+47
-        evmAddressWithShardAndRealm:
-          value: 0.0.ac384c53f03855fa1b3616052f8ba32c6c2a2fec
-      schema:
-        pattern: ^(\d{1,10}\.){0,2}(\d{1,10}|(0x)?[A-Fa-f0-9]{40}|(?:[A-Z2-7]{8})*(?:[A-Z2-7]{2}|[A-Z2-7]{4,5}|[A-Z2-7]{7,8}))$
-        type: string
-    orderQueryParam:
-      name: order
-      in: query
-      description: The order in which items are listed
-      example: desc
-      schema:
-        enum:
-        - asc
-        - desc
-        default: asc
   responses:
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: Not found
     InvalidParameterError:
       description: Invalid parameter
       content:
@@ -422,16 +432,6 @@ components:
               messages:
               - message: 'Invalid parameter: account.id'
               - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
-    NotFoundError:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            _status:
-              messages:
-              - message: Not found
 externalDocs:
   description: REST API Docs
   url: https://docs.hedera.com/guides/docs/mirror-node-api/cryptocurrency-api

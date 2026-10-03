@@ -83,15 +83,6 @@ paths:
       - Schedules
 components:
   schemas:
-    Schedules:
-      type: array
-      items:
-        $ref: '#/components/schemas/Schedule'
-    Timestamp:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type: string
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
     EntityId:
       type:
       - string
@@ -99,35 +90,6 @@ components:
       description: Network entity ID in the format of `shard.realm.num`
       pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
       example: 0.0.2
-    Error:
-      type: object
-      properties:
-        _status:
-          type: object
-          properties:
-            messages:
-              type: array
-              items:
-                type: object
-                properties:
-                  data:
-                    description: Error message in hexadecimal
-                    example: '0x3000'
-                    format: binary
-                    pattern: ^0x[0-9a-fA-F]+$
-                    type:
-                    - string
-                    - 'null'
-                  detail:
-                    description: Detailed error message
-                    example: Generic detailed error message
-                    type:
-                    - string
-                    - 'null'
-                  message:
-                    description: Error message
-                    example: Generic error message
-                    type: string
     Schedule:
       type: object
       properties:
@@ -161,44 +123,42 @@ components:
           example: Kd6tvu8=
         wait_for_expiry:
           type: boolean
-    Links:
+    EntityIdQuery:
+      type: string
+      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
+    Schedules:
+      type: array
+      items:
+        $ref: '#/components/schemas/Schedule'
+    Error:
       type: object
       properties:
-        next:
-          example: null
-          type:
-          - string
-          - 'null'
-    SchedulesResponse:
-      type: object
-      properties:
-        schedules:
-          $ref: '#/components/schemas/Schedules'
-        links:
-          $ref: '#/components/schemas/Links'
-    TimestampNullable:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type:
-      - string
-      - 'null'
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
-    Key:
-      description: The public key which controls access to various network entities.
-      type:
-      - object
-      - 'null'
-      properties:
-        _type:
-          type: string
-          enum:
-          - ECDSA_SECP256K1
-          - ED25519
-          - ProtobufEncoded
-          example: ProtobufEncoded
-        key:
-          type: string
-          example: 15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743
+        _status:
+          type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  data:
+                    description: Error message in hexadecimal
+                    example: '0x3000'
+                    format: binary
+                    pattern: ^0x[0-9a-fA-F]+$
+                    type:
+                    - string
+                    - 'null'
+                  detail:
+                    description: Detailed error message
+                    example: Generic detailed error message
+                    type:
+                    - string
+                    - 'null'
+                  message:
+                    description: Error message
+                    example: Generic error message
+                    type: string
     ScheduleSignature:
       type: object
       properties:
@@ -222,17 +182,82 @@ components:
           - ECDSA_SECP256K1
           - UNKNOWN
           example: ED25519
-    EntityIdQuery:
+    TimestampNullable:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type:
+      - string
+      - 'null'
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    Links:
+      type: object
+      properties:
+        next:
+          example: null
+          type:
+          - string
+          - 'null'
+    Key:
+      description: The public key which controls access to various network entities.
+      type:
+      - object
+      - 'null'
+      properties:
+        _type:
+          type: string
+          enum:
+          - ECDSA_SECP256K1
+          - ED25519
+          - ProtobufEncoded
+          example: ProtobufEncoded
+        key:
+          type: string
+          example: 15706b229b3ba33d4a5a41ff54ce1cfe0a3d308672a33ff382f81583e02bd743
+    Timestamp:
+      description: A Unix timestamp in seconds.nanoseconds format
       type: string
-      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    SchedulesResponse:
+      type: object
+      properties:
+        schedules:
+          $ref: '#/components/schemas/Schedules'
+        links:
+          $ref: '#/components/schemas/Links'
+  responses:
+    InvalidParameterError:
+      description: Invalid parameter
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: 'Invalid parameter: account.id'
+              - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: Not found
   parameters:
-    scheduleIdPathParam:
-      name: scheduleId
-      in: path
-      required: true
-      description: Schedule id
+    orderQueryParam:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: desc
       schema:
-        $ref: '#/components/schemas/EntityId'
+        enum:
+        - asc
+        - desc
+        default: asc
     accountIdQueryParam:
       name: account.id
       in: query
@@ -286,16 +311,6 @@ components:
           value: lte:0.0.700
       schema:
         $ref: '#/components/schemas/EntityIdQuery'
-    orderQueryParam:
-      name: order
-      in: query
-      description: The order in which items are listed
-      example: desc
-      schema:
-        enum:
-        - asc
-        - desc
-        default: asc
     scheduleIdQueryParam:
       name: schedule.id
       description: The ID of the schedule to return information for
@@ -348,6 +363,13 @@ components:
           value: lte:0.0.700
       schema:
         $ref: '#/components/schemas/EntityIdQuery'
+    scheduleIdPathParam:
+      name: scheduleId
+      in: path
+      required: true
+      description: Schedule id
+      schema:
+        $ref: '#/components/schemas/EntityId'
     limitQueryParam:
       name: limit
       in: query
@@ -359,28 +381,6 @@ components:
         default: 25
         minimum: 1
         maximum: 100
-  responses:
-    InvalidParameterError:
-      description: Invalid parameter
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            _status:
-              messages:
-              - message: 'Invalid parameter: account.id'
-              - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
-    NotFoundError:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            _status:
-              messages:
-              - message: Not found
 externalDocs:
   description: REST API Docs
   url: https://docs.hedera.com/guides/docs/mirror-node-api/cryptocurrency-api

@@ -66,144 +66,6 @@ paths:
       tags:
       - Balances
 components:
-  parameters:
-    orderQueryParamDesc:
-      name: order
-      in: query
-      description: The order in which items are listed
-      example: asc
-      schema:
-        enum:
-        - asc
-        - desc
-        default: desc
-    timestampQueryParam:
-      description: The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
-      name: timestamp
-      in: query
-      explode: true
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        secondsNoOperator:
-          summary: Example of seconds equals with no operator
-          value: 1234567890
-        timestampNoOperator:
-          summary: Example of timestamp equals with no operator
-          value: 1234567890
-        secondsEqOperator:
-          summary: Example of seconds equals with operator
-          value: eq:1234567890
-        timestampEqOperator:
-          summary: Example of timestamp equals with operator
-          value: eq:1234567890.000000200
-        secondsNeOperator:
-          summary: Example of seconds not equals operator
-          value: ne:1234567890
-        timestampNeOperator:
-          summary: Example of timestamp not equals operator
-          value: ne:1234567890.000000300
-        secondsGtOperator:
-          summary: Example of seconds greater than operator
-          value: gt:1234567890
-        timestampGtOperator:
-          summary: Example of timestamp greater than operator
-          value: gt:1234567890.000000400
-        secondsGteOperator:
-          summary: Example of seconds greater than or equals operator
-          value: gte:1234567890
-        timestampGteOperator:
-          summary: Example of timestamp greater than or equals operator
-          value: gte:1234567890.000000500
-        secondsLtOperator:
-          summary: Example of seconds less than operator
-          value: lt:1234567890
-        timestampLtOperator:
-          summary: Example of timestamp less than operator
-          value: lt:1234567890.000000600
-        secondsLteOperator:
-          summary: Example of seconds less than or equals operator
-          value: lte:1234567890
-        timestampLteOperator:
-          summary: Example of timestamp less than or equals operator
-          value: lte:1234567890.000000700
-      schema:
-        type: array
-        items:
-          type: string
-          pattern: ^((eq|gt|gte|lt|lte|ne):)?\d{1,10}(\.\d{1,9})?$
-    limitQueryParam:
-      name: limit
-      in: query
-      description: The maximum number of items to return
-      example: 2
-      schema:
-        format: int32
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 100
-    accountPublicKeyQueryParam:
-      name: account.publickey
-      in: query
-      description: The account's public key to compare against
-      example: 3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be
-      schema:
-        type: string
-    accountIdOrAliasOrEvmAddressQueryParam:
-      name: account.id
-      in: query
-      description: Account id or account alias with no shard realm or evm address with no shard realm
-      examples:
-        aliasOnly:
-          value: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-        accountNumOnly:
-          value: 8
-        realmAccountNum:
-          value: 0.8
-        shardRealmAccountNum:
-          value: 0.0.8
-        evmAddress:
-          value: ac384c53f03855fa1b3616052f8ba32c6c2a2fec
-        evmAddressWithPrefix:
-          value: 9.832019034092927e+47
-      schema:
-        pattern: ^(\d{1,10}\.){0,2}(\d{1,10}|(0x)?[A-Fa-f0-9]{40}|(?:[A-Z2-7]{8})*(?:[A-Z2-7]{2}|[A-Z2-7]{4,5}|[A-Z2-7]{7,8}))$
-        type: string
-    accountBalanceQueryParam:
-      name: account.balance
-      in: query
-      description: The optional balance value to compare against
-      explode: true
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        noOperator:
-          summary: Example of equals with no operator
-          value: 100
-        eqOperator:
-          summary: Example of equals operator
-          value: eq:200
-        neOperator:
-          summary: Example of not equals operator
-          value: ne:300
-        gtOperator:
-          summary: Example of greater than operator
-          value: gt:400
-        gteOperator:
-          summary: Example of greater than or equals operator
-          value: gte:500
-        ltOperator:
-          summary: Example of less than operator
-          value: lt:600
-        lteOperator:
-          summary: Example of less than or equals operator
-          value: lte:700
-      schema:
-        type: string
-        pattern: ^((gte?|lte?|eq|ne)\:)?\d{1,10}$
   schemas:
     EntityId:
       type:
@@ -263,6 +125,17 @@ components:
           type:
           - string
           - 'null'
+    BalancesResponse:
+      type: object
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountBalance'
+        links:
+          $ref: '#/components/schemas/Links'
     TimestampNullable:
       description: A Unix timestamp in seconds.nanoseconds format
       type:
@@ -292,17 +165,6 @@ components:
         tokens:
         - token_id: 0.0.200001
           balance: 8
-    BalancesResponse:
-      type: object
-      properties:
-        timestamp:
-          $ref: '#/components/schemas/TimestampNullable'
-        balances:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountBalance'
-        links:
-          $ref: '#/components/schemas/Links'
   responses:
     InvalidParameterError:
       description: Invalid parameter
@@ -315,6 +177,144 @@ components:
               messages:
               - message: 'Invalid parameter: account.id'
               - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
+  parameters:
+    limitQueryParam:
+      name: limit
+      in: query
+      description: The maximum number of items to return
+      example: 2
+      schema:
+        format: int32
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    orderQueryParamDesc:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: asc
+      schema:
+        enum:
+        - asc
+        - desc
+        default: desc
+    accountPublicKeyQueryParam:
+      name: account.publickey
+      in: query
+      description: The account's public key to compare against
+      example: 3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be
+      schema:
+        type: string
+    accountBalanceQueryParam:
+      name: account.balance
+      in: query
+      description: The optional balance value to compare against
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        noOperator:
+          summary: Example of equals with no operator
+          value: 100
+        eqOperator:
+          summary: Example of equals operator
+          value: eq:200
+        neOperator:
+          summary: Example of not equals operator
+          value: ne:300
+        gtOperator:
+          summary: Example of greater than operator
+          value: gt:400
+        gteOperator:
+          summary: Example of greater than or equals operator
+          value: gte:500
+        ltOperator:
+          summary: Example of less than operator
+          value: lt:600
+        lteOperator:
+          summary: Example of less than or equals operator
+          value: lte:700
+      schema:
+        type: string
+        pattern: ^((gte?|lte?|eq|ne)\:)?\d{1,10}$
+    accountIdOrAliasOrEvmAddressQueryParam:
+      name: account.id
+      in: query
+      description: Account id or account alias with no shard realm or evm address with no shard realm
+      examples:
+        aliasOnly:
+          value: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+        accountNumOnly:
+          value: 8
+        realmAccountNum:
+          value: 0.8
+        shardRealmAccountNum:
+          value: 0.0.8
+        evmAddress:
+          value: ac384c53f03855fa1b3616052f8ba32c6c2a2fec
+        evmAddressWithPrefix:
+          value: 9.832019034092927e+47
+      schema:
+        pattern: ^(\d{1,10}\.){0,2}(\d{1,10}|(0x)?[A-Fa-f0-9]{40}|(?:[A-Z2-7]{8})*(?:[A-Z2-7]{2}|[A-Z2-7]{4,5}|[A-Z2-7]{7,8}))$
+        type: string
+    timestampQueryParam:
+      description: The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
+      name: timestamp
+      in: query
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        secondsNoOperator:
+          summary: Example of seconds equals with no operator
+          value: 1234567890
+        timestampNoOperator:
+          summary: Example of timestamp equals with no operator
+          value: 1234567890
+        secondsEqOperator:
+          summary: Example of seconds equals with operator
+          value: eq:1234567890
+        timestampEqOperator:
+          summary: Example of timestamp equals with operator
+          value: eq:1234567890.000000200
+        secondsNeOperator:
+          summary: Example of seconds not equals operator
+          value: ne:1234567890
+        timestampNeOperator:
+          summary: Example of timestamp not equals operator
+          value: ne:1234567890.000000300
+        secondsGtOperator:
+          summary: Example of seconds greater than operator
+          value: gt:1234567890
+        timestampGtOperator:
+          summary: Example of timestamp greater than operator
+          value: gt:1234567890.000000400
+        secondsGteOperator:
+          summary: Example of seconds greater than or equals operator
+          value: gte:1234567890
+        timestampGteOperator:
+          summary: Example of timestamp greater than or equals operator
+          value: gte:1234567890.000000500
+        secondsLtOperator:
+          summary: Example of seconds less than operator
+          value: lt:1234567890
+        timestampLtOperator:
+          summary: Example of timestamp less than operator
+          value: lt:1234567890.000000600
+        secondsLteOperator:
+          summary: Example of seconds less than or equals operator
+          value: lte:1234567890
+        timestampLteOperator:
+          summary: Example of timestamp less than or equals operator
+          value: lte:1234567890.000000700
+      schema:
+        type: array
+        items:
+          type: string
+          pattern: ^((eq|gt|gte|lt|lte|ne):)?\d{1,10}(\.\d{1,9})?$
 externalDocs:
   description: REST API Docs
   url: https://docs.hedera.com/guides/docs/mirror-node-api/cryptocurrency-api
