@@ -67,27 +67,17 @@ paths:
       - Balances
 components:
   schemas:
-    EntityId:
-      type:
-      - string
-      - 'null'
-      description: Network entity ID in the format of `shard.realm.num`
-      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
-      example: 0.0.2
-    TokenBalance:
+    BalancesResponse:
       type: object
-      required:
-      - token_id
-      - balance
       properties:
-        token_id:
-          $ref: '#/components/schemas/EntityId'
-        balance:
-          format: int64
-          type: integer
-      example:
-        token_id: 0.0.200001
-        balance: 8
+        timestamp:
+          $ref: '#/components/schemas/TimestampNullable'
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountBalance'
+        links:
+          $ref: '#/components/schemas/Links'
     Error:
       type: object
       properties:
@@ -117,6 +107,20 @@ components:
                     description: Error message
                     example: Generic error message
                     type: string
+    TimestampNullable:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type:
+      - string
+      - 'null'
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    EntityId:
+      type:
+      - string
+      - 'null'
+      description: Network entity ID in the format of `shard.realm.num`
+      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
+      example: 0.0.2
     Links:
       type: object
       properties:
@@ -125,24 +129,6 @@ components:
           type:
           - string
           - 'null'
-    BalancesResponse:
-      type: object
-      properties:
-        timestamp:
-          $ref: '#/components/schemas/TimestampNullable'
-        balances:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountBalance'
-        links:
-          $ref: '#/components/schemas/Links'
-    TimestampNullable:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type:
-      - string
-      - 'null'
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
     AccountBalance:
       type: object
       required:
@@ -165,100 +151,21 @@ components:
         tokens:
         - token_id: 0.0.200001
           balance: 8
-  responses:
-    InvalidParameterError:
-      description: Invalid parameter
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            _status:
-              messages:
-              - message: 'Invalid parameter: account.id'
-              - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
+    TokenBalance:
+      type: object
+      required:
+      - token_id
+      - balance
+      properties:
+        token_id:
+          $ref: '#/components/schemas/EntityId'
+        balance:
+          format: int64
+          type: integer
+      example:
+        token_id: 0.0.200001
+        balance: 8
   parameters:
-    limitQueryParam:
-      name: limit
-      in: query
-      description: The maximum number of items to return
-      example: 2
-      schema:
-        format: int32
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 100
-    orderQueryParamDesc:
-      name: order
-      in: query
-      description: The order in which items are listed
-      example: asc
-      schema:
-        enum:
-        - asc
-        - desc
-        default: desc
-    accountPublicKeyQueryParam:
-      name: account.publickey
-      in: query
-      description: The account's public key to compare against
-      example: 3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be
-      schema:
-        type: string
-    accountBalanceQueryParam:
-      name: account.balance
-      in: query
-      description: The optional balance value to compare against
-      explode: true
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        noOperator:
-          summary: Example of equals with no operator
-          value: 100
-        eqOperator:
-          summary: Example of equals operator
-          value: eq:200
-        neOperator:
-          summary: Example of not equals operator
-          value: ne:300
-        gtOperator:
-          summary: Example of greater than operator
-          value: gt:400
-        gteOperator:
-          summary: Example of greater than or equals operator
-          value: gte:500
-        ltOperator:
-          summary: Example of less than operator
-          value: lt:600
-        lteOperator:
-          summary: Example of less than or equals operator
-          value: lte:700
-      schema:
-        type: string
-        pattern: ^((gte?|lte?|eq|ne)\:)?\d{1,10}$
-    accountIdOrAliasOrEvmAddressQueryParam:
-      name: account.id
-      in: query
-      description: Account id or account alias with no shard realm or evm address with no shard realm
-      examples:
-        aliasOnly:
-          value: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-        accountNumOnly:
-          value: 8
-        realmAccountNum:
-          value: 0.8
-        shardRealmAccountNum:
-          value: 0.0.8
-        evmAddress:
-          value: ac384c53f03855fa1b3616052f8ba32c6c2a2fec
-        evmAddressWithPrefix:
-          value: 9.832019034092927e+47
-      schema:
-        pattern: ^(\d{1,10}\.){0,2}(\d{1,10}|(0x)?[A-Fa-f0-9]{40}|(?:[A-Z2-7]{8})*(?:[A-Z2-7]{2}|[A-Z2-7]{4,5}|[A-Z2-7]{7,8}))$
-        type: string
     timestampQueryParam:
       description: The consensus timestamp as a Unix timestamp in seconds.nanoseconds format with an optional comparison operator. See [unixtimestamp.com](https://www.unixtimestamp.com/) for a simple way to convert a date to the 'seconds' part of the Unix time.
       name: timestamp
@@ -315,6 +222,99 @@ components:
         items:
           type: string
           pattern: ^((eq|gt|gte|lt|lte|ne):)?\d{1,10}(\.\d{1,9})?$
+    orderQueryParamDesc:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: asc
+      schema:
+        enum:
+        - asc
+        - desc
+        default: desc
+    accountBalanceQueryParam:
+      name: account.balance
+      in: query
+      description: The optional balance value to compare against
+      explode: true
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        noOperator:
+          summary: Example of equals with no operator
+          value: 100
+        eqOperator:
+          summary: Example of equals operator
+          value: eq:200
+        neOperator:
+          summary: Example of not equals operator
+          value: ne:300
+        gtOperator:
+          summary: Example of greater than operator
+          value: gt:400
+        gteOperator:
+          summary: Example of greater than or equals operator
+          value: gte:500
+        ltOperator:
+          summary: Example of less than operator
+          value: lt:600
+        lteOperator:
+          summary: Example of less than or equals operator
+          value: lte:700
+      schema:
+        type: string
+        pattern: ^((gte?|lte?|eq|ne)\:)?\d{1,10}$
+    accountPublicKeyQueryParam:
+      name: account.publickey
+      in: query
+      description: The account's public key to compare against
+      example: 3c3d546321ff6f63d701d2ec5c277095874e19f4a235bee1e6bb19258bf362be
+      schema:
+        type: string
+    accountIdOrAliasOrEvmAddressQueryParam:
+      name: account.id
+      in: query
+      description: Account id or account alias with no shard realm or evm address with no shard realm
+      examples:
+        aliasOnly:
+          value: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+        accountNumOnly:
+          value: 8
+        realmAccountNum:
+          value: 0.8
+        shardRealmAccountNum:
+          value: 0.0.8
+        evmAddress:
+          value: ac384c53f03855fa1b3616052f8ba32c6c2a2fec
+        evmAddressWithPrefix:
+          value: 9.832019034092927e+47
+      schema:
+        pattern: ^(\d{1,10}\.){0,2}(\d{1,10}|(0x)?[A-Fa-f0-9]{40}|(?:[A-Z2-7]{8})*(?:[A-Z2-7]{2}|[A-Z2-7]{4,5}|[A-Z2-7]{7,8}))$
+        type: string
+    limitQueryParam:
+      name: limit
+      in: query
+      description: The maximum number of items to return
+      example: 2
+      schema:
+        format: int32
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+  responses:
+    InvalidParameterError:
+      description: Invalid parameter
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            _status:
+              messages:
+              - message: 'Invalid parameter: account.id'
+              - message: Invalid Transaction id. Please use \shard.realm.num-sss-nnn\ format where sss are seconds and nnn are nanoseconds
 externalDocs:
   description: REST API Docs
   url: https://docs.hedera.com/guides/docs/mirror-node-api/cryptocurrency-api
