@@ -90,124 +90,6 @@ paths:
       tags:
       - Airdrops
 components:
-  schemas:
-    TokenAirdropsResponse:
-      type: object
-      properties:
-        airdrops:
-          $ref: '#/components/schemas/TokenAirdrops'
-        links:
-          $ref: '#/components/schemas/Links'
-    Timestamp:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type: string
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
-    TimestampRange:
-      type: object
-      description: A timestamp range an entity is valid for
-      properties:
-        from:
-          allOf:
-          - $ref: '#/components/schemas/Timestamp'
-          - description: The inclusive from timestamp in seconds
-        to:
-          allOf:
-          - $ref: '#/components/schemas/TimestampNullable'
-          - description: The exclusive to timestamp in seconds
-    EntityIdQuery:
-      type: string
-      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
-    Error:
-      type: object
-      properties:
-        _status:
-          type: object
-          properties:
-            messages:
-              type: array
-              items:
-                type: object
-                properties:
-                  data:
-                    description: Error message in hexadecimal
-                    example: '0x3000'
-                    format: binary
-                    pattern: ^0x[0-9a-fA-F]+$
-                    type:
-                    - string
-                    - 'null'
-                  detail:
-                    description: Detailed error message
-                    example: Generic detailed error message
-                    type:
-                    - string
-                    - 'null'
-                  message:
-                    description: Error message
-                    example: Generic error message
-                    type: string
-    EntityId:
-      type:
-      - string
-      - 'null'
-      description: Network entity ID in the format of `shard.realm.num`
-      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
-      example: 0.0.2
-    TokenAirdrop:
-      type: object
-      properties:
-        amount:
-          format: int64
-          type: integer
-        receiver_id:
-          $ref: '#/components/schemas/EntityId'
-        sender_id:
-          $ref: '#/components/schemas/EntityId'
-        serial_number:
-          example: 1
-          format: int64
-          type:
-          - integer
-          - 'null'
-        timestamp:
-          $ref: '#/components/schemas/TimestampRange'
-        token_id:
-          $ref: '#/components/schemas/EntityId'
-      example:
-        amount: 10
-        receiver_id: 0.0.15
-        sender_id: 0.0.10
-        serial_number: null
-        timestamp:
-          from: '1651560386.060890949'
-          to: '1651560386.661997287'
-        token_id: 0.0.99
-      required:
-      - amount
-      - receiver_id
-      - sender_id
-      - timestamp
-      - token_id
-    TimestampNullable:
-      description: A Unix timestamp in seconds.nanoseconds format
-      type:
-      - string
-      - 'null'
-      example: '1586567700.453054000'
-      pattern: ^\d{1,10}(\.\d{1,9})?$
-    Links:
-      type: object
-      properties:
-        next:
-          example: null
-          type:
-          - string
-          - 'null'
-    TokenAirdrops:
-      type: array
-      items:
-        $ref: '#/components/schemas/TokenAirdrop'
   parameters:
     senderIdQueryParam:
       name: sender.id
@@ -243,47 +125,6 @@ components:
           value: lte:0.0.200
       schema:
         $ref: '#/components/schemas/EntityIdQuery'
-    limitQueryParam:
-      name: limit
-      in: query
-      description: The maximum number of items to return
-      example: 2
-      schema:
-        format: int32
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 100
-    serialNumberQueryParam:
-      name: serialnumber
-      in: query
-      explode: true
-      description: The nft serial number (64 bit type). Requires a tokenId value also be populated.
-      examples:
-        noValue:
-          summary: --
-          value: ''
-        serialNumNoOperator:
-          summary: Example of serialNum equals with no operator
-          value: 100
-        serialNumEqOperator:
-          summary: Example of serialNum equals operator
-          value: eq:200
-        serialNumGtOperator:
-          summary: Example of serialNum greater than operator
-          value: gt:400
-        serialNumGteOperator:
-          summary: Example of serialNum greater than or equals operator
-          value: gte:500
-        serialNumLtOperator:
-          summary: Example of serialNum less than operator
-          value: lt:600
-        serialNumLteOperator:
-          summary: Example of serialNum less than or equals operator
-          value: lte:700
-      schema:
-        type: string
-        pattern: ^((eq|gt|gte|lt|lte):)?\d{1,19}?$
     tokenIdQueryParam:
       name: token.id
       description: The ID of the token to return information for
@@ -339,33 +180,16 @@ components:
           value: lte:0.0.700
       schema:
         $ref: '#/components/schemas/EntityIdQuery'
-    accountIdOrAliasOrEvmAddressPathParam:
-      name: idOrAliasOrEvmAddress
-      in: path
-      description: Account alias or account id or evm address
-      required: true
-      examples:
-        aliasOnly:
-          value: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-        realmAlias:
-          value: 0.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-        shardRealmAlias:
-          value: 0.1.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
-        accountNumOnly:
-          value: 8
-        realmAccountNum:
-          value: 0.8
-        shardRealmAccountNum:
-          value: 0.0.8
-        evmAddress:
-          value: ac384c53f03855fa1b3616052f8ba32c6c2a2fec
-        evmAddressWithPrefix:
-          value: 9.832019034092927e+47
-        evmAddressWithShardAndRealm:
-          value: 0.0.ac384c53f03855fa1b3616052f8ba32c6c2a2fec
+    orderQueryParam:
+      name: order
+      in: query
+      description: The order in which items are listed
+      example: desc
       schema:
-        pattern: ^(\d{1,10}\.){0,2}(\d{1,10}|(0x)?[A-Fa-f0-9]{40}|(?:[A-Z2-7]{8})*(?:[A-Z2-7]{2}|[A-Z2-7]{4,5}|[A-Z2-7]{7,8}))$
-        type: string
+        enum:
+        - asc
+        - desc
+        default: asc
     receiverIdQueryParam:
       name: receiver.id
       description: The ID of the receiver to return information for
@@ -400,16 +224,74 @@ components:
           value: lte:0.0.200
       schema:
         $ref: '#/components/schemas/EntityIdQuery'
-    orderQueryParam:
-      name: order
+    serialNumberQueryParam:
+      name: serialnumber
       in: query
-      description: The order in which items are listed
-      example: desc
+      explode: true
+      description: The nft serial number (64 bit type). Requires a tokenId value also be populated.
+      examples:
+        noValue:
+          summary: --
+          value: ''
+        serialNumNoOperator:
+          summary: Example of serialNum equals with no operator
+          value: 100
+        serialNumEqOperator:
+          summary: Example of serialNum equals operator
+          value: eq:200
+        serialNumGtOperator:
+          summary: Example of serialNum greater than operator
+          value: gt:400
+        serialNumGteOperator:
+          summary: Example of serialNum greater than or equals operator
+          value: gte:500
+        serialNumLtOperator:
+          summary: Example of serialNum less than operator
+          value: lt:600
+        serialNumLteOperator:
+          summary: Example of serialNum less than or equals operator
+          value: lte:700
       schema:
-        enum:
-        - asc
-        - desc
-        default: asc
+        type: string
+        pattern: ^((eq|gt|gte|lt|lte):)?\d{1,19}?$
+    limitQueryParam:
+      name: limit
+      in: query
+      description: The maximum number of items to return
+      example: 2
+      schema:
+        format: int32
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    accountIdOrAliasOrEvmAddressPathParam:
+      name: idOrAliasOrEvmAddress
+      in: path
+      description: Account alias or account id or evm address
+      required: true
+      examples:
+        aliasOnly:
+          value: HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+        realmAlias:
+          value: 0.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+        shardRealmAlias:
+          value: 0.1.HIQQEXWKW53RKN4W6XXC4Q232SYNZ3SZANVZZSUME5B5PRGXL663UAQA
+        accountNumOnly:
+          value: 8
+        realmAccountNum:
+          value: 0.8
+        shardRealmAccountNum:
+          value: 0.0.8
+        evmAddress:
+          value: ac384c53f03855fa1b3616052f8ba32c6c2a2fec
+        evmAddressWithPrefix:
+          value: 9.832019034092927e+47
+        evmAddressWithShardAndRealm:
+          value: 0.0.ac384c53f03855fa1b3616052f8ba32c6c2a2fec
+      schema:
+        pattern: ^(\d{1,10}\.){0,2}(\d{1,10}|(0x)?[A-Fa-f0-9]{40}|(?:[A-Z2-7]{8})*(?:[A-Z2-7]{2}|[A-Z2-7]{4,5}|[A-Z2-7]{7,8}))$
+        type: string
   responses:
     InvalidParameterError:
       description: Invalid parameter
@@ -432,6 +314,124 @@ components:
             _status:
               messages:
               - message: Not found
+  schemas:
+    EntityId:
+      type:
+      - string
+      - 'null'
+      description: Network entity ID in the format of `shard.realm.num`
+      pattern: ^\d{1,10}\.\d{1,10}\.\d{1,10}$
+      example: 0.0.2
+    Timestamp:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type: string
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    TimestampRange:
+      type: object
+      description: A timestamp range an entity is valid for
+      properties:
+        from:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The inclusive from timestamp in seconds
+        to:
+          allOf:
+          - $ref: '#/components/schemas/TimestampNullable'
+          - description: The exclusive to timestamp in seconds
+    TokenAirdrops:
+      type: array
+      items:
+        $ref: '#/components/schemas/TokenAirdrop'
+    Links:
+      type: object
+      properties:
+        next:
+          example: null
+          type:
+          - string
+          - 'null'
+    Error:
+      type: object
+      properties:
+        _status:
+          type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  data:
+                    description: Error message in hexadecimal
+                    example: '0x3000'
+                    format: binary
+                    pattern: ^0x[0-9a-fA-F]+$
+                    type:
+                    - string
+                    - 'null'
+                  detail:
+                    description: Detailed error message
+                    example: Generic detailed error message
+                    type:
+                    - string
+                    - 'null'
+                  message:
+                    description: Error message
+                    example: Generic error message
+                    type: string
+    TokenAirdropsResponse:
+      type: object
+      properties:
+        airdrops:
+          $ref: '#/components/schemas/TokenAirdrops'
+        links:
+          $ref: '#/components/schemas/Links'
+    TimestampNullable:
+      description: A Unix timestamp in seconds.nanoseconds format
+      type:
+      - string
+      - 'null'
+      example: '1586567700.453054000'
+      pattern: ^\d{1,10}(\.\d{1,9})?$
+    TokenAirdrop:
+      type: object
+      properties:
+        amount:
+          format: int64
+          type: integer
+        receiver_id:
+          $ref: '#/components/schemas/EntityId'
+        sender_id:
+          $ref: '#/components/schemas/EntityId'
+        serial_number:
+          example: 1
+          format: int64
+          type:
+          - integer
+          - 'null'
+        timestamp:
+          $ref: '#/components/schemas/TimestampRange'
+        token_id:
+          $ref: '#/components/schemas/EntityId'
+      example:
+        amount: 10
+        receiver_id: 0.0.15
+        sender_id: 0.0.10
+        serial_number: null
+        timestamp:
+          from: '1651560386.060890949'
+          to: '1651560386.661997287'
+        token_id: 0.0.99
+      required:
+      - amount
+      - receiver_id
+      - sender_id
+      - timestamp
+      - token_id
+    EntityIdQuery:
+      type: string
+      pattern: ^((gte?|lte?|eq|ne)\:)?(\d{1,10}\.\d{1,10}\.)?\d{1,10}$
 externalDocs:
   description: REST API Docs
   url: https://docs.hedera.com/guides/docs/mirror-node-api/cryptocurrency-api
