@@ -1,0 +1,80 @@
+edges:
+- partner_name: LF Decentralized Trust (membership / landscape)
+  partner: lf-decentralized-trust
+  partner_match: register
+  type: register
+  direction: partner-built
+  category: LF Decentralized Trust membership
+  evidence: https://landscape.lfdecentralizedtrust.org
+  channel: standard-directory
+  relationship: standard-participant
+  contract_reference:
+    register: LF Decentralized Trust Landscape (landscape.lfdecentralizedtrust.org/data/full.json)
+    spec_file: null
+    standard: LF Decentralized Trust
+    role: lfdt-member
+    registered_name: Hedera Hashgraph LLC
+    registered_names:
+    - Hedera Hashgraph
+    - Hedera Hashgraph LLC
+    website: https://hedera.com/
+    matched_domain: hedera.com
+    matched_by: domain
+    landscape_categories:
+    - Distributed Ledgers / Permissionless
+    landscape_entries: 1
+    signal_note: 'participation only: LFDT membership / a landscape listing is standard-participant evidence, not
+      depth. Tier, entries and categories are CONTEXT, never counted'
+    detected_by: sweep-lf-decentralized-trust-landscape.py
+    detected: '2026-10-22'
+  detected_by: sweep-lf-decentralized-trust-landscape.py
+  first_seen: '2026-10-22'
+  partner_tier: Premier
+- partner_name: LF Decentralized Trust projects (maintainer)
+  partner: lf-decentralized-trust
+  partner_match: register
+  type: register
+  direction: partner-built
+  category: LF Decentralized Trust project maintainership
+  evidence: https://github.com/hiero-ledger/tsc/blob/HEAD/MAINTAINERS.md
+  channel: standard-directory
+  relationship: standard-participant
+  contract_reference:
+    register: LF Decentralized Trust project MAINTAINERS files (github.com/hyperledger, github.com/LF-Decentralized-Trust-labs,
+      canton-network/splice)
+    spec_file: null
+    standard: LF Decentralized Trust
+    role: lfdt-project-maintainer
+    registered_name: Hedera
+    registered_names:
+    - Hedera
+    matched_domain: hedera.com
+    matched_by: domain
+    maintained_repos:
+    - repo: hiero-ledger/tsc
+      project: Hiero
+      evidence_url: https://github.com/hiero-ledger/tsc/blob/HEAD/MAINTAINERS.md
+      basis:
+      - affiliation
+    maintained_basis: MAINTAINERS (maintains, not implements)
+    signal_note: 'participation only: the org''s people are ACTIVE maintainers of an LFDT project; it maintains
+      the code, it does not by that fact ship or implement it. Repos are CONTEXT, never counted. Maintainer names
+      / e-mails are never stored'
+    detected_by: sweep-lf-decentralized-trust-landscape.py
+    detected: '2026-10-22'
+  detected_by: sweep-lf-decentralized-trust-landscape.py
+  first_seen: '2026-10-22'
+generated: '2026-10-22'
+method: searched
+source:
+- https://landscape.lfdecentralizedtrust.org
+- https://landscape.lfdecentralizedtrust.org/data/full.json
+- https://github.com/hyperledger
+- https://github.com/LF-Decentralized-Trust-labs
+- https://github.com/canton-network/splice
+checked:
+- https://github.com/LF-Decentralized-Trust-labs
+- https://github.com/canton-network/splice
+- https://github.com/hyperledger
+- https://landscape.lfdecentralizedtrust.org
+- https://landscape.lfdecentralizedtrust.org/data/full.json
