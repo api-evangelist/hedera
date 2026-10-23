@@ -435,3 +435,9 @@ components:
 externalDocs:
   description: REST API Docs
   url: https://docs.hedera.com/guides/docs/mirror-node-api/cryptocurrency-api
+x-provenance:
+  method: harvested
+  publisher: Hedera
+  source: https://docs.hedera.com/openapi.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
