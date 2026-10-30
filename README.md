@@ -1,4 +1,4 @@
-# Hedera (hedera)
+# Hedera
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,77 +66,209 @@
 
 Hedera is an enterprise-grade public distributed ledger platform built for the digital economy and governed by a council of leading global institutions. The Hedera Mirror Node REST API provides read-only access to historical network data including transactions, accounts, tokens, NFTs, smart contracts, consensus topics, blocks, schedules, and network-level information. The public API requires no authentication and supports mainnet, testnet, and previewnet environments.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/apis.yml)
+**Areas:** Hedera · Distributed Ledger · Blockchain · DLT · Hashgraph · Transaction · Tokens · NFT · Smart Contracts · Enterprise
 
-## Tags
+## Hedera on APIs.io
 
-- Distributed Ledger
-- Blockchain
-- DLT
-- Hashgraph
-- Transactions
-- Tokens
-- NFTs
-- Smart Contracts
-- Enterprise
+Everything profiled for Hedera is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/hedera/](https://apis.io/providers/hedera/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (10)
 
-- **Created:** 2026-06-13
-- **Modified:** 2026-06-13
+- [Hedera Accounts API](https://apis.io/apis/hedera/hedera-accounts-api/) — The accounts object represents the information associated with an account entity and returns a list of account information.The accounts list endpoint is…
+- [Hedera Airdrops API](https://apis.io/apis/hedera/hedera-airdrops-api/) — The airdrops API from Hedera — 2 operation(s) for airdrops.
+- [Hedera Balances API](https://apis.io/apis/hedera/hedera-balances-api/) — The balance object represents the balance of accounts on the Hedera network.
+- [Hedera Blocks API](https://apis.io/apis/hedera/hedera-blocks-api/) — The blocks API from Hedera — 2 operation(s) for blocks.
+- [Hedera Contracts API](https://apis.io/apis/hedera/hedera-contracts-api/) — The contracts objects represents the information associated with contract entities.The contracts list endpoint is cached and not updated as frequently as…
+- [Hedera Network API](https://apis.io/apis/hedera/hedera-network-api/) — The network API from Hedera — 6 operation(s) for network.
+- [Hedera Schedules API](https://apis.io/apis/hedera/hedera-schedules-api/) — The schedules object represents the information associated with a schedule entity.The schedules list endpoints is cached and not updated as frequently as…
+- [Hedera Tokens API](https://apis.io/apis/hedera/hedera-tokens-api/) — The tokens object represents the information associated with a token entity and returns a list of token information.The tokens list endpoint is cached and…
+- [Hedera Topics API](https://apis.io/apis/hedera/hedera-topics-api/) — The topics object represents the information associated with a topic entity and returns topic messages information.
+- [Hedera Transactions API](https://apis.io/apis/hedera/hedera-transactions-api/) — The transaction object represents the transactions processed on the Hedera network.
 
-## APIs
+### Published properties
 
-### Hedera Mirror Node REST API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-The Hedera Mirror Node REST API provides read-only access to historical data from the Hedera distributed ledger. It allows querying of transactions, account information, token balances and metadata, NFT ownership and transfers, smart contract results and logs, consensus topic messages, block data, schedule transactions, and network supply, fees, exchange rates, nodes, and staking information. No authentication is required for public endpoints. The API is throttled at 50 requests per second per IP address on the public mainnet endpoint.
+#### MCP servers (1)
 
-- **Human URL:** [https://docs.hedera.com/hedera/sdks-and-apis/rest-api](https://docs.hedera.com/hedera/sdks-and-apis/rest-api)
-- **Base URL:** `https://mainnet.mirrornode.hedera.com`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [MCP Server](https://apis.io/servers/hedera/mcp-server/)
 
-- Transactions
-- Accounts
-- Tokens
-- NFTs
-- Smart Contracts
-- Consensus Topics
-- Blocks
-- Schedules
-- Network
-- Balances
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://docs.hedera.com/hedera/sdks-and-apis/rest-api)
-- [OpenAPI](https://mainnet.mirrornode.hedera.com/api/v1/docs/swagger.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Swagger](https://mainnet.mirrornode.hedera.com/api/v1/docs/)
-- [Swagger Testnet](https://testnet.mirrornode.hedera.com/api/v1/docs/)
-- [Swagger Previewnet](https://previewnet.mirrornode.hedera.com/api/v1/docs/)
-- [Plans](https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/plans/plans.yml)
-- [Rate Limits](https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/rate-limits/rate-limits.yml)
-- [Fin Ops](https://raw.githubusercontent.com/api-evangelist/hedera/refs/heads/main/finops/finops.yml)
+- [Hedera Agentic Access](https://apis.io/agentic-access/hedera/hedera-agentic-access/)
 
-## Common Properties
+#### JSON Schema (144)
 
-- [Portal](https://portal.hedera.com)
+The data models the API reads and writes.
+
+- [AccessList](https://apis.io/schemas/hedera/AccessList/)
+- [AccountAlias](https://apis.io/schemas/hedera/AccountAlias/)
+- [AccountBalance](https://apis.io/schemas/hedera/AccountBalance/)
+- [AccountBalanceTransactions](https://apis.io/schemas/hedera/AccountBalanceTransactions/)
+- [AccountInfo](https://apis.io/schemas/hedera/AccountInfo/)
+- [Accounts](https://apis.io/schemas/hedera/Accounts/)
+- [AccountsResponse](https://apis.io/schemas/hedera/AccountsResponse/)
+- [Alias](https://apis.io/schemas/hedera/Alias/)
+- [Allowance](https://apis.io/schemas/hedera/Allowance/)
+- [AssessedCustomFee](https://apis.io/schemas/hedera/AssessedCustomFee/)
+- [AuthorizationList](https://apis.io/schemas/hedera/AuthorizationList/)
+- [Balance](https://apis.io/schemas/hedera/Balance/)
+- [BalancesResponse](https://apis.io/schemas/hedera/BalancesResponse/)
+- [Block](https://apis.io/schemas/hedera/Block/)
+- [Blocks](https://apis.io/schemas/hedera/Blocks/)
+- [BlocksResponse](https://apis.io/schemas/hedera/BlocksResponse/)
+- [Bloom](https://apis.io/schemas/hedera/Bloom/)
+- [ChunkInfo](https://apis.io/schemas/hedera/ChunkInfo/)
+- [ConsensusCustomFees](https://apis.io/schemas/hedera/ConsensusCustomFees/)
+- [Contract](https://apis.io/schemas/hedera/Contract/)
+- [ContractAction](https://apis.io/schemas/hedera/ContractAction/)
+- [ContractActions](https://apis.io/schemas/hedera/ContractActions/)
+- [ContractActionsResponse](https://apis.io/schemas/hedera/ContractActionsResponse/)
+- [ContractCallRequest](https://apis.io/schemas/hedera/ContractCallRequest/)
+- [ContractCallResponse](https://apis.io/schemas/hedera/ContractCallResponse/)
+- …and 119 more published on APIs.io
+
+#### Examples (48)
+
+Example requests and responses.
+
+- [Contractcall](https://apis.io/examples/hedera/contractCall/)
+- [Estimatefees](https://apis.io/examples/hedera/estimateFees/)
+- [Getaccount](https://apis.io/examples/hedera/getAccount/)
+- [Getaccounts](https://apis.io/examples/hedera/getAccounts/)
+- [Getbalances](https://apis.io/examples/hedera/getBalances/)
+- [Getblock](https://apis.io/examples/hedera/getBlock/)
+- [Getblocks](https://apis.io/examples/hedera/getBlocks/)
+- [Getcontract](https://apis.io/examples/hedera/getContract/)
+- [Getcontractactions](https://apis.io/examples/hedera/getContractActions/)
+- [Getcontractlogsbycontractid](https://apis.io/examples/hedera/getContractLogsByContractId/)
+- [Getcontractopcodes](https://apis.io/examples/hedera/getContractOpcodes/)
+- [Getcontractresultbyidandtimestamp](https://apis.io/examples/hedera/getContractResultByIdAndTimestamp/)
+- [Getcontractresultbytransactionidorhash](https://apis.io/examples/hedera/getContractResultByTransactionIdOrHash/)
+- [Getcontractresultsbycontractid](https://apis.io/examples/hedera/getContractResultsByContractId/)
+- [Getcontractstate](https://apis.io/examples/hedera/getContractState/)
+- [Getcontracts](https://apis.io/examples/hedera/getContracts/)
+- [Getcontractslogs](https://apis.io/examples/hedera/getContractsLogs/)
+- [Getcontractsresults](https://apis.io/examples/hedera/getContractsResults/)
+- [Getcryptoallowances](https://apis.io/examples/hedera/getCryptoAllowances/)
+- [Gethookstorage](https://apis.io/examples/hedera/getHookStorage/)
+- [Gethooks](https://apis.io/examples/hedera/getHooks/)
+- [Getnetworkexchangerate](https://apis.io/examples/hedera/getNetworkExchangeRate/)
+- [Getnetworkfees](https://apis.io/examples/hedera/getNetworkFees/)
+- [Getnetworknodes](https://apis.io/examples/hedera/getNetworkNodes/)
+- [Getnetworkstake](https://apis.io/examples/hedera/getNetworkStake/)
+- …and 23 more published on APIs.io
+
+#### Collections (10)
+
+Postman and Open Collection request collections.
+
+- [Mirror Node REST accounts API](https://apis.io/collections/hedera/open-hedera-accounts-api/)
+- [Mirror Node REST accounts airdrops API](https://apis.io/collections/hedera/open-hedera-airdrops-api/)
+- [Mirror Node REST accounts balances API](https://apis.io/collections/hedera/open-hedera-balances-api/)
+- [Mirror Node REST accounts blocks API](https://apis.io/collections/hedera/open-hedera-blocks-api/)
+- [Mirror Node REST accounts contracts API](https://apis.io/collections/hedera/open-hedera-contracts-api/)
+- [Mirror Node REST accounts network API](https://apis.io/collections/hedera/open-hedera-network-api/)
+- [Mirror Node REST accounts schedules API](https://apis.io/collections/hedera/open-hedera-schedules-api/)
+- [Mirror Node REST accounts tokens API](https://apis.io/collections/hedera/open-hedera-tokens-api/)
+- [Mirror Node REST accounts topics API](https://apis.io/collections/hedera/open-hedera-topics-api/)
+- [Mirror Node REST accounts transactions API](https://apis.io/collections/hedera/open-hedera-transactions-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Hedera — jsonschema rules](https://apis.io/rules/hedera/hedera-jsonschema-spectral-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Hedera Domain Security](https://apis.io/security/hedera/hedera-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Plans](https://apis.io/plans/hedera/plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rate Limits](https://apis.io/rate-limits/hedera/rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Finops](https://apis.io/finops/hedera/finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.hedera.com/)
 - [Documentation](https://docs.hedera.com/hedera)
-- [Git Hub](https://github.com/hashgraph)
-- [Mirror Node Source](https://github.com/hiero-ledger/hiero-mirror-node)
 - [Blog](https://hedera.com/blog)
-- [Fees](https://hedera.com/fees)
-- [Status](https://status.hedera.com)
-- [Discord](https://hedera.com/discord)
-- [Twitter](https://twitter.com/hedera)
-- [LinkedIn](https://linkedin.com/company/hashgraph)
-- [YouTube](https://youtube.com/hederahashgraph)
-- [Foundation](https://hedera.foundation)
-- [Governance](https://hederacouncil.org)
-- [Terms of Service](https://hedera.com/terms)
-- [Privacy Policy](https://hedera.com/privacy)
+- [Terms of service](https://hedera.com/terms)
+- [Privacy policy](https://hedera.com/privacy)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 33.2** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 46.1 |
+| Contract governance | 9.8 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.6 |
+| Access clarity | 28.9 |
+
+**Agent readiness 58.5** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | unknown |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 19.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/hedera/](https://apis.io/providers/hedera/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Hedera: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/hedera/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
